@@ -1,0 +1,10 @@
+//
+//	ColdFishRemote String Catalog
+//
+//	Translated by: Maximo Pech Jaramillo
+//
+
+MSG_MENU_ABOUT=100			Acerca de
+MSG_MENU_ADD 				Agregar Archivo
+MSG_UNKNOWN					Desconocido
+

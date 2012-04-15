@@ -1,0 +1,17 @@
+//
+//	Desktop String Catalog
+//
+//	Translated by: Ruud Kuin - Bas de Lange - Kaj de Vos
+//
+
+MSG_DESKTOP_TITLE=0								Bureaublad
+
+MSG_DESKTOP_SYMLINKS_APPLICATIONS=100			Toepassingen
+MSG_DESKTOP_SYMLINKS_DISKS						Media
+MSG_DESKTOP_SYMLINKS_HOME						Persoonlijke map
+MSG_DESKTOP_SYMLINKS_PREFERENCES				Voorkeuren
+MSG_DESKTOP_SYMLINKS_TERMINAL					Opdrachtvenster
+MSG_DESKTOP_SYMLINKS_TRASH						Prullenbak
+
+MSG_DESKTOP_LINKLANGUAGE=1000					nl
+

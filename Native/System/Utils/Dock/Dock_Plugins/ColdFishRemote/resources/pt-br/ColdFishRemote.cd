@@ -1,0 +1,10 @@
+//
+//	ColdFishRemote String Catalog
+//
+//	Translated by: Edgar Domingo de Albuquerque
+//
+
+MSG_MENU_ABOUT=100			Sobre
+MSG_MENU_ADD 				Adicionar Arquivo
+MSG_UNKNOWN					Desconhecido
+

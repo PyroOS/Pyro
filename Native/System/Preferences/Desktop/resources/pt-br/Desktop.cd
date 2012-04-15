@@ -1,0 +1,21 @@
+//
+//	Preferences/Desktop String Catalog
+//
+//	Translated by: Edgar Domingo de Albuquerque
+//
+
+MSG_MAINWND_TITLE=0							Área de trabalho
+
+MSG_MAINWND_BACKGROUND=100					Plano de Fundo
+MSG_MAINWND_BACKGROUND_IMAGE				Imagem
+MSG_MAINWND_BACKGROUND_NONE					Nenhuma
+
+MSG_MAINWND_WINDOWS_TEXT=200				Janelas
+MSG_MAINWND_WINDOWS_TEXT_POPUP				Janela selecionada de PopUp
+MSG_MAINWND_WINDOWS_TEXT_SINGLECLICK		Usar interface de um só clique
+MSG_MAINWND_WINDOWS_TEXT_SHADOWTEXT			Mostrar texto dos ícones sombreados
+
+MSG_MAINWND_BUTTON_APPLY=300				Aplicar
+MSG_MAINWND_BUTTON_UNDO						Desfazer
+MSG_MAINWND_BUTTON_DEFAULT					Padrão
+

@@ -1,0 +1,22 @@
+//
+//	Preferences/Locale string catalog
+//
+//	Translated by: Flemming H. Sørensen
+//
+
+MSG_MAIN_TITLE=0						Sprogvalg
+
+MSG_MAIN_LANGUAGE_TAB=100				Sprog
+MSG_MAIN_LANGUAGE_ACTIVATE				Tilføj sprog >
+MSG_MAIN_LANGUAGE_DEACTIVATE			< Fjern sprog
+MSG_MAIN_LANGUAGE_AVAILABLE				Understøttede sprog
+MSG_MAIN_LANGUAGE_USED					Valgte sprog
+
+MSG_MAIN_COUNTRY_TAB=200				Land
+
+MSG_MAIN_APPLY=1000						_Aktiver
+MSG_MAIN_REVERT							_Gendan
+MSG_MAIN_DEFAULT						_Standard
+
+MSG_ERROR_SAVE=1100						Kunne ikke gemme indstillingerne
+

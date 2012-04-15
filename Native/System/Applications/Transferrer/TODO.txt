@@ -1,0 +1,19 @@
+To do before 1.0 release:
+* fix 'skip all' when uploading directory
+* complete error handling for recursive jobs
+* recursive cancelling, pausing of recursive jobs
+* have MainWindow peek at the paths of completed transfers and refresh the RemoteView if a relevant transfer finishes
+* ignore duplicate transfers
+* implement status bar messages
+* provide way to remove finished transfers from progress window
+* Add a label or other indication that the left pane is local, right pane is remote
+
+
+Later:
+* implement 'Retry' button on error dialogs for failed transfers
+* Use 64-bit types for file size, offset etc (note: off_t is 64bit, size_t, ssize_t is only 32bit)
+* use CURLOPT_USERNAME and CURLOPT_PASSWORD when available
+* Use localised strings
+* add doxygen comments for new code
+* remove Job::m_nType in favour of an enum Job::m_eDirection (which is one of UPLOAD, DOWNLOAD or NONE) and a String Job::m_zType which is a human-readable name for the type of job (for debugging messages)
+

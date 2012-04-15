@@ -1,0 +1,40 @@
+//
+//	MediaPlayer String Catalog
+//
+//	Translated by: Henrik Isaksson - Daniel Eriksson - Jonas Jarvoll
+//
+
+MSG_MAINWND_TITLE=0							Media Player
+
+MSG_MAINWND_MENU_APPLICATION=100			Program
+MSG_MAINWND_MENU_APPLICATION_ABOUT			Om...
+MSG_MAINWND_MENU_APPLICATION_QUIT			Avsluta
+
+MSG_MAINWND_MENU_FILE=200					Filer
+MSG_MAINWND_MENU_FILE_OPEN					Öppna...
+MSG_MAINWND_MENU_FILE_OPEN_INPUT			Öppna mediatyp...
+MSG_MAINWND_MENU_FILE_INFO					Info...
+MSG_MAINWND_MENU_FILE_FULLSCREEN			Fullskärm
+
+MSG_MAINWND_MENU_TRACKS=300					Spår
+
+MSG_ABOUTWND_TITLE=1000						Om Media Player
+MSG_ABOUTWND_TEXT							\nEn videospelare\nCopyright 2003 Arno Klenke\n\nMedia Player är utgivet under LGPL.
+MSG_ABOUTWND_OK								OK
+
+MSG_ERRWND_TITLE=1100						Fel
+MSG_ERRWND_OK								OK
+MSG_ERRWND_CANTPLAY							Filen kan inte öppnas.\nKontrollera dina inställningar.
+
+MSG_INFOWND_TITLE=1200						Information
+MSG_INFOWND_VIDEO							Video
+MSG_INFOWND_AUDIO							Ljud
+MSG_INFOWND_CHANNELS						kanaler
+MSG_INFOWND_OK								Ok
+
+MSG_ALERTWND_NOMEDIASERVER_TITLE=1300		Fel
+MSG_ALERTWND_NOMEDIASERVER_TEXT				Kan inte ansluta till media servern.
+MSG_ALERTWND_NOMEDIASERVER_OK				_Ok
+
+MSG_TRACK_MENU_ITEM=2000					Spår
+

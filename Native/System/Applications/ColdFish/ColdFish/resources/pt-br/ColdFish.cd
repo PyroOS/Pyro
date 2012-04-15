@@ -1,0 +1,59 @@
+//
+//	ColdFish String Catalog
+//
+//	Translated by: Edgar Domingo de Albuquerque - Bruno
+//
+
+MSG_MAINWND_TITLE=0						ColdFish
+
+MSG_MAINWND_PLAY=100						Tocar
+MSG_MAINWND_STOP							Parar
+MSG_MAINWND_PAUSE							Pausa
+MSG_MAINWND_PLAYLIST						Lista de execução
+MSG_MAINWND_FILE							Arquivo
+MSG_MAINWND_TRACK							Faixa
+MSG_MAINWND_STREAM							Stream
+MSG_MAINWND_LENGTH							Tamanho
+MSG_MAINWND_PLAYING							Tocando
+
+MSG_MAINWND_MENU_APPLICATION=200			Applicação
+MSG_MAINWND_MENU_APPLICATION_ABOUT			Sobre...
+MSG_MAINWND_MENU_APPLICATION_QUIT			Sair
+
+MSG_MAINWND_MENU_PLAYLIST=300				Lista de Execução
+MSG_MAINWND_MENU_PLAYLIST_SELECT			Selecionar...
+MSG_MAINWND_MENU_PLAYLIST_INPUT				Abrir Entrada...
+
+MSG_MAINWND_MENU_FILE=400					Arquivo
+MSG_MAINWND_MENU_FILE_ADD					Adicionar...
+MSG_MAINWND_MENU_FILE_REMOVE				Remover
+
+MSG_MAINWND_MENU_VIEW=500					Visualizar
+MSG_MAINWND_MENU_VIEW_PLAYLIST				Lista de Execução
+
+MSG_ABOUTWND_TITLE=1000						Sobre ColdFish
+MSG_ABOUTWND_TEXT							\nMusic Player\nCopyright 2003 Arno Klenke\nCopyright 2003 Kristian Van Der Vliet\nCopyright 2005 Rick Caudill\n\nColdFish lançado sob LGPL.
+MSG_ABOUTWND_OK								OK
+
+MSG_ERRWND_TITLE=1100						ColdFish Erro
+MSG_ERRWND_OK								OK
+MSG_ERRWND_CANTPLAY							ColdFish não pode tocar este arquivo.
+MSG_ERRWND_CANTDELETE						A faixa atual não pode ser removida.
+MSG_ERRWND_NOTPLAYLIST						O arquivo selecionado não é uma Lista de Execução.
+
+MSG_ALERTWND_NOMEDIASERVER_TITLE=1200		Erro
+MSG_ALERTWND_NOMEDIASERVER_TEXT				Não foi possível se conectar ao servidor de mídia.
+MSG_ALERTWND_NOMEDIASERVER_OK				_Ok
+
+MSG_PLAYLIST_UNKNOWN=2000					Desconhecido
+MSG_PLAYLIST_DEFAULT						Lista de Execução Padrão
+
+MSG_PLAYLISTWND_TITLE=2100					Selecione a Lista de Execução - ColdFish
+MSG_PLAYLISTWND_FILE						Arquivo
+MSG_PLAYLISTWND_OPEN						Abrir
+MSG_PLAYLISTWND_NOTE						Nota: se você tentar abrir uma lista de execução\nnão existente, ela será criada
+
+MSG_LCD_TRACK=3000							Faixa
+
+MSG_MIMETYPE_APPLICATION_XCOLDFISHPLAYLIST=10000		ColdFish Lista de Execuçã?
+

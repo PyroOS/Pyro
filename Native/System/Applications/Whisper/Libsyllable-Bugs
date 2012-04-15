@@ -1,0 +1,100 @@
+ListView
+	o There is no real way to know which rows have been selected if the ListView allows
+	  multiple selection.  GetFirstSelected() & GetLastSelected() are only useful if the
+	  user has selected one contingous block of rows.  If they have selected individual
+	  rows by holding down QUAL_CTRL it is impossible to know which are selected without
+	  interating over every row and calling IsSelected().  The message set with
+	  SetSelChangeMsg() should be sent with a complete list of selected rows.
+		*Workaround*
+	  Loop over the rows bounded by GetFirstSelected() & GetLastSelected() and call
+	  IsSelected() on each row.
+	o ListViewRow::Paint is a horrible, non-orthogonal class.  Perhaps the row handling
+	  should be internal to ListView and it should be possible to insert any any View into
+	  a ListView as a row?
+	o Sorting is largely useless; the option is either to sort automatically with no way
+	  to control the sort method, no way to indicate which column to sort on and no way
+	  to control wether to sort ascending or descending. There is no way to control how
+	  the sorting is performed for each column, which may have different requirements,
+	  without creating your own ListViewRow class and hard coding the sorting logic into
+	  the IsLessThan() method.
+	o The ListView model is far too rigid and fragile, making many advanced operations
+	  impossible or mearly very difficult.
+
+TreeView
+	o The entire Tree does not need to be redrawn with every node removed during Clear().
+	  Just redrawing it once at the end of the Clear() would be better visually.
+	o Trunks are not redrawn correctly if Nodes are inserted or removed while the TreeView
+	  is visible.
+		*Workaround*
+	  Call Hide() before Clear(), re-populate, then call Show()
+	o TreeViewStringNode does not redraw when SetString() is called.
+		*Workaround*
+	   Call InvalidateRow() to force a redraw.
+	o TreeViewStringNode could be genericised more towards our custom TreeViewMessageNode
+	o There is no way to build a TreeView that has more than one column: rows are not
+	  drawn correctly if the indent is > 0, making it fairly useless.  This is largely
+	  a symptom of the rather odd ListView model.
+	o There is no easy way to insert a new TreeViewNode as a child of another Node; the
+	  current method is very clunky and requires us to know the exact row we want to
+	  insert the node at and the exact indentation level to use.
+
+ListView & TreeView
+	o It should be possible to drag rows/nodes and recieve proper begin/end drag
+	  notifications.
+	o There is no way to change the Font or Colors used to render a ListViewStringRow or
+	  TreeViewStringNode.
+	o There is no way to force a ListView or TreeView to redraw itself (& all of it's
+	  Rows/Nodes)
+
+	Note that many of the above ListView & TreeView issues are a brick-wall to implementing
+	a threaded or grouped message list.
+
+Menu
+	o MenuItems with a shortcut key are drawn differently to those without a shortcut
+	  when they are disabled
+
+TextView
+	o When SetTabOrder() is used on TextView, tabs should not be trapped if the TextView
+	  is multi-line E.g. you can tab into a TextView but not out.
+	o Set() should take a String as well as const char *
+	o Selecting the text & hitting backspace should have the same effect as Delete.
+
+RegistrarManager
+	o There is no way to know when the application started via. Launch() has quit.  This
+	  is a problem when the user uses the "Open" menu item for an attachment; there is no
+	  easy way to know when it safe to unlink the temporary file.
+	o There is no way to get an Icon for a type E.g. if the type is known to be "image/png"
+	  there is no interface to get the icon configured for that type.  The only way to do
+	  this currently would be to save the file to disk and then use GetTypeAndIcon()
+	o A seperate GetType() call (No icon) would be useful.
+
+StatusBar
+	o No way to remove a panel.
+
+StringView
+	o No way to change the way the string is drawn E.g. can't set DTF_WRAP_SOFT
+
+Toolbar
+	o GetPreferredSize() does not provide a realistic width.
+
+Spinner
+	o GetPreferredSize() does not provide a realistic width.
+
+Window
+	o Hitting Enter in a multiline TextView if the Window also has a DefaultButton set
+	  will always cause the Enter to be sent to the Button.
+
+appserver
+	o Attempting to use DrawText() with a very large string does not work, causing the error
+	  "0:Whisper::Whisper : Error: View::_AllocRenderCmd() packet to big!" in the kernel
+	  log from Window::_AllocRenderCmd()  There needs to be some way to pass very large
+	  packets to the appserver; RENDER_BUFFER_SIZE is currently only 8180 bytes.
+	o DrawText() ignores tabs
+	o The MOUSE_BUT_ macros in guidefines.h and the way that the nButtons values are passed
+	  to E.g. MouseDown do not match.  MOUSE_BUT_RIGHT is defined as 0x04 but the value passed
+	  to the View indicates it is 0x02, which is currently defined as MOUSE_BUT_MID
+	o The mouse button mask doesn't seem to always get cleared.  This can be seen in
+	  FlowView::MouseDown()  If the user right-clicks and then left-clicks on the menu that
+	  is displayed, the right-mouse click will not be cleared.  A subsequent click of the
+	  left mouse button will result in the nButtons mask of 0x03 rather than the 0x01 expected.
+

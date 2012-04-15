@@ -1,0 +1,15 @@
+This plugin is based on libPST 0.5.1, originally written by Dave Smith and maintained at
+http://alioth.debian.org/projects/libpst by Joseph Nahmias.  The code has been slightly
+modified to compile cleanly as C++ under Syllable.  The Whisper plugin (pst.h, pst.cpp)
+is written by Kristian Van Der Vliet.
+
+The plugin can read PST files created by Microsoft Outlook versions 97 to 2002.  Outlook
+2003 PST files are not supported.  Outlook 2003 users should refer to the Microsoft Office
+Assistance page at http://office.microsoft.com/en-us/assistance/HA011190371033.aspx,
+which contains full instructions for exporting your Microsoft Outlook items in
+Outlook 97-2002 PST format.
+
+Currently only mail and sub-folders are imported.  Contacts and Journal entries are
+ignored.  Rich Text and encrypted bodies within mail messages are ignored.  Attachments
+may not be imported or imported incorrectly.
+

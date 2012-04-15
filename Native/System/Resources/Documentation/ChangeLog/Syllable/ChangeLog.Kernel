@@ -1,0 +1,1374 @@
+* August 9, 2008, Kristian Van Der Vliet *
+
+Synced the ACPI bus manager with Linux 2.6.26.2. Patch from
+Zoltan Kovacs <giszo@nyomi.hu>
+
+* August 4, 2008, Anthony Morphett *
+
+Minor bugfixes to iso9660 driver and kernel/cpuid, thanks to c0x.
+
+* July 15 2008, Kristian Van Der Vliet *
+
+Small fix to the rtl8169 driver so it doesn't crash when it's loaded.
+
+* July 12 2008, Anthony Morphett *
+
+Added kernel boot parameters to get_system_info(), raising SYS_INFO_VERSION to 4
+Removed old get_system_info() code for versions 1 & 2
+Fixed alignment check in descriptors.c as pointed out by c0x.
+
+* May 29, 2008, Anthony Morphett *
+
+Added kernel parameter printk_max=n to limit boot messages
+
+* May 11, 2008, Anthony Morphett *
+
+Export get_bool_arg() properly from the kernel and remove the duplicate
+get_bool_arg() code from drivers
+
+* May 4, 2008, Kristian Van Der Vliet *
+
+Added a workaround to the rtl8169 driver for a GCC optimisation bug which
+creates a reference to memcpy() after the pre-processor has run, hence is
+undefined.
+
+* April 5, 2008, Kristian Van Der Vliet *
+
+posix/limits.h: Moved certain macro definitions to be outside the gaurd for
+__STRICT_ANSI__. This ensures macros like PATH_MAX are defined when -ansi
+is used.
+
+* February 2, 2008, Kristian Van Der Vliet *
+
+Re-wrote sys_alarm() to use the POSIX ITIMER_REAL timer instead of it's own
+list. The send_signal_alarms() function has been completely removed.
+
+* January 28, 2008, Kristian Van Der Vliet *
+
+A few smaller fixes to get Qemu working:
+
+ o Fixed POSIX timer rescheduling
+ o Don't return -EINTR from tcp_connect()
+
+* January 27, 2008, Kristian Van Der Vliet *
+
+Implemented POSIX timers with setitimer() & getitimer(). These timers are
+maintained in a seperate list from the SIGALRM alarms but in a similiar
+manner I.e. there is one list for all threads, and all of the available timers
+are checked to see if they expire every timer interrupt. ITIMER_REAL timers
+appear to work. ITIMER_VIRTUAL & ITIMER_PROF timers have not been tested.
+
+* January 22, 2008, Kristian Van Der Vliet *
+
+Make fcntl() F_SETLK more standards compliant. A process can now call
+F_SETLK for a region which it already holds another lock on, and the existing
+lock will be replaced or adjusted to acomodate the new lock. This hasn't been
+heavily tested but it at least seems to be enough to get Samba 3.0.28 working.
+
+---- 0.6.5 Released -------------------------------------------------------------------
+
+* January 3, 2008, Kristian Van Der Vliet *
+
+Added /system/indexes/lib/ to the default search path used by the ELF loader
+to locate DSOs if DLL_PATH is not set in the processes environment.
+
+* January 1, 2008, Kristian Van Der Vliet *
+
+Added a workaround to ip_find_route() for a bug that causes odd routes to be
+selected I.e. routing to the gateway for 127.0.0.1. There is a route entry
+with an address and mask of 0.0.0.0 which will always be the first match for
+any address passed to ip_find_route(), regardless of if there is a more
+specific route later in the routing table. This first entry does not appear
+to be the default route entry. I don't know where it comes from exactly but
+the workaround will at least allow routing to other networks to work
+correctly.
+
+* December 24 2007, Kaj de Vos *
+
+Imported an updated version of the AtheOS NFS driver and Arno's port of
+OpenBeFS, and updated the makefiles.
+
+* December 12, 2007, Kristian Van Der Vliet *
+
+Some network stack improvements and bug fixes:
+
+o Ensure the advertised TCP MSS allows enough room for the IP & TCP headers.
+o Set the "Don't Fragment" bit on "whole" IP packets.
+o Increased the default TCP send and recieve buffer size to 32k
+o Only route a packet to the gateway if the destination is not on the local
+  subnet.
+
+* December 9, 2007, Kristian Van Der Vliet *
+
+The system libraries are now split between two locations, so the initial
+DLL_PATH set before init is run must include /system/indexes/lib
+
+* November 26, 2007, Kristian Van Der Vliet *
+
+o Implemented setsockopt() SO_SNDBUF & SO_RCVBUF for TCP sockets.
+o Return ENETUNREACH from tcp_connect() if there is no route to the
+  requested host.
+
+* November 26, 2007, Kristian Van Der Vliet *
+
+Set the correct access mode flags in the associated file descriptor for
+new sockets. The mask is now set to O_RDWR instead of 0_RDWR | 0777
+
+* November 26, 2007, Kristian Van Der Vliet *
+
+get_named_inode() will now return an error if the name is an empty string.
+This at least fixes on problem where access( "", F_OK ) would not return an
+error.
+
+* October 20, 2007, Kristian Van Der Vliet *
+
+Patches from Anthony Morphett:
+
+ o Fix a bug in ext2 driver where it forgets to close() the device after
+   probing for an ext2 and not finding one
+ o Changed the name of the create_device_node() parameter 'pCookie' to
+   'pNodeCookie' and added a comment to the documentation better explaining
+   what this parameter is used for.
+ o Fix a quirk in AFS where write_attr() sometimes returns 0 rather than the
+   number of bytes written. Specifically, if the written attribute is small
+   enough to fit in the 'small attribute area' inside the inode then the call
+   would return 0 even on success, otherwise it returns the number of bytes
+   written or an error code.
+
+* September 26, 2007, Arno Klenke *
+
+o Keep usb disk driver loaded
+o Fix dma transfers on the second ata/sata channel for pci controllers
+
+* August 4, 2007, Kristian Van Der Vliet *
+
+o clone_semaphore() allocates the correct amount of space for a R/W lock
+  semaphore. Fixes bug #288
+o sk_write() & sk_writev() now check for the sendmsg() socket op instead of
+  recvmsg(). Fixes bug #290
+
+* July 18, 2007, Kristian Van Der Vliet *
+
+Added the dl2k network driver for D-Link DL2000 based gigabit ethernet cards,
+which was ported from the Linux 2.6.20 dl2k driver. Tested on a
+D-Link DGE-550T at 100 & 1000Mbps
+
+* July 15, 2007, Arno Klenke *
+
+Cloning memory contexts now works correctly with remapped areas
+or areas with preallocated pages
+
+---- 0.6.4 Released -------------------------------------------------------------------
+
+* July 1, 2007, Arno Klenke *
+
+Always set PTE_ACCESSED when PTE_DIRTY is set
+debug_read() now blocks when there is no data available
+
+* Jun 25, 2007, Kristian Van Der Vliet *
+
+Fix lock/unlock order of the g_hInodeHashSem mutex in do_mount(). Fixes bug #256.
+
+* Jun 20, 2007, Kristian Van Der Vliet *
+
+Fixed Intel SATA detection and configuration. Fixes Bug #244.
+
+* Jun 17, 2007, Kristian Van Der Vliet *
+
+Added a TUN network driver, which was originally written by William Rose some
+time ago. The TUN driver can be used by user-space applications to act as
+network end-points. The driver is currently TUN only (I.e. no Ethernet
+headers, raw IP packets only): TAP mode (with fake Ethernet headers) is not
+supported.
+
+* May 25, 2007, Arno Klenke *
+
+Added the disable_device_on_bus() and enable_devices_on_bus() functions. All drivers that currently
+use disable_device() should be changed to use disable_device_on_bus().
+
+Added the disable_gfx_drivers kernel parameter
+
+* May 15, 2007, Kristian Van Der Vliet *
+
+Added the PCI ID for the TGUI 9680 graphics card to the Trident graphics driver.
+
+* May 15, 2007, Kristian Van Der Vliet *
+
+Get the PCI access method from the BIOS and only fall back to register probing if no PCI BIOS
+is found. I've also removed the specific check for Virtual PC and reversed the register probing
+method so that method 1 is probed before method 2. This is based on the method used by NetBSD.
+
+* May 10, 2007, Kristian Van Der Vliet *
+
+Removed the 3c59x drivers private linuxcomp.h header and merged the pci_set_power_state()
+function into linux_compat.h, with updates to the driver to fit the modified API.
+
+* May 7, 2007, Arno Klenke *
+
+Update acpi code to version 20070126
+Add the set_thread_target_cpu() function
+Use the clone_page_pte() function more often
+Limit memory size to 1.5gb
+
+* May 4, 2007, Arno Klenke *
+
+Added the cpu frequency scaling patch by Tim ter Laak
+Allow accesses to the usb uhci root hub if the controller is suspended
+Rename MEMF_OKTOFAILHACK to MEMF_OKTOFAIL
+Removed the (unused) GFP_CLEAR flag. get_free_page() now respects the MEMF_CLEAR flag.
+
+* April 14, 2007, Kristian Van Der Vliet *
+
+Synced the rtl8169 driver with Linux. Adds support for RTL8168b/8111b, RTL8101e and RTL8100e
+PCI-E chips and some newer PHYs.
+
+* April 4, 2007, Arno Klenke *
+
+Added new pci ids to the hda driver
+
+* March 20, 2007, Kristian Van Der Vliet *
+
+Added some missing Intel ICH5 & ICH6 SATA PCI IDs to the ATA driver. My ICH6 SATA controller
+now works fully in "Normal" mode (Instead of "Combination") on my Dell GX280. This might cause
+the drive to move I.e. hda->hde etc.
+
+* March 15, 2007, Kristian Van Der Vliet *
+
+o Added a skge driver for SysKonnect/Marvell Yukon1 NICs, ported from the Linux 2.6 skge
+  driver. Tested at 100Mbps with a DLink DGE-530T.
+o Updated linux_compat.h with some additional macros and stubs used by the skge driver
+
+* March 13, 2007, Kristian Van Der Vliet *
+
+Fifos (pipes) are now specifically marked as such (FDT_FIFO) to allow certain operations to
+fail correctly.
+lseek() on a pipe will now cause ESPIPE. Fixes bug #164.
+
+* March 8, 2007, Kristian Van Der Vliet *
+
+Return the correct error condition from tcp_connect() if connect() is called more than once.
+Fixes bug #155.
+
+* March 8, 2007, Arno Klenke *
+
+The ps2 driver should only be opened one time
+
+---- 0.6.3 Released -------------------------------------------------------------------
+
+* February 23, 2007, Kristian Van Der Vliet *
+
+Increased the maximum partition limit to 32 in the ATA driver.
+
+* February 23, 2007, Arno Klenke *
+
+Do not use the tsc timer in non smp mode
+
+* February 21, 2007, Kristian Van Der Vliet *
+
+Allow tcp_connect() to return immediatly with -INPROGRESS if the socket is non-blocking.
+tcp_sendmsg() and tcp_recvmsg() will return EAGAIN if the the SYN ACK has not yet been recieved.
+Fixed a handful of remaining issues with the new setsockopt()
+
+* February 8, 2007, Kristian Van Der Vliet *
+
+Split the 64bit argument to set_real_time() into two 32bit (High-low) arguments.
+Do not mangle return value passed to exit_thread()
+Cleaned up the definition of struct rusage and removed all those unused members.
+
+* February 6, 2007, Kristian Van Der Vliet *
+
+o Re-organised, cleaned up and improved setsockopt()
+	o A lot of option do nothing more than set a flag on the socket I.e. the behavour of the
+	  socket is not changed.
+o Implemented getsockopt()
+	o Mostly complete for socket-level options (SO_) but nothing lower is implemented.
+
+* February 2, 2007, Arno Klenke *
+
+o Added a function to return the acpi id of one processor
+
+* January 31, 2007, Arno Klenke *
+
+o Enable pci links when they are needed
+o ATA driver updates:
+	o Moved parts of the interrupt handling code from the busmanager into the controller driver.
+	  This avoids problems with level triggered interrupts
+	o A lot of small changes in the ATAPI code to support drives which are very strict about
+	  the order of the commands
+	o Enabled DMA transfers for (non ahci) nvidia sata controllers
+	o Updated reset code in the ata_pci controller driver
+
+* December 20, 2006, Kristian Van Der Vliet *
+
+Modified the iso9660 driver so that it always uses RockRidge if the disc uses both
+RockRidge and Joliet. Fixes bug #41. Also made a few smaller code cleanups.
+
+* January 15, Arno Klenke *
+
+Fixed a bug in the usb hub driver and added hub reset code
+Add a timeout for the codec reset in the i8xx audio driver
+Show symbol names for kernel drivers in the stack traces
+
+* January 9, Arno Klenke *
+
+Replaced lock_mem_area()/unlock_mem_area() by verify_mem_area()
+Use the tsc timer for thread scheduling
+Use the elf symbol hash tables
+Added additional error checks to the usb hid driver to work with at least one keyboard
+
+* December 14 2006, Arno Klenke *
+
+o Report the total size of the blockcache and not just the allocated blocks
+o Fixed memory leak in the iso9660 driver
+
+* December 10 2006, Kristian Van Der Vliet *
+
+o Added a tg3 driver for Broadcom NetExtreme Tigon3 NICs, ported from the Linux 2.6 tg3
+  driver. Tested at 100Mbps and 1000Mbps with various Broadcom chips.
+o Updated the PCI vendors list in pci_vendors.h from Linux
+o Updated linux_compat.h and added net/mii.h from Linux. Added net/net_device.h with
+  common definitions for the net_device and net_device_stats structures.
+o Checked the ethernet drivers still compile and fixed any problems with the updated
+  headers. There is still work to do here to move to the common headers but they all
+  compile.
+
+* December 4 2006, Arno Klenke *
+
+Align the stack of threads to 16 bytes
+
+* November 27 2006, Kristian Van Der Vliet *
+
+Applied a further set of code cleanups to the Via Rhine driver from
+Tim ter Laak <timl@scintilla.utwente.nl>
+
+* November 24 2006, Kristian Van Der Vliet *
+
+Patched the VIA Rhine driver to fix initalisation on certain Rhine II & III chips
+with Wake-On-LAN  The patch was provided by Tim ter Laak <timl@scintilla.utwente.nl>,
+based on an older patch from an unknown source. 
+
+---- 0.6.2 Released -------------------------------------------------------------------
+
+* October 25 2006, Arno Klenke *
+
+Fixed audio drivers
+
+* October 22 2006, Arno Klenke *
+
+Avoid infinite loop in the ata driver
+Fixed ps2 driver
+
+* October 17 2006, Kristian Van Der Vliet *
+
+iso9660 driver:
+ o Fixed RockRidge selection
+ o Rationalised the optional paramaters to be "nojoliet" and "norockridge" or "norr"
+ o sindent'ed everything
+
+* October 17 2006, Kristian Van Der Vliet *
+
+Improved SATA configuration for VIA SATA and Intel ICH-5 controllers
+
+* October 17 2006, Kristian Van Der Vliet *
+
+Rewrite of the APIC & SMP startup code
+Split smp.c into smp.c & apic.c, and inc/smp.h into smp.h, apic.h & mpc.h
+The APIC code has been re-written to be much closer to the original Linux version
+Bug fixes
+ o Booting from a CPU other than #0 now works
+ o Non-SMP machines should no longer have "phantom" CPU's I.e. showing the CPU as #15
+ o Various over bug fixes and code cleanups
+
+* October 10 2006, Arno Klenke *
+
+Shutdown processors before trying to power off in smp mode
+
+* October 7 2006, Arno Klenke *
+
+Added page validation code and fix the timer wakeup code
+Added pci id for via8237a to the ata driver
+Do not reconfigure pci bridges that are already configured
+Use acpi to find additional pci busses that are not connected to the primary bus
+Fixed a memory leak in the usb ehci driver
+
+* September 20 2006, Arno Klenke *
+
+The floppy drive should work again
+
+* August 22nd 2006, Kristian Van Der Vliet *
+
+Added a Realtek 8169 (& compatible) Gigabit NIC driver ported from the Linux 2.6 r8169
+driver.  Tested at 100Mb & 1000Mb speeds with a Realtek 8169 based card.
+
+* August 4th 2006, Arno Klenke *
+
+Fixed some gcc4 related warnings
+Synchronized tlb flushes on smp machines
+Avoid recursive spinlocks
+New busmanager api
+Some work on suspend and resume
+
+* July 11th 2006, Kristian Van Der Vliet *
+
+Checked in an NTFS driver, ported from Linux by Jaroslaw Pelczar <jpelczar@interia.pl>
+The driver is currently read-only.
+
+* July 10th 2006, Kristian Van Der Vliet *
+
+Checked in Lance Hartfords <Lance.Hartford@libertymutual.com> fair scheduler patches.
+Each thread now has a quantum that is calculated from it's priority; lower priority
+threads have less quantum.  The scheduler now maintains two queues; one for ready
+threads and one for threads whos quantum has expired.  All of the threads on the ready
+queue will be run to their full quantum before the two lists are swapped.
+
+It's a fairly standard round-robin priority based afair, but now high priority threads
+can no longer starve the lower priority threads.
+
+* June 4th 2006, Arno Klenke *
+
+Updated ACPI busmanager
+Added new ps2 driver
+
+---- 0.6.1 Released -------------------------------------------------------------------
+* May 20th 2006, Kristian Van Der Vliet *
+
+Working ptrace() implementation and full support for GDB
+All done by Jan L. Hauffa <hauffa@in.tum.de>
+
+* April 14 2006, Arno Klenke *
+
+Some swap code related work but it is still broken
+Improved block cache allocator code
+Reload drivers when they have been changed
+
+* April 10 2006, Arno Klenke *
+
+Implemented the AREA_CONTIGUOUS flag
+Fixed mtrr support in non apic mode
+
+* April 5 2006, Kristian Van Der Vliet *
+
+New function reset_semaphore()
+The ATA drivers now use lock()/unlock() to wait for ATA DMA completion.  This fixes DMA on
+controllers & drives which raise an IRQ early during the operation: previously this would
+cause the ATA bus manager to call wakeup_sem() before the ATA hcd had called sleep_on_sem()
+
+* March 15 2006, Kristian Van Der Vliet *
+
+Added a working ioremap() implementation to linux_compat.h  This has fixed at least one known
+problem with the 3c59x driver and certain mini-PCI laptop cards.
+
+* January 27 2006, Arno Klenke *
+
+Moved PGDIR_XXX macros from atheos/areas.h to a private kernel header
+Removed protect_phys_pages() call
+
+* January 26 2006, Kristian Van Der Vliet *
+
+atheos/lp.h: New file, from Linux with some modifications.
+
+* January 12 2006, Kristian Van Der Vliet *
+
+atheos/bitops.h: New file, from Linux.
+atheos/linux_compat.h: New file.  Single, standardised version of the various linuxcomp.h headers
+used by a lot of ported drivers.
+Updated the net & sound drivers.  Removed the individual bitops.h in favour of <atheos/bitops.h>
+and removed the majority of the individual linuxcomp.h wrappers in favour of <atheos/linux_compat.h>
+posix/ioctl.h: Corrected the argument order for the _IOC macro and fixed the implementations for
+the _IO, _IOR, _IOW & _IORW macros.
+
+* January 3 2006, Kristian Van Der Vliet *
+
+ftruncate() support for AFS.  Patch from Daniel Gryniewicz.
+posix/ioctl.h: Define Linux-compatable names for the ioctl macros E.g. _IOW, _IOR etc.
+atheos/tld.h: The TLD range from 512 to 1024 is now reserved for use by Glibc
+exec.c, thread.c: Put the base address of the thread data area in the initial thread TLDs so it can
+be retrieved by get_tld_addr() without a syscall.
+
+* January 2 2006, Arno Klenke *
+
+The kernel now uses software task switching
+Moved the irq controller code from intel.s to irq.c
+Support for the acpi busmanager
+
+---- 0.6.0a Released -------------------------------------------------------------------
+---- 0.6.0 Released -------------------------------------------------------------------
+
+* December 2 2005, Kristian Van Der Vliet *
+
+Update the ISO9660 filesystem driver with Microsoft Joilet support.
+The driver also uses the kernel NLS.  From Jaroslaw Pelczar <spideros1@wp.pl>
+
+* December 2 2005, Kristian Van Der Vliet *
+
+Added kernel-level NLS support for use by kernel level drivers E.g. ISO9660
+& FAT filesystem drivers.  From Jaroslaw Pelczar <spideros1@wp.pl>
+
+* October 8 2005, Kristian Van Der Vliet *
+
+Implement get_msg_size()
+
+* October 4 2005, Arno Klenke *
+
+Added the flush_locked_device_cache() function
+Reworked shrink_cache_heaps() and shutdown_vfs()
+Sorted kernel function list in ksyms.c
+MTRR support
+The floppy drive should work again
+Kernel graphic driver updates
+Support for the pci bios in the pci busmanager
+
+* September 7 2005, Kaj de Vos *
+
+Corrected some spelling mistakes in afs.c.
+
+* September 3 2005, Henrik Isaksson *
+
+Applied patches for documentation and journal sanity check.
+
+---- 0.5.7 Released -------------------------------------------------------------------
+
+* July 18 2005, Arno Klenke *
+
+Enabled call to reflect_irq_to_realmode() to make the bios driver work again
+
+* May 29 2005, Arno Klenke *
+
+Fixed SIOCSIFDSTADDR ioctl to work with point to point interfaces
+
+* May 24 2005, Kristian Van Der Vliet *
+
+Removed atheos/pthreadsignal.h.  pthread_sigmask() is now defined in
+bits/sigthread.h as part of Glibc 2.3.4
+
+* May 7 2005, Kristian Van Der Vliet *
+
+Build 0015.  Added a new syscall, get_tld_addr() which as the name suggests,
+returns the void * address for the given TLD handle.  This functionality is
+required by the TLD implementation of Glibc.
+
+---- 0.5.6 Released -------------------------------------------------------------------
+
+* March 30 2005, Jake Hamby *
+
+Updated to Build 0014.  The major change is mostly cosmetic:  I changed a
+number of simple "#define CONSTANT 123" macros into the form:
+
+static const uint32_t CONSTANT = 123;
+
+It takes up a bit more space but is a little more type-safe.  Unfortunately,
+C's implementation of "const" is much less powerful than C++'s, so you can't
+use const variables to set the sizes of arrays, in case statements, or as
+initialization values for other const variables.  I also changed a few macros
+to their equivalent static inline functions, which helps with readability as
+well as with type safety.
+
+Also, there's one bug fix, in vfs/fifo.c.  I added an additional check for a
+broken pipe immediately before writing to a pipe, because the existing check
+only happened if the buffer was full.  This fixes a unit test in the
+testsuite for TCL, io.test 29.27.  I also updated the write function in
+vfs/pty.c to match the ordering of the logic in vfs/fifo.c.
+
+* March 27 2005, Jake Hamby *
+
+Updated to Build 0013.  Added stubs for three new system calls:  ftruncate(),
+truncate(), and sigaltstack().  It's unlikely that any of these functions
+will be implemented in time for the next release, but by adding the system
+calls now, we can add these functions to the kernel without requiring a
+glibc upgrade.  The next release of glibc 2.3.4 (RC3) will use these system
+calls, but the behavior (return -1 with errno = ENOSYS) will not change,
+except for a debug message printed by the kernel to the log when these new
+functions are called.
+
+In preparation for implementing ftruncate(), I have updated the filesystem
+driver API to version 2 and added a new method, op_truncate().  None of the
+filesystems implement this function yet, but I've updated the source code for
+each filesystem, cleaning up a number of GCC warnings in the process and fixing
+a few spelling errors in the AFS comments.  You do not have to recompile your
+filesystems after updating the kernel, as I've added code to allocate an
+operations structure of the larger size and copy in the values when an old
+filesystem driver is loaded.  The implementation of sys_ftruncate() and
+sys_truncate() is slightly better than an empty stub, as the code does the
+work of finding the inode structure and calling op_truncate(), so all that
+remains is to actually implement op_truncate() for one or more filesystems.
+
+* March 25 2005, Jake Hamby *
+
+Updated to Build 0012.  Improvements to signal handling:
+
+    * Upgraded sigset_t from 32 to 64 bits, allowing for signals 1-64.
+    * Updated <posix/signal.h>, defining _NSIG as 64 inside the kernel
+	and as 65 (biggest signal number + 1) in user-space, as required
+	by POSIX and glibc.  Added definitions for SA_NOCLDWAIT and SA_SIGINFO,
+	SIGRTMIN and SIGRTMAX (range for "real-time" signals), inline signal
+	set macros, and SIG_HOLD, which is handled by glibc's sigset()
+	function and not by the kernel itself.
+    * Fixed a bug that assumed that glibc was passing sigaction structs with
+	a sigset_t of 32 bits.  In fact, glibc uses a sigset_t that is much
+	larger (128 bytes) so the kernel always read a 0 for sa_flags instead
+	of the correct value.  Added a definition of struct libc_sigaction to
+	<posix/signal.h> so that the kernel can convert to/from the version
+	of sigaction used by glibc.
+    * Added support for the SA_NOCLDWAIT flag, which can be set for SIGCHLD
+	to prevent zombie processes from being created when a child exits.
+	If wait() is called while SA_NOCLDWAIT is set, it returns immediately
+	with ECHILD.
+    * Added support for the SA_SIGINFO flag, which tells the kernel to call
+	the user's signal handler with three arguments instead of one.  The
+	second argument is a pointer to a siginfo_t structure which contains
+	additional information about the signal, and the third argument is a
+	pointer to a ucontext_t structure which contains the processor-specific
+	context saved by the signal handler.  For now, most of the fields in
+	siginfo_t are set to zero, as the kernel doesn't currently save the
+	information about pending signals necessary to fill in this structure.
+	See the Linux man page for sigaction(2) for more information on how
+	this structure should be initialized.
+    * Added support for signals 32-64 in sys_sigsuspend().  This requires a
+	patch to glibc to pass that portion of the signal mask in the second
+	argument to sys_sigsuspend().
+
+Most of the signal related tests in the Open POSIX Test Suite
+(posixtest.sourceforge.net) now pass, except for those related to POSIX
+real-time system calls (sigqueue(), sigwait(), sigtimedwait(), and
+sigwaitinfo()), and tests for the following missing functionality:
+
+    * As described above, the siginfo_t structure is not currently being
+	filled in correctly.  In order to do so, we will need to store a
+	small amount of additional information for each pending signal.
+	For example, the SIGCHLD signal sets si_code to one of the following:
+	CLD_EXITED : child has exited
+	CLD_KILLED : child was killed
+	CLD_DUMPED : child terminated abnormally
+	CLD_TRAPPED : traced child has trapped
+	CLD_STOPPED : child has stopped
+	CLD_CONTINUED : stopped child has continued
+	The cleanest solution will probably be to maintain a linked list of
+	siginfo_t structures for each pending signal, since for example several
+	child processes could stop or exit at about the same time, and the
+	process ID and real user ID of the child must be saved in addition to
+	the si_code.  However, if a child stops then continues before the
+	parent has a chance to run, the kernel is allowed to optimize away the
+	matched CLD_STOPPED/CLD_CONTINUED pair.
+    * Defining an alternate signal stack with sigaltstack() is not supported.
+	The uc_stack field in the ucontext_t structure is also not filled in.
+    * sys_sigsuspend() doesn't work correctly.  After waking, it should first
+	handle all signals not masked by the temporary signal mask, then
+	restore the previous signal mask and handle any remaining signals.  It
+	should also return -1 with errno = EINTR.  I wasn't able to fix this
+	easily because signals are normally handled before returning to user
+	mode by a call to handle_signals() in syscall.s.  To fix this bug,
+	sys_sigsuspend() would have to save the original signal mask in the
+	thread structure, return (thus calling signal handlers with the
+	temporary mask), then the original signal mask would have to be
+	restored elsewhere, after all signals had been handled with the
+	temporary mask.
+    * POSIX threads requires certain aspects of signal handling to be managed
+	on a per-process basis, while Syllable currently handles all aspects
+	of signals on a per-thread basis.  This is why getpid() returns a
+	thread_id rather than a proc_id.  At some point in the future, we will
+	need to refactor the signal code so that, for example, kill() will take
+	a proc_id (and deliver the signal to a single thread within that
+	process), while pthread_kill() will function as kill() does now.
+	Signal masks will continue to be set on a per-thread basis, while
+	signal actions and signal handlers will be set on a per-process basis.
+
+* March 21 2005, Jake Hamby *
+
+Updated to Build 0011.  List of fixes:
+
+    * Added checks to load_image() and sys_execve() to return EISDIR if the
+	caller attempts to execute a directory, or EINVAL if the caller
+	attempts to execute anything else besides a regular file.
+    * Added strlcat() and strlcpy() functions from OpenBSD and exported
+	them to kernel modules.  Currently nothing is using these functions
+	but the plan is to convert all uses of strcat(), strcpy(), strncat(),
+	and strncpy() to use these safer and less error-prone routines.  See:
+	http://www.courtesan.com/todd/papers/strlcpy.html
+    * Updated <atheos/tld.h> to fix a warning when building GCC.
+    * Updated <posix/types.h> to fix an error when building glibc 2.1.2.
+
+* March 19 2005, Jake Hamby *
+
+Updated to Build 0010.  List of fixes:
+
+    * Added support for the remaining pty control characters:  ^U, ^W, ^R.
+	See the next ChangeLog entry for more details.
+    * Deleting characters, whether with backspace, ^U, or ^W, echos the
+	correct number of backspaces for each character on the line:  zero
+	or two for each control character depending on whether echoctl is set,
+	backspace to the last tab stop for tabs, and one backspace for all
+	other characters.
+    * Commented out two kernel printk messages:  "sbrk() Search for address"
+	and "sbrk() next address whould be 0x00000000".  Programs like gcc
+	were filling up the kernel log with these harmless messages.
+    * Changed the error code for unlink("") from EINVAL to ENOENT.  Some
+	Makefiles (for example GCC) try to [rm -f ""] which would print the
+	annoying message: "rm: cannot remove `': Invalid argument".  Changing
+	the error to "No such file or directory" causes the "-f" flag to
+	suppress the warning message.
+
+* March 17 2005, Jake Hamby *
+
+Updated to Build 0009.  Many improvements to terminal handling (ptys).  Note
+that bash does its own processing of control keys, but you can verify
+handling of "cooked" mode by running /bin/cat to echo lines from stdin.
+
+    * The various control keys (^C, ^D, ^H, ^Z, etc.) are now programmable
+	instead of hard-coded.  See the stty utility for more information.
+    * Fixed several bugs in carriage return / newline handling.  In
+	particular, programs such as "bc" and "cat" will correctly jump
+	to the next line when the user presses return.
+    * By default, control keys are echoed back as ^A, ^B, etc.  This can be
+	disabled with "stty -echoctl".
+    * By default, XON/XOFF flow control is now available with ^S and ^Q.
+	This can be disabled with "stty -ixon".
+    * The quit key (default: ^\) is similar to ^C but sends SIGQUIT instead
+	of SIGINT.  Special handling of ^C, ^\, and ^Z can be disabled with
+	"stty -isig".
+    * To type a control character that would otherwise be processed specially,
+	you can press LNEXT (default: ^V) before typing the character.
+	Unfortunately, aterm catches ^V for pasting text, but you can remap
+	this functionality to a different control character using stty.
+    * If the master or the slave side of the pty is closed, the other side
+	will get an errno of EIO instead of EPIPE on the next read.  If the
+	master is closed and the slave is written to, EIO is returned, but
+	if the slave side is closed, data can still be written to the master
+	and it will be buffered, allowing the slave to be reopened for
+	reading.  This is the same behavior as Linux.
+
+Using the upcoming version of glibc, the "expect" program now works correctly,
+which means that the DejaGnu testing framework should now work (and passes
+its testsuite).  Input line handling functionality not yet implemented:
+
+    * Erase the entire line (default: ^U).
+    * Erase the last word (default: ^W).
+    * Reprint the current line (default: ^R).
+
+* March 16 2005, Jake Hamby *
+
+Updated to Build 0008.  Finished merging Arno's most recent set of SMP fixes,
+plus minor spelling corrections.  Additional notes from Arno Klenke:
+
+    * descriptors.c: Clear a bit in the right descriptor (the initial tss
+	descriptor). Previously a bit in another descriptor was cleared. This
+	bit is marked as reserved in the Intel docs and has always been set
+	for new threads (Thread_New() in thread.c) but the docs say that
+	reserved bits have to be cleared.
+    * init.c: Changed the order of some calls to match the order that has
+	been used before my big refactoring patch.  I don't think that this
+	was necessary but I am not sure if there are dependencies in the order
+	that I haven't seen yet.
+    * init.c: Added the new kernel parameter disable_acpi=true.
+    * irq.c: Disable reflection of irqs to realmode.
+    * pagefault.c: Readded the line psThread->tr_nState = TS_WAIT.  It was
+	removed by the scheduler patches but is necessary for correct behaviour.
+    * smp.c: Fixed acpi table parsing.  Removed the cli()/put_cpu_flags() pair
+	in do_smp_invalidate_pgt() and do_smp_preempt() because both functions
+	are called with interrupts disabled. Of course this shouldn't make any
+	difference but it does because it seems that we get problems if
+	put_cpu_flags() is the last call in one function. This has been the
+	case in the do_smp_invalidate_pgt() function which is only called on
+	systems with more than one cpu.
+
+* March 14 2005, Jake Hamby *
+
+Updated to Build 0007.  Commented out the microsecond precision code for
+performance reasons.  Integrated Arno's SMP fixes and the kernel now boots
+correctly on my Pentium 4 with SMP enabled.  Other fixes:
+
+    * Fixed <atheos/spinlock.h> bug which prevented the devices from building.
+    * Added C99 type support and updated areas.c and bcache.c with the new
+	C99 types (the other kernel files will be updated later).
+    * Removed compiler warnings for mismatched printf types (%ld -> %d).
+    * Updated kernel printf() to support %z (C99 size_t type) and fixed
+	%p handling to print the leading "0x" in conformance with standard.
+    * Removed MEMF_BUFFER flag to kmalloc() which didn't do anything.
+    * Removed global g_nDisableTS which was not being used.
+    * Changed g_bKernelInitiated to g_bKernelInitialized.
+
+* March 1 2005, Arno Klenke *
+
+Enabled nodemonitoring in the fat fs driver.
+
+* February 6 2005, Jake Hamby *
+
+Updated to Build 0006.  Upgraded get_system_time() and get_real_time() from
+millisecond to microsecond precision.
+
+* February 4 2005, Jake Hamby *
+
+Updated to Build 0005.  The kernel now builds w/o warnings on GCC 3.4.3 and
+appears to work when compiled with it!  However, the eth_if module doesn't
+yet build due to missing "-lgcc_static" (apparently a bug in the GCC 3.4.3
+port).
+
+List of fixes:
+    * Fixed "use of cast expressions as lvalues is deprecated" warning
+	in smp.c by rewriting the expression with "+" instead of "+=".
+    * Added include to <atheos/spinlock.h> so that the get_processor_id()
+	inline function is available (GCC 3.4.3 gives a warning about this).
+    * Commented out "spinlock nested too deep" check in spinlock() unless
+	DEBUG_SPINLOCKS is defined.
+    * Commented out "Warning: kmalloc() of oversized block" message in
+	kmalloc.c that was scaring a lot of users.
+    * Removed "-mcpu=i586" from CFLAGS; GCC 3.4.3 gives a warning about this
+	and it's implied by "-march=i586".
+    * Moved some "__attribute__ ((packed))" before the type names in acpi.h;
+	GCC 3.4.3 gives a warning that the attribute is ignored if placed
+	at the end of the typedef.
+    * Added a new file "lib/gcc34_strcpy.c" with non-inline definitions of
+	strcpy() and memcpy().  GCC 3.4.3 generates some code which requires
+	these functions.  On other versions of GCC this is #ifdef'd out.
+
+* February 3 2005, Jake Hamby *
+
+Updated to Build 0004.  Integrated Daniel's scheduler cleanup patches.
+Added a 'pause' loop to spinlock() to improve power consumption and
+performance on Pentium 4 hyperthreaded systems.
+
+* February 3 2005, Jake Hamby *
+
+Updated to Build 0003.  Fixed errno printing bug in strace and fixed
+sys_rmdir() to accept pathnames with a trailing '/'.
+
+* January 29 2005, Jake Hamby *
+
+Updated to Build 0002.  Patch from Daniel Gryniewicz to fix GCC 3.4.3
+compiler warnings and to fix an initialization bug in <atheos/seqlock.h>.
+Also added Daniel's double-linked list implementation at <atheos/dlist.h>.
+
+* January 29 2005, Jake Hamby *
+
+Build 0001:
+    * New 4-digit build version printed at system startup and logged to
+	/var/log/kernel.  Anyone checking a kernel change into CVS must
+	bump this version number along with adding a ChangeLog entry.
+
+WARNING:
+	This kernel now attempts to detect the SMP configuration
+	using ACPI, exposing SMP-related bugs in systems that were
+	previously detected as uniprocessor.  This includes Pentium 4
+	systems with hyperthreading.  Add "disable_smp=true" to your
+	boot flags if your system won't boot this kernel.
+
+Big kernel patch from Arno Klenke:
+    * Add support for AGP 2x, 4x and 8x devices and AGP fast writes.
+    * New boot argument to disable AGP code -- "disable_agp=true"
+    * Rename some struct members to use Hungarian notation:
+	affected headers are <atheos/multiboot.h>, <atheos/seqlock.h>
+    * Rename GetCMOSTime() to get_cmos_time()
+    * Rename InitAreaManager() to init_areas()
+    * Rename InitMsgPorts() to init_msg_ports()
+    * Rename InitProcesses() to init_processes()
+    * Rename InitSemaphores() to init_semaphores()
+    * Rename InitThreads() to init_threads()
+    * Rename SetColor() to dbcon_set_color() and move to dbconsole.c.
+    * Rename StartTimerInt() and StopTimerInt() to start/stop_timer_int()
+    * Rename SysInit() to system_init()
+    * Rename smp_scan_config() to smp_scan_mpc_config()
+    * New header "inc/acpi.h" with ACPI table definitions.
+    * New smp_read_acpi_rsdt() and smp_scan_acpi_config() functions in smp.c
+	retrieve CPU and IOAPIC information from ACPI tables if present.
+    * New init_kernel_mem_context() function sets up the g_psKernelSeg struct.
+    * New init_descriptors() function initializes the code and data segments.
+    * New init_cpuid() function in cpuid.c reads the cpuid and enables fast FPU and SSE.
+    * New init_pages() function to initialize page table structures.
+    * Clean up init_kernel(), which now calls the new init_*() functions.
+    * Move boot_ap_processors(), start_timer_int() and get_cmos_time() calls
+	from system_init() to kernel_init().
+    * Move Desc_*() Intel descriptor support functions to new descriptors.c.
+    * Move virtual 8086 structures from "inc/scheduler.h" to new "inc/virt86.h".
+    * Move structure typedefs in <atheos/typedefs.h> to new "inc/typedefs.h".
+    * Remove init_e820_memory_map() function.
+    * Print kernel parameters parsed by parse_kernel_params().
+    * Remove old commented-out code from intel.s.
+    * Move protect_dos_mem(), unprotect_dos_mem() from kernel.c to mman.c.
+    * Remove inline function enable_mmu() and copy its inline asm code to
+	calibrate_apic_timer() in smp.c.
+
+* December 12 2004, Kristian Van Der Vliet *
+
+Merged header changes required for Glibc 2.3.3, mostly changes to various
+types.  Verified the kernel compiles against them.  The following files
+were changed:
+
+atheos/atomic.h
+atheos/pthreadtypes.h
+atheos/types.h
+posix/errno.h
+posix/types.h
+
+---- 0.5.5 Released -------------------------------------------------------------------
+
+* December 5 2004, Kristian Van Der Vliet *
+
+Reverted find_boot_dev() to version 1.13 of init.c; I had checked in an older
+version as 1.14 over-writing the changes.
+
+* November 14 2004, Jake Hamby *
+
+  fatfs:
+    Display short filenames correctly as upper- or lowercase using flags set
+    by Windows.  All filenames should now display with the correct case.
+
+  kernel:
+    Updated BogoMIPS calculation and udelay.c from Linux for slightly greater
+    accuracy.  Updated init.c to use segment constants (CS_KERNEL, DS_KERNEL)
+    instead of magic numbers.  Updated init_e820_memory_map() to print the
+    memory map returned by the BIOS.  Fixed a few spelling errors.  Added
+    a few signals to <posix/signal.h> for POSIX completeness.
+
+  kernel patches from Arno Klenke:
+    * Some cleanups of the SSE registers save/restore code
+    * Added cpu id for celeron m/pentium m
+
+* November 7 2004, Jake Hamby *
+
+Fixed a bug in restoring the FPU registers on returning from a signal
+handler.  Also, if the process hasn't used the FPU, save_i387() will
+return 0, causing AddSigHandlerFrame() to clear the FPU state pointer so
+that on returning from the signal, restore_i387() isn't called.
+
+* November 7 2004, Jake Hamby *
+
+Update sys_kill() to verify that the real or effective user ID of the
+calling process matches either the real or saved user ID of the receiving
+process, or the caller is root, or the calling process is sending SIGCONT to
+a process with the same session ID (to allow job control of setuid programs).
+In order for a process to send SIGCHLD to its parent on exit, regardless of
+user ID, do_exit() now uses send_signal() with the third argument set to true
+instead of sys_kill().  Several other places have been changed to use
+send_signal() as an optimization when permissions don't need to be checked.
+
+The rather complicated code to transform the floating-point state to and
+from the format used by the signal handler stack frame has now been moved to
+a separate file, save_i387.c, to avoid cluttering up psignals.c.
+
+* November 7 2004, Jake Hamby *
+
+Fix fault.c to send SIGSEGV, SIGFPE, and SIGILL signals to the faulting thread
+instead of to all threads.  Fixed ExceptionHand() to kill the thread causing
+the exception with SIGSEGV (this required moving the exception handler stubs
+exc1(), exc2(), etc. from intel.s to syscall.s).
+
+Apparently Intel processors generate an external IRQ 13 *in addition to*
+the native INT 16 math error reporting mechanism (even though I set the NE
+bit in CR0 in both intel.s and ap_entry_proc()) so I had to add an IRQ 13
+handler in irq.c to clear the 8259A.  The proper fix is to mask IRQ 13 in
+the 8259A but I don't know enough about the 8259A code to do this.  This
+only affects programs which explicitly enable exceptions for divide-by-zero
+or other errors, e.g. with the feenableexcept() function that is currently
+missing from Syllable's math library anyway.
+
+* November 6 2004, Jake Hamby *
+
+Implement lazy FPU save/restore for faster context switching and save the
+state of XMM registers on Pentium3 and above for SSE support.  Exception
+handlers in fault.c send signals (SIGSEGV, SIGFPE, SIGILL) rather than
+exiting the process.  Spelling fixes in comments.  The function
+is_signals_pending() is now correctly spelled is_signal_pending(). The new
+SeqLock_s type from Linux is used in timer.c for reading the timer
+registers without disabling interrupts, and the "inc/io_ports.h" header
+defines constants for the PIC I/O ports, which are used for readability in
+irq.c, smp.c and timer.c.  Other minor cleanups include removing useless
+statistical counters from array.c, adding a warning to kmalloc() when 128K
+or larger allocations are made, modifying bcache.c to use an area instead
+of kmalloc() for its hashtable, using g_sSemListSpinLock instead of
+g_sSchedSpinLock in sema.c, a new do_free_pages() function in mman.c that
+doesn't call flush_tlb_global() (used in loops by areas.c), inlined asm
+functions in "inc/intel.h" and atheos/kernel.h, and updated macros from
+Linux for atheos/isa_io.h.  "macros.h" now uses a macro called __likely()
+on GCC 3.0 and above as a hint to the compiler in kassertw() that the
+expression asserted is expected to be true.
+
+NOTE: You should install the new header files from the sys/include directory
+with "make dist" and then rebuild your drivers along with the kernel.
+
+* October 24 2004, Kristian Van Der Vliet *
+
+A series of patches from Jake Hamby <jhamby@anobject.com> which changes the
+atomic_t primitives:
+	o Replaced the primitives in atheos/atomic.h with versions based on Linux 
+	  2.6.8's include/asm-i386/atomic.h.
+	o Replaced occurrences of atomic_add(&foo, 1) and atomic_add(&foo, -1) with 
+	  atomic_inc(&foo) and atomic_dec(&foo), which are slightly faster and more
+	  self-explanatory.
+	o Many of the drivers were Linux ports that used the atomic_*() macros
+	  properly; comment out the compatibility macros in "linuxcomp.h"
+	o Fixed a few typos and changed kernel/debug.c to use ints instead 
+	  of floats.
+
+The following components are effected:
+
+* kernel
+* afs
+* fatfs
+* iso9660
+* libsyllable
+* appserver
+* bus/ata
+* bus/pci
+* bus/scsi
+* bus/usb
+* disk/bios
+* disk/usb
+* graphics/geforcefx
+* usb_ehci
+* usb_ohci
+* usb_uhci
+* keyboard driver (kbd)
+* ps2aux
+* apm
+* w8378x
+* net/3c509
+* net/eepro100
+* sound/emu10k1
+* sound/es1370
+* sound/es1371
+* sound/i810
+* sound/sbpro
+* sound/trident
+* sound/via686a
+* sound/vt82xx
+* sound/ymfpci
+
+* October 20 2004, Kristian Van Der Vliet *
+
+A minor patch to kernel/debug.c which fixes the code to work properly if
+your client sends <CR>, <CR><LF>, or <CR><NUL> for newline.  This patch is
+intended to allow the use of a Telnet client as a debug terminal in conjunction
+with VMWare.  See the VMWare FAQ for more information.  Patch from
+Jake Hamby <jhamby@anobject.com>
+
+* October 20 2004, Kristian Van Der Vliet *
+
+read_cpu_id() was modifying %ebx but didn't tell GCC.  Patch from
+Jake Hamby <jhamby@anobject.com>
+
+* October 13 2004, Kristian Van Der Vliet *
+
+Fixed a possible race condition in devices.c/register_device()  Spotted by
+Peter Skerl <skerl@chello.at>
+
+* October 10 2004, Kristian Van Der Vliet *
+
+A whole bunch of patches from Jake Hamby <jhamby@anobject.com>
+
+	o Minor stylistic fixes:
+		* Added "-Wstrict-prototypes" to the Makefile and corrected some warnings
+		  where functions were declared as "foo()" instead of "foo(void)" as is
+		  correct for ANSI C.
+		* I commented out some local functions which were not being used, removing
+		  the remaining GCC warnings
+		* Fixed a typo ("deamon" -> "daemon") in kernel/swap.c
+		* Fixed panic() in to use the va_list macros instead of pointer arithmetic. 
+	o Fix to allow the kernel to build with -O2 instead of -O3
+		* Changed Fork() to a static inline function and commented out the prototype
+		  in include/atheos/kernel.h. 
+	o Upgrade the assembly macros in string.h to the versions in Linux 2.6.8
+		* Removed "cld" instructions from most macros.  They shouldn't be 
+		  necessary as every occurrence of "std" is immediately followed by "cld".
+		* Changed function macros from "extern inline" to "static inline". 
+		* Removed the alternate versions of strcat() and strncat().  Changed a 
+		  value from "0xffffffff" to "0xffffffffu" which perhaps was causing a bug 
+		  in the original versions.
+		* memmove() now calls memcpy() if possible (changed in Linux 2.6.x).
+		* Added an assembly version of strstr(), not inline but in kernel/lib/strstr.c
+		  (and added to Makefile).
+	o Fix a GCC warning in lib/vsprintf.c
+		* va_arg functions can't pass floats (they are promoted to double) or 
+		  short int (promoted to int).  I fixed the "%hd" code based on the Linux 
+		  version and commented out the "%f" handling altogether as the kernel 
+		 really should be avoiding floating point usage.
+
+Including in this changeset are a few minor changes by myself:
+
+	o Changed the Makefile to use "-O2 -mpreferred-stack-boundary=2" instead of -O3
+	o Strip all symbols from kernel.so by default with the "make install" target
+
+---- 0.5.4 Released -------------------------------------------------------------------
+
+* September 24 2004, Kristian Van Der Vliet *
+
+Complete strace rewrite.  The new strace() is a table driven function which is much easier
+to keep upto date.  set_strace_level() has been removed (Breaking binary compatability with
+any code that calls set_strace_level()) and a new syscall strace() replaces it.
+
+All current syscalls are now understood by handle_strace() and the syscalls have
+been grouped by function.  strace can be set to trace only functions within specified groups.
+Two new syscalls, strace_exclude() and strace_include() allow specific syscalls to be
+excluded or included in the trace.
+
+A new file, ptrace.c, has been added as a syscall stub for an eventual ptrace()
+implementation.
+
+* August 4 2004, Kristian Van Der Vliet *
+
+Streamlined find_boot_dev() which doesn't need to be so complex with the new ATAPI stuff.
+
+---- 0.5.3 Released -------------------------------------------------------------------
+
+* April 25 2004, Kristian Van Der Vliet *
+
+Public Message Ports list handling fixes by Arno.
+
+* Mrt 10 2004, Kaj de Vos *
+
+Became a kernel hacker by fixing some spelling mistakes. :-)
+
+* Feb 11 2004, Kristian Van Der Vliet *
+
+The ELF loader memmap_instance() now "ignores" any text segments which might occure between the first
+and last data segments.  Any non-data segments inside of data segments will become part of the data
+segment.  This shouldn't be an issue for the majority of libraries and executables but it is required
+in order to load Glibc 2.3.2 libc.so.2
+
+* Feb 1 2004, Kristian Van Der Vliet *
+
+Patch PCI bus manager so that it can detect the (buggy) PCI controller emulated by
+Microsoft Virtual PC.
+
+* Jan 11 2004, Kristian Van Der Vliet *
+
+Fixes to enable_bus_master() in PCI bus manager & a bug fix in pci.h from Hilary Cheng
+<tinyobject@yahoo.com>
+
+* Dec 21 2003, Arno Klenke *
+
+Updated elf loader to load binaries that have been created by binutils 2.14 or/and gcc 3.3.2
+A gcc3 fix for timer.c
+Added -fno-strict-aliasing to the CFLAGS of the makefile
+Change to the standard elf linker map
+Some small fixes to avoid warnings 
+
+* Dec 2 2003, Henrik Isaksson *
+
+Checked in some drivers I forgot yesterday...
+
+* Dec 1 2003, Henrik Isaksson *
+
+Changed the psuedo-random number generator to a "Mersenne Twister", that
+should give a lot more randomness.
+
+Applied Arno's patches:
+
+Kernel:
+
+o Added a get_area_physical_address() function that returns the physical
+  start address of one area.
+o A lock for protecting the devices list has been added.
+o Fixed the remove_driver() function in the USB busmanager.
+
+GeForce FX driver:
+
+o Ported the GeForce FX specific code of the current XFree86 driver into
+  a Syllable GeForce FX driver. This was necessary, because the access to
+  the engine registers using the fifo, that is used in the current
+  Syllable nvidia driver does not work anymore. You have to use a command
+  buffer instead.
+o The driver supports all accelerated functions (BltBitmap, FillRect,
+  DrawLine, hardware cursor, video overlays ).
+o All drawing operations and framebuffer accesses are first done in an
+  offscreen buffer. A seperate driver thread copies this data into the
+  visible area on v-blank. This  seems to make scrolling a lot smoother.
+o I tried to implement DMA copies to the overlay memory, but this caused
+  problems and so this code is disabled for now.
+
+* Nov 30 2003, Henrik Isaksson *
+
+o Public/private state for message ports is now represented by one bit only.
+  (MSG_PORT_PUBLIC)
+
+* Okt 29 2003, Arno Klenke *
+
+Updated device driver documentation.
+
+* Okt 28 2003, Arno Klenke *
+
+Fixed some bugs in the USB busmanager & in the USB UHCI driver.
+Added first version of the USB mass storage driver.
+
+* Sept 30 2003, Kristian Van Der Vliet *
+
+Small bug fix to get_device_info()
+
+* Sept 21 2003, Kristian Van Der Vliet *
+
+PCI & USB bus managers and some new drivers by Arno Klenke
+<arno_klenke@yahoo.de>  The full changes are:
+
+o Busmanager management
+o Devices management + some changed to the dev fs
+o Kernel configfile
+  o A new kernel paramater (disable_config) to disable the configfile access.
+     This is probably necessary when booting from a read-only volume
+     (E.g. CDROM ).
+o All drivers have been ported to the changed APIs
+o Fixed some of the drivers makefiles so that make clean really removes
+  all binary stuff
+o The alloc_physical() function:
+ o The memory allocator has been re-written for the realmode memory to also be
+    useful for memory region allocations.
+ o The kernel reserves the region used by the RAM and tries to use the e820
+    function of the BIOS to reserve the other regions (e.g. ACPI). The PCI busmanager
+    also reserves the memory of the PCI devices.
+
+The following new drivers have been added:
+
+o PCI busmanager
+o USB busmanager
+o USB UHCI driver
+o USB mouse driver
+o VIA LAN driver
+
+* Sept 13 2003, Kristian Van Der Vliet *
+
+Combined networking patch from William Rose <wrose@zip-it.org>
+
+This patch comes in a few parts:
+  o reader-writer locks
+  o network utility updates
+    o changed command-line syntax of ifconfig and route to support CIDR
+    o changed output of both to be clearer (IMO) and support new networking features
+
+  o networking patches
+    o changes to implement reader-writer locking on network interface and route table
+       (also includes garbage collection for these structures).
+    o implement adding and deleting interfaces
+    o introduce automatic local network routes for interfaces
+    o add support for binding to a specific device to bypass routing
+
+dhcpc has been updated to reflect the changes.
+
+* Sept 13 2003, Kristian Van Der Vliet *
+
+select() patch from William Rose <wrose@zip-it.org>  This patch updates the VFS code to
+add a cookie parameter to the add_select_req and rem_select_req primitives.  It breaks binary
+compatibility with filesystems that support these primitives.  The only ones to date are special
+filesystems: e.g. dev, fifo, pty and socket  Corrections for these are included in the patch.  AFS
+et al are not affected.
+
+Once installed, using select() on the file descriptor obtained using open() on a device node
+will now correctly pass through the select request to the underlying driver, rather than just
+returning instantly.  This can be used to implement non-blocking device I/O.
+
+* Sept 11 2003, Kristian Van Der Vliet *
+
+Add support for the MSG_PEEK flag in tcp.c tcp_recvmsg()
+
+* Sept 01 2003, Kristian Van Der Vliet *
+
+The kernel version information has now been changed.  The kernel itself now sets the
+system name and CPU type, as apposed to Glibc.  Changes have been made to Glibc uname.c
+to reflect these changes, and the version and revision fields have been split into two
+distinct fields (Which now contain valid data).  Sample output of uname -a is:
+
+[root@hostname:~]uname -a
+syllable liqwyd.domain 0 0.5 i586 unknown
+
+* Aug 7 2003, Kristian Van Der Vliet *
+
+Applied the GNU Indent styleguide script to all of the kernel source files and applied
+a patch to the Makefile which fixes subsequent problems with generating the
+kernel.exports.c file with the GNU Indent changes applied.
+
+* Jul 16 2003, Kristian Van Der Vliet *
+
+Patches from Arno Klenke <arno_klenke@yahoo.de>
+	* New PCI module which no longer requires a PCI BIOS to function.
+	* CPU capability detection (E.g. CPU type, MMX, SSE[2] support)
+	* Use the APIC when available on single CPU systems
+
+* Jun 26 2003, Kristian Van Der Vliet *
+
+Disabled errent debug output from the IP stack during tcp transmits.
+
+* Jun 26 2003, Kristian Van Der Vliet *
+
+Applied patch from Arno Klenke <arno_klenke@yahoo.de> which stops the kernel from
+unloading a filesystem if it is loaded a boot module.  This should stop spurious
+"Unable to find boot device" messages when using the root=@boot argument.
+
+* May 17 2003, Kristian Van Der Vliet *
+
+find_boot_dev() function in init.c which is used to "probe" for a boot CD in all of the
+available drives.  The function iterates over all of the available devices in /dev/disk and
+attempts to mount each one of them using the boot FS.  If the disk can be mounted,
+then a check is made for a file called "SYLLABLE" in the device root.
+
+To enable boot device probing you must pass root=@boot to the kernel.
+
+The flag MNTF_SLOW_DEVICE has also been added to filesystem.h
+which the do_mount() function to attempt to mount a device upto a maximum of five
+times.  This is useful if we are booting from E.g. a very slow CD-ROM drive, which
+can take some time to spin up.
+
+* Feb 16 2003, Kristian Van Der Vliet *
+
+Applied a patch by Alexander Deynichenko <thorn@fpss.ru> which splits
+the PCI class information into an API, base and sub-class.
+
+* Dec 31 2002, Kristian Van Der Vliet *
+
+Added SO_BROADCAST support to the ethernet driver and ARP layer.
+
+kernel/net/eth_interface.c : Always ignore gateway address if
+  the destination is 255.255.255.255
+
+kernel/net/arp.c : Always map IP address 255.255.255.255 to
+  MAC address ff:ff:ff:ff:ff:ff
+
+kernel/net/udp.c : Recognise SO_SETSOCKOPT flags SO_BROADCAST
+  and SO_REUSEPORT (Not correctly implemented, but recognised)
+
+* Dec 30 2002, Kristian Van Der Vliet *
+
+Added raw sockets (SOCK_RAW) support to the IP stack with a patch from
+Ville Kallioniemi <festivus@mbnet.fi>
+
+Added raw sockets (SOCK_RAW) to the IP stack
+  Changed a lot of debugging output to use the kerndbg() macro
+
+Added ping utility (More tools to follow)
+  The kernel ICMP ignores ICMP_ECHOREPLY packets.
+
+* Dec 24 2002, Kristian Van Der Vliet *
+
+Applied a patch from Daniel Gryniewicz <dang@fprintf.net> to the AFS
+(AtheOS File System) driver, and the "mount" utility to add read-only support.
+
+Added a mount flag for read-only (mount -r)
+Added mount flag processing for read-only flag - afs_mount will now set
+the read-only afs filesystem flag
+Added checks in all writing entrypoints to afs for the mount flag - these
+entrypoints will return a read-only error if called on a read-only filesystem.
+
+* Nov 3 2002, Kristian Van Der Vliet *
+
+Added a kerndbg() macro to kdebug.h  Kernel output can now be controlled
+by defining the DEBUG_LIMIT macro at compile time.
+
+* Oct 24 2002, Kristian Van Der Vliet *
+
+Added random.c which adds two functions, seed() and rand().  These can be
+used by other kernel functions, and device drivers (E.g. the new /dev/random
+device).
+
+* Sep 23 2002, Kristian Van Der Vliet *
+
+Added make_port_public(), make_port_private() and find_port() syscalls
+to msgport.c  These syscalls can be used to provide a "public" message port,
+which can be retrieved by another process with the find_port() syscall.
+
+For more information, you should refer to the online documentation.
+
+* Sep 23 2002, Kristian Van Der Vliet *
+
+Removed both set_tld() and get_tld() in process.c  These syscalls were not
+required; they are implemented in user space as part of libc.
+
+
+* Sep 15 2002, Kristian Van Der Vliet *
+
+Applied a fix to sys/kernel/kernel/vfs/vfs.c  The fcntl() F_GETLK command
+now works as expected.

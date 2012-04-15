@@ -1,0 +1,104 @@
+Whisper provides several Events which can be used by external applications.
+They are split into two groups; Generic events, which could be implemented
+by any mail client for Syllable, and Whisper events, which are specific to
+Whisper.
+
+Generic events use the namespace "internet/Mail/", and Whisper events use
+"app/Whisper"
+
+
+Generic Events
+==============
+
+Name
+
+	internet/Mail/Send
+
+Parameters
+
+	Name		Type		Notes
+	----		----		-----
+	subject		String		Optional
+	to			String		Optional
+	cc			String		Optional
+	bcc			String		Optional
+	message		String		Optional
+	attachment	String		Optional
+
+Return Parameters
+
+	None
+
+Description
+
+	Creates a new email message. The Compose window SHOULD be displayed. The
+	email SHOULD NOT be sent automatically.
+
+	Multiple to, cc, bcc and attachment parameters may be provided. Only one
+	subject parameter and one message parameter may be provided: additional
+	subject or message parameters MUST be ignored.
+
+	The subject parameter is a single line of text. The client MAY remove any
+	line breaks or other "unsafe" characters.
+
+	The to, cc and bcc parameters are email addresses of the intended
+	recipient(s). The following forms are allowed:
+
+		user@example.com
+		<user@example.com>
+		"User" <user@example.com>
+
+	The client MAY ignore any email addresses which are not in one these forms.
+
+	The message parameter is free-form text with standard UNIX line-breaks.
+
+	The attachment parameter is an absolute path to file(s) which are to be
+	attached to the email. The client MUST display the attachment details
+	before the email is sent by the user.
+
+******************************************************************************
+Name
+
+	internet/Mail/GetNewCount
+
+Parameters
+
+	None
+
+Return Parameters
+
+	Name		Type		Notes
+	----		----		-----
+	count		Int32
+
+Description
+
+	Causes the client to check all POP servers for new messages. The client MUST
+	respond with the total count of all the new messages across all of the
+	available POP server(s).
+
+******************************************************************************
+Name
+
+	internet/Mail/Check
+
+Parameters
+
+	None
+
+Return Parameters
+
+	None
+
+Description
+
+	Causes the client to retrieve all messages from all available POP servers.
+
+******************************************************************************
+
+
+Whisper Events
+==============
+
+No Whisper-specific Events are yet defined.
+

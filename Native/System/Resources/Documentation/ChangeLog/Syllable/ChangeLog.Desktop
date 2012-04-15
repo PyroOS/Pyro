@@ -1,0 +1,239 @@
+* July 6, 2008, Anthony Morphett *
+Fixed login window to hide system users
+
+---- 0.6.5 Released -------------------------------------------------------------------
+
+* September 20, 2007, Rick Caudill *
+Made login window sensitive to fonts.  It still isn't great, because we have to fix how iconview works
+
+* September 1, 2007, Arno Klenke *
+
+Close login window while the user is logged in
+
+* August 18, 2007, Kristian Van Der Vliet *
+
+FileBrowser will now automatically remember the view settings and Window
+position. Patch from Anthony Morphett <awmorp@gmail.com>
+
+---- 0.6.4 Released -------------------------------------------------------------------
+
+* July 8, 2007, Arno Klenke *
+
+Do not scale desktop wallpaper if not needed
+Removed default wallpaper
+
+* June 3, 2007, Arno Klenke *
+
+Change the dock to use the registrar application list
+
+* March 31, 2007, Kristian Van Der Vliet *
+
+Use an unlocked IconDirView in Filebrowser so backspace will change to parent dir.
+Set appropriate tab order in dlogin for keyboard navigation and a couple of other minor
+fixes for keyboard control  (so login should be possible even if mouse isn't working)
+Moved all of the individual copies of dockplugin.h to <appserver/dockplugin.h>
+Patches from Anthony Morphett <awmorp@gmail.com>
+
+---- 0.6.3 Released -------------------------------------------------------------------
+
+* February 20, 2007, Flemming H. Sørensen *
+
+Fixed Dock-menu bug, that prevented Dock from starting if folder.png was missing.
+Added category icons.
+Dock will now use localized application names.
+
+* February 20, 2007, Kristian Van Der Vliet *
+
+Add DesktopActivated and ScreenModeChanged methods to DockPlugin. Plugins are
+now notified of desktop or screenmode changes. Patch from
+Anthony Morphett <awmorp@gmail.com>
+
+* February 18, 2007, Flemming H. Sørensen *
+
+Fixed Bug #38 (It didn't delete the old icons, when you changed the language).
+
+* Febuary 6 2006, Kristian Van Der Vliet *
+
+Fixed launching of applications from ~/Settings/Desktop/Startup: only the name was
+being passed to execlp(), not the full path as needed. Patch from
+Anthony Morphett <awmorp@gmail.com>
+
+* November 10 2006, Kristian Van Der Vliet *
+
+Added a Print Queue dock plugin
+
+---- 0.6.2 Released -------------------------------------------------------------------
+
+* September 20 2006, Arno Klenke *
+
+Hide login window at the right place
+
+---- 0.6.1 Released -------------------------------------------------------------------
+
+* April 14 2006, Arno Klenke *
+
+Switched the dock and the desktop to the new event system
+
+* Feburary 23 2006, Arno Klenke *
+
+Patch for the clock dock plugin by Andreas Benzler
+
+* January 21 2006, Rick Caudill*
+
+Added 'Clipper', a dock plugin that holds the text of the clipboard for 10 clips.
+Delete items to add new ones.  This plugin will become more elaborate as time goes on
+
+Features that I want to include are:
+	1. A history
+	2. Infinite amount of Clips/
+	3. Clips that can be bitmaps(that will require work in libsyllable)
+	4. Anything else that I want :)
+
+* January 15 2006, Arno Klenke *
+
+Support for a text shadow color in the desktop
+
+* January 2 2006, Arno Klenke *
+
+The dock and desktop cannot be closed with alt-w
+Added battery dock plugin
+
+---- 0.6.0a Released -------------------------------------------------------------------
+---- 0.6.0 Released -------------------------------------------------------------------
+
+* October 31 2005, Arno Klenke
+
+Camera can now save screenshots in 16bit screen mode
+
+* October 14 2005, Arno Klenke
+
+The dock now sets the size for maximized windows
+Removed some workarounds from the dock code
+
+* October 4 2005, Arno Klenke
+
+New plugin system
+Clock, meter, mixer and coldfish plugin updated
+
+* September 7 2005, Kaj de Vos
+
+Cleaned up message texts in DLogin.
+
+---- 0.5.7 Released -------------------------------------------------------------------
+
+* Aug 19, 2005, Arno Klenke
+	Added a refresh ipc message to the desktop
+
+* Aug 14, 2005, Arno Klenke
+	*The dock now scans the application directory
+	*Changed orientation in the mixer plugin
+
+* Aug 6, 2005, Rick Caudill
+	Added Switcher(a desktop switching plugin)
+	
+* July 30, 2005, Rick Caudill
+	*Removed old desktop/dlogin code
+	*Initial version of new dlogin :)
+	
+* June 3 2005, Arno Klenke
+	* Fixed icon creation in the desktop
+
+---- 0.5.6 Released -------------------------------------------------------------------
+
+* March 19 2005,    Arno Klenke
+	*Moved code from the constructors/destructors of some plugins into the (A/De)ttachedToWindow() method
+	*Fixed font handling in the clock plugin
+	*Added a slider to set the master volume to the mixer plugin
+* March 15 2005,    Rick Caudill
+	*Added Meter(William Hogarth) dock plugin which displays useful system information
+	*Added WallpaperChanger(Rick Caudill) dock plugin which gives options like time intervals to wallpapers
+	*Added Camera(Rick Caudill) dock plugin which is a screenshot plugin for dock
+	*Updated clock dock plugin(Rick Caudill), this update features a slew of features including changing the time, opening of DateTime,...
+	
+	
+* January 9th 2005, Kristian Van Der Vliet
+
+	* Added a simple Mixer dock plugin which calls the Media Server to display the mixer/stream controls window.
+	* Cleaned this ChangeLog
+
+---- 0.5.5 Released -------------------------------------------------------------------
+
+---- 0.5.4 Released -------------------------------------------------------------------
+
+* September 19th 2004, Arno Klenke *
+	* Checked in the complete new desktop (desktop, FileBrowser and Dock)
+
+---- 0.5.3 Released -------------------------------------------------------------------
+
+* August 18,    2003, Rick Caudill *
+	* Fixed a rendering bug that happened when you showed the desktop information on a 32bit desktop.
+
+* July 14,      2003, Rick Caudill *
+	* Pablo removed the syllable version number from the login image. 
+	* Added DrawString() to the login view, so that you can still see the version number. 
+	* Finally fixed the login config problem. The first time you use the new desktop/dlogin, there will be a problem, but as soon as you login and log back out it will be fixed, however; if you remove /system/config/login.cfg before you install the new desktop then you won�t have a problem at all. This problem only happens if you have a config file, so Syllable 0.4.6 will not be affected. 
+	* Cleaned up the source. Boy did it ever need it!!!
+
+* June 1,       2003, Rick Caudill *
+	* Bug Fix in icon color
+	* Fix icons in sys/other/icons
+	* Bug Fix
+
+* May 19,       2003, Rick Caudill *
+	* Changes(There has been so many since August) *
+	* Icons load almost 3 times faster.
+	* Fixed major bugs in the desktop.
+	* Added a drive settings window.
+	* Added icon background transparency.
+	* Added Partition information to the specfic drive dialog.
+	* Many! Many other changes!
+   
+* August 15/16, 2002, Rick Caudill *
+	* Changes *
+
+	* Fixed a bug that was caused when moving all of the files around.
+	
+	* ReImplemented the "Mounted Drives" menu.  It shows all partitons now :).
+	
+	* Moved over to Henriks latest menuitem code(he gave it to me a while ago and I just never got around to it).
+	
+	* Added SubMenu arrow to imageitem code.
+
+	* Shrunk all context menu images down from 16x16 to 10x10.
+
+* August 15, 2002, Rick Caudill *
+	* Changes *
+	
+		* Fixed a bug that was causing the desktop to segfault if there wasn't any config 			file.
+
+		* The desktop now creates ~/Trash, which will be used for trash files down the 			road.
+
+		* If the background image is not found, a ^(carot) will appear in the config file. 			This gives me options like error control and now the "Background Pictures" 			dialog will be able to display the last image used in the listview.
+
+		* Everything in the icon properties dialog is greyed out at first now :).
+	
+		* The desktop is now split up into two programs(dlogin/desktop).  DLogin controls
+			the login process and Desktop is the actual desktop
+
+		* Removed all debug information
+
+		* Images for the login has change.
+
+		* Change all alerts to the new alert code(images).
+	
+	
+
+
+* August 4, 2002, Rick Caudill *
+	
+	* Changes since Syllable 0.4.0(a)
+		* Changed login process.
+		* Added Logout code(Still needs code to kill user apps before logging out).
+		* Added a new Settings class.
+		* Started merger with Launcher(It is getting there).
+		* Fixed a major bug that was causing the properties dialog to segfault.
+		* Moved code around.  It makes the code easier to read.
+		* Added error testing for scaling images.  If the image is not bigger than the
+ 				screen resolution, the desktop will not scale the image.
+		* Fixed icon text color problems.
+

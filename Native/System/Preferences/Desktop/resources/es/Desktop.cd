@@ -1,0 +1,21 @@
+//
+//	Preferences/Desktop String Catalog
+//
+//	Translated by: Maximo Pech Jaramillo
+//
+
+MSG_MAINWND_TITLE=0							Escritorio
+
+MSG_MAINWND_BACKGROUND=100					Fondo
+MSG_MAINWND_BACKGROUND_IMAGE				Imagen
+MSG_MAINWND_BACKGROUND_NONE					Ninguno
+
+MSG_MAINWND_WINDOWS_TEXT=200				Ventanas
+MSG_MAINWND_WINDOWS_TEXT_POPUP				Elevar ventana seleccionada
+MSG_MAINWND_WINDOWS_TEXT_SINGLECLICK		Usar interfaz de un sólo click
+MSG_MAINWND_WINDOWS_TEXT_SHADOWTEXT			Mostrar con sombra texto de íconos
+
+MSG_MAINWND_BUTTON_APPLY=300				Aplicar
+MSG_MAINWND_BUTTON_UNDO						Deshacer
+MSG_MAINWND_BUTTON_DEFAULT					Predeterminado
+

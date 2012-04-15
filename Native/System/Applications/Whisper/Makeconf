@@ -1,0 +1,28 @@
+CXXFLAGS += -Wall -c
+
+OBJDIR = $(PWD)/objs
+
+OBJS = main appwindow appwindow_messages icon inputview messagenode composer_window \
+       dialogs message_view message_window mail mailbox syllable_mailbox qp_codec base64_codec identity \
+       transport pop3_transport smtp_transport filter rule_filter ixport strfuncs rfctime
+
+OBJS := $(addprefix $(OBJDIR)/,$(addsuffix .o,$(OBJS)))
+
+SETTINGS = settings_window
+SETTINGS_OBJS = settings_window identity_view signature_view outbound_view inbound_view filters_view
+
+SETTINGS_OBJS := $(addprefix $(OBJDIR)/,$(addsuffix .o,$(SETTINGS_OBJS)))
+
+LIBS = libpop3 libsmtp
+
+IXPLUGINDIR = ixport
+IXPLUGINS = mbox pst dbx
+IXPLUGINS := $(addprefix $(IXPLUGINDIR)/,$(IXPLUGINS))
+
+PLUGINS = $(IXPLUGINS)
+
+LANGS = da es hu nl sv
+CATALOGS := $(addsuffix /Whisper.catalog,$(addprefix resources/,$(LANGS)))
+
+EXE = Whisper
+

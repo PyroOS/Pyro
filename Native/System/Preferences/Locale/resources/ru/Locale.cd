@@ -1,0 +1,22 @@
+//
+//	Preferences/Locale string catalog
+//
+//	Translated by: Ilya Krol
+//
+
+MSG_MAIN_TITLE=0						Локализация
+
+MSG_MAIN_LANGUAGE_TAB=100				Язык
+MSG_MAIN_LANGUAGE_ACTIVATE				Активировать язык >
+MSG_MAIN_LANGUAGE_DEACTIVATE			< Деактивировать язык
+MSG_MAIN_LANGUAGE_AVAILABLE				Поддерживаемые языки
+MSG_MAIN_LANGUAGE_USED					Активно используемые языки
+
+MSG_MAIN_COUNTRY_TAB=200				Страна
+
+MSG_MAIN_APPLY=1000						_Применить
+MSG_MAIN_REVERT							_Обратить
+MSG_MAIN_DEFAULT						_По умолчанию
+
+MSG_ERROR_SAVE=1100						Ошибка при попытке сохранить настройки локализации.
+

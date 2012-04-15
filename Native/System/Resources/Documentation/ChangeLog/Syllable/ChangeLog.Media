@@ -1,0 +1,251 @@
+* August 9 2007 Kristian Van Der Vliet *
+
+Fixed a handful of bugs in the ffmpeg plugin, although a lot of files are
+still corrupted.
+Prepped for an update to the latest FFMpeg sources, but not enabled yet.
+
+---- 0.6.5 Released -------------------------------------------------------------------
+
+* December 24 2007 Kaj de Vos *
+
+Imported Arno's AAC codec and updated the makefile.
+
+* November 16 2007 Kaj de Vos *
+
+Updated the FFMPEG port to a new Subversion checkout.
+
+* September 4 2007 Arno Klenke *
+
+-Added a sample resolution value to the media format structure
+-The framerate is now a double value (required by ffmpeg)
+-Added methods for title, author, etc. to the MediaInput class
+-Added a ParsePacket() method to the MediaCodec class
+-MediaSyncStage::Run() now returns the time the application can sleep
+-The screen output plugin can now convert a video frame to yuv, scale it
+and write it to the framebuffer in one pass
+-ColdFish shows the title and author of files and saves them using attributes
+or in the playlist file
+
+---- 0.6.4 Released -------------------------------------------------------------------
+
+* May 21 2007 Arno Klenke *
+
+Fixed memory leaks in the vorbis plugin
+
+* May 7 2007 Arno Klenke *
+
+Updated the ffmpeg plugin to work with the latest ffmpeg version
+
+* April 14 2007 Arno Klenke *
+
+Pass supported media formats from the media server to the server audio plugin
+
+---- 0.6.3 Released -------------------------------------------------------------------
+
+* January 29 2007 Arno Klenke *
+
+Fixed GetBufferSize() in the MediaStageObject class
+Fixed some reference counters in the high level api
+Short audio files should now play correctly in the media player
+The mediaserver now deletes audio streams if an application crashes
+
+* January 19 2007 Arno Klenke *
+
+- Updates to the high level api
+
+* January 10 2007 Arno Klenke *
+
+- Keep the aspect ratio of videos in the mediaplayer
+
+
+---- 0.6.2 Released -------------------------------------------------------------------
+
+* October 26 2006 Arno Klenke *
+
+The ffmpeg codec now reorders the samples in 6 channel mode to match the hardware format
+Fixed uninitialized members
+
+* October 25 2006 Arno Klenke *
+
+Close the device if the IOCTL_GET_USERSPACE_DRIVER ioctl fails
+
+* October 15 2006 Arno Klenke *
+
+Added the update media framework:
+
+low-level api:
+- Added reference counters and the GetPhysicalType() method
+- Removed the caches from the output plugins
+- Removed the os::MediaTimeSource class
+
+high-level api:
+- Added the new high-level api
+- Currently limited to decoding
+
+mediaserver:
+- Rewritten communication with the serveraudio plugin
+- Better hardware format selection
+- Uses the media output drivers instead of oss
+
+audio drivers:
+- intel i8xx compatible
+- via 8233/8235
+- intel hd audio compatible
+
+mediaplayer:
+- Added new file info dialog
+- New a/v sync code added because of the removal of os::MediaTimeSource
+
+coldfish:
+- Do not corrupt the playlist if you close it when still loading
+
+mediaconverter:
+- Added track selection box
+
+* September 14 2006 Kaj de Vos *
+
+Updated the FFMPEG port and plug-in to a new Subversion checkout.
+
+---- 0.6.1 Released -------------------------------------------------------------------
+
+* February 18 2006 Arno Klenke *
+
+Switched the coldfish dock plugin to the new event system
+
+* January 21 2006 Arno Klenke *
+
+Small updates for the media player and coldfish
+
+* January 2 2006 Arno Klenke *
+
+Moved media plugins to the extensions folder
+
+---- 0.6.0a Released -------------------------------------------------------------------
+
+* December 19 2005 Kaj de Vos *
+
+Temporarily made the same fix as in LibMedia to ColdFish, to make it load its
+plug-ins on the live CD. Necessitated by a bug in the path construction in the
+ISO9660 driver. Here, ColdFish wants to use a relocatable path, which doesn't
+work with the fix, so this should be reverted sometime later.
+
+---- 0.6.0 Released -------------------------------------------------------------------
+
+* November 18 2005 Arno Klenke *
+
+Updated coldfish to avoid a lockup when loading a playlist with many files
+
+* October 7 2005 Arno Klenke *
+
+ColdFish can now add multiple files at once
+
+* October 4 2005 Arno Klenke *
+
+Fixed memory leaks in the media applications
+Updated screen driver that can scale the output
+Updated ffmpeg driver
+
+---- 0.5.7 Released -------------------------------------------------------------------
+
+* August 15 2005 Arno Klenke *
+Small fix to avoid a deadlock in coldfish
+
+* July 16 2005 Kristian Van Der Vliet *
+
+Added YUY2 output to the screen driver.  Video overlays can now be used on chipsets
+that do not support YV12 or YUV422 E.g. S3 Savage.
+
+* June 7 2005 Kaj de Vos *
+
+Rearranged the plug-in loading code in LibMedia a little to work around a bug in the
+ISO9660 file system. The file system doesn't generate a proper result when asked for
+the path of a node.
+
+* June 2 2005 Kaj de Vos *
+
+Fixed the new FFMPEG plug-in code to compile with an FFMPEG library installed outside
+the source tree again. Please remember that third-party libraries are not managed within
+the Syllable source tree anymore.
+
+Moved the internal FFMPEG headers that we need to a separate include/ffmpeg/ subdirectory
+to avoid clashing with other packages.
+
+* June 1 2005 Arno Klenke *
+Improved shutdown behaviour in coldfish
+
+* May 29th 2005 Arno Klenke *
+Updated the ffmpeg plugin to work with the latest ffmpeg version
+Fixed resampler
+Fixed handling of the Media::Length attribute in coldfish
+Some smaller timestamp related fixes
+
+---- 0.5.6 Released -------------------------------------------------------------------
+
+* March 19th 2005 Arno Klenke *
+Added Get()/Put() methods to the media manager class
+Merged videobitmap and videooverlay driver into a screen driver
+
+* Feburary 13th 2005 Arno Klenke *
+Updated the ffmpeg plugin to work with the latest ffmpeg version
+
+* January 23th 2005, Arno Klenke *
+
+Added the new MediaTimeSource class which can be used to sync audio and video streams
+Changed alignment of the video data in the video overlay which fixes a lot of display errors
+Plugin support for ColdFish
+
+---- 0.5.5 Released -------------------------------------------------------------------
+
+* October 6th 2004, Kristian Van Der Vliet *
+
+Pass an empty String instead of NULL as required by libsyllable.so.5 when creating a
+FileRequester in inputselector.cpp
+
+---- 0.5.4 Released -------------------------------------------------------------------
+
+* August 6 2004, Kristian Van Der Vliet *
+
+Added a CD Digital Audio input plugin
+
+* July 24 2004, Arno Klenke *
+
+Timestamped audio and video playback
+Updated to a newer ffmpeg version
+GUI updates in the MediaPlayer and ColdFish
+
+---- 0.5.3 Released -------------------------------------------------------------------
+
+* April 24 2004, Arno Klenke *
+
+The plugins are now handled using the new MediaAddon class
+The cdrom plugin exports one input for every drive
+The oss and serveraudio plugin exports one output for every soundcard
+
+* March 22 2004, Arno Klenke *
+
+Updates to work with gcc3 and current libsyllable
+New icons
+
+* Dec 21 2003, Arno Klenke *
+
+Coldfish saves the size of the file list when you hide the list.
+The MediaPlayer grays out the fullscreen menu entry if no video is loaded
+A fix to the SoundPlayer class to avoid segfaults when no soundcard is installed
+Window icons for MediaPlayer, Coldfish and the media controls window have been added
+Fixed the volume controls of the oss output plugin
+Added a configuration view for the serveraudio output plugin to select the soundcard
+The announced media preferences gui update
+All code is gcc3 ready 
+
+* Nov 18 2003, Kristian Van Der Vliet *
+
+Added multiple soundcard support to the media server
+	o Scan /dev/sound/ for all available DSP & mixer devices
+	o Allow the user to select their prefered DSP device via. the Media Preferences.
+	  Currently only one DSP can be used at any one time
+	o The Media Controls window displays one tab per. mixer device
+	o The OSS output driver will query the Media Server to find the default DSP
+
+* Nov 18 2003, Kristian Van Der Vliet *
+
+Created this ChangeLog for changes specific to the media framework.

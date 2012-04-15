@@ -1,0 +1,7 @@
+
+enum {
+	ID_APP_SURRENDER = 100,
+	ID_APP_QUIT,
+	ID_LEVEL_CHANGE,
+	ID_DONE = 200
+};

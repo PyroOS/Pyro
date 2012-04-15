@@ -1,0 +1,59 @@
+//
+//	ColdFish String Catalog
+//
+//	Translated by: Henrik Isaksson - Jonas Jarvoll
+//
+
+MSG_MAINWND_TITLE=0						ColdFish
+
+MSG_MAINWND_PLAY=100						Spela
+MSG_MAINWND_STOP							Stopp
+MSG_MAINWND_PAUSE							Paus
+MSG_MAINWND_PLAYLIST						Spellista
+MSG_MAINWND_FILE							Fil
+MSG_MAINWND_TRACK							Spår
+MSG_MAINWND_STREAM							Ström
+MSG_MAINWND_LENGTH							Längd
+MSG_MAINWND_PLAYING							Spelar
+
+MSG_MAINWND_MENU_APPLICATION=200			Program
+MSG_MAINWND_MENU_APPLICATION_ABOUT			Om...
+MSG_MAINWND_MENU_APPLICATION_QUIT			Avsluta
+
+MSG_MAINWND_MENU_PLAYLIST=300				Spellista
+MSG_MAINWND_MENU_PLAYLIST_SELECT			Välj...
+MSG_MAINWND_MENU_PLAYLIST_INPUT				Öppna ingångsdata...
+
+MSG_MAINWND_MENU_FILE=400					Fil
+MSG_MAINWND_MENU_FILE_ADD					Lägg till...
+MSG_MAINWND_MENU_FILE_REMOVE				Ta bort
+
+MSG_MAINWND_MENU_VIEW=500					Visa
+MSG_MAINWND_MENU_VIEW_PLAYLIST				Spellista
+
+MSG_ABOUTWND_TITLE=1000						Om ColdFish
+MSG_ABOUTWND_TEXT							\nEn musikspelare.\n\nCopyright 2003 Arno Klenke\nCopyright 2003 Kristian Van Der Vliet\nSvensk Översättning: Henrik Isaksson\n\nColdFish har släppts under LGPL.
+MSG_ABOUTWND_OK								Ok
+
+MSG_ERRWND_TITLE=1100						ColdFish: Fel
+MSG_ERRWND_OK								Ok
+MSG_ERRWND_CANTPLAY							ColdFish kan inte spela denna fil.
+MSG_ERRWND_CANTDELETE						Det spår som håller på att spelas upp kan inte raderas.
+MSG_ERRWND_NOTPLAYLIST						Den valda filen är inte en spellista.
+
+MSG_ALERTWND_NOMEDIASERVER_TITLE=1200		Fel
+MSG_ALERTWND_NOMEDIASERVER_TEXT				Kan inte ansluta till media servern.
+MSG_ALERTWND_NOMEDIASERVER_OK				_Ok
+
+MSG_PLAYLIST_UNKNOWN=2000					Okänd
+MSG_PLAYLIST_DEFAULT						Standard spellista
+
+MSG_PLAYLISTWND_TITLE=2100					Välj spellista - ColdFish
+MSG_PLAYLISTWND_FILE						Fil
+MSG_PLAYLISTWND_OPEN						Öppna
+MSG_PLAYLISTWND_NOTE						OBS: Om du försöker öppna en spellista som\ninte finns, så skapas den automatiskt.
+
+MSG_LCD_TRACK=3000							Spår
+
+MSG_MIMETYPE_APPLICATION_XCOLDFISHPLAYLIST=10000		Spellista för ColdFish
+

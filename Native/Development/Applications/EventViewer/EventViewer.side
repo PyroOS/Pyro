@@ -1,0 +1,29 @@
+
+<CompilerFlags>-Wall -c -O2 -fexceptions
+<LinkerFlags>
+<Target>Event Viewer
+<Category>Development
+<InstallPath>/Applications/sIDE
+<RunInTerminal>false
+<Group>Source
+<FileName>main.cpp
+<FileType>
+<FileName>application.cpp
+<FileType>
+<FileName>mainwindow.cpp
+<FileType>
+<Group>Headers
+<FileName>application.h
+<FileType>
+<FileName>mainwindow.h
+<FileType>
+<FileName>messages.h
+<FileType>
+<Group>Libraries
+<FileName>syllable
+<FileType>
+<FileName>stdc++
+<FileType>
+<Group>Resources
+<FileName>icon48x48.png
+<FileType>

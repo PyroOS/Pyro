@@ -1,0 +1,249 @@
+		0.		INHALT
+
+		1.		WIRD SYLLABLE AUF MEINEM COMPUTER LAUFEN?
+		2.		SYLLABLE INSTALLIEREN
+		3.		DEN BOOTLOADER KONFIGURIEREN
+		3.1.		DEN BOOTLOADER INSTALLIEREN
+		3.1.1.		HINWEISE ZU GRUB
+		4.		ERSTER START
+		4.1.		WAS KANN ICH NUN TUN?
+		4.2.		PROBLEMLÖSUNG
+
+
+		1. WIRD SYLLABLE AUF MEINEM COMPUTER LAUFEN?
+
+Syllable ist darauf ausgelegt, auf einem modernen, Intel-kompatiblen PC zu
+laufen. Als Minimalvoraussetzung muss Ihr Rechner einen Pentium-Prozessor und
+32 MB Hauptspeicher besitzen, aber ein schnellerer Prozessor und 128 MB
+Hauptspeicher werden Syllable erlauben, mehr Aufgaben zu erledigen und
+schneller zu laufen. Specifically, you need some more than 32 MB to use the
+graphical web browser.
+
+Die meisten üblichen PC-Mainboards, Grafikkarten und Netzwerkkarten werden
+unterstützt. Viele übliche Soundkarten, Drucker und Scanner funktionieren
+ebenfalls und einige USB-Geräte werden auch unterstützt. Sollte Ihre
+spezielle Hardware nicht völlig unterstüzt sein, heißt dies nicht, dass
+Ihre Hardware nicht funktionieren wird. Sie können trotzdem versuchen,
+Syllable zu installieren; das schlimmste, was passieren kann ist, dass es
+schlicht nicht läuft.
+
+
+		2. SYLLABLE INSTALLIEREN
+
+Syllable wird normalerweise von einer startbaren CD installiert, was ein
+einfacher und schmerzloser Weg ist. Sie können entweder ein CD-Abbild
+herunterladen und selbst eine CD brennen, oder Sie können eine CD für $15
+kaufen.
+
+Eine gekaufte CD ist identisch mit dem herunterladbaren Abbild, enthält aber
+zusätzlich die letzten verfügbaren Anwendungen und den vollen Quellcode von
+Syllable. Wenn Sie eine CD kaufen, werden Sie helfen, das Syllable-Projekt zu
+unterstützen. Schauen Sie unter
+http://de.syllable.org/pages/get-Syllable.html#Premium-CD um mehr
+Informationen zu erhalten.
+
+Das herunterladbare Syllable-CD-Abbild wird als mit 7-Zip komprimiertes
+ISO-Abbild verteilt. Bevor Sie dieses Abbild auf eine CD brennen können,
+müssen Sie es zuerst ent-7zippen. In Syllable ist 7-Zip integriert. Auf Linux
+oder anderen Unix-artigen Systemen wie MacOS X, sollten Sie sicherstellen,
+dass die portable Version von 7-Zip installiert ist
+(http://p7zip.sourceforge.net) und dies eingeben:
+
+  7z x SyllableDesktop-0.6.6.i586.iso.7z
+
+Unter Windows müssen Sie 7-Zip benutzen (http://www.7-zip.org) um die
+7zip-Datei zu dekomprimieren, oder Sie können stattdessen das
+selbstextrahierende Archiv herunterladen und ausführen:
+
+  SyllableDesktop-0.6.6.i586.iso.exe
+
+Sobald Sie das ISO-Abbild dekomprimiert haben, müssen Sie es unter Verwendung
+Ihrer bevorzugten Brennsoftware, z.B. cdrecord unter Linux oder Nero unter
+Windows, auf eine CD brennen. Es gibt keine besonderen Anforderungen an das
+Brennen des Syllable-CD-Abbilds; es handelt sich um ein Standard ISO9660
+CD-Abbild, welches jede Brennsoftware brennen können sollte.
+
+Wenn Sie Syllable auf eine CD gebrannt haben, können Sie Ihren Computer damit
+starten. Die CD wird dann die Installationsskripte automatisch starten. Folgen
+Sie einfach den Anweisungen, um Syllable auf Ihrer Festplatte zu installieren.
+Sobald Sie Syllable auf Ihrer Festplatte installiert haben, müssen Sie den
+Bootloader GRUB konfigurieren. Lesen Sie dazu die nächste Sektion.
+
+
+		3. DEN BOOTLOADER KONFIGURIEREN
+
+Der nächste Schritt ist, den Bootloader zu konfigurieren und installieren.
+
+Als erstes müssen Sie GRUB sagen, wo es den Kernel und die benötigten
+Festplatten- / Dateisystem-Treiber findet, bevor Syllable gestartet werden
+kann. Diese Information findet sich in "/inst/boot/grub/menu.lst". Wenn Sie
+andere Betriebssysteme auf dem Rechner installiert haben, müssen Sie GRUB
+entweder als Bootmanager konfigurieren oder einen anderen Bootmanager
+installieren, der GRUB von der AFS-Partition nachladen kann.
+
+Die Datei menu.lst sollte in etwa so aussehen, um Syllable entsprechend der
+oben beschriebenen Installation zu starten:
+
+     title  Syllable
+     root   (hd0,1)
+     kernel /system/kernel.so root=/dev/disk/ata/hda/1
+     module /system/config/kernel.cfg
+     module /system/drivers/dev/bus/acpi
+     module /system/drivers/dev/bus/pci
+     module /system/drivers/dev/bus/ata
+     module /system/drivers/dev/hcd/ata_pci
+     module /system/drivers/fs/afs
+
+Dies wird GRUB anweisen, die Partition 2 auf der ersten Festplatte durch das
+Kommando "root (hd0,1)" zu starten, und ihm sagen, wo der Kernel, der
+Festplattentreiber sowie der Dateisystemtreiber auf dieser Partition zu finden
+sind. Die Zeichenkette "root=/dev/disk/ata/hda/1" nach dem Pfad zum Kernel ist
+ein Parameter, der an den Kernel weitergegeben wird und angibt, welche
+Partition als /boot/ einzuhängen ist, bevor der Startvorgang fortgesetzt
+wird. Der Kernel kann zudem eine Anzahl von weiteren Parametern entgegennehmen
+(im folgenden aufgeführt), die in der selben Art und Weise nach dem
+"root"-Parameter angegeben sind.
+
+Wenn Sie Syllable auf der zweiten Partition der ersten Festplatte
+installieren, ist die Standard-Konfigurationsdatei in Ordnung. Anderenfalls
+müssen Sie die Zeile, die mit "root (Festplatte, Partition)" beginnt,
+editieren, um sie an Ihre Installation anzupassen. Sollten Sie weitere
+Betriebssysteme mit GRUB starten wollen, müssen Sie diese ebenfalls zu der
+Konfigurationsdatei hinzufügen. Um beispielsweise BeOS oder Windows oder die
+meisten anderen Betriebssysteme zu starten, die einen eigenen Bootloader
+besitzen, können Sie das "chainloader"-Kommando wie folgt verwenden:
+
+     title BeOS
+     chainloader (hd0,3)+1
+
+Dies wird einen Menüeintrag mit dem Titel BeOS hinzufügen, der das
+Betriebssystem startet, das sich auf der vierten Partition der ersten
+Festplatte befindet.
+
+Sie können außerdem ein Zeitlimit festsetzen, nach dessen Ablauf der erste
+Eintrag in der Liste (oder der Standardeintrag entsprechend dem
+"default"-Kommando) gestartet wird. Verwenden Sie dazu das "timeout"-Kommando:
+
+     timeout 5
+
+
+		3.1. DEN BOOTLOADER INSTALLIEREN
+
+Wenn Sie die Anpassung der Konfigurationsdatei abgeschlossen haben, müssen
+Sie den Computer durch gleichzeitiges drücken von <CTRL>, <ALT>, und <ENTF>
+(DRÜCKEN SIE NICHT DIE RESET- ODER POWER-TASTE. DIES WIRD DAZU FÜHREN, DASS
+GECACHTE DATEN, DIE NOCH NICHT AUF DIE FESTPLATTE GESCHRIEBEN WURDEN, VERLOREN
+GEHEN UND KÖNNTE EINE BESCHÄDIGUNG DER INSTALLATION VERURSACHEN!) von der CD
+neu starten, um den Bootloader zu installieren.
+
+Zu diesem Zeitpunkt sollten Sie GRUB abbrechen, bevor es Syllable startet,
+indem Sie <ESC> drücken und anschlie0end "C", um die GRUB-Shell zu betreten,
+wo Sie die Installation abschließen können.
+
+Nun müssen Sie entscheiden, ob Sie GRUB entweder in den MBR (Master Boot
+Record) der ersten Festplatte installieren und ihn als einen Bootmanager
+verwenden wollen, oder ob sie ihn auf der AFS-Partition installieren wollen
+und einen anderen Bootmanager verwenden, um zu wählen, welches Betriebssystem
+gestartet werden soll.
+
+In beiden Fällen müssen Sie GRUB sagen, wo sich die Konfigurationsdatei
+befindet sowie der Lader der zweiten Stufe indem Sie eine "root"-Partition
+setzen:
+
+  root (hd0,1)
+
+Wenn Sie Syllable nicht auf der zweiten Partition der ersten festplatte
+installiert haben, müssen Sie die Parameter entsprechend ändern.
+
+Dann müssen Sie den Bootloader mit dem "setup"-Kommando installieren.
+
+Um in de MBR der ersten Festplatte zu installieren, führen Sie aus:
+
+  setup (hd0)
+
+Um in der AFS-Partition zu installieren, führen Sie aus:
+
+  setup (hd0,1)
+
+(Ändern Sie die Parameter wieder entsprechend Ihrer Installation.)
+
+Nun sollte es möglich sein, Syllable von der nativen Partition zu starten.
+
+
+		3.1.1. HINWEISE ZU GRUB
+
+GRUB versteht das AFS-Dateisystem und kann jeglichen Kernel starten, der sich
+auf einer AFS-Partition befindet, indem die "Kernel"-Zeile in der
+Konfigurationsdatei geändert wird oder durch manuelles Laden des Kernels und
+der benötigten Module von der GRUB-Shell. Es gibt keine Notwendigkeit,
+irgendwelche Werkzeuge auszuführen, um Blocklisten oder irgendetwas anderes
+zu aktualisieren, wenn ein neuer Kernel installiert wurde.
+
+Lesen Sie die GRUB-Dokumentation [http://www.gnu.org/software/grub/grub.html]
+und verwenden Sie das "help"-Kommando in der GRUB-Shell für weitere
+Informationen über den Bootloader.
+
+
+		4. ERSTER START
+
+Wenn Sie Syllable das erste Mal starten, wird es Ihren Computer untersuchen,
+um Treiber für Ihre Hardware zu finden. Wird ein Treiber gefunden, der ein
+bestimmtes Stück Hardware unterstützt, wird er automatisch geladen.
+
+Sind alle Treiber verfügbar, startet Syllable die grafische
+Benutzeroberfläche. Sie werden ein einzelnes Fenster in der Mitte des
+Bildschirms sehen, welches die Benutzerkonten, ein Eingabefeld für das
+Passwort sowie eine "Login"-Schaltfläche zeigt.
+
+Bevor Sie in der Lage sein werden, irgendetwas zu tun, müssen Sie sich unter
+Verwendung eines Benutzernamens und eines Passworts anmelden müssen. Die
+Grundinstallation kommt mit einem vordefinierten Benutzer, "root", der das
+Passwort "root" besitzt. Dieser ist der Hauptbenutzer und hat
+uneingeschränkten Zugriff zum System.
+
+Sollte etwas schiefgegangen sein oder Syllable nicht starten, lesen Sie bitte
+Sektion 4.2 dieses Dokuments.
+
+
+		4.1. WAS KANN ICH NUN TUN?
+
+Sie können das Begrüßungsdokument lesen, welches an einem der folgenden
+Orte gefunden werden kann:
+
+	Online unter http://de.syllable.org/Desktop/Welcome.html
+	In Syllable unter /documentation/Welcome.html, auch verknüpft vom Desktop.
+
+Das Begrüßungsdokument enthält Informationen zu den Internetseiten und
+Mailinglisten von Syllable sowie zu Software und Hardware und wird Ihnen
+helfen, erste Schritte in Syllable zu unternehmen.
+
+
+		4.2. PROBLEMLÖSUNG
+
+Wenn Syllable nicht installiert werden konnte oder Sie Syllable nicht starten
+können, gibt es mehrere Orte, wo Sie versuchen können, Hilfe und Lösungen
+für bekannte Probleme zu erhalten. Bitte lesen Sie das Begrüßungsdokument;
+schauen Sie in die vorherige Sektion dieser Datei ("WAS KANN ICH NUN TUN?"),
+um mehr Informationen zu erhalten.
+
+Falls ein Problem auftritt, sollte das erste, was Sie tun, sein, es
+einzuengen. Was ist schiefgegangen? Konnte die CD nicht gestartet werden? War
+Syllable nicht in der Lage, Ihre Festplatte zu finden? Konnte die grafische
+Benutzeroberfläche nicht geladen werden? Sammeln Sie jegliche
+Fehlermeldungen, die Sie sehen; dies wird helfen, Ihr Problem zu lösen.
+Machen Sie eine Aufstellung Ihrer Hardware (Prozessor, Typ des Motherboard,
+Gesamtmenge an Hauptspeicher, Typ der Grafikkarte).
+
+Sie sollten dann die Häufig Gestellten Fragen (FAQ) prüfen unter
+http://de.syllable.org/documentation/FAQ.html Diese liefern Antworten zu sehr
+häufigen Fragen, die Syllable betreffen.
+
+Wenn Sie sicher sind, dass es sich um ein Problem mit Syllable handelt,
+prüfen Sie die Foren bei http://forum.syllable.org/ Jemand hat
+möglicherweise bereits dasselbe Problem gehabt wie Sie und eine Lösung
+erhalten!
+
+Zum Schluss, wenn nichts davon hilft, fragen Sie auf der Syllable
+Entwickler-Mailingliste. Sie müssen dieser erst beitreten. Lesen Sie
+http://lists.sourceforge.net/lists/listinfo/syllable-developer für
+Informationen darüber, wie Sie beitreten können.

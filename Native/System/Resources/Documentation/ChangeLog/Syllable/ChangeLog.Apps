@@ -1,0 +1,822 @@
+* March 15, 2009, Anthony Morphett *
+
+Fix potential crash and make sure the active keymap is always displayed in Keyboard prefs.
+
+* December 31, 2008, Anthony Morphett *
+
+Updated Contact to use Webster rather than ABrowse; changed web address to syllable.org.
+Make Memory Monitor save its settings properly.
+
+* December 30, 2008, Anthony Morphett *
+
+Off-by-one rendering bugfix in Memory Monitor.
+Infinite loop bugfix in Printers pref.
+
+* December 22, 2008, Anthony Morphett *
+
+Fixed Mouse prefs catalogs after previous patch.
+
+* December 15, 2008, Anthony Morphett *
+
+Patches for Camera, Clock dockplugins, aclock and Users&Groups prefs from Adam.
+Swap left & right mouse buttons added to mouse prefs, patch from Adam.
+
+* December 14, 2008, Anthony Morphett *
+
+Bugfixes for dock plugin unloading.
+Updated apps to use Webster rather than ABrowse: Address dockplugin, SimpleBurn, Launch.
+
+* December 12, 2008, Kaj de Vos *
+
+Corrected the DateTime preference applet for the new locations of GLibC and /etc/localtime.
+Report from Alexander "azlt".
+
+* August 11, 2008, Rick Caudill *
+
+Added a keymap selector to dlogin.  This should fix issues with foreign keymaps not working in dlogin
+Note: This will change the default keymap for the whole system.
+Note: I am not sure if this will work correctly with passwords.  We might have to change some of the dlogin
+code to use unicode.
+
+* April 22, 2008, Kristian Van Der Vliet *
+
+Patches from Anthony Morphett
+
+o Fix bug http://forum.syllable-norden.info/viewtopic.php?t=926: AEdit doesn't
+  show the last character of file if it's not a newline. The patch also
+  changes the file saving behaviour so that it doesn't add \n to the end of
+  the last line of the file.
+
+* March 25, 2008, Kaj de Vos *
+
+Merged Arno's versions of sIDE, LayoutEditor and Sourcery from the sIDE 0.4.7-2 package.
+Made some fixes and updates along the way.
+
+*** All developers are required to merge their work with the repository, or else! ***
+
+Fixed LibCodeView and Sourcery makefiles.
+
+Applied a fix to LibCodeView for keyboard shortcuts while Caps-Lock is on from "kasbah".
+
+* March 20, 2008, Kaj de Vos *
+
+Updated old build settings in sIDE to conform to modern standards.
+
+* March 20, 2008, Rick Caudill *
+
+Imported LogMonitor (formerly ATail) into developer apps.
+Also fixed it to launch with /var/log/kernel as the default, so now
+when a user double clicks on the icon they can start seeing kernel
+log messages.
+
+* Febuary 18 2008, Rick Caudill *
+
+Fixed sIDE New Project creation bug.  Check sIDE revision for more info.
+
+* Febuary 10 2008, Rick Caudill *
+
+Added KeyboardEventView to the development apps.  This app will allow a developer/user to
+know what global keyshortcuts are utilized already.
+  
+* January 15 2008, Kristian Van Der Vliet *
+
+Fixed the Network Preferences to better handle a hosts file which has tabs in.
+Patch from Andrew Kennan.
+
+* January 13 2008, Rick Caudill *
+
+Changed Font prefs to set the correct default fonts and also made the gui a little nicer by adding
+a spacer between the fonts and the anti aliasing checkbox.
+
+* January 11 2008, Kristian Van Der Vliet *
+
+Added Mouse preferences. Patches from Jonas Jarvoll <jonas-jarvoll@syllable-norden.info>
+
+---- 0.6.5 Released -------------------------------------------------------------------
+
+* December 28 2007, Kristian Van Der Vliet *
+
+Imported SimpleBurn 0.4 and added it to the "base" profile for builds.
+
+* December 24 2007, Kaj de Vos *
+
+Imported an updated version of the AtheOS NFS server and Andrew Kennan's new network
+preferences applet, and updated the makefiles.
+
+* November 6, 2007, Rick Caudill *
+
+Added a Settings Editor (originally called ASE by Henrik).
+
+* September 26, 2007, Rick Caudill *
+
+Camera now includes support for 'Print Screen' key
+
+I have also added a boolean value to Clipper so it will not invoke the event on startup of 
+the Dock(this is a quick hack).
+
+* September 18, 2007, Rick Caudill *
+
+Changed how Clipper works.  Now Clipper waits for an event from the appserver telling
+it that there has been new data added to it.  Clipper also got an overhaul on how clips
+are managed.  Now clips are managed by date, so a user can know what they copied and when
+they copied it.  Dates are in YYYY-MM-DD format.  
+
+An example of the menu structure is:
+	2007-9-18
+		-> Clip 1
+		-> Clip 2
+		-> Clip 3
+		...
+		-> Clip n
+	2007-9-19
+		-> Clip 1
+	2007-9-20
+		-> Clip 1
+		-> Clip 2
+	....
+	2008-9-18
+		-> Clip 1
+		-> Clip 2
+	...
+
+---- 0.6.4 Released -------------------------------------------------------------------
+
+* May 22, 2007, Kaj de Vos *
+
+Renamed cpumon and memmon to CPU Monitor and Memory Monitor and moved them to
+/Applications/System Tools/. Cleaned them up a bit and moved their configuration
+files from ~/config/ to ~/Settings/.
+
+* May 9, 2007, Kristian Van Der Vliet *
+
+Center the Screen Preferences confirmation dialog in the screen. Patch from
+Athony Morphett <awmorp@gmail.com>
+
+* April 14, 2007, Flemming H. Sørensen *
+
+Added Contact version 0.4.1
+
+* April 13, 2007, Kristian Van Der Vliet *
+
+dhcpc
+	o Added support for multiple interfaces
+	o The client can automatically launch the NTP client
+	o dhcpc now runs as a deamon correctly
+	o Gave the code a general clean up and re-wrote most the client startup code
+
+* April 12, 2007, Kristian Van Der Vliet *
+
+ATerm generates the sequence "\M-[3~" instead of ^? when VK_DELETE is pressed, which makes
+forward-delete work correctly with the default Bash keybindings.
+
+* March 17, 2007, Kristian Van Der Vliet *
+
+Change the Screen preferences behaviour so that the "Apply to" desktops Dropdown is not reset
+if the user makes changes elsewhere in the dialog. Patch from Athony Morphett <awmorp@gmail.com>
+
+---- 0.6.3 Released -------------------------------------------------------------------
+
+* February 23, 2007, Arno Klenke *
+
+Fixed some bugs in aedit
+
+* February 21, 2007, Kristian Van Der Vliet *
+
+Added a simple implementation of 'df' It can display usage information for all mounted volumes
+or a given volume if a path is specified. No additional flags are supported.
+
+* January 16, 2007, Kristian Van Der Vliet *
+
+Added the following filetypes to AView:
+
+X Pixmap - image/x-xpixmap - .xpm
+Windows Bitmap Image - image/bmp - .bmp
+Tagged Image File Format (TIFF) - image/tiff - .tif, .tiff
+PiCture eXchange (PCX) - image/x-pcx - *.pcx
+Truevision Graphics Adapter image (TGA) - image/x-tga - .tga, .icb, .tpic, .vda, .vst
+X BitMap (XBM) - image/x-xbitmap - .xbm
+
+* January 12, 2007, Arno Klenke *
+
+New icons for most preferences applications
+Delete fonts properly in the font prefs
+
+* December 9, 2006, Kristian Van Der Vliet *
+
+Moved DiskManager, SlbMgr and aterm binaries to /Application/System Tools and renamed the binaries
+"Disk Manager", "System Information" and "Terminal". There are symlinks for SlbMgr and aterm from
+/system/bin to the new locations.
+
+* December 3, 2006, Kristian Van Der Vliet *
+
+- AEdit
+	o Imported AEdit 2.3c from Jonas Jarvoll
+		o New icons
+		o Removed custom made widgets. Now using libsyllable StatusBar and ToolBar
+		o Added new TabView widget which enables the user to hide or show tabs
+		o Remove the font menu and replaced with a font requester dialog instead
+		o Fixed bug when changing font (bug #21)
+		o Replaced Search, Replace and Goto window dialog with a panel 
+		o Removed use of snprintf
+		o Removed icons not used
+		o Fixed About dialog so that all text is actually visible
+		o Automatic convert from DOS to Unix when loading file
+		o Minor code cleanup in some files
+		o Added AEdit as default filehandler (bug #28) for plain text files
+		o Localize MIME content description
+		o Added patch from Anthony Morphett to handle ctrl+left/right
+
+* November 27, 2006, Kristian Van Der Vliet *
+
+- ATerm
+	Run() the application in a new thread, so message loop is running and M_QUIT messages will be handled
+	Fixed handling of -s option
+
+- dlogin
+	Added ALL_DESKTOPS to constructor so window is shown on all desktops
+
+Both changes from Anthony Morphett <awmorp@gmail.com>
+
+* November 25 2006, Rick Caudill *
+
+- Albert
+	o Changed name to Calculator
+	o Added default icon
+	o Changed Makefile to reflect changes
+	o Fixed deprecated warnings
+
+* November 16 2006, Kristian Van Der Vliet *
+
+- AView
+	o Added "Fit to window" option (scales image)
+	o Added option to scale images (E.g. 10%, 50%, 200% etc.)
+	o Use system os::ToolBar class instead of our own
+	o Use Tango icons
+	o Bug fixes
+
+* November 10 2006, Kristian Van Der Vliet *
+
+Added a Print Queue manager and Printers Preferences
+
+---- 0.6.2 Released -------------------------------------------------------------------
+
+* October 16 2006, Kristian Van Der Vliet *
+
+- DiskManager
+	o Modernised and expanded the list of available partition types
+	o Different partitions are displayed with different colours
+	o The first partition must now start at or above block #63
+	o Added Danish, Spanish and Hungarian translations
+
+* August 22 2006, Kristian Van Der Vliet *
+
+- AEdit
+ 	o Re-wrote the Save routine so it no longer crashes when the user tries to save a file
+	  that contains long lines (E.g. a configure script)
+	o Now version 2.2
+- ATerm
+	o Changed the way ESC[M is handled so that the attributes are always cleared to start
+	  with.  Fixes the issue with the entire Termianl turning inverse-video with E.g. less
+
+* July 22 2006, Arno Klenke *
+
+Switched the Dock to the new event system
+Added Spinner to the LayoutEditor
+
+* July 11 2006, Kristian Van Der Vliet *
+
+Fixed the Network preferences so that it runs network-init.sh when the
+user applies their changes.
+
+* June 29 2006, Arno Klenke *
+
+sIDE 0.4.5 and LayoutEditor 0.1.1 checked in
+
+* June 19 2006, Arno Klenke *
+
+Fixed DateTime preferences to work with the updated dropdown menu code
+
+* June 4 2006, Arno Klenke *
+
+Added sIDE, Sourcery, LayoutEditor and Xpdf to CVS
+
+---- 0.6.1 Released -------------------------------------------------------------------
+---- 0.6.0a Released -------------------------------------------------------------------
+---- 0.6.0 Released -------------------------------------------------------------------
+
+* November 13 2005, Kristian Van Der Vliet *
+
+- AEdit
+	o Finally checked in AEdit 2.1  Jonas Jarvoll has made a lot of changes since AEdit 1.5,
+	  including support for multiple (tabbed) documents.
+
+* November 12 2005, Henrik Isaksson *
+
+- ColdFishRemote
+	o Polish translation. For real this time. ;)
+
+* September 17 2005, Henrik Isaksson *
+
+- Launch
+	o Added Swedish, Danish and Polish translations.
+- AEdit
+	o Added Polish and an updated Danish translation.
+- Locale
+	o Added Swedish, Danish and Polish translations.
+- ColdFishRemote
+	o Swedish, Danish and Polish translations. (but CFR doesn't use them!)
+
+* September 7, 2005, Arno Klenke *
+- DateTime
+	o Fixed memory corruption
+
+
+---- 0.5.7 Released -------------------------------------------------------------------
+
+* August 10, 2005, Rick Caudill *
+
+-  Launch
+    o New launch command... Comaparable to MS Windows(TM) "Run" command
+    
+* August 2, 2005, Rick Caudill  *
+ 
+ - ColdFish
+    o Play/Pause Combined into one button
+    o Added Rick Caudill to the About Box
+    o The remote plugin has changed.  It adds to the registrar now "AddFile", "GetPlayState", "About", "GetSong" and also
+      will allow you to load ColdFishRemote dock plugin
+ - ColdFishRemote dock plugin
+ 	o A new dock plugin that allows you to control ColdFish through the dock.
+ 	o Features included are:
+ 		o Play/Stop/Next/Previous
+ 		o Viewing of currrent song(via a scrollview)
+ 	o Features I would like to add:
+ 		o A better way of scrolling
+ 		o Changing of the positon of the song(via some sort of slider)
+  
+* July 18 2005, Kristian Van Der Vliet *
+
+ - dhcpc
+	o Fixed a crash-bug if the server returned a long list of DNS servers or gateway routers.
+
+* July 10 2005, Henrik Isaksson *
+
+ - catcomp
+	o Moved catcomp.cd to resources
+
+* July 6 2005, Arno Klenke *
+ - CodeEdit
+	o Fixed memory corruption
+ - Network preferences
+	o Fixed memory corruption
+
+* June 26 2005, Henrik Isaksson *
+
+ - CharMap
+	o Updated to use the new FontRequester class.
+
+* June 15 2005, Henrik Isaksson *
+
+ - CharMap
+	o Updated to use the new StatusBar class.
+	o Added support for scroll wheel.
+
+* May 29 2005, Henrik Isaksson *
+
+ - AEdit
+	o Moved icons to resource section.
+
+* May 21 2005, Henrik Isaksson *
+
+ - Media Player
+	o Added Polish and Swedish translations
+ - Cold Fish
+	o Added Polish, updated Swedish
+
+* May 14 2005, Henrik Isaksson *
+
+ - Locale prefs
+	o Added catalogue file
+	o Moved language info into resource "languages.db"
+
+* May 8 2005, Kaj de Vos *
+
+Improved Dutch translation of AEdit. Added Frisian translation.
+
+---- 0.5.6 Released -------------------------------------------------------------------
+
+* April 16th, Kristian Van Der Vliet *
+
+Added Danish translations for AEdit, Coldfish, Mediaplayer and catalog.  All from
+BurningShadow.
+
+* February 6th, Henrik Isaksson
+
+	- BZoom
+		o Applied patch from Jake to fix problems with modes where bytes per line is
+		  not equal to width * depth.
+
+* January 29th 2005, Kristian Van Der Vliet
+
+	- Total re-write of AView.  AView 0.4 has been removed and replaced with AView 1.1,
+	  which is written around the Image family of classes now available in libsyllable.
+
+* January 9th 2005, Kristian Van Der Vliet
+
+	- Replaced the old standalone mixer utility with a stub application which calls
+	  the Media Server to display the mixer/streams control window.
+
+	- Added Application and Dock icons for AEdit and aterm.  More to follow.
+
+---- 0.5.5 Released -------------------------------------------------------------------
+
+* December 2nd 2004, Henrik Isaksson *
+
+	- Albert
+		o Fixed the crash in the about window. The cause was that the font was set
+		  to an invalid value if the font couldn't be opened. Ideally the appserver
+		  should be fixed so that it doesn't crash when this happens, but I was unable
+		  to trace the crash in the appserver. I'll put it on the fix-later list... :o)
+
+* November 21th 2004, Henrik Isaksson *
+
+	- ATerm
+		o Improved dead key support
+		o Fixed compile warning ("int format int32 arg")
+
+* October 6th 2004, Kristian Van Der Vliet *
+
+	- ColdFish & MediaPlayer
+		o Pass an empty String instead of NULL as required by libsyllable.so.5 when
+		  creating a FileRequester
+
+* October 6th 2004, Kristian Van Der Vliet *
+
+	- BZoom
+		o Cleanup the GUI; removed "   >" from the Magnification menu and replaced
+		  the About window with a proper Alert dialog.
+
+---- 0.5.4 Released -------------------------------------------------------------------
+
+* September 24th 2004, Kristian Van Der Vliet *
+	- systools
+		o Rewrote strace to use the new strace functionality.
+
+* September 19th 2004, Kristian Van Der Vliet *
+	- fsutils
+		o Added a new dumpattrib utility and updated lsattrib with bug fixes.  Both
+		  from Ruslan Nickolaev <nruslan@hotbox.ru>
+
+* September 19th 2004, Arno Klenke *
+	-Archiver
+		o GUI updates
+	-Preferences
+		o The new FileTypes, Dock and Desktop preferences
+
+* September 17th 2004, Arno Klenke *
+	-Aedit, AView, memmon, cpumon
+		o Bugfix: Make it work with the new libsyllable
+
+	-DiskManager
+		o Bugfix: Layout
+
+* August 31st 2004, Kristian Van Der Vliet *
+	-pkgmanager
+		o Call manmanager -a instead of manaddpackage.sh
+		o Call manmanager -r when removing a package with pkgmanager -r
+	-manmanager
+		o Bugfix: Avoid a null-string in an if[] during remove_section()
+
+* August 8th 2004, Henrik Isaksson *
+	-Aterm
+		o Bugfix: CTRL+C after activating the window by clicking in the TermView
+		  did not work.
+		o Bugfix: found an "if( m_bSelectionValid = true )". Not sure what problems
+		  this may have caused...
+
+* July 29th 2004, Kristian Van Der Vliet *
+	-man2html/manmanager
+		o Removed the old man2html scripts
+		o Checked in a new script "manmanager" which performs the same function
+		  as the old "man2html" scripts
+		o -r/--remove now works
+
+* July 25th 2004, Arno Klenke */
+	-Preferences applications
+		o Some smaller GUI updates
+		o Added the necessary files for the DateTime preferences as resources
+
+
+* July 20th 2004, Rick Caudill *
+	-CharMap
+		o Added Charmap Application
+	-Aterm
+		o Added Settings Dialog(Damien Daniels)
+		o Added -F switch(FullScreen Mode)
+		o Added -s switch(Switches to a specific desktop number)
+		o Added UTF8 Support
+		o Popup menu offers "copy", "paste", "about" and "settings" actions.
+		o Size and position of the terminal are saved when you save your settings.
+		o Use double-click to select words.
+		o Press Alt to make rectangular selections.
+		o ATERM_ATTR environnement variable is no longer used.
+		o Default colors are "white on black".
+		o When you close the terminal window, the shell process is killed.
+		o ...
+ 
+* June 19th 2004, Henrik Isaksson *
+
+	- AClock
+		o Fixed crash on exit with new libsyllable
+
+	- AEdit
+		o Added translations
+
+	- BZoom
+		o Fixed crash on exit with new libsyllable
+
+	- CatalogTool, CatComp
+		o Initial check-in
+
+	- ColdFish
+		o Added localisation
+		o Fixed crash when exiting
+		o Fixed layout to be font & translation sensitive
+
+	- Locale
+		o Initial check-in of Locale Prefs
+
+	- SlbMgr
+		o Moved drives to a separate panel (making the first panel readable)
+
+* June 12th 2004, Henrik Isaksson *
+
+	- CodeView:
+		o Added line numbers.
+		o Added line highlight (Rick).
+		o Added context menu (Rick).
+		o Code clean-up.
+
+* June 6th 2004, Henrik Isaksson *
+
+	- Applied GCC3 patches from Damien.
+
+* June 1st 2004, Kristian Van Der Vliet *
+
+	- Bugfix for dhcpc.  Removed the OPTION_ROUTERS option during DHCPREQUEST
+	  stages.  This was causing all sorts of problems for some users.  This
+	  bugfix does not appear to regress the changes made by Ross.
+
+* May 13th 2004, Henrik Isaksson *
+
+	- Updated Albert
+
+* May 9th 2004, Kristian Van Der Vliet *
+
+	- Fixed pkgmanager -r (Remove)
+
+---- 0.5.3 Released -------------------------------------------------------------------
+
+* April 30th 2004, Rick Caudill *
+	- Almost all apps have been fixed to work with GCC 3
+	
+	- Archiver has seen some updates
+	
+	- AView has seen some updates
+		o Code Cleanup
+		o Start of moving AView towards using the Image Class
+	
+	- Dlogin
+		o Code Cleanup
+		o Saves last user as attribute
+
+* April 2nd 2004, Kristian Van Der Vliet *
+
+	- dhcpc
+		o Get and use a DHCP relay agent if one is in use on the network.
+		o Always send client ID to server
+		o Append missing OPTION_END's
+		o Other misc. fixes.  All from Ross Schulman
+
+* February 24 2004, Henrik Isaksson *
+
+	- Prefs/Date-Time
+		o Fixed for GCC3 and libsyllable changes.
+
+* February 15 2004, Henrik Isaksson *
+
+	- aedit
+		o Updated due to more libsyllable changes.
+
+* February 14 2004, Henrik Isaksson *
+
+	- aedit
+		o Updated for GCC3 and libsyllable changes.
+		o Localised and translated to Swedish.
+	- guiprefs
+		o Corrected typo.
+	- keymapconv
+		o Updated for GCC3.
+	- locator_0.2
+		o Updated for GCC3 and libsyllable changes.
+	- memmon
+		o Updated for GCC3 and libsyllable changes.
+	- pkgmanager
+		o Updated for GCC3
+
+* February 13 2004, Henrik Isaksson *
+	
+	- rescopy
+		o Updated for GCC3 and libsyllable changes.
+	- ShellTools/alert
+		o Changed to link against libsyllable.
+	- SlbMgr
+		o Updated for GCC3 and libsyllable changes.
+	- Users
+		o Updated for GCC3 and libsyllable changes.
+		o Added shortcuts and tabbing.
+
+* January 28 2004, Henrik Isaksson *
+
+	Fixed apps to match changes in API:
+		o aclock
+		o archiver
+		o aview
+		o desktop
+		o guiprefs
+
+* January 9 2004, Henrik Isaksson *
+	- DiskManager:
+		o Added shortcuts
+		o Fixed layout of buttons (due to changes in Button)
+	- Prefs-Appearance, Prefs-Screen:
+		o Added shortcuts
+	- Prefs-Network:
+		o Added shortcuts
+		o Changed the two StringViews in the 'detect' window into one, using the
+		  new multi-line capabilites.
+	- Prefs-Keyboard:
+		o Added shortcuts
+		o Updated for changes in API (GetDefaultKeymap)
+	- Prefs-Font:
+		o Added shortcuts
+		o Updated for changes in API (GetConfigNames)
+		o Added anti-aliasing checkbox to tab order
+
+* January 8 2004, Kaj de Vos *
+	Removed Windows Carriage Returns from this file.
+	Removed Inetutils 1.3.2 and Less 3.74. Syllable 0.5.2 now uses Inetutils 1.4.2
+	and Less 3.81 (which don't have to be in CVS, because they can be installed by
+	the build system).
+	Removed Tar 1.13.25 because there are newer alpha releases, and it didn't build
+	yet, anyway.
+
+* December 24 2003, Rick Caudill *
+	* Fixed many makefiles to work with libsyllable instead of libatheos
+
+* October 9 2003. Kristian Van Der Vliet *
+
+Network Preferences
+	* Fixed the syntax for ifconfig & route in net_init.sh
+	* Changed the output for the route command.  If a Gateway is specified by the user
+	  then the mask is set to 0.0.0.0 to indicate a default route.  This will not work
+	  if you require multiple gateways to be configured, as only one route can be default.
+
+* October 3 2003. Kristian Van Der Vliet *
+
+Network Preferences
+	* Re-add missing code for "Use DHCP" checkbox
+	* Change net_init.sh to use new ifconfig & route syntax
+	
+* September 18 2003, Rick Caudill *
+	* Added VirtualDesktop.cpp to launcher/plugins/src.  It is a virtual desktop manager.
+* September 7 2003, Rick Caudill *
+	* Added a slew of updates to Syllable Manager from Henrik
+		* Better listview updates (no flickering text anymore). 
+		* Less CPU usage during updates 
+		* A number of memory leaks fixed 
+		* General code clean-up (and indented with sindent!) 
+		* CheckMenu used for update speed selection 
+		* Option to save window position using the Settings class
+
+
+* August 29 2003, Kristian Van Der Vliet *
+	* Fixed the height of the Clock in Launcher
+
+* August 15 2003, Kristian Van Der Vliet *
+	* Usability updates to AClock
+
+* August 13, 2003 Rick Caudill *
+	*  Just added BZoom to the group of apps
+
+* July 16 2003, Kristian Van Der Vliet *
+	* Syllable Manager now displays CPU info on single CPU machines
+
+* July 14,2003, Rick Caudill *
+	* Users
+		*  All Alerts use the appropriate alert icon.
+		*  All dialogs are now centered in the main window.
+		*  The main window is now centered in the screen.
+		*  Added the key icon back.  The reason why this was broke was the icon
+			had to be put in <Users directory>/share/keys.png, but now it is
+			loaded from a resource.
+		
+* July 14 2003, Kristian Van Der Vliet *
+	* Bugs fixes for dhcpc
+		* Better handling of out-of-sequence replies
+		* Do not segfault on an unusual exit situations (E.g catching SIGTERM while waiting for a reply from the server)
+
+* July 9  2003, Rick Caudill *
+	* Patched Diskmanager to say: "Syllable Partition Editor" instead of "AtheOS partition editor". 
+
+* July 2  2003, Rick Caudill *
+	* Aedit 1.4
+		* Aedit is now uses the standard imagebutton(which also means that I had to patch buttonbar up)
+		* All dialogs are centered in the main application window.  
+		* About box has the info icon on it.
+		* Menus are size by GetPreferredSize()
+		* Resize bug is now fixed.
+
+* July 1  2003, Rick Caudill *
+	* AView
+		* Final patches to AView.  This source is the latest that is uploaded to my website.
+
+* June 24 2003, Kristian Van Der Vliet *
+	* Bug fixes to dhcpc
+		* Send & recieve on same port (BOOTPC, UDP 68)
+		* Seed RNG in dhcp_init() so that we get a unique XID
+
+* June 18 2003, Kristian Van Der Vliet *
+	* Add man2html scripts & source
+	* pkgmanager -a now calls the manaddpackage.sh script if a "man" directory exists
+
+* June 10 2003, Kristian Van Der Vliet *
+	* Import of Date/Time preferences application from the last version (0.4alpha) released by Daryl Dudey.
+
+* June 10 2003, Kristian Van Der Vliet *
+	* Better font handling in AEdit
+
+* June 9 2003, Rick Caudill    *
+	* Patched up Diskmanager.  Now all the dialogs are friendlier
+
+* June 8 2003, Rick Caudill    *
+	* AView updates
+		* New Features:
+			Finished adding scrollbar support.  
+			Now if the image is greater than the application window, the window will resize to half of the image size
+			Added a statusbar
+			Many other fixes
+
+
+* June 6 2003, Rick Caudill    *
+	* Patched Launcher so that images will not be drawn with a little fuzz(tm) on them.
+	* Patched Launcher's Clock so that the text will align right with the new freetype.
+	* Patched Locator so that the imagebutton's text will align right with the new freetype.
+	* Updated AView
+		* New Features:
+			If the image is smaller than the current bitmapview size, AView now doesn't resize to fit the image.
+			If the image is bigger than the current screen resolution, AView will now resize to the size of the image and then move to 0,0.  This will change when I get the scrollbar working.
+			The menu is now 20 pixels and has been rearranged
+			Added and about box.
+			Moved to my new make system.  I use this with all my apps now.
+
+
+* May 24 2003, Henrik Isaksson *
+
+	* Patched Font prefs for Anti-AA option, made window larger and resizable.
+
+* May 22 2003, Henrik Isaksson *
+
+	* Applied patch from Arno to Screen prefs, so that it will work with
+	  his patches to the appserver.
+
+* April 27 2003, Henrik Isaksson *
+
+	* Updated keymapconv.cpp with dead keys and new file format.
+	  (old file format still supported though)
+
+* February 18 2003, Kristian Van Der Vliet *
+
+	* Fixed a braindead bug in dhcpc interface.c
+
+* January 11 2003, Kristian Van Der Vliet *
+
+	* Added the dhcpc v1.0 DHCP client for Syllable
+
+* January 11 2003, Kristian Van Der Vliet *
+
+	* Brought AEdit upto V1.2 with the following changes
+		* Enable Undo/Redo Buttons, Menu items and Context Menu items.
+		* Do not display an error dialog if the file cannot be opened.
+		* Removed some keyboard shortcuts as they're now part of os::TextView
+		* Do not try to use the "Lucida Sans Typewriter" font at startup.
+
+* August 12 2002, Rick Caudill *
+	* Patched Launcher's clock to show American date(MM/DD/Y)
+
+* August 11 2002, Rick Caudill *
+	
+	* Since 0.4.0(a) *
+		* Added NetworkPreferences from Daryl Dudey(daryl.dudey@ntlworld.com).
+		* Added SlbMgr(AtheMgr renamed).
+		* Patches by Vanders for AEdit.

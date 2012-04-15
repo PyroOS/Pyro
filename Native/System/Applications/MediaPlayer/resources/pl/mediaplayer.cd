@@ -1,0 +1,40 @@
+//
+//	MediaPlayer String Catalog
+//
+//	Translated by: Unknown - antesenamon
+//
+
+MSG_MAINWND_TITLE=0							Media Player
+
+MSG_MAINWND_MENU_APPLICATION=100			Aplikacja
+MSG_MAINWND_MENU_APPLICATION_ABOUT			O porgramie...
+MSG_MAINWND_MENU_APPLICATION_QUIT			Koniec
+
+MSG_MAINWND_MENU_FILE=200					Plik
+MSG_MAINWND_MENU_FILE_OPEN					Otwórz...
+MSG_MAINWND_MENU_FILE_OPEN_INPUT			Otwórz wejście...
+MSG_MAINWND_MENU_FILE_INFO					Info...
+MSG_MAINWND_MENU_FILE_FULLSCREEN			Pełny ekran
+
+MSG_MAINWND_MENU_TRACKS=300					Scieżki
+
+MSG_ABOUTWND_TITLE=1000						O programie Media Player
+MSG_ABOUTWND_TEXT							\nA Media Player\nCopyright 2003 Arno Klenke\n\nSyllable Media Player jest rozwijany na warunkach licencji LGPL.
+MSG_ABOUTWND_OK								O.K
+
+MSG_ERRWND_TITLE=1100						Błąd
+MSG_ERRWND_OK								Ok
+MSG_ERRWND_CANTPLAY							Nie można otworzyć pliku.\n Sprawdź ustawienia multimedialne.
+
+MSG_INFOWND_TITLE=1200						Information
+MSG_INFOWND_VIDEO							Video
+MSG_INFOWND_AUDIO							Audio
+MSG_INFOWND_CHANNELS						channels
+MSG_INFOWND_OK								OK
+
+MSG_ALERTWND_NOMEDIASERVER_TITLE=1300		Błąd
+MSG_ALERTWND_NOMEDIASERVER_TEXT				Nie można połączyć się z media serwer.
+MSG_ALERTWND_NOMEDIASERVER_OK				_OK
+
+MSG_TRACK_MENU_ITEM=2000					Ścieżka
+

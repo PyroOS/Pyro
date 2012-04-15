@@ -1,0 +1,55 @@
+//
+// This catalog was exported from Catalog Editor
+//
+
+STR_APP_NAME=1000                                 Hex Editor v0.1
+STR_ABOUT_DLG_TITLE                               About 
+STR_ABOUT_DLG_MSG                                 Hex editor for Syllable\nCopyright 2007 Andrew Kennan\n\nThis application is released under the\nGNU General Public License. Please see the\nfile COPYING distributed with Hex Editor, or\nhttp:://gnu.org for more information.
+STR_ABOUT_DLG_BTN_CLOSE                           Close
+STR_FMT_LOADED                                    Loaded %d bytes.
+STR_MSG_SAVED                                     Saved file.
+STR_CLOSE_DLG_TITLE                               File Changed
+STR_CLOSE_DLG_MSG_PREFIX                          The file\n\n
+STR_CLOSE_DLG_MSG_SUFFIX                          \n\nhas changed. Do you want to save it?
+STR_CLOSE_DLG_BTN_DISCARD                         Discard It
+STR_CLOSE_DLG_BTN_SAVE                            Save It
+STR_CLOSE_DLG_BTN_CANCEL                          Don't Close
+STR_CHANGE_DLG_TITLE                              File Changed
+STR_CHANGE_DLG_MSG_PREFIX                         The file\n\n
+STR_CHANGE_DLG_MSG_SUFFIX                         \n\nhas changed outside of the editor. Do you want to re-load it?
+STR_CHANGE_DLG_MSG_LOST                           \n\nThis will cause changes to be lost.
+STR_CHANGE_DLG_BTN_LOAD                           Load
+STR_CHANGE_DLG_BTN_IGNORE                         Ignore
+STR_FIND_DLG_TITLE                                Find
+STR_FIND_DLG_LBL_SEARCH_FOR                       Search For
+STR_FIND_DLG_LBL_SEARCH_TYPE                      Search Type
+STR_FIND_DLG_BTN_NEXT                             Next
+STR_FIND_DLG_BTN_PREV                             Previous
+STR_FIND_DLG_BTN_CLOSE                            Close
+STR_MNU_APP                                       _Application
+STR_MNU_APP_ABOUT                                 _About...
+STR_MNU_APP_QUIT                                  _Quit
+STR_MNU_FILE                                      _File
+STR_MNU_FILE_OPEN                                 _Open...
+STR_MNU_FILE_SAVE                                 _Save
+STR_MNU_FILE_SAVE_AS                              Save _As...
+STR_MNU_FILE_CLOSE                                _Close
+STR_MNU_EDIT                                      _Edit
+STR_MNU_EDIT_UNDO                                 _Undo
+STR_MNU_EDIT_REDO                                 _Redo
+STR_MNU_EDIT_COPY                                 _Copy
+STR_MNU_EDIT_SELECT_ALL                           Select _All
+STR_MNU_EDIT_SELECT_NONE                          Select _None
+STR_MNU_EDIT_FIND                                 _Find
+STR_MNU_HELP                                      _Help
+STR_TB_OPEN                                       Open
+STR_TB_SAVE                                       Save
+STR_TB_SAVE_AS                                    Save As
+STR_TB_COPY                                       Copy
+STR_TB_FIND                                       Find
+STR_FMT_CURSOR                                    Cursor: 0x%08x
+STR_MSG_SEARCH_NOT_FOUND                          Search string not found.
+STR_MSG_INVALID_HEX_STRING                        Not a valid hexadecimal string.
+STR_MSG_SEARCH_CONTINUE_TOP                       Continuing search from top of file.
+STR_MSG_SEARCH_CONTINUE_BOTTOM                    Continuing search from bottom of file.
+

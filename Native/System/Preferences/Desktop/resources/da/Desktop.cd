@@ -1,0 +1,21 @@
+//
+//	Preferences/Desktop String Catalog
+//
+//	Translated by: Flemming H. Sørensen
+//
+
+MSG_MAINWND_TITLE=0							Skrivebord
+
+MSG_MAINWND_BACKGROUND=100					Baggrund
+MSG_MAINWND_BACKGROUND_IMAGE				Billede
+MSG_MAINWND_BACKGROUND_NONE					Ingen
+
+MSG_MAINWND_WINDOWS_TEXT=200				Vinduer
+MSG_MAINWND_WINDOWS_TEXT_POPUP				Aktivt vindue øverst
+MSG_MAINWND_WINDOWS_TEXT_SINGLECLICK		Brug enkelt-klick brugerflade
+MSG_MAINWND_WINDOWS_TEXT_SHADOWTEXT			Vis ikon-tekst med skygger
+
+MSG_MAINWND_BUTTON_APPLY=300				Aktiver
+MSG_MAINWND_BUTTON_UNDO						Gendan
+MSG_MAINWND_BUTTON_DEFAULT					Standard
+

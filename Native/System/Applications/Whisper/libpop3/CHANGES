@@ -1,0 +1,9 @@
+0.6
+
+	o Fix major bug with sigaction() in pop3_timer.c
+	o Use calloc() instead of malloc() in pop3_create_session() to ensure strings are NUL terminated.
+	o Improved error handling in pop3_get_message().
+		o Don't leak memory.
+	o Huge improvements to pop3_get_message() which can now handle badly behaved mail servers which consistently mis-report the size of the message.  Both "too small" and "too big" are now handled properly.
+	o Added a size argument to pop3_get_message() which gives the size of the allocated buffer to the caller.
+

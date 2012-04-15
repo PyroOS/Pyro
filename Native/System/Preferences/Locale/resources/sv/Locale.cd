@@ -1,0 +1,22 @@
+//
+//	Preferences/Locale string catalog
+//
+//	Translated by: Henrik Isaksson
+//
+
+MSG_MAIN_TITLE=0						Språkval
+
+MSG_MAIN_LANGUAGE_TAB=100				Språk
+MSG_MAIN_LANGUAGE_ACTIVATE				Lägg till >
+MSG_MAIN_LANGUAGE_DEACTIVATE			< Ta bort språk
+MSG_MAIN_LANGUAGE_AVAILABLE				Understödda språk
+MSG_MAIN_LANGUAGE_USED					Valda språk
+
+MSG_MAIN_COUNTRY_TAB=200				Land
+
+MSG_MAIN_APPLY=1000						_Aktivera
+MSG_MAIN_REVERT							_Återgå
+MSG_MAIN_DEFAULT						_Standard
+
+MSG_ERROR_SAVE=1100						Kunde inte spara inställningarna
+

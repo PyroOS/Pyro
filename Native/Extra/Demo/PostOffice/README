@@ -1,0 +1,84 @@
+PostOffice                    [http://www.shell.linux.se/digiz/atheos/]
+==========
+
+PostOffice is a singleton class intended to help you pass messages
+between windows and/or other Looper-derived classes. This is very
+useful if your application contains many windows, and you want them to
+be able to talk to each other.
+
+With PostOffice you can easily do this without worrying about pointers
+or locks. Everything is done automatically. Almost automatically... ;)
+
+News since last time
+====================
+
+* The PostOffice will not go away until you tell it to Quit().
+  This prevents nasty situations like calling RemMailbox() on an
+  object that does not exist.
+
+* The license has changed to GNU Library General Public License.
+
+* You can now add several Mailboxes with the same name, and messages
+  will be broadcasted to all of them.
+
+* You can also create Mailboxes with the "unique" attribute set, to
+  ensure that only one exists.
+
+* By default, you'll get a lot of silly debug output with this version.
+  To turn it off, comment out the line that sais "#define P_O_DEBUG 1"
+  in postoffice.h.
+
+* Finally, you can send a message to every Mailbox, regardless of
+  its name, for instance:
+
+  Broadcast(new Message(M_QUIT));
+
+  To kill off all your windows.
+
+How to build a PostOffice
+=========================
+
+PostOffice runs as a thread. While you add or remove Mailboxes (which
+is what I call the named Handler-objects) the thread is locked. When
+you send a message to the PostOffice, it is forwarded to the class
+specified by a string called "Address" that you add to the message
+before sending it.
+
+But you don't have to worry about that, if you use the macros in
+postoffice.h.
+
+Here's how to build a PostOffice:
+
+For every Window (or other Looper derivate) that you want to send
+messages to, add this to the constructor:
+
+	AddMailbox("MailboxName");
+
+Where "MailboxName" is the name you want to use when you send messages
+to this object.
+
+In the destructor, add:
+
+	RemMailbox("Mailboxname");
+
+To send a message to a window with a Mailbox, just type:
+
+	Mail("Mailboxname", myMessage);
+
+Finally, to get rid of the postoffice, you have to say:
+
+	PostOffice::GetInstance()->Quit();
+
+Right after your Application::Run() method has returned.
+You may also want to tell all remaining windows to shut down before
+calling Quit():
+
+	Broadcast(new Message(M_QUIT));
+	PostOffice::GetInstance()->Quit();
+
+Capisci?
+
+If not - look at the example, main.cpp.
+
+Arrivederci!
+

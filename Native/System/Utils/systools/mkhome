@@ -1,0 +1,114 @@
+#!/bin/bash
+#
+# mkhome : Copyright (C) 2005 Kristian Van Der Vliet
+#
+# mkhome creates a new users home directory and populates it
+# with default files and configuration from the skeleton directory.
+#
+# This script is generally called by user management tools
+# such as the Users preferences.  You should not normally
+# need to call this script manually.
+
+# Global variables.  These can be changed if you know what you're
+# doing.
+
+SKELETON_DIR=/home/.template
+
+# function print_usage
+#
+# Prints usage information.  This function will cause the script
+# to exit with a return code of 1
+#
+# No arguments
+
+function print_usage
+{
+	echo "$0 [path] [username]"
+	exit 1
+}
+
+# function exit_with_error
+#
+# Called by other functions when an abnormal exit is required.  Prints
+# an error and exits with a return code it was passed (1..n)
+#
+# $1 error code
+# $2..$n extra information.  Error code specific
+
+function exit_with_error
+{
+	echo -n "Error: "
+
+	case $1 in
+	"1" )
+		# The home directory already exists
+		echo "The directory \"$2\" already exists."
+		;;
+	"2" )
+		# Failed to copy files from the template directory
+		echo "Failed to copy default configuration files to users home directory."
+		;;
+	"3" )
+		# Could not create directory
+		echo "Could not create directory \"$2\"."
+		;;
+	esac
+
+	exit $1
+}
+
+# function create_home_dir
+#
+# Creates the home directory and copies the default configuration from
+# the skeleton directory.
+#
+# $1 home directory
+# $2 username
+
+function create_home_dir
+{
+	userhome=$1
+	username=$2
+
+	# Don't overwrite an existing home directory
+	if [ -e $userhome ]
+	then
+		exit_with_error 1 $userhome
+	fi
+
+	# Create the new directory and copy the skeleton files
+	if [ -e $SKELETON_DIR ]
+	then
+		mkdir -p $userhome
+		cp $SKELETON_DIR/.profile $userhome 1>/dev/null
+		cp -a $SKELETON_DIR/* $userhome 1>/dev/null
+		if [ $? != 0 ]
+		then
+			exit_with_error 2
+		fi
+	fi
+
+	# Own everything to the user (If they exist)
+	if [[ `id -u` == 0 ]]
+	then
+		if [ $(cat /etc/passwd | cut -d : -f 1 | grep $username) ]
+		then
+			chown -R $username:users $userhome
+		fi
+	fi
+}
+
+# mkuser script entry point
+#
+# $1 - home directory to create
+# $2 - username of owner
+
+if [ -z $1 ] || [ -z $2 ]
+then
+	print_usage
+fi
+
+create_home_dir $1 $2
+
+exit 0
+

@@ -1,0 +1,40 @@
+//
+//	MediaPlayer String Catalog
+//
+//	Translated by: Maximo Pech Jaramillo - Angel L Laguna
+//
+
+MSG_MAINWND_TITLE=0							Reproductor Multimedia
+
+MSG_MAINWND_MENU_APPLICATION=100			Aplicación
+MSG_MAINWND_MENU_APPLICATION_ABOUT			Acerca de...
+MSG_MAINWND_MENU_APPLICATION_QUIT			Salir
+
+MSG_MAINWND_MENU_FILE=200					Archivo
+MSG_MAINWND_MENU_FILE_OPEN					Abrir...
+MSG_MAINWND_MENU_FILE_OPEN_INPUT			Abrir archivo de Entrada...
+MSG_MAINWND_MENU_FILE_INFO					Información...
+MSG_MAINWND_MENU_FILE_FULLSCREEN			Pantalla Completa
+
+MSG_MAINWND_MENU_TRACKS=300					Pistas
+
+MSG_ABOUTWND_TITLE=1000						Acerca de Reproductor Multimedia
+MSG_ABOUTWND_TEXT							\nUn reproductor multimedia\nCopyright 2003 Arno Klenke\n\nEl reproductor multimedia de Syllable se distribuye bajo los términos de la licencia LGPL.
+MSG_ABOUTWND_OK								OK
+
+MSG_ERRWND_TITLE=1100						Error
+MSG_ERRWND_OK								OK
+MSG_ERRWND_CANTPLAY							No se pudo abrir el archivo.\nPor favor verifique su configuración multimedia.
+
+MSG_INFOWND_TITLE=1200						Información
+MSG_INFOWND_VIDEO							Video
+MSG_INFOWND_AUDIO							Audio
+MSG_INFOWND_CHANNELS						canales
+MSG_INFOWND_OK								OK
+
+MSG_ALERTWND_NOMEDIASERVER_TITLE=1300		Error
+MSG_ALERTWND_NOMEDIASERVER_TEXT				No se ha podido conectar al servidor multimedia.
+MSG_ALERTWND_NOMEDIASERVER_OK				_Ok
+
+MSG_TRACK_MENU_ITEM=2000					Pista
+

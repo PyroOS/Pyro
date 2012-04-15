@@ -1,0 +1,22 @@
+//
+//	Preferences/Locale string catalog
+//
+//	Translated by: Edgar Domingo de Albuquerque
+//
+
+MSG_MAIN_TITLE=0						Localização
+
+MSG_MAIN_LANGUAGE_TAB=100				Idíomas
+MSG_MAIN_LANGUAGE_ACTIVATE				Ativar Idíoma >
+MSG_MAIN_LANGUAGE_DEACTIVATE			< Desativar Idioma
+MSG_MAIN_LANGUAGE_AVAILABLE				Idíomas Suportados
+MSG_MAIN_LANGUAGE_USED					Idíomas ativados
+
+MSG_MAIN_COUNTRY_TAB=200				Pais
+
+MSG_MAIN_APPLY=1000						_Aplicar
+MSG_MAIN_REVERT							_Reverter
+MSG_MAIN_DEFAULT						_Padrão
+
+MSG_ERROR_SAVE=1100						Erro durante a tentativa de salvar as preferências de Idíomas.
+

@@ -1,0 +1,1688 @@
+* January 9, 2009, Kaj de Vos *
+
+Added experimental support for installing from and to USB memory devices
+to the installer and GrUB menus.
+
+* December 27, 2008, Anthony Morphett *
+
+Patch for p7zip to workaround double-initialization of signatures.
+
+* December 15, 2008, Anthony Morphett *
+
+Added 'swap left & right mousebuttons' pref to appserver; thanks to Adam.
+
+* December 15, 2008, Kaj de Vos *
+
+Added Russian translation of the welcome document, from Alexander "azlk".
+
+* December 12, 2008, Kaj de Vos *
+
+Upgraded SDL to 1.2.13 from patches by Rui Caridade.
+Upgraded SDL-Image to 1.2.7, SDL-Net to 1.2.7 and SDL-Sound to 1.0.3.
+
+* November 29, 2008, Anthony Morphett *
+
+Modified os::Resources to internally use std::vector< ResourceDesc* >
+instead of std::vector< ResourceDesc >; this bypasses the strange rescopy crash.
+
+Removed the default parameter from MessageQueue::FindMessage() to remove
+the ambiguity.
+
+* October 24, 2008, Kristian Van Der Vliet *
+
+Fixed a couple of stupid errors in libpthread where || (Boolean OR) had been
+transposed for && (Boolean AND) causing some simple sanity checks to fail.
+
+* October 8, 2008, Kaj de Vos *
+
+Standardised main documentation location, from /atheos/Documentation/ and
+/boot/Documentation/ on Desktop and /Documentation/ on Server, to /documentation/.
+This also gets rid of the last use of the /atheos/ symlink.
+Added a Documentation/ symlink in the desktop templates to /documentation/.
+
+* October 7, 2008, Kristian Van Der Vliet *
+
+Added os::Directory::SetPath(). Patch from
+Dee Sharpe <demetrioussharpe@netscape.net>
+
+* September 29, 2008, Kaj de Vos *
+
+Updated the default content for home directories: browser bookmarks, desktop links
+and filetype associations.
+
+* September 5, 2008, Kaj de Vos *
+
+The main documentation files are now pulled from the websites, so they are first
+processed by the content management system. The FAQ is now also included in
+/Documentation/, and the new translated documentation.
+
+Added ReadLine to the build at a tip from Anthony and made BASh use this external
+version. The added value is that INetUtils FTP now also uses it.
+
+* August 23, 2008, Kaj de Vos *
+
+Introduced a symlink /resources/ to /usr/. This will serve the migration in the
+coming time of resource packages to /resources/, which is a much clearer name and
+separates our packages from the legacy content of /usr/ (Unix System Resources).
+I chose the most fitting of those three words to describe our packages.
+
+* August 14, 2008, Kaj de Vos *
+
+Added a number of extra GrUB entries to the install CD for hardware testing, known
+emulator configurations and serial debugging.
+
+Used Anthony's sysinfo extension in the installer to find out the kernel parameters
+that the install CD was booted with and propagate any extra parameters into the
+GrUB menu of the installation.
+
+* August 4, 2008, Kaj de Vos *
+
+OpenSSH has been included in the base distribution a few dev builds ago.
+NetCat was also added some time ago.
+
+Another addition is TINY, a REBOL/ORCA library factored out of Builder.
+It's not fully ready yet, but is already used in the content management system
+of the web sites for data access and parsing and templating.
+
+Some useful data has also been added:
+/etc/mime.types is a simple standard database for programs to determine the MIME types
+of files based on their name extensions.
+/etc/ssl/certs/ is a collection of well-known security certificates published by
+Certification Authorities, used by many network programs for authentication.
+Configurations were added for a number of popular servers: INetUtils FTPD, VSFTPD,
+OpenSSH, BIND, RSync and Apache. These work on Server, but not all of them work on
+Desktop yet.
+Another configuration was added for S3Sync, a tool to synchronise files with Amazon S3.
+
+* August 3, 2008, Anthony Morphett *
+
+Fixed Winter, Blue and Warpspeed decorators.
+Added unload_decorator() method to appserver decorator API.
+
+* July 12, 2008, Anthony Morphett *
+
+Updated sysinfo to use new get_system_info() version.
+Make 'strace --help' work.
+Corrections to dhcpc as pointed out by c0x.
+
+* July 8, 2008, Kristian Van Der Vliet *
+
+Added three new AGP GART HCD drivers for ALi, nVidia & SiS chipsets. All
+drivers are from Dee Sharpe.
+
+* June 6, 2008, Kristian Van Der Vliet *
+
+Added an AGP bus manager and Via AGP GART HCD driver. All of this is from Dee
+Sharpe <demetrioussharpe@netscape.net>
+
+* May 1, 2008, Anthony Morphett *
+
+Documentation updates and bugfixes for BitmapImage relating to
+Bitmap::SHARE_FRAMEBUFFER flag
+
+* April 22, 2008, Kristian Van Der Vliet *
+
+Patches from Anthony Morphett
+
+ o Make the mousewheel work properly in DropdownMenus
+ o Make ctrl+home, ctrl+end, shift+ctrl+home, shift+ctrl+end work properly in
+   AEdit and TextViews
+
+* April 15, 2008, Kristian Van Der Vliet *
+
+Detect the Intel i945GME chip with the i855 driver.
+
+* April 11, 2008, Kaj de Vos *
+
+Gave priority to the resource packages installed in /usr/ over software installed in
+/usr/local/. This means that you can port software according to its standard instructions,
+and then later install an official package for it in /usr/ without having to painfully
+delete the scattered files under /usr/local/.
+
+* March 24, 2008, Kristian Van Der Vliet *
+
+Updated the GeForceFX driver with PCI IDs for newer cards. Untested. Patch from
+Alexandru Mizeranschi <lexu_85@yahoo.com>
+
+* March 9, 2008, Kristian Van Der Vliet *
+
+Some patches from Anthony Morphett
+
+o An improved shutdown tool to do a clean shutdown via the appserver. This is intended
+  to replace the current shutdown and reboot tools which don't give apps a chance to
+  quit cleanly.
+o In the mouse prefs app, the doubleclick speed values it was setting were off by a
+  factor of 100, so even the slowest speed was way to fast to be usable. Also the
+  doubleclick slider wasn't initially being set to the right value.
+o Make lsattribs and dumpattribs work with read-only filesystems. Currently they open
+  the file O_RDWR which fails on read-only filesystems; changed to O_RDONLY.
+
+* January 12 2008, Kristian Van Der Vliet *
+
+A bunch of PThreads improvements:
+
+o Implemented thread cancellation. pthread_cancel() & pthread_testcancel() now work.
+o Defined SIGCANCEL using the (unused) signal # used for SIGWINCH
+o The type for pthread_t has changed from a simple int to a more complex struct pointer.
+  A pthread_t variable can now be used to access the associated pthread_attr_t. This is
+  used in E.g. pthread_join() where the target thread is checked to ensure it is
+  joinable.
+o As a result of the above change and an additional change to pthread_attr_t the
+  library version has been incremented.
+o Change setstackaddr() & setstacksize() to always return ENOSYS
+o Implement getstack() fully and a stub for setstack() that always returns ENOSYS
+o Define PTHREAD_STACK_MIN instead of the private __DEFAULT_STACK_SIZE
+o Implemented pthread_sigmask()
+o A handful of bug fixes and additional checks have been added to make libpthread more
+  POSIX compliant.
+
+These changes have all been tested using the OpenPosix Test Suite.
+
+---- 0.6.5 Released -------------------------------------------------------------------
+
+* January 2, 2008, Kaj de Vos *
+
+Moved files for software development (headers, static libraries and development
+documentation) into a new, separate area in /system/development/resources/.
+They have to be registered in /system/indexes/ separately after system installation.
+Moved the system headers to /system/development/headers/.
+
+* December 23, 2007, Kristian Van Der Vliet *
+
+A bunch of updates to libdl & libpthread:
+
+o dlerror() returns NULL if no error has been set since the last call to dlerror()
+  This makes dlerror() POSIX compliant and fixes a bug loading dynamic objects in
+  Glib.
+o Fixed a few return values in some stub functions and pthread_cond_timedwait() now
+  returns ETIMEDOUT instead of -ETIMEDOUT.
+o Added debugging statements and asserts to libpthread, which can all be enabled or
+  disabled at build time.
+
+* December 15, 2007, Kristian Van Der Vliet *
+
+o One more fix to libdl: don't try to free the handle in dlclose()
+o Remove the unneeded debug output from afs_truncate()
+
+* November 26, 2007, Kaj de Vos *
+
+Fixed execution of the early init scripts, and thereby initialisation of the terminal.
+
+* November 25, 2007, Kaj de Vos *
+
+Moved essential packages to the new system area, to protect them from regular software
+maintenance activities in /usr/. The idea is that regular user actions will not leave
+the system unbootable, and a protected system environment will keep allowing basic
+operation of the system to repair any damage.
+
+* November 22, 2007, Kristian Van Der Vliet *
+
+Fixed dlopen() so that it correctly returns NULL if the library could not be
+opened. I've also done a quick cleanup and removed an unnescary malloc() that
+was also a memory leak.
+
+* November 12, 2007, Kaj de Vos *
+
+Introduced an extra symlinked package pool for system resources.
+
+I have thought many years about the desirability of versioned package installations.
+It seemed a powerful thing to be able to install multiple versions of a package.
+However, it would also complicate our package symlink system quite a bit, because
+multiple versions of the same file would be allowed and would have to be managed.
+And when it comes down to it, the only parts of a package that are properly versioned
+and can be used next to each other are shared libraries. These are essential, because
+we are shipping compatibility versions of older libraries. For using complete packages
+in place of another version provided in the system, the method Builder uses by placing
+another package pool first in all the search paths has turned out to be convenient.
+As a matter of psychology, allowing multiple package versions in the main system could
+easily lead users to install too many versions, and developers to link programs to
+non-standard library versions that are not available on other people's configurations
+(as observed in other systems).
+
+This matter needed a solution now, because Linux is not as flexible with shared libraries
+as Syllable. The method we used to move the core C and C++ libraries to /system/libraries/
+breaks on Linux, because it does not allow moving the shared system libraries after
+compilation. At first I just left GLibC and GCC in /usr/, but this is undesirable because
+they are not protected there from a user overwriting them and leaving the system unusable.
+
+I have implemented the following solution. The default package pool in /usr/ is still
+available, unversioned. However, I have moved all packages with shared libraries that
+are part of the core system to an extra, versioned package pool in /system/resources/.
+The symlinks are in /system/indexes/. The new ORCA Packager was already able to handle
+multiple pools. It did not have to be extended, because multiple versions of the same
+file are still not allowed in the system pool. If multiple versions of a package are
+installled, only a subset consisting of their shared libraries is supported, for shipping
+older versions for backward compatibility. Library versions are now easy to manage,
+because they are in their own subdirectories.
+
+* September 23, 2007, Kaj de Vos *
+
+Implemented PkgConfig support. The base PKG_CONFIG_PATH variable is set in /etc/profile
+and Builder extends it to its staging areas.
+
+* August 30, 2007, Kaj de Vos *
+
+Moved loose documentation files in ports to "documentation" subdirectories.
+
+* August 27, 2007, Arno Klenke *
+
+Use lock_semaphore()/unlock_semaphore() instead of sleep_on_sem()/wakeup_sem()
+in the usb busmanager and disk driver to avoid lockups.
+Fixed libusb code.
+
+Added a driver for the s3 deltachrome card. Only bios based modesetting is supported.
+
+* August 17, 2007, Flemming H. Sørensen *
+
+Added Greek.
+Fixed a problem with the ColdFish locale-catalog.
+
+* August 14, 2007, Kaj de Vos *
+
+Included SDL_ttf, now that the new version builds with new FreeTypes.
+
+* August 13, 2007, Arno Klenke *
+
+Corrected area flags in the audio drivers
+
+* July 28, 2007, Kristian Van Der Vliet *
+
+Added support for userspace USB via. libusb. The USB bus manager will now
+export device nodes under /dev/usb/[bus #]/[device #] which are used by libusb
+to access the device.
+
+* July 18, 2007, Kaj de Vos *
+
+Set network to DHCP by default on eth0.
+
+---- 0.6.4 Released -------------------------------------------------------------------
+
+* July 6, 2007, Kristian Van Der Vliet *
+
+Improved the framebuffer size detection in the Radeon driver.
+
+* July 1, 2007, Flemming H. Sørensen *
+
+New Calculator "Syllable-family" logo.
+
+* June 19, 2007, Arno Klenke *
+
+Added acpi cpu driver
+Fixed some modesetting bugs in the radeon driver
+
+* May 10, 2007, Flemming H. Sørensen *
+
+Added Bulgarian.
+
+* April 27, 2007, Flemming H. Sørensen *
+
+Added Russian translation to Contact.
+Added icon to aclock.
+Added screen-res 1280x800 to the sis300 video driver.
+
+* April 13, 2007, Kristian Van Der Vliet *
+
+Moved the existing png, jpeg, gif and icon translators into their own directories
+Imported new bmp, pcx, tga, tiff, xbm and xpm translators from
+Jonas Jarvoll <jonas-jarvoll@syllable-norden.info>
+
+* April 5, 2007, Flemming H. Sørensen *
+
+Updated keymaps from Maritimus.
+Updated and New translations from Maritimus.
+
+* April 4, 2007, Arno Klenke *
+
+geforce driver:
+	o Added support for geforce 6100 igp
+	o Changed some parts of the vga programming code
+	o NV40 cards and newer do not support video overlays anymore
+
+Started to move the application list handling into the registrar
+
+---- 0.6.3 Released -------------------------------------------------------------------
+
+* February 24, 2007, Flemming H. Sørensen *
+
+Localized PrintQueue.
+
+* February 21, 2007, Flemming H. Sørensen *
+
+The language-lists in the Locale preferences is now wide enough to show the full languagenames (Bug #109)
+Added updated Keymap->Language database to the Keymap preferences (Bug #108)
+Keymap preferences can now handle a larger number of language codes, per keymap (Bug #111)
+
+* February 19, 2007, Kaj de Vos *
+
+Moved /atheos/autolnk/ to /usr/indexes/.
+
+* February 18, 2007, Kaj de Vos *
+
+Removed the atheos subdirectory to simplify and flatten the filesystem hierarchy.
+Moved /system/libs/ to /system/libraries/.
+Note that you have to adapt your GrUB menu.lst file when upgrading.
+
+* February 18, 2007, Flemming H. Sørensen *
+
+New Keyboard pref.
+
+* February 17, 2007, Kristian Van Der Vliet *
+
+The VGA_MISC_OUT_W and VGA_MISC_OUT_R registers were swapped in the Savage driver,
+leading to incorrect hardware configuration and flcikering displays in some cases.
+Patch from Tim ter Laak <timl@scintilla.utwente.nl>
+
+* February 13, 2007, Flemming H. Sørensen *
+
+Localized the Printers preferences.
+
+* February 8, 2007, Kristian Van Der Vliet *
+
+Fix pthread_exit() and pthread_join() in libpthread
+	o Pass the value in value_ptr to exit_thread() in pthread_exit()
+	o Retrieve the value from wait_for_thread() and set value_ptr in pthread_join()
+	o Use our own entry function for spawn_thread() in pthread_create() and call
+	  pthread_exit() with the return value when the thread entry function returns
+
+* January 29, 2007, Kristian Van Der Vliet *
+
+Fixed a serious bug with the Savage driver that affected Savage 4 and Savage 2000 series
+cards (and may have caused other us-seen bugs). The framebuffer and registers are now
+mapped correctly for the correct type of chipset.
+
+* January 27 2007, Kaj de Vos *
+
+Moved /atheos/sys/ to /atheos/system/. It has been sticking out like a sore thumb
+for a long time. Now we can treat the system and an image area the same during
+building and installing. Builder now provides an $IMAGE environment variable that
+points to the chosen installation area, to replace $DIST_DIR.
+
+* January 22, 2007, Kristian Van Der Vliet *
+
+Added an additional PCI ID for the Intel Pro/100 VE to the eepro100 driver.
+Patch from Turki Al-Marri <turki.almarri@gmail.com>
+
+* January 20, 2007, Kristian Van Der Vliet *
+
+Updated the nVidia NIC (forcedeth) driver to version 0.48 (Synced with the Linux
+driver). The driver adds support for newer chips including the CK804, MCP04, MCP51
+and MCP55, Gigabit speeds and bug fixes.
+
+Thanks to Stephan Wiebusch <stephanwib@googlemail.com> for testing and debugging.
+
+* January 19, 2007, Kristian Van Der Vliet *
+
+Fix the declaration of PROMPT_COMMAND on bash 3.2 (Bug #60)
+
+* January 17, 2007, Flemming Sørensen *
+
+ColdFish, MediaPlayer, MediaConverter and Media Pref. will now tell the user
+if they can't contact the media server.
+ColdFish and MediaPlayer PNGs has been moved to the sub-folder "images/".
+
+* December 20, 2006, Kristian Van Der Vliet *
+
+Fixed the screen-mode list enumaration in the Vesa driver SetScreenMode(), and
+also fixed the alignment of objects in off-screen video memory on the Savage
+driver. Both patches fix issues with certain Savage video cards, and both patches
+are from Tim ter Laak <timl@scintilla.utwente.nl>
+
+* December 9, 2006, Kristian Van Der Vliet *
+
+Moved the wallpapers to /system/resources/wallpapers instead of having copies in
+every users home directory. The Desktop Preferences has been modifed to match.
+
+* December 8 2006, Kristian Van Der Vliet *
+
+The registrar scans file extensions backwards to avoid "double extensions". Patch
+from Anthony Morphett, fixes bug #23 
+
+* December 8 2006, Flemming Sørensen *
+
+Added a patch from "computrius", that will let ColdFish load a dir. full of audio,
+instead of just a number of selected files.
+
+* December 4 2006, Kaj de Vos *
+
+Introduced a "package" command, written in Orca. pkgmanager is now deprecated, but
+as long as it's still there, they're based on the same library, written in Orca.
+In the future, Builder will also use this library, Packager will get package
+installation features, and pkgmanager will be removed.
+
+* November 18 2006, Kristian Van Der Vliet *
+
+Put the auto build "nightly" build scripts in CVS under build-tools/scripts/auto-build
+
+* November 15 2006, Kristian Van Der Vliet *
+
+Overhauled the SCSI bus manager.  The code has been split down and modulerised,
+and a lot of the ATAPI code has been imported to improve error handling and
+clean up a lot of the direct command manipulation code.  SCSI CD-ROM drives
+are now supported; by extension, USB CD-ROM drives work.  The CD-ROM device
+supports reading, CD-DA and packet command (Used by cdrecord), but no analogue
+audio playback functions have been implemented.
+
+---- 0.6.2 Released -------------------------------------------------------------------
+
+* October 31 2006, Flemming Sørensen *
+
+Fixing the MediaPlayer Makefile, so the Category is written after the catalogs is added.
+Dock will now handle the "Other" category correctly.
+
+* October 30 2006, Flemming Sørensen *
+
+Added more Russian translations.
+
+* October 29 2006, Kaj de Vos *
+
+Corrected and improved the Dutch translations.
+
+* October 28 2006, Flemming Sørensen *
+
+Merged localization patches, and new translations collected from several contributors.
+Replaced the Danish keymap.
+
+* October 23 2006, Kristian Van Der Vliet *
+
+Patched drive probing in the ata_pci driver for certain drives that set the ATA
+count register to 0x01 during the probe.  This has been observed on certain drives
+from NEC and Toshiba, and possibly others.
+
+* October 23 2006, Kristian Van Der Vliet *
+
+Updated the OSS drivers to work with the OSS driver in the new audio framework,
+and fixed the mixer ioctl() so it doesn't return -EINVAL any more.
+
+* October 21 2006, Kaj de Vos *
+
+AtheOS seems to have had a modified xterm terminfo entry. The standard NCurses one
+hardly works with ATerm. The AtheOS definition doesn't provide all features anymore
+for the current ATerm, either. The NCurses rxvt-16color definition turns out to work
+best, so I made that default. However, unlike the original AtheOS xterm, it doesn't
+map box drawing characters to the right font glyphs - unless something else is wrong
+with the font rendering.
+
+Also, the delete key still doesn't work in the terminal - another regression from
+AtheOS.
+
+* October 18 2006, Kaj de Vos *
+
+Added SDL_mixer, SDL_net, SDL_image and SDL_sound to the base distribution, but only
+got SDL_net to build a shared library so far.
+
+* October 17 2006, Kaj de Vos *
+
+Merged localization patches from BurningShadow and new translations that he collected
+from several contributors.
+
+* October 15 2006, Kristian Van Der Vliet *
+
+Moved the template and root users home directory into a Builder resource.  Removed
+the old template stuff from CVS.
+Only the template directory and root users home directory are created.
+Removed the default guest user account from the default passwd file.
+Fixed the mkhome script to copy the .profile file when a new home directory is created.
+
+* October 4 2006, Arno Klenke *
+
+Added usb_hid / usbkeyboard drivers
+
+* September 27 2006, Kaj de Vos *
+
+Moved fonts to ports to have modular packages. Added several new ones.
+Added FreeFont to compensate for the CodeAlt font that we had to drop some time ago.
+Updated our ancient original URW GhostScript fonts to the latest ones, from Gnome
+Russia and Mandriva, so we support Cyrillic again.
+Replaced Bitstream Vera fonts with their successor, the Deja Vu fonts, and made them
+the default fonts. Unfortunately, ABrowse can't handle Deja Vu and FreeFont. When
+that's fixed, we can drop Vera.
+We have box drawing glyphs in our Mono fonts now, but the terminal doesn't seem to
+find them yet. They're boxy, but they're good, so we should find a fix for this. It
+worked in AtheOS times.
+Dropped the SyllableConsole font. No NIH syndrome here.
+
+* September 22 2006, Kaj de Vos *
+
+Added more keymaps, by BurningShadow. (How come these keymap makers all go by
+false names?)
+Normalized keymap names.
+
+* September 14 2006, Kaj de Vos *
+
+Added the latest keymaps from Maritimus' keymaps pack 2.5, in source form.
+Deleted the previous binary versions.
+Please let us know if older keymaps were better.
+
+* September 14 2006, Kaj de Vos *
+
+Added SDL to the base system.
+
+* September 9 2006, Kaj de Vos *
+
+Completed the rewrite of PkgManager in Orca. It is smaller, cleaner and more correct.
+There is some code in there to account for oddities in the symlink structures created
+by the old C++ PkgManager, but some quirks can still occur when upgrading.
+
+* September 3 2006, Arno Klenke *
+
+Fixed intel graphics driver
+
+* August 9 2006, Kaj de Vos *
+
+Finished the normalization move of GLibC from /usr/glibc2/ to /usr/glibc/.
+
+* July 25 2006, Kaj de Vos *
+
+Finally got NCurses to install the TermInfo database in a staging area during system
+building. It moved from /usr/share/terminfo to usr/ncurses/share/terminfo. We'll have
+to see if this is a good place for it.
+
+* July 10 2006, Kristian Van Der Vliet *
+
+Added a parallel printer (lp_printer) driver, based on the Linux driver and ported
+by Lengyel Sandor <slengyel@chello.hu>
+
+* June 19 2006, Arno Klenke *
+
+The ata busmanager is now more flexible to support non-standard ata hostcontroller drivers
+
+* June 4 2006, Arno Klenke *
+
+GCC4 fixes
+
+* May 25 2006, Kristian Van Der Vliet *
+
+Combined updates from Jan L. Hauffa and Arno Klenke
+
+	o Improved conditionals handling
+	o Mutex handling is more compliant
+	o pthread_cleanup_push(), pthread_cleanup_pop() implemented & the cleanup
+	  handlers are called from pthread_exit()
+	o Basic pthread_join() implementation
+
+---- 0.6.1 Released -------------------------------------------------------------------
+
+* May 14 2006, Kristian Van Der Vliet *
+
+Some Maestro bug fixes:
+	o Don't return IRQRET_BREAK from the IRQ handler
+	o Return usable data from SNDCTL_DSP_GETOSPACE ioctl
+	o Page align the DMA buffer so we don't get Bad Noise during playback (This
+	  seems to be a habit of mine)
+
+* May 5 2006, Kaj de Vos *
+
+Added binary keymaps from Maritimus. Some of them will still be overwritten by those
+that have text versions in the repository, until all issues are sorted out.
+
+				Known issues:
+	o	French and Belgian: deadkeys don't respect the shift lock.
+	o	Breton and Cherokee: multicharacter keys don't work.
+	o	Canadian Multilingual, German 453, Swedish SS-66-22-41: Group key won't work.
+	o	Complex scripts and BIDI don't work yet.
+	o	CTRL+Shift keys ignored.
+
+				Likely issues:
+	o	Portuguese Brazilian: 103rd key, keymap dot, probably won't work: please report.
+
+				Other:
+	o	Romanian keymaps allocate S & T with comma instead of S & T with cedilla:
+		use the cedilla deadkey for legacy situations.
+	o	You will need fonts able to handle the characters for them to display:
+		Install your fonts to atheos/sys/fonts/ .
+
+* May 3 2006, Kaj de Vos *
+
+Added newer versions of the URW fonts, from Maritimus.
+Updated Danish, Icelandic and Faroese keymaps, from Flemming S�rensen.
+
+* May 1 2006, Kaj de Vos *
+
+Added empty /etc/mtab to satisfy FindUtils.
+
+* April 29, 2006 Rick Caudill *
+
+Added Minimize All support to Appserver.  This means we can have a 'Show Desktop(TM)'
+
+* April 19 2006, Kristian Van Der Vliet *
+
+Synched the 3c59x driver with a more recent Linux version.  Recognise the following new
+cards:
+
+3c982 Hydra Dual Port A
+3c982 Hydra Dual Port B
+3c905B-T4
+3c920B-EMB-WNM Tornado
+
+* April 16 2006, Arno Klenke *
+
+Appserver patches:
+	o Added code to fallback from backbuffered to singlebuffered rendering for a window
+	o Avoid recalculating the visible areas of the layers if this is not necessary
+
+* April 13 2006, Kristian Van Der Vliet *
+
+Fixed memory detection on Radeon IGP cards
+PCI busmanager correctly handles multifunction devices (Patch by Arno Klenke)
+Enable the off-screen bitmaps support in the Savage driver now that they work, thanks
+to a related appserver fix from Arno.
+
+* April 10 2006, Arno Klenke *
+
+Synced geforcefx driver with X driver.
+Added the updated screen preferences
+
+* March 25 2006, Arno Klenke *
+
+The geforcefx driver should now work on cards which store their real pci device ids
+in a special register.
+
+* March 16 2006, Kristian Van Der Vliet *
+
+Updated the Savage driver
+	o Support "old" streams engine (overlays)
+	o Fix overlays in 16bit mode with "new" streams
+	o Support for off-screen bitmaps based on an early X.org EXA patch.  This is
+	  currently disabled as I can not solve a rendering error in 16bit modes with
+	  off-screen->screen blits.  Asyncronous rendering is enabled however.
+
+* February 24 2006, Kristian Van Der Vliet *
+
+Added a Maestro 1/2[E] driver.  Ported from the Linux 2.6 OSS driver and tested
+on a Maestro 2E.  PCM output and mixer are functional.
+
+* February 11 2006, Kaj de Vos *
+
+Added objcopy from BinUtils to the base distribution, because it's needed by rescopy.
+
+* January 27 2006, Arno Klenke *
+
+Synced the geforcefx driver with the X driver. This will hopefully fix the FX5200 problems.
+
+* January 26 2006, Kristian Van Der Vliet *
+
+Added a USB printer driver.  The driver is a re-write of the Linux usblp driver
+and has been tested with an EPSON Stylus Color 900 with CUPS and the Gutenprint
+raster driver.
+
+* January 25 2006, Kaj de Vos *
+
+Rearranged the system initialization scripts.
+Introduced an early-init directory for packages, to allow scripts to run before
+user login, specifically to allow setting variables in the user's environment.
+Introduced user-early-init.sh.
+Renamed net_init.sh and user_init.sh to network-init.sh and user-init.sh, for
+consistency and more natural writing.
+
+* January 21 2006, Arno Klenke *
+
+Updated generic acpi code
+Updated irq wait handling in the ata busmanager to fix problems on virtual hardware
+
+* January 17 2006, Arno Klenke *
+
+Updated window selector in the appserver to show previews of the windows
+
+* January 8 2006, Kaj de Vos *
+
+Fixed package-specific initialization in /system/user_init.sh.
+
+* January 2 2006, Arno Klenke *
+
+Added the ACPI busmanager
+Support for acpi irq routing in the PCI busmanager
+
+---- 0.6.0a Released -------------------------------------------------------------------
+
+* December 26 2005, Kristian Van Der Vliet *
+
+Fixed both mkhome & Users & Groups preferences to work correctly together.  mkhome
+now accepts two arguments; the new home directory to create and the username of
+the owner.  Users & Groups has been changed to path these arguments.
+
+* December 19 2005, Kaj de Vos *
+
+Over the course of the last week, made a lot of fixes for Syllable 0.6.0a.
+See the commit messages and the 0.6.0a Builder profile.
+
+* December 17 2005, Kaj de Vos *
+
+Added Dutch translations for
+- Locale preference applet
+- Xpdf (source of which hasn't been imported yet)
+
+Extended the Dutch translation for AEdit for version 2.1. Reconstructed my old
+improvements to the ancient translation, which were lost in the upgrade.
+
+Made minor corrections to the corresponding English texts.
+
+* December 10 2005, Kaj de Vos *
+
+Added Dutch translations by Rik van Achterberg for
+- LibSyllable
+- Media Player
+- ColdFish
+- ColdFish Remote
+- Launch
+- CatComp
+
+Made some minor corrections to the corresponding English texts.
+
+Added binary versions of some translations and fixed LibSyllable to install
+its catalogs in the system.
+
+---- 0.6.0 Released -------------------------------------------------------------------
+
+* November 28 2005, Arno Klenke *
+
+The appserver should now close the applications more reliable
+
+* November 18 2005, Arno Klenke *
+
+The registrar now supports relative icon paths
+
+* October 14 2005, Arno Klenke *
+
+Stretched blits are now supported in DM_BLEND mode
+Added the possibility to set the size for maximized windows
+
+* October 11 2005, Arno Klenke *
+
+Fixed a special case in the focus handling code of the appserver
+
+* October 8 2005, Kristian Van Der Vliet *
+
+Improve drive probing in the ATA driver and always use ATAPI block
+size of 2048
+
+* October 8 2005, Kristian Van Der Vliet *
+
+The appserver Window & Application loops use get_msg_size() to handle
+over-sized packets.
+
+* October 5 2005, Arno Klenke
+
+Updated makefiles of the input and display drivers
+
+* October 4 2005, Arno Klenke
+
+Updated appserver:
+	o Code cleanups and display driver api updates
+	o Removed 15bit code
+	o Parts of the keyboard code moved into an input plugin
+	o Backbuffered rendering supported in the intel, sis and geforce driver
+	o New hardware support: SiS 761, XGI Volari and nVidia GeForce 7800
+
+* September 17 2005, Henrik Isaksson *
+
+Checked in Paul Dufresne's French Canadian keymap.
+
+* September 7 2005, Arno Klenke *
+
+Updated geforce driver
+
+* September 2 2005, Kristian Van Der Vliet *
+
+Checked in all the init script, environment & Users management changes.  There
+are two new preferences applications, "Login" & "Users & Groups".
+
+* September 2 2005, Kristian Van Der Vliet *
+
+It was brought to my attention that the code_alt.ttf font which was being shipped
+with Syllable was a commercial shareware font that should not be redistributed.
+The font has been removed from Syllable.
+
+* September 2 2005, Kristian Van Der Vliet *
+
+Small patch to the ATA driver so it uses a counting semaphore instead of a counter
+and a loop that snooze()s while it wait.  This should reduce CPU usage and reduce
+latency for commands.
+
+---- 0.5.7 Released -------------------------------------------------------------------
+
+* August 19 2005, Arno Klenke *
+
+Changed linker flags in the decorator makefiles to fix freezes
+
+* August 15 2005, Kristian Van Der Vliet *
+
+New Savage driver that supports all S3 Savage chipsets (Although not the mis-named
+Via Unichrome "ProSavage" chips)  The driver has been tested on an IX-MV Mobile
+Savage and supports acclerated 2D ops.  Video Overlays are only currently supported
+on the Mobile Savage chips (IX & MX) pending demand for support on older chipsets.
+
+* August 14 2005, Arno Klenke *
+
+Appserver changes:
+	- Make it work with gcc 3.4 and the new glibc
+	- Line drawing with DM_BLEND
+	- Improved sprite code
+	- New shutdown procedure
+
+* July 17 2005, Arno Klenke *
+
+AGP support is now disabled by default
+
+* July 9 2005, Arno Klenke *
+
+Compilation fix for the network drivers
+Added new device ids to the pci irq routing table code
+
+* July 6 2005, Arno Klenke *
+
+Fixed aperture detection for i830 and i845 chipsets
+
+* June 1 2005, Arno Klenke *
+
+Set AC97_NR in the i810 audio driver to 1. This is reported to fix problems with some
+chipsets.
+
+* May 30 2005, Arno Klenke *
+
+Fixed interrupt handling in the rtl8139 network driver.
+
+* May 18 2005, Kaj de Vos *
+
+Enabled the min/max macros in macros.h for userland C code. They were restricted to
+kernel space due to clashing with the C++ standard library, but some C applications
+use them.
+
+* May 12 2005, Kaj de Vos *
+
+Generalized the makefiles more. Removed generic hardwired optimization and debug options.
+Changed more occurrences of $(CC) to $(CXX). Some rules probably still need to be
+differentiated between C and C++.
+
+From now on, please don't hardwire optimization options that aren't specific to your code.
+Consult Builder/settings to see which options are used by default globally.
+
+* May 8 2005, Kaj de Vos *
+
+Added Frisian flag to locale preference applet. Enabled several more flags we already had,
+except for Russian because it doesn't seem to be the right one. Corrected spelling of
+some languages.
+
+---- 0.5.6 Released -------------------------------------------------------------------
+
+* April 10 2005, Kristian Van Der Vliet *
+
+New Icelandic keymap and updated Danish and Faeroese keymaps from BurningShadow
+
+* March 26 2005, Kaj de Vos *
+
+Fixed the installer, which was completely broken due to invalid hardcoded paths.
+Obviously, it still hardly has any error checking, or it wouldn't have worked at all.
+Also made it handle partitions with unrecognized types, which weren't presented in the
+user interface, although it was able to install onto them.
+
+* March 25 2005, Jake Hamby *
+
+Updated libpthread with a simple implementation of pthread_kill().
+
+Moved the system call table into a new header file, <atheos/syscalltable.h>,
+so that both the kernel and the strace utility can include it.
+
+* March 24 2005, Henrik Isaksson *
+
+Added warpspeed to decorators Makefile.
+
+* March 19 2005, Arno Klenke *
+
+Fixed possible data corruptions in the atapi driver
+
+* March 9 2005, Henrik Isaksson *
+
+Changed makefile.rules; CPPFLAGS -> CXXFLAGS
+
+* March 1 2005, Arno Klenke *
+
+Updated sis3xx driver
+
+* February 27 2005, Kaj de Vos *
+
+Sanitized some aspects of the makefiles. Fixed bugs and parameterized hardcoded tool calls
+to allow compilation with GCC 3.4 and with cross-compilers. From now on, please keep in
+mind that compilation can be relative to a staging area instead of the running system
+(managed by Builder). Use
+	$(CC)
+	$(CXX)
+	$(AS)
+	$(LD)
+instead of
+	gcc
+	g++
+	as
+	ld
+to allow cross-compilation. Use
+	$(CXX)
+instead of
+	gcc -lstdc++
+to allow compilation with GCC 3.4.x.
+
+Changed occurrences of O4 to O3. Higher than O3 doesn't exist as an optimization option
+for GCC. Replaced a lot of occurrences of CPPLAGS with CXXFLAGS. CPPFLAGS is for the
+preprocesser, not for C++. This probably means that the media framework was never optimized.
+
+* February 5 2005, Kristian Van Der Vliet *
+
+Added libdl, which is a simple wrapper around Syllable native functionality and provides
+a POSIX dlfcn API.
+Cleaned up the libpthread Makefile and bumped the library version to 1 to handle libc ABI
+breakage.
+
+* January 29 2005, Jake Hamby *
+
+Removed binary keymap files from CVS and replaced them with their ASCII
+equivalents.  Cleared the NumLock flag on all keymaps.  Updated Makefile
+to convert keymaps into binary during "make dist".
+
+* January 29 2005, Kristian Van Der Vliet *
+
+Added a National Semiconductor DP8381x based NIC driver, ported from Linux 2.6 (natsemi.c)
+The driver is suitable for dp83810, dp83815 and dp83816 based NICs E.g. the Netgear FA311
+and FA312.  The driver was tested on a Netgear FA311 (dp83816).
+
+* January 10 2005, Kaj de Vos
+
+Over the past days, pulled several more parts from the current distribution into the
+repository. Several went into a new resources facility that I implemented in Builder.
+
+User documentation was in the repository, but was not being installed by the Makefiles.
+Moved it to Builder/resources, also.
+
+* January 6 2005, Kaj de Vos
+
+Updated default AppServer configuration. The currently distributed configuration
+wasn't in the repository.
+
+---- 0.5.5 Released -------------------------------------------------------------------
+
+* December 10th 2004, Arno Klenke *
+
+- Appserver:
+	o Updated the GeForceFX driver to support older GeForce cards and the GeForce 6600/6800
+	o Moved the support for nVIDIA Riva cards from the now unused nvidia driver to a new dedicated riva driver
+	o Some speed improvements in the DisplayDriver class
+
+- PCI busmanager:
+	o Can use the routing table on via/sis/intel chipsets
+
+- ATA driver:
+	o 48bit lba support enabled by default
+	o The controllers are initialized before they are passed to the ATA busmanager
+
+- SCSI busmanager:
+	o scsi_readv() and scsi_writev() are implemented which improves the performance for usb devices
+
+* December 2nd 2004, Kristian Van Der Vliet *
+
+SiS 900 and nVidia "nForce" NIC drivers from from Michael Krueger <invenies@web.de>.
+The SiS driver is considered experimental due to lack of positive testing.  The nVidia
+driver is a port of the Linux forcedeth driver, which was written from a reverse engineering
+effort of the nVidia binary drivers.
+
+* October 30th 2004, Kristian Van Der Vliet *
+
+Removed the S3 Savage IX/MX driver.  This driver was buggy and largly non-functional.
+S3 Savage IX/MX cards will work with the Vesa 2.0 driver.
+
+* October 13th 2004, Kristian Van Der Vliet *
+
+32bit "hardware" cursor support in the VMWare driver from James Hayhurst
+<santa_cruz_chap@yahoo.com>
+
+* October 6th 2004, Kristian Van Der Vliet *
+
+	- Matrox driver
+		o Recognise 0x2537 PCI ID for G550
+		o Properly detect a G450
+		o Fall back to Vesa BIOS for Gx50 DAC cards E.g. G450, 550 and Parhaliea
+
+* October 6th 2004, Kristian Van Der Vliet *
+
+Better handling of multiple mixer devices for Trident audio cards.  Patch from
+Colin Phipps <cph@cph.demon.co.uk>
+
+---- 0.5.4 Released -------------------------------------------------------------------
+
+* September 17th 2004, Kristian Van Der Vliet *
+
+Added Turkish "F" and "Q" keymaps from Truva <truva@hotpop.com>
+
+* September 17th 2004, Arno Klenke *
+	-Makefile fixes
+		o sys/kernel/drivers/bus/Makefile
+		o sys/kernel/drivers/disk/Makefile
+		o sys/kernel/fs/Makefile
+
+	-afs, fatfs, ramfs
+		o Changed SEM_REQURSIVE to SEM_RECURSIVE
+
+	-ext2
+		o Fixed directory listening and reading of files
+
+	-ata busmanager
+		o Do not show the capacity for atapi drives
+
+	-ata pci driver
+		o Added support for legacy isa mode
+
+	-usb mass storage driver
+		o Makefile fix
+
+	-usb ehci driver
+		o Do not segfault if the initilization fails
+
+* September 11th 2004, Arno Klenke *
+
+Fixed i810 sound driver
+
+* September 6th 2004, Kristian Van Der Vliet *
+
+Removed ATERM_ATTR from setup_environ.sh; no longer required with the updated
+ATerm.  Also cleaned up user_init.sh (Drives can be mounted by the new Desktop)
+and also call /Applications/Preferences/Network instead of the old netprefs binary
+to detect network changes.
+
+* September 5th 2004, Kristian Van Der Vliet *
+
+3Dfx Voodoo 3/4/5 driver from Jan Hauffa <hauffa@in.tum.de>  The driver supports
+full 2D acceleration and video overlays on all Voodoo 3, 4 and 5 boards.
+
+* September 5th 2004, Kristian Van Der Vliet *
+
+Updated Danish keymap with Greenland support and a new Faeroese keymap, both from
+Flemming "BurningShadow" H. Sørensen
+
+* August 4 2004, Kristian Van Der Vliet *
+
+Updated the ATAPI part of the ATA driver.  It works much better and now supports
+CD-DA.
+
+* June 9 2004, Kristian Van Der Vliet *
+
+Synched the changes required for Glibc 2.3.2 in the following header files:
+
+atheos/atomic.h
+atheos/semaphore.h
+posix/param.h
+posix/signal.h
+posix/stat.h
+posix/types.h
+util/locker.h
+
+* June 7 2004, Kristian Van Der Vliet *
+
+Glibc 2.3.2 source finally checked in under syllable/system/lib/glibc-2.3.2  This
+is not yet complete but it is buildable.
+
+* May 13 2004, Henrik Isaksson *
+
+- Swedish keymap:
+  Added a couple of deadkeys for east European languages (ČĎĚŇŘŠŤŮŽ).
+  The new characters are available through the ´ key (next to backspace), when AltGr
+  is pressed.
+
+* May 5 2004, Henrik Isaksson *
+
+- Added ATERM_ATTR=0x80 to setup_environ.sh to get rid of that awful cyan background
+  colour, often seen on screen shots... .o)
+- Added "0.5.3 Released" to all changelogs at appropriate locations. Should make a bit
+  easier to see what has been done since the last release...
+
+* May 2 2004, Kaj de Vos *
+
+Spring cleaning. Now that Syllable 0.5.3 is out, I deleted most remaining
+third-party sources. In most cases we're now using newer versions, or the version
+in CVS didn't work anyway. In any case, they're not built from CVS anymore, but
+installed from the original tarballs by Builder.
+  Freetype
+  NCurses
+  ZLib
+  Bash
+  BZip2
+  FindUtils
+  GZip
+For historical reference, some packages that have patches remain.
+
+---- 0.5.3 Released -------------------------------------------------------------------
+
+* April 29 2004. Kristian Van Der Vliet *
+
+VMWare video driver from James Hayhurst <james_hayhurst@hotmail.com>
+
+* April 29 2004. Kristian Van Der Vliet *
+
+nVidia driver
+	o Remove NV30Setup() (NV30 chipsets are handled by the GeForceFX driver)
+	o Cleaned up the NV??Setup() calls in NVidia::Nvidia()
+	o The code cleanup fixes a bug where the following chipsets were not initialised
+	  correctly:
+		* GeForce4 MX 440 with AGP8X
+		* GeForce4 MX 440SE with AGP8X
+		* GeForce4 MX 420 with AGP8X
+		* GeForce4 448 Go
+		* GeForce4 488 Go
+		* Quadro4 580 XGL
+		* Quadro4 280 NVS
+		* Quadro4 380 XGL
+
+* April 25 2004, Kristian Van Der Vliet *
+
+ATi Radeon driver from Michael Krueger <invenies@web.de>  The driver supports all
+Radeon cards from the 7000 to the 9800 and Mobility chipsets.  9700 (and newer) and
+Mobility support is disabled by default but can be enabled with custom-modelines via.
+a config file.  The driver supports 2D accelerated drawing and video overlays.
+
+* April 25 2004, Kristian Van Der Vliet *
+
+Added a Yamaha DS-XG (DSE/DSE1) audio driver.
+
+* April 25 2004, Kristian Van Der Vliet *
+
+Patch to the i810 audio (Intel ICHx) driver from Michael Krueger <invenies@web.de>
+
+* April 2 2004, Kristian Van Der Vliet *
+
+Add Danish keymap from Flemming "BurningShadow" H. Sørensen
+
+* March 24 2004, Kaj de Vos *
+
+Adapted the decorators to the new FreeType configuration as well,
+which I missed before.
+
+* March 5 2004, Kaj de Vos *
+
+Changed the makefiles for the AppServer and the video drivers
+to make them use FreeType as a normally installed library,
+instead of embedded in the source tree.
+
+* February 28 2004, Kristian Van Der Vliet *
+
+Added Ukrainian and Belarusian keymaps from Nikolaev Ruslan
+<nruslan@hotbox.ru>
+
+* February 27 2004, Arno Klenke *
+Performance improvements in the DisplayDriver class
+GFX driver updates for 32bit mouse cursors
+Added support for 32bit mouse cursors in the appserver
+
+* Feb 15 2004, Henrik Isaksson *
+
+translators:
+	o Updated for GCC3 and API changes.
+	o Translators moved to /system/drivers/translators.
+
+* Feb 8 2004, Henrik Isaksson *
+
+libcodeview:
+	o Updated for GCC3.
+	o Changed std::strings in interface to os::String.
+	o Bumped version to 2.
+
+* Feb 7 2004, Henrik Isaksson *
+
+Updated AppServer, AppServer drivers and libsyllable for GCC3.
+
+* Feb 1 2004, Kristian Van Der Vliet *
+
+Update RTL8139 driver to support more compatible cards.  Patch from
+Michael Krueger <invenies@web.de>
+
+* Jan 9 2004, Henrik Isaksson *
+
+Fixed bug in PNG translator when saving images wider than 256 pixels.
+
+* Jan 3 2004, Kristian Van Der Vliet *
+
+APM BIOS driver & APM battery meter Launcher plugin from Hilary Cheng
+<tinyobject@yahoo.com>
+
+* Jan 2 2004, Kristian Van Der Vliet *
+
+Updates to the i810 ICH audio driver by Michael Krueger <invenies@web.de>  It
+incorporates some cleanups from Linux 2.4 upstream patches by Herbert Xu and a
+important fix for proper AC97 codec initialization.
+
+* Dec 31 2003, Kristian Van Der Vliet *
+
+Updates to the Savage IX/MX driver using the latest code from the official S3/Via
+driver, from Hilary Cheng <tinyobject@yahoo.com>
+
+* Dec 31 2003, Kristian Van Der Vliet *
+
+Improved IMPS2/PS2 mouse detection in the PS/2 mouse driver from Damien Danneels
+<ddanneels@free.fr>
+
+* Dec 2 2003, Kaj de Vos *
+
+Fixed and cleaned up many build problems of several sorts all over the system
+over the past few days. See commit messages for details.
+
+* Nov 30 2003, Henrik Isaksson *
+
+Added some command line options to ls_ports, and made it recognize the new
+format of message port flag bits.
+
+* Nov 22 2003, Henrik Isaksson *
+
+Updated CodeView's Makefile to link against libsyllable.
+
+* Nov 18 2003, Kristian Van Der Vliet *
+
+Sound drivers now export their device nodes to different locations to allow
+multiple devices to work at the same time.  DSP devices are created as
+/dev/sound/<name>/dsp/<dsp #> and mixer devices are
+/dev/sound/<name>/mixer/<mixer #>  Old applications which expect /dev/sound/dsp
+& /dev/sound/mixer to be present will no longer work.
+
+* Nov 16 2003, Kaj de Vos *
+
+Fixed a number of build problems due to recent changes to Syllable:
+- Added patch-config directives to a number of recipes for third-party
+  packages to account for the new uname.
+- Updated the build system to match.
+- Added -lz flag to all decorator Makefiles to account for Zlib being
+  shared now.
+
+* Nov 12 2003, Kristian Van Der Vliet *
+
+Increase the size of the drive name buffer in the ATA driver to fix a buffer
+overrun.
+
+* Oct 21 2003, Kristian Van Der Vliet *
+
+Changes to libpthread to fix an issue when GCC 3.x includes pthreadtypes.h;
+__thread is a reserved keyword in GCC 3.x
+
+* Oct 21 2003, Kristian Van Der Vliet *
+
+Implement SNDCTL_DSP_GETOSPACE & SNDCTL_DSP_GETODELAY ioctl's in the
+emu10k1 driver.
+
+* Oct 21 2003, Kristian Van Der Vliet *
+
+Improve drive detection in the ATA driver.  The changes are especially helpful
+in eliminating "phantom" ATAPI devices some user have experienced.
+
+* Oct 6 2003, Kaj de Vos *
+
+First check-in of the new build system.
+Recipes for third-party software packages will follow,
+and also tweaking to many native packages to make them comply.
+
+Removed sed 4.0.7 because it didn't build after going through CVS.
+
+Removed sh-utils and textutils. They were replaced by coreutils,
+and sh-utils didn't build, anyway. I left fileutils in there
+for reference to the patch it contains.
+
+Removed freetype 2.1.3. It was replaced by freetype 2.1.4.
+
+* Oct 3 2003, Kristian Van Der Vliet *
+
+Patch Savage driver to fix problems with 16bit modes from Hilary Cheng
+<tinyobject@yahoo.com>
+
+* Sep 30 2003, Kristian Van Der Vliet *
+
+German keymap fixes from Arno Klenke <arno_klenke@yahoo.de>
+
+* Sep 30 2003, Kristian Van Der Vliet *
+
+Updates to SlbMgr which adds a new "Devices" tab.  This uses the new device management
+sub system to display relevent information on all connected devices, by
+Arno Klenke <arno_klenke@yahoo.de>
+
+* Sep 30 2003, Kristian Van Der Vliet *
+
+SavageIX/MX video driver from Hilary Cheng <tinyobject@yahoo.com>
+
+* Sep 22 2003, Kristian Van Der Vliet *
+
+Removed the get_bios_params() function from the ATA driver.  This function was
+un-needed and causing a crash when running Syllable on Virtual PC.
+
+* Sep 22 2003, Kristian Van Der Vliet *
+
+i810 (Intel ICH) audio driver and Intel EtherExpressPro 100 (Speedo3) NIC drivers
+from Michael Krueger <invenies@web.de>
+
+* Sep 21 2003, Kaj de Vos *
+
+Removed grep 2.5 because it was misconfigured in CVS.
+
+* Sep 2 2003, Kaj de Vos *
+
+Fixed several related bugs in the network preferences applet
+
+* Aug 22 20003, Arno Klenke *
+
+Added libmedia, media drivers and media applications
+
+* Aug 20 2003, Kristian Van Der Vliet *
+
+Patched ping.c to fix the byte order in the ping output.  Patch from Daniel Gryniewicz
+<dang@fprintf.net>
+
+* Aug 15 2003, Kristian Van Der Vliet *
+
+Patch from William Rose <wrose@zip-it.org> which adds an appserver= argument to the
+kernel command line, which allows the user to specify the path to the appserver binary
+to load.  Useful for development/testing.
+
+* Aug 14 2003, Kristian Van Der Vliet *
+
+Backed out the earlier patch the nVidia driver (Aug 7, 2003).  nvidia.cpp reverted to
+version 1.4
+
+* Aug 14 2003, Kristian Van Der Vliet *
+
+Patch to the media detection code of the Tulip NIC driver in an attempt to fix problems
+with 10BaseT/10Base2 detection.
+
+* Aug 14 2003, Kristian Van Der Vliet *
+
+Trident audio driver from Michael Krueger <invenies@web.de>
+
+* Aug 7 2003, Kristian Van Der Vliet *
+
+Patch from William Rose for the nVidia driver which fixes problems when the driver is used
+on some PC's with the new PCI module.
+
+* Jul 19 2003, Kristian Van Der Vliet *
+
+More Matrox driver changes.
+	* Split off the DAC control code from the rest of the CRTC code
+	* Support for older Matrox cards with Texas Instruments TVP3026 DACs
+	* Bug fixes for the Millenium I
+	* The driver does not export 15bit or very-high resolution video modes
+	  for TVP3026 DACs
+
+Hardware cursor code has been disabled and the driver has been "hardwired" to
+never use Vesa mode-switching, which means it can detect but not work with newer
+Matrox cards (E.g. the Gx50 & Parhalea cards)
+
+* Jul 14 2003, Kristian Van Der Vliet *
+
+Fixes to the nVidia, Mach64 & SiS3xx video drivers from Arno Klenke <arno_klenke@yahoo.de>
+From Arno "There was a bug in the videooverlay code of all these drivers which caused screen
+corruptions while the overlay was active. I have also added the newest XFree driver code to
+the sis driver and vesa mode switching for notebook chipsets to the mach driver."
+
+* Jul 5 2003, Kristian Van Der Vliet *
+
+A whole bunch of changes to the Matrox driver as part of an attempt to cleanup &
+improve the driver.
+
+* Jun 29 2003, Kristian Van Der Vliet *
+
+Finally fixed the bizarre Matrox video-offset bug.
+
+* Jun 27 2003, Kristian Van Der Vliet *
+
+Read-only ext2/3 driver from Kurre St�hlberg <kurre@cc.hut.fi>
+
+* Jun 26 2003, Kristian Van Der Vliet *
+
+ISO9660 filesystem updates from Ville Kallioniemi <festivus@mbnet.fi>.  Better
+RockRidge handling.
+
+* June 17 2003, Rick Caudill *
+
+Added some of the headers for libDesktop.  You can find them in system/libs/desktop
+
+* June 14 2003, Kaj de Vos *
+
+Imported tar 1.13.25 and coreutils 5.0.
+Imported zlib 1.1.4. This is supposed to be built as a shared library. Didn't adapt the
+makefiles, as the new build system will take care of this.
+
+* June 10 2003, Kristian Van Der Vliet *
+
+Put the Icon Translator back into the base distribution.
+
+* June 9 2003, Kaj de Vos *
+
+Imported ncurses 5.3.
+Removed man, groff and diffutils.
+Removed sed 3.02 after importing 4.0.7 a while ago.
+
+* May 22 2003, Henrik Isaksson *
+
+Fixed a bug in CodeView, concerning backspace at the beginning of a line. (It did not
+delete the newline character on the line above, but instead the first character of the
+line above.)
+
+* May 17 2003, Kristian Van Der Vliet *
+
+The BIOS and ATA drivers now check for kernel parameters that indicate which drives and
+controllers to enable.  For the BIOS driver:
+
+o By default, the driver only probes for floppy drives and ignores all harddrives
+o Individual drives can be enabled by passing hd?=bios in the kernel parameters E.g.
+   hda=bios enables the BIOS driver for hda
+ 
+For the ATA driver:
+
+o By default the driver probes for a Primary and a Secondary controller but no others.
+o The primary controller can be disabled by passing ata0=disabled in the kernel paramters.
+  The secondary controller can be disabled by passing ata1=disabled.
+
+The BIOS & ATA paramters can be combined.  E.g. if you wish to disable the ATA controller
+for hda and hdb and instead use the BIOS driver, while leaving the drive cdc enabled in
+the ATA driver you would pass:
+
+ata0=disabled hda=bios hdb=bios
+
+* May 11 2003, Henrik Isaksson *
+
+Checked in CodeView class.
+
+* Apr 27 2003, Henrik Isaksson *
+
+Updated keymaps for the new keymap format.
+Added dead keys to Swedish keymap.
+
+* Apr 27 2003, Kristian Van Der Vliet *
+
+Fix compile errors when using pthread.h
+
+* Apr 27 2003, Kristian Van Der Vliet *
+
+Applied a bug-fix patch to the VT82xx audio driver from Arno Klenke<arno_klenke@yahoo.de>
+
+* Apr 27 2003, Kristian Van Der Vliet *
+
+ISO9660 filesystem from Ville Kallioniemi <festivus@mbnet.fi> added
+
+* Apr 01 2003, Henrik Isaksson *
+
+Updated emu10k1 driver for Audigy support, and finally, got rid of the Bad Noise(tm)!!!
+
+* Mar 29 2003, Kristian Van Der Vliet *
+
+Two more patchs from Arno Klenke<arno_klenke@yahoo.de> for the ATA[PI] driver which fixes some
+bugs in atapi_read(), atapi_readv() and atapi_packet_command().  It is now possible to mount, read
+and unmount an ISO9660 formatted disc under Syllable.
+
+* Mar 26 2003, Kristian Van Der Vliet *
+
+SiS 3xx video driver and Via82xx audio drivers from Arno Klenke<arno_klenke@yahoo.de>
+
+* Mar 26 2003, Kristian Van Der Vliet *
+
+Changed the default DEBUG_LIMIT limit to KERN_INFO
+
+* Mar 26 2003, Kristian Van Der Vliet *
+
+Cleaned up the formatting of this ChangeLog
+
+* Mar 26 2003, Kristian Van Der Vliet *
+
+Two patches for the ATA driver from Arno Klenke <arno_klenke@yahoo.de>  One fixes a bug in select_drive()
+and the other modifies atapi_packet_command() to handle drives that send their response as multiple chunks
+of data.
+
+* Mar 23 2003, Kristian Van Der Vliet *
+
+Added an ATA/ATAPI driver, and removed the old "ide" driver under syllable/system/sys/kernel/driver/disk/
+
+* Feb 18 2003, Kristian Van Der Vliet *
+
+Patched the Mach64 driver so that it does not attempt to initialise Rage Mobility chipsets (Which do not work with
+the driver).  Patch from Michael Krueger <invenies@web.de>
+
+* Jan 11 2003, Kristian Van Der Vliet *
+
+Removed the Lucida fonts from CVS due to licencing issues.  They have been replaced with the Lucidux fonts
+from XFree86, and the URW fonts taken fron GhostScript.  See the file Copyrights for full copyright and licencing
+information.
+
+* Dec 23 2002, Kristian Van Der Vliet *
+
+Upgraded Grub to 0.92 with a patch from Jack Tonkin <lists@tonkin.org.uk> which adds AFS support from 0.53.
+This version of Grub is reported NOT to compile on Syllable currently, although if you wish you can easily build
+and install it from Linux.
+
+* Nov 3 2002, Kristian Van Der Vliet *
+
+Fixed the keyboard driver and appserver.  The NumLock & CapsLock keys now function and are honored by the
+appserver.  All keymaps now set NumLock on by default.
+
+* Oct 24 2002, Kristian Van Der Vliet *
+
+Added a /dev/random character device driver, which makes use of the new kernel rand() function.
+
+* Oct 5 2002, Kristian Van Der Vliet *
+
+Added system/libs/libpthread  This is a POSIX threads library which wraps the Syllable kernel threads.  The
+current code is incomplete but functional.  For more information, see the README and CHANGES files
+included with libpthread.
+
+* Sep 24 2002, Kristian Van Der Vliet *
+
+Removed the -g flags from the libatheos and appserver Makefiles, which of course reduces the size of
+the resulting files.
+
+* Aug 25 2002, Kristian Van Der Vliet *
+
+Updated nVideo driver from Iain Hutchison < iain_hutchison@yahoo.com >.  The driver now supports more
+cards, including the GeForce 4 and Riva128.  It should also correctly detect if you have an LCD  screen attached
+and set things up correctly.  The update also includes Joseph's patch to allow multiple video cards in the same PC
+
+* Aug 25 2002, Kristian Van Der Vliet *
+
+Applied a patch from Sebastien Keim < s.keim@laposte.net > for copy.c in Fileutils-4.1 which adds attribute
+support to cp
+
+* Aug 18 2002, Kristian Van Der Vliet *
+
+I have finally managed to get Glibc fixed!  I have added it back under libs/ & the Makefile is updated.  Not all
+Makefiles are complete, and the README is also out of date...
+
+* Aug 11 2002, Kristian Van Der Vliet *
+
+Updated the Trident video driver, which fixes a bug with PCI Trident cards.
+
+* Aug 11 2002, Kristian Van Der Vliet *
+
+Added an es1370 (SoundBlaster 64/128) driver, from Henrik Isaksson < henrik@boing.nu >
+
+* Aug 6 2002, Kristian Van Der Vliet *
+
+Made a small amendment to du.c from fileutils-4.1; this may fix the problem with "du" showing 0 bytes for all
+files, but I havn't tested it.
+
+* Aug 6 2002, Kristian Van Der Vliet *
+
+Added sed-3.02 in apps/gnu/  Thanks goto Andrew Brown < abrown.taos@bemail.org> for porting
+& checking
+
+* Aug 6 2002, Kristian Van Der Vliet *
+
+Removed compile gaurds from pkgmanager.cpp
+
+* Aug 6 2002, Kristian Van Der Vliet *
+
+Moved other/keymaps/Contributors to doc/Contributors.  This will be a more general file to hold
+details of patch, driver, keymap etc. authors.
+
+* Aug 6 2002, Kristian Van Der Vliet *
+
+Added a Hungarian keymap, from Szekely Krisztian < szekelyk@different.hu >
+
+* Jul 28 2002, Kristian Van Der Vliet *
+
+Added upgrade tarball build scripts in build-tools/
+
+* Jul 28 2002, Kristian Van Der Vliet *
+
+Created ChangeLog.Kernel, ChangeLog.UI & ChangeLog.Desktop
+
+* Jul 11 2002, Kristian Van Der Vliet *
+
+Restructure and fix libs/compat-1.0, all of the libraries are kept within a tarball in
+order to preserve symlinks through the CVS Repository.
+
+* Jul 7 2002, Kristian Van Der Vliet *
+
+Made a few small changes to the SBPro driver, to stop it creating & holding /dev/sound/dsp
+even when no SBPro is detected.
+
+* Jul 5 2002, Kristian Van Der Vliet *
+
+Added apm_poweroff() function from a patch Anthony Morphett < tonymorph@yahoo.com >
+in kernel.c
+
+* Jul 5 2002, Kristian Van Der Vliet *
+
+Added shutdown.c to apps/utils/sysutils
+
+* Jul 4 2002, Kristian Van Der Vliet *
+
+Added the following drivers:
+
+	Network Interface Cards:
+		3c509
+		3c59x
+		pcnet32
+		tulip
+
+	Sound:
+		emu10k1
+		es1371
+		sbpro
+		via686a
+
+	Video:
+		mach64
+		trident
+
+* Jul 4 2002, Kristian Van Der Vliet *
+
+Added apps/utils/mixer
+
+* Jul 4 2002, Kristian Van Der Vliet *
+
+Updated build-tools/mkdisttree.sh
+
+* Jul 2 2002, Kristian Van Der Vliet *
+
+Added the following Window Decorators:
+
+	Beish
+	Drow
+	Mulvane
+	Photon
+	Red
+	Win98
+
+Added the following keymaps:
+
+	Russian
+	Polish
+
+* Jun 14 2002, Kristian Van Der Vliet *
+
+Implement get_tld(), set_tld() in process.c

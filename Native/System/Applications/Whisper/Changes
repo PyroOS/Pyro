@@ -1,0 +1,271 @@
+Alpha 8
+	o Cleaned up the Makefile
+		o Fixed the rules for handling catalogs
+		o Split some of the setup into a seperate Makeconf file
+	o Moved the headers into a seperate includes directory
+	o Moved the WhisperWindow::HandleMessage() method into it's own file, appwindow_messages.cpp
+		o Broke up the huge single method into smaller methods for each function.
+	o Added licence text headers to every source file. The bulk of the code is explictly GPL (As it has
+	  always been implied) but four headers which form public API's are explictly LGPL to allow for non-GPL
+	  plugins. They are:
+
+		codec.h 
+		ixport.h
+		mailbox.h
+		transport.h
+		filter.h
+
+	  Implementers are free to include these headers into plugins that are distributed under non-GPL licences.
+	o Cleaned up all the debug output. The output can now be controlled by both a compile-time macro and a run-time
+	  switch.
+	o ComposerWindow
+		o Removed the clumsy second constructor.
+		o Merged the CreateWindow() method back into the constructor.
+		o Added SetSubject(), SetTo(), SetCc(), SetBcc() & SetBody() methods.
+		o Moved the body of the code for M_LOAD_REQUESTED to a new AddAttachment() method.
+	o Added an Events API with the following available events:
+
+		internet/Mail/Send
+		internet/Mail/GetNewCount
+		internet/Mail/Check
+
+	  This Events are fully documented in the seperate "Events" file.
+	o Moved the settings_window stuff into a seperate directory
+		o Split the SettingsView classes into seperate settings_window & one file for each Views
+	o Implemented Message filters
+		o New FilterEngine. All inbound messages are passed through the FilterEngine to determine which folder
+		  to place them in, instead of always putting them in the Inbox.
+		o Implemented RuleFilter, which can filter a message depending on a complex "rule chain" I.e. "IF Subject
+		  CONTAINS viagra DELETE". Rules can be "chained" together with OR and AND conditions. If the rule matches
+		  a given message, multiple actions can be applied to the message I.e. flagged, marked, deleted or moved
+		  to a folder.
+		o Added a configuration dialog for the Rule filter. Users can define multiple rule chains with upto 4 rules
+		  and two actions per. chain. These are not hard limits but it keeps the GUI sane.
+		o Additional filters can be loaded as plugins. The interface is defined in the filter.h header.
+	o Allowed column sorting of the message list. The limitations of the TreeView & ListView classes makes sorting
+	  rather basic.
+
+Alpha 7
+	o Enable and disable the ToolBar buttons in the main window and the composer window the same way that
+	  the menu items are handled.
+	o Set an appropriate Window icon for the composer Window.
+	o Some mouse-handling improvements in MessageView & children. It still isn't perfect, but it's a lot
+	  better than before I.e. clicking on the scrollbar doesn't cause the text in a FlowView to be selected.
+	o Messages are now displayed as they arrive, instead of reading them all and then (slowly) reloading the
+	  entire Mailbox
+		o Mailbox::Write() now sets the reference for the mail message so that it is valid without needing
+		  to re-read the message.
+		o M_NEW_MAIL_COMPLETE now does nothing.
+	o Implemented folder properties
+		o Added a Propeties dialog
+		o Added folder properties support to the syllable mailbox
+		o Rewrote some sections of the code to use folder properties.
+		o "Important" folders E.g. Inbox and Trash, are identified via. folder properties instead of
+		  the folder name. This means default folder names can be localised.
+	o Added a "Post to mailing list" menu to the Folder context menu. If the folder has a mailing list
+	  associated with it, the Composer Window will be dislayed with the list address already filled in.
+	o "Default" folders can not be deleted
+	o Added "visual" settings file, which will hold additional GUI settings that are directly changable
+	  by the user I.e. font settings etc.
+		o Pass the visual settings to MessageView & any child Views that need it.
+	o Messages can be displayed in a seperate Window. The raw message data can also be displayed in a
+	  seperate Window.
+	o Added some keyboard shortcuts
+		o "v" will display the currently selected message in a seperate Window.
+		o "d" will delete the currently selected message.
+		o "Ctrl+N" (New) displays the Composer Window. 
+		o "Ctrl+R" Reply to the currently selected message.
+		o "Ctrl+F" Forward the currently selected message.
+		o "Ctrl+C" Copy selected text.
+	o ESMTP SMTP-AUTH support
+		o Added ESMTP & SMTP AUTH support to libsmtp (See libsmtp changelog)
+		o Added SMTP username & password fields to the "Outbound" settings panel.
+	o Fixed an issue with some SMTP servers that reject a MAIL FROM: address in the form "name" <a@b.c>
+	o Fixed the shortcut for "Quit" (Ctrl+Q)
+	o Added a version number to Syllable Mailboxes
+		o Automatically attempt to "upgrade" older mailboxes I.e. add the new "flags" and "types" attributes to mail folders.
+
+Alpha 6
+	o Handle messages that have nothing but an attachement in the body
+		o Look for a Content-Disposition header in the main text of the message as well within multi-parts
+		o Correctly identify non-text messages with a disposition of ATTACHMENT in Mail::FindBody()
+	o Added Spanish & Hungarian translations
+	o Added Dutch & Swedish translations
+	o Fix GCC 4.1.1 build errors
+		o Change lvalue casts in libdbx.c
+		o A small fix to pst.cpp and a small performance enhancement
+
+Alpha 5
+	o Fixed MessageView::InnerView::_Layout to re-calculate the layout from the frame, not the bounds, and
+	  don't reset the Scrollbar when the Window is resized.
+	o Removed some rather silly code from Mailmessage::IdentifyDisposition that was fouling up classification
+	  of multipart/alternative parts, which in turn contain child parts.
+	o Bumped the version to 1.0a5
+	o Added the disposition BODY_SIGNED.  Identify messages which have the MIME type "multipart/signed" and
+	  re-nominate the BODY part as BODY_SIGNED.  Display BODY_SIGNED messages using a SignedView
+	o Whisper has been made translation-ready thanks to BurningShadow
+		o Added a Danish translation from BurningShadow
+	o Support for selecting text in FlowView
+		o Add MouseDown(), MouseMove() & MouseUp() methods
+		o If text has been selected, use DrawSelectedText()
+		o Added a Copy context menu
+		o Change the mouse-cursor to an I-beam when the mouse is over the view.
+	o MessageView will automatically scroll the InnerView if the user clicks and drags the mouse.
+	o MessageView now has a pointer direct to the application Window so that it can send messages from inside
+	  the Views.  This is used to send the enable and disable messages for the Edit->Copy menu.
+	o Added PasswordMode & MultiLine methods to InputView
+		o Use PasswordMode for the POP3 password input
+	o Fixed the font rendering on Icons
+	o Implemented Signatures
+		o New Signatures settings panel
+		o The Insert->Signatures menu now lists all of the available Signatures
+	o Fixed importing into the root folder of a Mailbox
+	o When updating the unread count after retrieving a new mail, update the folder the message was written to
+	  rather than the currently selected folder.
+		o Changed FindFolder() to FindFolderRow(), which also returns the ListView row #, and wrapped it with
+		  a method matching the original FindFolder()
+	o Replaced most of the icons with ones from the Tango icon set
+	o Added a new class TreeViewMessageNode, which can display an Icon or a String in any column.
+		o Use TreeViewMessageNode in the MessageList
+		o Added three new columns to display a Flag, Status and Attachments.
+		o Display a Status icon for appropriate Forward-ed and Reply-ed
+		o Change the Font used to display each TreeViewMessageNode depending on the status of the MailMessage.
+		  STATUS_UNREAD messages are displayed in bold, STATUS_NEW & STATUS_DRAFT are displayed in bold with
+		  the FPF_ITALIC flag set.
+	o Implemented Flags
+		o A MailMessage can be flagged "Urgent", "High", "Medium" or "Low"
+		o New method Mailbox::ChangeFlag() and implemented in SyllableMailbox
+		o New attributes "flag" and "attachments"
+	o Count the number of "real" attachments and inline attachments during Mailmessage::IdentifyDisposition()
+	o Parse the whole Mailmessage during M_MAIL_NEW and M_IMPORT_NEW so that the Mailmessage has a useful attachment
+	  count.
+	o Display an attachment icon if the Mailmessage has attachments
+	o Dates now have a purpose
+		o rfctime.h & rfctime.cpp: New files
+		o Use convert_date() to parse the Date: field into a time_t value
+		o Store the converted time_t date in MailSummery, not the raw Date: string
+		o Display the Date that the email was sent in the MessageList
+	o Ensure the folders tree is redrawn when a folder is deleted.
+	o Messages can now be manually marked as Read, Unread or Draft
+	o FlowView, InlineView, SignedView and AttachmentView all derive from a new ChildView base-class instead of
+	  directly from View.  ChildView currently only implements a new HandleMouseMove() method.
+	o Fixed a bunch of PopCursor() and selection-autoscroll bugs
+		o MessageView now passes MouseMove() calls up to InnerView() which will in turn pass on to the ChildViews.
+		  ConvertFromParent() is called on the mouse coordinates at every stage.
+
+Alpha 4
+
+	o Fix OutboundWorker to disconnect from the auth Transport before returning if we fail to connect to
+	  the outbound Transport.
+	o Added the functions xstrnxcpy(), xstrncpy_to_unix() & xstrncpy_to_inet() and start modifying Whisper
+	  to use these functions instead of duplicating code.
+	o Round off the Font height when calculating the height of MessageView and fix rendering issues with
+	  FlowView/InlineView/SignedView Patch from Arno Klenke.
+	o Added Mailmessage::CleanHeader(), which uses xstrnxcpy() to clean email addresses.  Strips out quotes
+	  (" and ') and punctuation (; & ,)
+	o Use CleanHeader() in Mailmessage::ParseHeaders() to clean the To:, Cc:, Bcc:, From: and ReplyTo: headers.
+	o Tweaked the size & position of the ScrollBar in Messageview.
+	o Changed the way Delete works
+		o Now allows the user to delete multiple messages
+		o Moves messages to the Trash folder rather than deleting outright
+	o Added "Empty Trash" menu item to the Folder menu which deletes all messages in the Trash folder.
+	o Add the ability to Cut, Copy and Paste multiple messages in one operation.
+	o FlowView now uses the DTF_WRAP_SOFT flag for GetTextExtent()/DrawText(), which wraps the text to be
+	  displayed.
+	o FlowView, InlineView & SignedView are now created with a useful initial size, which gives FlowView
+	  something useful to work with when flowing the text.
+	o Made the AddressView class and the more general InputView.
+	o Rewrote most of the settings Window to use fixed positioning and InputViews.
+	o Added a Spinner for SMTP & POP3 configuration to allow the user to change the port #.
+	o Fix several bugs (Including a crash bug) when deleting a POP3 server configuration
+	o Added xstrcasestr() & xstrncasestr() functions to perform a case-insensitive strstr()  This fixes a bug
+	  parsing mails from certain mailers (Pine) that produce uppercase MIME arguments (E.g. "BOUNDARY=")
+	o Added a few workarounds in FindMultiParts() & IdentifyDisposition() to improve BODY identification
+		o If the Content-Type: header is not present, default to "text/plain" (GNUS)
+		o If the first part is INLINE and type "text/*" then it is nominated to be BODY instead.
+	o Disable Cut, Copy, Paste, Delete, Reply, Reply All & Forward operations (which can be triggered from
+	  the Toolbar buttons) if no message is selected.
+	o Use a TreeView instead of ListView for the messages list in the main window in preperation for threaded &
+	  grouped messages.
+	o Removed the folder paths map.  All folder information (Name, absolute path & mailbox index) is now
+	  stored together in a folder_cookie_s struct which is attached to the TreeViewNode as a cookie, eliminating
+	  the need to perform a seperate lookup from the std::vector<>m_vFolderMap to get the folder path.
+	o The seperate SettingsViews are now notified about changes made on the SettingsViews E.g. the OutboundView
+	  can now update it's list of available POP3 servers that have been entered in the InboundView without having
+	  to Apply, close & re-open the window.
+	o Hide the Folders TreeView during LoadMailboxes() so we don't get ugly rendering problems when it is
+	  Clear()ed and re-populated.
+	o Hide the MessageView scrollbar if it is not required
+	o Display the current email address in the Identity/email address textview of the settings Window.
+	o Add the default Mailbox to the Identity when the user saves or applies in the settings Window.  This fixes
+	  a crash if the user attempts to send an email immediatly after configuring Whisper.
+
+Alpha 3
+
+	o Added disposition types of MULTIPART and ENCRYPTION_KEY
+	o Identify parts with type "multipart/*" as having MULTIPART disposition.
+	o Identify parts with type "application/pgp-signature" as having ENCRYPTION_KEY disposition
+	o Split Mailmessage::FindMultiParts into two methods.  FindMultiParts is responsible for finding all
+	  parts within a given buffer and IdentifyDisposition assigns disposition types to each part and
+	  identifies the body.
+	o Change X-Mailer: header to User-Agent:
+	o Fix an unterminated buffer when converting LF to CRLF pairs in Mailmessage::Compose()
+	o Broke Messageview::Innerview::Display() down and added three additional functions; AddBody(),
+	  AddAttachment() & AddInline() which are responsible for creating the child views.
+	o Multiparts now have a 64bit ID associated with them.  Each part within a Mailmessage has a unique ID
+	o Added Mailmessage::GetPartById() which recursivly searches through the parts and any child parts
+	  (from MULTIPART parts) until it finds the part.  MULTIPART parts can be nested an arbitary depth.
+	o InlineView, AttachmentView & AttachmentIcon now use the 64bit ID to identify a Multipart instead of
+	  it's index within Mailmessage::m_vParts[]
+	o Messageview can now identify MULTIPART messages.  The inner parts are treated as though they
+	  belong to the parent Mailmessage.  It can currently only handle multipart parts nested one deep.
+	o Alternative parts (E.g. "text/html" parts from a "multipart/alternative" message) are marked as
+	  BODY_ALTERNATIVE_HIDDEN by default.  If no BODY part is found, the first BODY_ALTERNATIVE_HIDDEN
+	  part will be changed to BODY_ALTERNATIVE.
+	o Added FindFolderByPath() method which locates a folder from it's absolute path and returns a
+	  Mailfolder.
+	o Added an Import & Export (IX) framework, consisting of a IXFactory class and associated IXNode.
+	  IXPlugins are loaded from the ^/plugins/ixport/ directory.
+	o Created import plugins for
+
+		UNIX mbox (mboxo & Eudora style)
+		Microsoft Outlook PST (97-2002 format)
+		Microsoft Outlook Express DBX (Individual .dbx files and Folders.dbx)
+
+	   The PST import plugin is based on libPST 0.5.1, originally written by
+	   Dave Smith <dave.s@earthcorp.com>
+	   The DBX import plugin is based on libDBX 1.0.3, written by Dave Smith
+	   <dave.s@earthcorp.com> and Ries Van Twisk <rvt@dds.nl>
+	o Created export plugins for
+
+		UNIX mbox (mboxo)
+	o Added an About dialog.
+	o Created SignedView(), which is similiar to InlineView but intended for encrypted & signed parts.
+	  SignedView is currently unused, pending the addition of encryption support.
+	o Fix InboundWorker to disconnect the Transport before returning if there is no mail on the server.
+
+Alpha 2
+
+	o Improved multi-part classification.  Whisper now does a better job of identifying attachments
+	  and body/body alternative parts.
+	o If a name can not be found for an attachment, default to "Untitled Attachment".
+	o Allow saving attachments with a "text/*" mime-type.
+	o Use the correct codec (Or no codec!) when saving attachments.
+	o Strip carriage return characters from the message body text before displaying it.
+	o Added a toolbar & buttons to the Application and Composer windows.
+	o Clean up the GUI layout calculations in the Composer window.
+	o Move the Address Textviews over five pixels to accomodate the label in the Composer window
+	o Fix the MultiPart copy constructor(s) to copy the associated part data
+	o Implemented InlineView sub-view in MessageView.  Whisper will now display Inline attachments of types:
+
+		text/* (Excluding text/html)
+		message/rfc822
+		image/*
+
+	  All inline attachments, wether displayed inline or not, can be saved by the user.
+	o Fixed the Mailmessage constructor Mailmessage( const char *pcBuffer, ssize_t nSize );
+	o Modified the Messageview _Layout code to handle resizing better, especially when embedding within an
+	  InlineView.
+	o Add a "Delete mail after downloading it" checkbox to the Inbound mail configuration and honour the
+	  flag in the Transport & InboundWorker when retrieving email.
+

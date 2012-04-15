@@ -1,0 +1,9 @@
+0.5
+	o Added ESMTP and SMTP AUTH (SASL) support
+		o Support for CRAM-MD5 (Untested), PLAIN and LOGIN SASL schemes
+		o CRAM-MD5 is currently disabled.
+
+0.4
+
+	o Fix major bug with sigaction() in smtp_timer.c
+

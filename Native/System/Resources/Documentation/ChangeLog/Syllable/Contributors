@@ -1,0 +1,51 @@
+This is an (Almost certainly incomplete!) list of people who have contributed to Syllable:
+
+Graphics Drivers
+
+SiS 3xx		:	Arno Klenke <arno_klenke@yahoo.de>
+nVidia		:	Iain Hutchison <iain_hutchison@yahoo.com>
+
+Sound Drivers
+
+Via686a		:	Arno Klenke <arno_klenke@yahoo.de>
+Via82xxx	:	Arno Klenke <arno_klenke@yahoo.de>
+
+Keymaps
+
+Belgian		:	Bram Van Dam <gandalfbram@pandora.be>
+British		:	Kristian Van Der Vliet <vanders@liqwyd.com>
+Dvorak		:	DraX <drax@stampede.org>
+French		:	Herve Parissi <hparissi@mail.dotcom.fr>
+German		:	Daniel Popescu <daniel@popescu.de>
+Hungarian	:	Szekely Krisztian <szekelyk@different.hu>
+Italian		:	Denis Torresan <torresan@e-tree.com>
+Polish		:	Michal Rygorowicz <mandrake@wp.pl>
+Russian		:	Nikolaev Ruslan <nruslan@hotbox.ru>
+Spanish		:	Chir <chir@geocities.com>
+Swedish		:	Tord Jansson <tord.jansson@swipnet.se>
+
+Patches
+
+Damien Danneels <ddanneels@free.fr>
+Daniel Gryniewicz <dang@fprintf.net>
+Jake Hamby <jhamby@pobox.com>
+Henrik Isaksson <henrik@isaksson.tk>
+Ville Kallioniemi <festivus@mbnet.fi>
+Arno Klenke <arno_klenke@yahoo.de>
+Anthony Morphett <awmorp@gmail.com>
+Jack Tonkin <lists@tonkin.org.uk>
+Kristian Van Der Vliet <vanders@liqwyd.com>
+
+Ports
+
+sed-3.02	:	Andrew Brown <abrown.taos@bemail.org>
+
+Translations
+
+Danish		:	Flemming Sørensen
+Dutch		:	Rik van Achterberg
+Frisian		:	Kaj de Vos
+Swedish		:	Henrik Isaksson
+
+Misc. help, work and advice
+

@@ -1,0 +1,44 @@
+#
+# Language database for Locale Prefs - V0.2
+# Copyright (C)2005 Syllable Team
+#
+# Tabsize = 4
+#
+# Name				Continent		Country				Family						Code		Flag
+al-‘arabiyyah			?			?					?							ar		ar.png
+Български			EUROPE			Република България	INDO_EUROPEAN/SLAVONIC		bg			bg.png
+Čeština				EUROPE			Česká Republika		INDO_EUROPEAN/SLAVONIC		cz			cz.png
+中文 (Chinese)			ASIA				China			?						zh-cn		zh-cn.png
+Deutsch				EUROPE			Deutschland			INDO_EUROPEAN/GERMANIC		de			de.png
+Deutsch/Schweiz		EUROPE			Der Schweiz			INDO_EUROPEAN/GERMANIC		de-ch		de-ch.png
+Dansk				EUROPE			Danmark				INDO_EUROPEAN/GERMANIC		da			da.png
+Eesti				EUROPE			Estonia				INDO_EUROPEAN				ee			ee.png
+English				EUROPE			United Kingdom		INDO_EUROPEAN/GERMANIC		en			en-gb.png
+English/British		EUROPE			United Kingdom		INDO_EUROPEAN/GERMANIC		en-gb		en-gb.png
+English/American	NORTH_AMERICA	United States		INDO_EUROPEAN/GERMANIC		en-us		en-us.png
+English/Australian	OCEANIA			Australia			INDO_EUROPEAN/GERMANIC		en-au		en-au.png
+English/New Zealand	OCEANIA			New Zealand			INDO_EUROPEAN/GERMANIC		en-nz		en-nz.png
+Español				EUROPE			España				INDO_EUROPEAN/ROMANCE		es			es.png
+Føroysku			EUROPE			Färöarna			INDO_EUROPEAN/GERMANIC		fo			fo.png
+Français			EUROPE			France				INDO_EUROPEAN/ROMANCE		fr			fr.png
+Frysk				EUROPE			?					INDO_EUROPEAN/GERMANIC		fy			fy.png
+Íslenska			EUROPE			Island				INDO_EUROPEAN/GERMANIC		is			is.png
+Italiano			EUROPE			Italia				INDO_EUROPEAN/ROMANCE		it			it.png
+日本語 (Japanese)		ASIA			Japan				?							ja			ja.png
+Lietuvių Kalba		EUROPE			Lithuania			INDO_EUROPEAN/BALTIC		lt			lt.png
+Magyar				EUROPE			Magyar				FINNO-UGRIC					hu			hu.png
+Nederlands			EUROPE			The Netherlands		INDO_EUROPEAN/GERMANIC		nl			nl.png
+Norsk/Bokmål		EUROPE			Norge				INDO_EUROPEAN/GERMANIC		no-nb		no.png
+Norsk/Nynorsk		EUROPE			Norge				INDO_EUROPEAN/GERMANIC		no-nn		no.png
+Polski				EUROPE			Poland				INDO_EUROPEAN/SLAVONIC		pl			pl.png
+Português			EUROPE			Portugal			INDO_EUROPEAN/ROMANCE		pt			pt.png
+Português/Brasil	SOUTH_AMERICA	Brasil				INDO_EUROPEAN/ROMANCE		pt-br		pt-br.png
+Română				EUROPE			Romania				INDO_EUROPEAN/ROMANCE		ro			ro.png
+Русский				EUROPE			Russia				INDO_EUROPEAN/SLAVONIC		ru			ru.png
+Shqip				EUROPE			Albania				INDO_EUROPEAN/ALBANIAN		sq			sq.png
+Suomi				EUROPE			Soumi				FINNO_UGRIC					fi			fi.png
+Slovenčina			EUROPE			Slovensko			INDO_EUROPEAN/SLAVONIC		sk			sk.png
+Svenska				EUROPE			Sverige				INDO_EUROPEAN/GERMANIC		sv			sv.png
+Türkçe				?				Turkey				?							tr			tr.png
+Tiếng Việt			ASIA			Vietnam				?							vi			vi.png
+Ελληνικά				EUROPE			Greece				INDO_EUROPEAN/PROTO_GREEK		el			el.png

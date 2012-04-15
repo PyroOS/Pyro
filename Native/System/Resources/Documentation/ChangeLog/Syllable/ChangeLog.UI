@@ -1,0 +1,1568 @@
+* December 22, 2008, Anthony Morphett *
+
+Added DropdownMenu::GetTabOrder() (mainly for future compatibility).
+
+* December 10, 2008, Anthony Morphett *
+
+Correct GetTabOrder() signature in Spinner, IconView; re-add Spinner::KeyUp for compatibility.
+
+* November 29, 2008, Anthony Morphett *
+
+- Spinner, DropdownMenu, TextView bugfixes
+- Added Spinner::Increment(), Spinner::Decrement() methods
+- Removed unneeded desktop log messages
+
+* September 21, 2008, Anthony Morphett *
+
+Bugfix: Make Spinner correctly send value in status changed message
+
+* August 11, 2008, Rick Caudill *
+
+Modified appserver/libsyllable to work correctly with new keymap code
+
+* August 10, 2008, Rick Caudill *
+
+Added keymap class.  
+
+Added files are in:
+	sys/appserver/libsyllable/util/keymap.cpp
+	sys/include/util/keymap.h
+
+Modified files are:
+	sys/appserver/libsyllable/Makefile
+
+* July 19, 2008. Kristian Van Der Vliet *
+
+Send a "selection changed" message from TabView when a tab is deleted.
+
+* July 17, 2008. Kristian Van Der Vliet *
+
+Some TextView & DropdowMenu bug fixes:
+
+TextView
+	o Added a new event flag EI_WAS_EDITED which is created when
+	  EI_CONTENT_CHANGED is created and persists until EI_ENTER_PRESSED or
+	  EI_FOCUS_LOST is generated. This can be used by the client to track state
+	  changes in the TextView.
+	o When the TextView is in single-line mode the text will now follow the
+	  cursor when the text is wider than the width of the View. This still isn't
+	  perfect (the last character in the view is partly obscured) but it's
+	  better.
+
+DropdownMenu
+	o Use the "events" flags from the child TextView to decide how to generate
+	  the "final" flag. "final" will now only be set when EI_WAS_EDITED is set
+	  by the TextView, so simple de-focusing the TextView will not generate a
+	  spurious edit message to the client.
+	o Don't generate a notification from the child TextView in SetCurrentString()
+
+* May 29, 2008, Anthony Morphett *
+
+Changed StringView to use os::drawtext_flags by default rather than os::alignment
+
+* May 18, 2008, Anthony Morphett *
+
+Changed StringView to use os::drawtext_flags flags for alignment, rather than os::alignment
+
+* May 1, 2008, Anthony Morphett *
+
+Documentation updates and bugfixes for BitmapImage relating to Bitmap::SHARE_FRAMEBUFFER flag
+
+* April 22, 2008, Kristian Van Der Vliet *
+
+Patches from Anthony Morphett
+
+o Make addattrib -f work, ie "addattrib destfile destattrib -f sourcefile"
+  writes the contents of file sourcefile into destattrib of destfile
+
+* March 9, 2008, Kristian Van Der Vliet *
+
+Some patches from Anthony Morphett
+
+o Make ctrl+click popup a window only when ctrl+clicking on the window frame.
+  Doubleclicking the window frame also pops it up. This only has effect when
+  the 'popup active window' pref is off.
+o Keyboard navigation of desktop icons is messed up after switching
+  workspaces. Actually, the keyboard nav state was forgotten whenever the
+  iconview was sorted; the patch fixes that. Also the patch removes a
+  completely redundant 'for' loop I came across which was significantly
+  slowing icon sorting.
+
+* Feburay 10, 2008, Rick Caudill *
+
+Added a way of adding global shortcuts by registering shortcuts and corresponding events to the appserver.
+To utilize all you have to do is look at Application::RegisterKeyEvent/Application::UnregisterKeyEvent/ApplicationGetCurrentKeyShortcuts
+
+* January 11, 2008, Kristian Van Der Vliet *
+
+Patched the appserver to support mouse preferences. The user can now set mouse sensitivity and
+acceleration. Patches from Jonas Jarvoll <jonas-jarvoll@syllable-norden.info>
+
+---- 0.6.5 Released -------------------------------------------------------------------
+
+* December 17, 2007, Kaj de Vos *
+
+Imported second version of the Blue decorator by John Aspras, and adapted Arno's leak fix to it.
+Adapted the fix more to also apply it to the Winter decorator.
+
+* November 25, 2007, Kaj de Vos *
+
+Added Blue decorator by John Aspras, with modifications by Arno.
+
+* September 26 2007, Rick Caudill *
+
+Added documentation to server.cpp and also added an event(os/System/PrintKeyWasHit) when 'Print Screen' key is hit
+
+* August 18, 2007, Kaj de Vos *
+
+Added Winter decorator, by John Aspras.
+
+* August 18, 2007, Kristian Van Der Vliet *
+
+Checked in a series of patches from Anthony Morphett <awmorp@gmail.com>
+
+o Fixed the keyboard navigation in IconView & IconDirView. Also adds the
+  ability to select-by-typing. This fixes bugs #270 & #276
+o A small fix to the automatic window repositioning code, which fixes bugs
+  #103 & #158
+o Focus the desktop if there are no open windows when the user switches to
+  a different desktop. Fixes bug #294
+
+---- 0.6.4 Released -------------------------------------------------------------------
+
+* July 8, 2007, Arno Klenke *
+
+Fixed drag and drop operations on textviews
+
+* June 19, 2007, Arno Klenke *
+
+Moved clipboard event into the appserver
+
+* June 4, 2007, Rick Caudill *
+
+Added Documentation to os::Clipboard
+
+Added an event to os::Clipboard called "os/system/ClipMonitor" that will allow the clipboard 
+to be monitored for changes.
+
+affected files:
+	sys/include/util/clipboard.h
+	sys/include/gui/guidefines.h
+	sys/appserver/libsyllable/util/clipboard.cpp
+
+* June 12, 2007, Arno Klenke *
+
+Fixed mouse move bug in the appserver
+
+* June 3, 2007, Arno Klenke *
+
+Moved all appserver mmx code to ddriver_mmx.cpp
+
+* May 23, 2007, Rick Caudill *
+
+Added Documentation to wndborder.cpp and wndborder.h
+Added "Restore window after Maximization" functionality
+	affected files:
+		sys/appserver/appserver/server/wndborder.cpp
+		sys/appserver/appserver/server/wndborder.h
+
+* May 9, 2007, Kristian Van Der Vliet *
+
+Improve automatic window adjustment when switching between different resolutions. Patch from
+Anthony Morphett <awmorp@gmail.com>
+
+* May 4, 2007, Arno Klenke *
+
+Optimized the appserver sprite code
+
+* April 29, 2007, Kristian Van Der Vliet *
+
+ListView
+	Add a seperate F_NO_SORT flag to ListView that allows columns to be sorted without having to
+	enable F_NO_AUTO_SORT.
+Settings
+	Don't crash of the application doesn't have a "-" in it's name. Patch from
+	Jonas Jarvoll <jonas-jarvoll@syllable-norden.info>
+
+* April 4, 2007, Arno Klenke *
+
+Added SetLabel() methods to the os::Menu and os::MenuItem class
+Finally removed the registrar call interface
+Added the os::RegistrarFileType class
+Fixed some mouse handling issues in the os::Window and the os::TextView class
+
+* March 31, 2007, Kristian Van Der Vliet *
+
+libsyllable
+	o moved find-as-you-type from IconDirView to IconView; so it should work on all IconViews
+	o added horizontal autoscrolling when trying to drag an icon to the far left/right of the
+	  IconDirView, in list mode
+	o fixed SetTabOrder() and GetTabOrder() for IconView
+	o prevent user from dragging an icon out of the IconView (in icon mode)
+	o added keyboard navigation to IconView:
+		o arrow keys can be used to move to adjacent icons
+		o home/end can be used to move to top-left-most, bottom-right-most icons
+		o if no icon was previously active, down or right will select topleft-most icon; up or
+		  left will select bottom-right-most (like home/end)
+		o if shift key is held, next icon will be added to selection
+		o pageup/pagedown will scroll the window (if scrollbars are present)
+		o escape deselects all icons
+
+Patches from Anthony Morphett <awmorp@gmail.com>
+
+* March 17, 2007, Kristian Van Der Vliet *
+
+Backspace now acts like Delete if text is selected in a TextView I.e. it deletes the selection. Fixes
+Bug #112. Patch from Athony Morphett <awmorp@gmail.com>
+
+* March 16, 2007, Arno Klenke *
+
+Mouse event handling changes in the appserver
+
+o Mouse move and mouse up events are passed to the currently active window, the active system window
+  and the window under the mouse
+
+o Mouse down events are passed to the currently active window _or_ the active system window
+  and the window under the mouse
+
+Clicking on already opened submenus does not close the whole menu structure
+
+* March 8, 2007, Arno Klenke *
+
+Added a missing space in the copy/move operations alert
+
+---- 0.6.3 Released -------------------------------------------------------------------
+
+* February 26, 2007, Arno Klenke *
+
+Fixed a rendering bug
+
+* February 16, 2007, Arno Klenke *
+
+Transparent views are working better now
+
+* February 12, 2007, Arno Klenke *
+
+The paint requests are now sent in the right order by the appserver when a view is scrolled
+
+* February 9, 2007, Arno Klenke *
+
+Closed windows are now removed from the window selector
+
+* February 2, 2007, Arno Klenke *
+
+The event handling code in the appserver has been rewritten to use a tree structure instead of 
+a simple list of events. This should provide better performance when the event system is used more
+often.
+
+
+* January 29, 2007, Arno Klenke *
+
+Folders can be opened after they have been renamed
+
+* January 19, 2007, Arno Klenke *
+
+Fixed recursive invalidates
+
+* January 10, 2007, Arno Klenke *
+
+Fixed intel graphics driver for some i9xx chipsets
+Fixed a drawing bug in the appserver
+
+* January 7, 2007, Kristian Van Der Vliet *
+
+Fixed a potential infinite loop in IconDirView, patch from Jonas Jarvoll
+
+* December 23, 2006, Arno Klenke *
+
+Fixed a drawing bug in the appserver
+
+* December 16, 2006, Arno Klenke *
+
+Reworked parts of the appserver code for backbuffered windows
+Check source rectangle before drawing a bitmap
+Fixed double clicks in the iconview
+
+* December 8, 2006, Kristian Van Der Vliet *
+
+Added MakeFocus() method to IconView class, from Jonas Jarvoll
+
+* December 6, 2006, Rick Caudill *
+
+Added a new ColorRequester.  This is to be the new default way to change colors
+in an application.
+
+Fixed an error in FontRequester where it was sending the wrong message when hitting the cancel shortcut
+
+Changes were in: guidefines.h, colorrequester.h colorrequster.cpp, Makefile fontrequester.cpp
+
+* December 4, 2006, Kristian Van Der Vliet *
+
+Fixed some graphical errors when using the window selector
+
+* December 3, 2006, Kristian Van Der Vliet *
+
+Improved FileRequester keyboard handling and general usability
+	* Change the order of the buttons: Now the "Cancel" button is the first button
+	  and "Open" the second button (according to Syllable HIG)
+	* For cases ID_OK and ID_INVOKED I have added a check to see if the user selected
+	  a directory or not. If a directory was selected the path of the filerequester
+	  is set to that directory. For ID_PATH_CHANGED, ID_BACK_BUT, ID_HOME_BUT and
+	  ID_UP_BUT was changed to make a call to the private function PathChanged. This
+	  ensures that the title and dropdown menu are in fact correctly updated.
+	* If SetPath() is called, make sure that the IconDirView always gets the focus.
+
+All from Jonas Jarvoll
+
+* December 3, 2006, Kristian Van Der Vliet *
+
+Patch to add Ctrl+Left & Ctrl+Right handling to TextView, which selects the previous
+and next word in the text. Patch from Anthony Morphett <awmorp@gmail.com>
+
+* December 1, 2006, Arno Klenke *
+
+Corrected mouse over behaviour in the textview and imagebutton class
+Fixed flattening of font objects
+Fixed fontrequester
+
+* November 30, 2006, Arno Klenke *
+
+Improve drag and drop in the iconview class
+Send mouse up events when system windows like menus are opened
+Send correct mouse events for system windows. This has fixed the menu open timers
+
+* November 27, 2006, Kristian Van Der Vliet *
+
+Changes to appserver & libsyllable
+	* libsyllable Window::SetFrame() before Window::Show() now properly handled
+	* os::Desktop class now doesn't crash appserver app_thread if constructed with
+	  invalid desktop number
+	* Added flag WND_INDEP_DESKTOP_FRAMES to indicate that a window's frames on
+	  different desktops should be independent (ie moving a window on one desktop
+	  doesn't move it on all desktops)
+	* Aterm -s switch fixed; Application message loop started via Application->Run()
+	  so now M_QUIT messages are handled properly
+	* Login window set to show on all desktops
+	* System windows not shown on Alt-Tab windowselector
+	* Changes to appserver's desktop-switching behaviour:
+		- window resizes/moves on one desktop affect the window on all desktops
+		  (unless flag WND_INDEP_DESKTOP_FRAMES is set)
+		- clicking any mouse button on a window while switching desktops with
+		  Alt+Fn/Alt+~ will bring the window to the new desktop.
+		- clicking right mouse button clones the window, so it will be present
+		  on both old and new desktops.
+		- clicking other buttons removes the window from the old desktop and adds
+		  it to the new desktop (old behaviour: left mouse button puts window only
+		  on new deskop; left+right click puts window only on new & prev desktops)
+		- fixed problems & appserver crashes if switching desktop while dragging a
+		  window or clicking minimise button, etc
+		- when switching to lower-resolution, all desktop windows are moved into
+		  visible screen area
+
+All from Anthony Morphett <awmorp@gmail.com>
+
+* November 25, 2006, Rick Caudill *
+
+The DateTime class is now flattened, so it can be passed through messages.
+Changes were in datetime.h, typecodes.h, and datetime.cpp
+	
+* November 18, 2006 Arno Klenke *
+
+Fixed libsyllable catalog handling
+
+* November 16, Arno Klenke *
+
+Removed old functions from the os::Desktop class
+(Hopefully) fixed the nvidia driver for >= nv40
+Disabled yv12 overlays in the i855 driver, they caused lockups for big video sizes
+The icons in the dock are correctly updated when you switch desktops
+
+---- 0.6.2 Released -------------------------------------------------------------------
+
+* October 24, Arno Klenke *
+
+Fixed drawing errors if the window takes a long time to update the content
+
+* October 23, Arno Klenke *
+
+Optimized blit list in the appserver
+
+* October 12, Arno Klenke *
+
+Do not draw icons in a os::IconView until they are layouted
+Rewrite of the directory read code in the os::IconDirView class
+
+* October 7, Arno Klenke *
+
+The VIEW_ICONS_DESKTOP view of the os::IconView now uses the information of the appserver about
+the maximal window frame.
+
+* September 20, 2006 Arno Klenke *
+
+Window icons can now be any size
+Fixed some color space conversion errors in the appserver
+
+* September 3, 2006 Arno Klenke *
+
+Changed the libsyllable icons
+New selection frame
+
+* July 22, 2006 Arno Klenke *
+
+Delay backbuffer to framebuffer blits until all rendering operations are finished
+
+* June 29, 2006 Arno Klenke *
+
+Fixed the TabView::DeleteTab() method.
+
+* June 19, 2006 Arno Klenke *
+
+Added the possibility to share bitmaps between applications
+Avoid problems when switching directories in the icondirview class
+First code to implement the window events in the appserver
+
+* June 17, 2006 Kristian Van Der Vliet *
+
+Added View::DrawSelectedText() & View::GetSelection()
+
+---- 0.6.1 Released -------------------------------------------------------------------
+
+* May 8, 2006 Kristian Van Der Vliet *
+
+Don't walk off the end of the list in ListView::InsertRow.  Fix from Jonas Jarvoll
+
+* May 2, 2006 Arno Klenke *
+
+Delete the message queue object in the looper class
+Do not call Flush() after every M_PAINT message
+
+* April 29, 2006 Rick Caudill *
+     Desktop
+     	* Added Desktop::MinimizeAll to Desktop class
+     	
+* April 15 2006, Rick Caudill *
+	Menu:
+		* Fixed os::Menu drawing when Menu was disabled and had a Shortcut.
+
+	ProgressBar:
+		* Added Documentation
+		* ProgressBar now draws with icon_selected default color and a black outline around the frame.
+		
+	ScrollBar:
+		* Added Documentation
+		
+	os::InputBox:
+		* Added new InputBox class to aide in getting input from a user
+		* Look at InputBox' documentation for further details.
+
+* April 15 2006, Kristian Van Der Vliet *
+
+The appserver now handles the case when you resize a backbuffered window and no
+memory can be allocated for the new window size.  Patch by Arno Klenke
+
+* April 10 2006, Arno Klenke *
+
+Added NO_ALPHA_CHANNEL flag to the os::Bitmap class
+
+* March 26 2006, Arno Klenke *
+
+Added WID_FULL_UPDATE_ON_RESIZE flag to some widgets
+The SameWidth()/SameHeight() methods of the os::LayoutNode class can
+now reset the width/height rings.
+
+* March 15 2006, Kristian Van Der Vliet *
+
+Added DTF_WRAP_SOFT & DTF_UNDERLINES flags to DrawText() & GetTextExtent()
+Patched libsyllable classes to use DTF_UNDERLINES as required.
+
+* February 17 2006, Arno Klenke *
+
+New event class for interprocess communication
+Small fixes in the dynamic layout system
+Added the method GetToken() to the handler class
+Updated mulvane decorator
+
+* January 15 2006, Arno Klenke *
+
+New method SetTextShadowColor() in the IconView class
+
+---- 0.6.0a Released -------------------------------------------------------------------
+---- 0.6.0 Released -------------------------------------------------------------------
+
+* December 9 2005, Arno Klenke *
+
+The layout node class now deletes its views
+
+* October 13 2005, Arno Klenke *
+
+Provide default permission flags to the open() call in the fsnode class
+
+* October 4 2005, Arno Klenke *
+
+Pixel align the views in the splitter class
+
+* September 17 2005, Henrik Isaksson *
+
+ - Added Polish translation, updated the Danish one.
+
+---- 0.5.7 Released -------------------------------------------------------------------
+
+* August 14 2005, Arno Klenke *
+
+ - IconDirView
+	o Icons are shown while dragging
+
+ - Menu
+	o Fixed a small rendering bug
+
+ - View
+	o Corrected default colors
+
+ - RegistrarManager
+	o Fixed memory leak
+
+ - Looper
+	o Make it possible to delete a timer from the TimerTick() method
+
+ - Translators
+	o Moved to /system/extensions/translators
+
+* July 27 2005, Henrik Isaksson *
+
+ - splitter.h
+	o Removed WID_DRAW_ON_CHILDREN. This fixes some Splitter rendering bugs.
+
+* July 10 2005, Henrik Isaksson *
+
+ - guidefines.h
+	o Moved FontRequester codes to the right place.
+	o Added warnings about changing the sequence of message codes.
+ - libsyllable
+	o Added Danish translation.
+
+* June 26 2005, Henrik Isaksson *
+
+ - Font
+	o Patch from Rick, makes Fonts Flattenable
+ - FontRequester
+	o New class
+
+* June 6 2005, Henrik Isaksson *
+
+ - IconView, IconDirectoryView
+	o Patch from Arno, adds keyboard navigation.
+ - FileRequester
+	o Cancel requester on ESC
+
+* May 29 2005, Henrik Isaksson *
+
+ - Flattenable
+	o New class, defines interface for objects that can be flattened and used by
+	  os::Message, written to disk etc.
+ - Message
+	o Added support for Flattenable objects through AddObject/FindObject.
+ - ShortcutKey
+	o Added flattening support.
+
+* May 29 2005, Arno Klenke *
+
+ - Filereference info dialog:
+	o Now shows the attributes of a file
+
+* May 28 2005, Henrik Isaksson *
+
+ - Locale
+	o Changed to use image ID = 0 to get at main executable resources
+	o Added GetSystemResourceStream() - looks for resources in /system/resources
+	  and/or libsyllable.so
+	o Added GetLocalizedSystemResourceStream()
+	o Added GetLocalizedSystemCatalog() - looks for catalogues in
+	  /system/resources/catalogs
+	o Added operator=()
+ - Catalog
+	o Added a variant of GetString() with a "default string" argument. I don't want
+	  to rely on embedded resources in libsyllable for default strings.
+ - Application
+	o Added SetApplicationLocale() and GetApplicationLocale().
+	o Added some documentation to Catalog and Locale methods.
+ - FileRequester, IconDirectoryView, Filereference_* dialogues, new directory dialogue,
+   mount dialogue
+	o Added catalog, translated to Swedish.
+
+* May 16 2005, Henrik Isaksson *
+
+ - AppServer & Libsyllable
+	o Jake's patch for GCC 3.4 compile warnings.
+
+* May 14 2005, Henrik Isaksson *
+
+ - AppServer
+	o Fixed GCC 3.4 compile errors and warnings.
+ - TreeView
+	o Fixed bug: it was only possible to expand the first item.
+
+* May 13 (friday 13th) 2005, Henrik Isaksson *
+
+ - Toolbar, Statusbar
+	o Fixed "attempt to remove view not belonging to this window" error.
+
+* May 7 2005, Henrik Isaksson *
+
+ - View
+	o Corrected default colours for COL_ICON_BG and COL_FOCUS.
+ - Separator
+	o New class, needed by ToolBar
+ - ToolBar
+	o New class
+ - LayoutNode
+	o Added GetView().
+
+* May 1 2005, Henrik Isaksson *
+
+ - View, IconView
+	o Added COL_ICON* (Rick) and COL_FOCUS
+
+---- 0.5.6 Released -------------------------------------------------------------------
+
+* March 25 2005, Henrik Isaksson *
+
+ - ColorSelector
+	o Bugfix: Set brightness slider correctly from SetValue.
+	o Compile warning fixed.
+
+* March 24 2005, Henrik Isaksson *
+
+ - Button
+	o Renamed Get/SetToggleMode() to Get/SetInputMode().
+	o Added input modes InputModeNormal, InputModeToggle and InputModeRadio.
+
+* March 20 2005, Henrik Isaksson *
+
+ - Button
+	o Added SetToggleMode() and GetToggleMode().
+ - ImageButton
+	o Fixed so that the border is always drawn when in toggle mode and selected.
+
+* March 19 2005, Henrik Isaksson *
+
+ Yet another Vanders-patch:
+ - Settings
+	o Added SetFile().
+
+* March 12 2005, Henrik Isaksson *
+
+ Applied a some patches from Vanders:
+ - ListView
+	o Added Set/GetCookie().
+ - TreeView
+	o Added Set/GetCookie().
+
+* March 9 2005, Henrik Isaksson *
+
+ Applied a bunch of patches from Vanders:
+ - volumes.cpp, scrollbar.h
+	o Glibc 2.3 compile fixes.
+ - String
+	o Added operator!=.
+ - ListView
+	o Only start a drag operation if the user clicks the left mouse button.
+	o Convert mouse coordinates to parent; context menu opens in correct position.
+ - TreeView
+	o Always draw connect lines.
+ - FileRequester
+	o The "source" pointer now always points to the FileRequester.
+ - Directory
+	o Added Delete() method.
+
+* March 6 2005, Henrik Isaksson *
+
+ - StringView
+	o Added option to draw a border.
+	o Uses BgColor of parent
+	o Size calculation improved
+ - StatusBar
+	o Initial check-in
+ - View
+	o Bugfix: DrawFrame() does no longer destroy Fg/BgColor
+ - Popupmenu
+	o Renamed DrawArrow() to SetDrawArrow()
+ - GUI classes (all starting with letters f - v)
+	o Added reserved virtual methods.
+	o Added const to get methods where appropriate.
+	o Added private copy constructors.
+
+* February 14 2005, Henrik Isaksson *
+
+ - GUI classes (gui/s*, gui/t* except TableView)
+	o Added reserved virtual methods.
+	o Added const to get methods where appropriate.
+	o Added private copy constructors.
+
+* February 6 2005, Henrik Isaksson *
+
+ - GUI classes
+	o Applied patches from Jake, adding private copy constructors.
+	o DropdownMenu::WheelMoved() was missing in headers in CVS??
+ - Desktop
+	o Applied patch from Jake regarding bytes per line value.
+ - AppServer
+	o Applied patch from Jake regarding bytes per line value. (desktop, sapplication)
+ - LibSyllable
+	o Bumped to version 6
+
+* January 26 2005, Henrik Isaksson *
+
+- FileRequester
+	o Applied a patch from Vanders that fixes a problem with erroneous paths when
+	  multiple files are selected.
+
+* December 25 2004, Henrik Isaksson *
+
+ - View
+	o Added documentation to shortcut methods.
+	o Added Set/GetContextMenu().
+	o Added context menu handling to MouseDown() method.
+
+ - TabView
+	o Moved private variables to private class.
+	o Replaced the private struct Tab with a public class TabViewTab.
+	o Changed MouseDown() so it passes on RMB events (for the contextmenu).
+	o Moved rendering into TabViewTab::Paint().
+
+---- 0.5.5 Released -------------------------------------------------------------------
+
+* December 2nd 2004, Henrik Isaksson *
+
+	- New decorator: WarpSpeed
+
+* November 21 2004, Henrik Isaksson *
+
+ Added ShortcutKey::GetKeyCode() and ShortcutKey::GetQualifiers().
+
+ Checked in patches from Arno that change the look of selected items in
+ ListViewStringRow and TreeViewStringNode.
+
+ Checked in Vanders' "kerning patch".
+
+* November 14 2004, Jake Hamby *
+
+ Fix Radeon driver for 1400x1050 resolution and any other resolution whose
+ width isn't an even multiple of 64 pixels.
+
+ Patch contributed by Nicolai Haehnle.
+
+* November 6 2004, Jake Hamby *
+
+ Fix a couple of sprintf "warning: int format, different type arg" bugs in
+ libsyllable "gui/icondirview.cpp" and "storage/filereference_info.cpp".
+
+* October 24 2004, Kristian Van Der Vliet *
+
+As part of a series of patches from Jake Hamby <jhamby@anobject.com> which changes the
+atomic_t primitives:
+	o Inline the ddriver_mmx.c code into ddriver.cpp
+
+---- 0.5.4 Released -------------------------------------------------------------------
+
+* September 19, Arno Klenk *
+ - New classes
+	o IconView
+	o IconDirectoryView
+	o RegistrarManager
+	o Volumes
+
+ - New methods
+	o FileReference::RenameDialog()
+	o FileReference::InfoDialog()
+	o Directory::CreateDialog()
+
+ - FileRequester
+	o Uses the IconDirectoryView class and the layout system
+	o New icons
+
+ - ImageButton
+	o Fixed GetPreferredSize() and Paint() to render labels correctly
+	o Support for multiline labels
+
+ - MemFile
+	o Delete the list of blocks in the destructor
+
+ - Application
+	o Added locking
+
+* August 08, Henrik Isaksson *
+
+ - Decorators
+	o Applied two more patches by Michael Saunders to Beish and Photon.
+	o Fixed a bug in the Amiga decorator (the buttons where drawn in the wrong colour when
+	  clicked).
+
+* August 07, Henrik Isaksson *
+
+ - Decorators
+	o Applied patch by Michael Saunders to the Beish decorator.
+
+* August 02, Henrik Isaksson *
+
+ - Decorators
+	o Applied patch by Michael Saunders, "Added minimize; fixed resize; better buttons and
+	  icon; fixed glitches" (Win98 decorator)
+
+* July 30, Henrik Isaksson *
+
+ - Decorators
+	o Applied Photon decorator patch by Michael Saunders.
+
+ - ColorSelector
+	o Checked in the initial version of ColorSelector and related classes.
+
+* July 25, Henrik Isaksson *
+
+ - Font
+	o Added GetStyle() and GetFamily().
+	o Removed declaration for GetFamilyAndStyle(). It has never been implemented so there should
+      be no impact on compatibility.
+
+ - Slider
+    o Bugfix: AttachedToWindow() crashed when the slider was added to a window prior to
+      assigning frame dimensions to it.
+
+ - ListView
+	o Fixed column detection, so that the nColumn argument now holds the index to the clicked
+      column, when an item is clicked.
+    o Bugfix: MouseDown() now works when there aren't any items in the list. (patch by Ruslan)
+
+ - TreeViewStringNode:
+	o Added SetTextFlags() and GetTextFlags().
+	o Default text flags is now DTF_IGNORE_FMT, meaning that the text will not be parsed for
+	  escape sequences or underscore characters. This breaks the alpha version of CatFish, but
+	  most likely nothing else.
+
+ - Window
+	o Added IsVisible().
+
+ - AppServer
+	o DrawText(), added \33d escape sequence to disable text parser.
+
+ - Translators
+	o Added winicontrans, for Windows .ICO files.
+
+* June 25, Henrik Isaksson *
+
+ - LayoutView
+	o SetRoot() will now remove the old root layout node, if there is one already.
+
+* June 19, Henrik Isaksson *
+
+ - Catalog
+	o Changed catalog file format to enable embedding of string metadata to aid
+	  translators.
+
+ - Locale
+	o Will now look for preferred languages in ~/Settings/System/Locale
+
+* June 11, Henrik Isaksson *
+
+ - ListView/TreeView
+	o Bugfix: Rendering problems when the last node was hidded are now fixed.
+	o Update: Updated TreeViewStringNode to use DrawText(), provides multi-line text
+	  display and future support for vertical scripts.
+
+* June 9, Henrik Isaksson *
+
+ - Application
+	o Bugfix: huge memory leak fixed. Application and Window destructors will now be run.
+
+ - Looper
+	o Deprecated: Looper::Quit() has been deprecated because it is unsafe to use outside
+	  its own thread.
+	o New method: Looper::Terminate() replaces Looper::Quit().
+
+* June 2, Henrik Isaksson *
+
+ - ListView
+	o Memory leak fixed. (Rows were not deleted when the ListView was deleted).
+
+* June 1, Henrik Isaksson *
+
+ - Locale
+	o Bugfix: uninitialized member variable (could cause segfaults)
+
+* May 22, Henrik Isaksson *
+
+ - AppServer
+	o Ready for freetype-2.1.8
+	o Support for italics softstyle (emboldening will have to wait due to bugs in ft)
+	o AR_GET_FONT_CHARACTERS added to appserver protocol
+ - Font
+	o New method: GetSupportedCharacters(), returns a vector of characters supported
+	  by a certain font.
+
+* May 10, Henrik Isaksson *
+
+ - Color32
+	o Added uint32 operator
+ - Variant
+	o Added support for Color32
+	o Bugfix: memory leak when using (I)Rect, (I)Point
+
+* May 09, Henrik Isaksson *
+
+ - Splitter
+	o Added SetSplitRatio() and GetSplitRatio().
+ - TextView
+	o Bugfix: the mouse cursor is now "normal" when it's over the scrollbars.
+ - Menu
+	o Increased the size of the selection highlight in menu bar mode and reduced the height
+	  of the menu bar to make the gap between menu bar and menu less obvious.
+	o Changed the behaviour, should make the menus a little less "jumpy"...
+
+* May 9th 2004, Kristiam Van Der Vliet *
+
+ - Drow & Beish decorators now create their binary files with an initial capital letter,
+   not "drow" and "beish".
+
+* May 08, Henrik Isaksson *
+
+ - String
+	o operator+() changed to const
+ - Thread
+	o Bugfix: uninitialized variable could cause threads to terminate the parent proess.
+ - ImageView
+	o Checked in missing changes that should have been there in 0.5.3... (Refresh() etc.)
+
+---- 0.5.3 Released -------------------------------------------------------------------
+
+* April 30 2004, Henrik Isaksson *
+
+ - TextView
+	o Patch from Rick to make text selectable even when the textview is disabled.
+ - Popupmenu
+	o Bugfix: GetPreferredSize() (patch from Rick).
+
+* April 25 2004, Henrik Isaksson *
+
+ - Message
+	o Bugfix: AddVariant() used the wrong type identifier (ie. it wasn't possible to use
+	  Variants with Messages before).
+ - BitmapImage
+	o Added methods that makes it possible to render directly to a BitmapImage, thus making
+	  BitmapImage usable as a background buffer.
+ - ImageView
+	o Added Refresh() to quickly redraw only the image (not the background). Useful for double
+	  buffering.
+
+* April 25 2004, Kristian Van Der Vliet *
+
+Software rendering speed improvements in ddriver.cpp, by Arno.
+
+* April 17 2004, Henrik Isaksson *
+
+ - Slider
+	o Bugfix: Invoked() now calls Control::Invoked() so that "value" is added to the message.
+	o Bugfix: Made Invoked() virtual.
+
+* April 1 2004, Henrik Isaksson *
+
+ - Fixed problem with catalog.h from the last commit.
+
+* March 28 2004, Henrik Isaksson *
+
+ - Translators
+	o Fixed PNG translator, saving was done with incorrect size
+	o Fixed ICON translator, loading and saving was done with incorrect sizes
+
+ - Image
+	o Bugfix: incorrect size when saving images
+
+ - Menu, CheckMenu, MenuItem
+	o Bugfix: keyboard navigation
+
+* March 20 2004, Henrik Isaksson *
+
+ - Window
+	o Added documentation
+	o Shortcuts events are properly targeted at the window
+ - Menu
+	o Added Shortcuts
+	o Added Icons
+ - ShortcutKey
+	o char* -> os::String
+ - Catalog
+	o Removed default strings (default strings will be loaded from another catalog file)
+ - Translators
+	o Moved to /system/drivers/translators
+
+* February 29 2004, Henrik Isaksson *
+
+ - Changed StringView layout behaviour. If maximum size is not set, it
+   will now use all available space.
+ - SetMax/MinPreferredSize will now let you specify number of rows as well
+   as number of columns.
+
+* February 27 2004, Arno Klenke *
+ - Added GetWindowIcon() method to the os::Desktop class
+ - Added support for 32bit mouse cursors in libsyllable
+ - Fixed a return value in the os::FileReference class
+
+* February 23 2004, Henrik Isaksson *
+
+ Applied patches from Arno:
+ - TextView: Memory leak fixed.
+ - PopupMenu: Rendering error fixed.
+
+* February 15 2004, Henrik Isaksson *
+
+ Applied Vander's "Use SeekableIO Everywhere" patch. Details below:
+
+ImageButton
+	Removed the following methods
+		o SetImageFromFile(const char *pzFile);
+		o SetImageFromResource (const char *pzFile);
+		o SetImageFromMemory (const void *pData, int nSize);
+	which have been replaced with a single method
+		o SetImage( StreamableIO *pcData );
+	
+	Renamed
+		o SetImageFromImage (Image *pcImage);
+	to
+		o SetImage (Image *pcImage);
+
+	Added a copy operator which copies the entire ImageButton.
+
+Settings
+	Added the following methods
+		o Path GetPath() const;
+		o File GetFile() const;
+		o SetPath( Path* pcPath );
+		o SetFile( SeekableIO* pcFile );
+	Removed
+		o Settings(const std::string &cFile, const std::string &cPath="");
+		o void SetPath( const String& cPath = "" );
+		o void SetFile( const String& cFile = "Settings" );
+		o String GetPath() const;
+		o String GetFile() const;
+
+OptionParser
+	Replaced
+		o void PrintHelpText (FILE *hStream, int nWidth=0) const;
+	With
+		o void PrintHelpText( StreamableIO* pcStream, int nWidth = 0 ) const;
+
+* February 14 2004, Henrik Isaksson *
+
+ * requester.cpp
+	Added tabbing to Alert
+ * locale.cpp/.h
+	Added GetLocalizedCatalog()
+	Will now look for resources in "^/resources"
+ * application.cpp
+	Changed SetCatalog method to use GetLocalizedCatalog()
+ * TableView.cpp
+	Bugfix: will now Invalidate() itself when resized.
+	Bugfix: titles were not drawn correctly (this bug was introduced when
+	char* was changed to os::String).
+
+* February 9 2004, Henrik Isaksson *
+
+ * string.cpp/.h
+   Added substr() and find() in order to simplify the
+   std::string -> os::String changes.
+
+* February 8 2004, Henrik Isaksson *
+
+ * resource.cpp:
+   Bugfix: missing NULL-termination when loading list of resources.
+
+* February 7 2004, Henrik Isaksson *
+
+ * Updated libsyllable for GCC3.
+
+* January 27 2004, Henrik Isaksson *
+
+ * Fixed stupid mistake in NodeMonitor; m was being deleted too soon.
+ * Fixed crash in DirectoryView when changing dirs.
+ * Fixed layout problem with TextView (GetPreferredSize(false) was
+   returning actual content size, not minimum size). This caused Whisper
+   to resize the mail view larger than the window sometimes.
+
+* January 25 2004, Henrik Isaksson *
+
+ * Changed all std::string to os::String, and, where applicable, pzName and
+   pzLabel parameters from char* to String&, in the following classes:
+	Clipboard, DateTime, Resources, OptionParser, RegExp, errno_exception,
+	Translator, DirIterator, Directory, File, FileReference, FSNode,
+	NodeMonitor, Path, SymLink,	TempFile
+ * Moved private variables to a Private class:
+	Directory, File, FileReference, FSNode, NodeMonitor, Path, Alert,
+	AlertView, ProgressRequester, ProgressView
+ * BitmapImage:
+	o bugfix: memory leak in Load() and Save() fixed, performance is
+	  also improved.
+ * DropdownMenu:
+ 	o Changed SetTabOrder() so it assigns different tab order numbers to
+	  the textview and the popup buttons.
+ * Alert/AlertView:
+	o new "tip" icon (Rick)
+	o more documentation (Rick)
+ * Slider:
+	o Added shortcut support.
+	o Added/changed focus indicator.
+	o Can now be controlled with the arrow keys.
+	o Retains focus when mouse is released.
+ * Scrollbar:
+	o Added shortcut support.
+	o Added/changed focus indicator.
+	o Can now be controlled with the arrow keys.
+	o Retains focus when mouse is released.
+ * String:
+	o added String::const_str()
+	o added operator+=( char )
+	o added operator+( char )
+ * DateTime:
+	o Added to namespace os.
+ * ShortcutKey
+	o Added SetFromLabel( String & )
+ * Locale:
+	o new class, mostly a placeholder at the moment
+ * Catalog:
+	o new class, a string catalogue class for localisation purposes
+ * Application:
+	o added SetCatalog() and GetCatalog()
+ * View:
+	o SetTabOrder() will now automatically assign the next tab order
+	  when given the argument NEXT_TAB_ORDER.
+
+* January 12 2004, Henrik Isaksson *
+
+ AppServer:
+ * Ran sindent.sh on the .cpp files.
+
+* January 9 2004, Henrik Isaksson *
+
+ API:
+ * Changed all std::string to os::String, and, where applicable, pzName and
+  pzLabel parameters from char* to String&, in the following classes:
+    Font, View, Control, Button, CheckBox, CheckMenu, Window, VideoOverlay,
+    Image, ScrollBar, Image, StringView, ImageView, ImageButton, Spinner,
+    Slider, Splitter, ProgressBar, TreeView, TabView, TableView,
+    LayoutView, RadioButton, ListView, TextView, DropdownMenu, Menu,
+    DirectoryView, FileRequester, Alert/ProgressRequester, FrameView,
+    Message, Looper, Handler, Application, Settings
+
+  DirectoryView and FileRequester still contains some std::strings, but none
+  are left in the interface.
+
+ * Added shortcut support to the following classes:
+	View, Control, Button, CheckBox, FileRequester, RadioButton,
+	DropdownMenu, Spinner
+
+ * Moved private variables to a Private class, or added a pointer for future
+  use in classes that didn't have private variables, in the following
+  classes:
+	CheckBox, RadioButton, Spinner, Slider
+
+ * Added/changed focus indicator in the following classes:
+  (this also includes changing the Activated() method to invalidate the
+  widget.)
+	Button, CheckBox, RadioButton, DropdownMenu, Spinner
+
+ * Changed the following classes to use DrawText() and GetTextExtent(), adds
+  multi-line capabilities and is the first step towards support for
+  vertical layout languages.
+	Button, StringView, CheckBox, RadioButton
+
+ * Changed GetPreferredSize to return the correct maximum size in the
+  following classes:
+	Button, CheckBox
+
+  Note! This may distort the layout in some apps.
+
+ * Other changes/details:
+	- View
+		o Added SetShortcut() and GetShortcut()
+		o Added SetShortcutFromLabel()
+		o Added DrawText()
+		o Added GetTextExtent()
+	- Control
+		o Removed obsolete method ValueChanged
+	- FileRequester
+		o Added shortcuts to buttons (Load, Save, Cancel)
+	- ListView
+		o Applied patch from Rick, makes it possible to add context
+		  menus.
+	- Font
+		o Added GetTextEntent()
+
+* January 5 2004, Henrik Isaksson *
+
+ AppServer:
+ - Added DRC_DRAW_TEXT and AR_GET_TEXT_EXTENTS to protocol.h
+ - Added DrawText flags to guidefines.h
+ - layer.h+render.cpp, added DrawText method.
+ - sapplication.cpp, added AR_GET_TEXT_EXTENTS
+ - sfont.h+sfont.cpp, added GetTextExtent
+ - swindow.cpp, added DRC_DRAW_TEXT
+
+* January 2 2004, Henrik Isaksson *
+
+ API:
+ - Added Rick's PopupMenu class
+ - ShortcutKey changed to use a unicode wide char instead of UTF-8
+ - Window::AddShortcut now checks that the supplied ShortcutKey is valid.
+
+* December 30 2003, Henrik Isaksson *
+
+ API:
+ - Splitter class:
+    * Fixed a bug that caused the splitter to follow the mouse pointer
+      even if it had not been clicked on first.
+ - Rect class:
+    * Added Scale() method, needed by the (crude) vector graphics in the
+      amiga decorator.
+
+ AppServer:
+ - Made some changes to the decorator API:
+    * SetButtonState() replaces the SetXXXButtonState() methods.
+    * Added HIT_MINIMIZE and HIT_STICKY.
+    * Added a note in the windowdecorator.h file, saying that the sequence
+      of the enum hit_items should not be changed, so that decorators can
+      store button state information in arrays.
+ - Added code for handling of the new MINIMIZE button, and cleaned up
+   the button handling a bit.
+ - Added a MINIMIZE button to the default decorator.
+ - The default decorator now uses arrays to store information about the
+   border buttons (makes the code easier to follow).
+ - The default decorator does no longer draw partial buttons in buttonless
+   windows.
+
+ Decorators:
+ - Updated the amiga decorator with code from the default decorator.
+   (minimize button + better handling of buttons).
+ - Updated the other decorators to work with the new API, did NOT add a
+   minimize button to any of them at this time.
+ - All decorators are now linked against libsyllable.
+
+* December 5 2003, Henrik Isaksson *
+
+ - Window class:
+    * Added AddShortcut() and RemoveShortcut().
+    * Added code to handle shortcuts.
+ - New class: util/shortcutkey.cpp
+ - Checked in parts of Arno's patch that I missed last time...
+
+* December 1 2003, Henrik Isaksson *
+
+ Applied Arno's patches:
+ - The window buttons have changed: Clicking on the zoom button will
+   maximize the window and clicking on the toggle button will minimize the
+   window.
+ - Caching of the converted font palette.
+ - The appserver can close all opened windows on the screen if it receives
+   the DR_CLOSE_WINDOWS message. This still needs some more testing with
+   applications until we use this call.
+ - Window class:
+    * Added a SetIcon() and GetIcon() method.
+    * Implemented ScreenModeChanged() and DesktopActivated().
+    * Added a WindowsChanged() method that is called if the windows on
+      the desktop change. (e.g. new ones appear, their icons or titles change)
+ - Desktop class:
+    * Moved the private class members into a private class.
+    * Added a GetWindows() and ActivateWindow() method.
+
+ - Video driver API:
+
+	* The drivers have been splitted into a kernel and an appserver driver.
+	  The kernel drivers are really generic for now. They scan for supported
+	  cards and create device nodes for them in /dev/graphics. The kernel
+	  drivers have to implement the IOCTL_GET_APPSERVER_DRIVER ioctl, that is
+	  used by the appserver to find out what appserver driver belongs to the
+	  kernel driver. Although the implementation of other ioctls is private to
+	  the appserver and kernel driver, I have predefined some for pci graphics
+	  cards in a header file called "pci_graphics.h" in /ainc/appserver.
+	* The appserver iterates through the /dev/graphics directory. For now it
+	  only uses the first node it finds. Then it opens the device, gets the
+	  name of the appserver driver, loads the appserver driver and calls the
+	  init_gfx_driver() function of it with the filedescriptor of the opened
+	  device node.
+	* The RenderGlyph() methods have been moved into the DisplayDriver class
+	  to avoid accesses to the framebuffer from outside this class.
+
+* November 30 2003, Henrik Isaksson *
+
+ message.h + message.cpp
+ - REPLY_SENDT -> REPLY_SENT
+
+ looper.h + looper.cpp
+ - IsPublic()
+ - SetPublic()
+ - Message Filtering implemented (common filters) (BeOS style, slightly simplified)
+
+ messenger.h + messenger.cpp
+ - New constructor that takes the name of a public port
+
+ messagefiler.h + messagefiler.cpp
+ - Implemented
+
+* November 16 2003, Henrik Isaksson *
+
+ Thread
+ - Stack size can now be set when a thread is created.
+
+ Menu
+ - Menu::GetPreferredSize() now returns correct maximum value.
+
+ Splitter
+ - Changed the meaning of VERTICAL and HORIZONTAL orientation. Orientation
+ - now refers to how the children are displayed, not how the splitter
+ - separator is rendered.
+ - The Splitter now resizes its children when it is resized.
+ - The Splitter separator is now drawn correctly.
+ - Fixed misspelled variable nFalgs -> nFlags.
+ - Splitter will now respect Views' minimum sizes as returned by GetPreferredSize(false).
+ - Relative sizes of Views are now retained when resizing.
+
+* November 16 2003, Kaj de Vos *
+
+  Updated freetype.makefile to Freetype 2.1.5. I didn't import the sources,
+  because they're supposed to be installed by the new build system now.
+
+  Added a -lz flag to all decorator Makefiles to make them build with the
+  shared Zlib library.
+
+* September 19 2003, Henrik Isaksson *
+
+ LibSyllable
+ - Added TreeView class
+ - Added DateTime class
+ - Patched ListView to support the TreeView class
+ - Added documentation to ListView
+ - Added multiplication operator to Point (useful for scaling)
+ - Patched layout classes, "wheight" changed to "weight".
+
+* August 25 2003, Henrik Isaksson *
+
+  Filerequester
+  - Moved private members to internal class
+
+  Checkmenu.h
+  - Name change: Highlight() -> SetHighlighted()
+
+  Desktop
+  - New method: Activate(), switches display to a certain desktop
+
+  Application
+  - New method: SwitchDesktop(), used by Desktop::Activate()
+  
+  Image
+  - Bug in GetBounds() fixed.
+  
+  Appserver
+  - Font directory watch patch applied (fonts are scanned automatically when a new font is added to
+    the font directory (Rick).
+  - Alt-Tab Window selector now respects colour preferences (Rick).
+  - SwitchDesktop capability (Rick).
+  
+* August 24 2003, Henrik Isaksson *
+
+  Name change: libatheos is now named libsyllable.
+
+* August 23 2003, Henrik Isaksson *
+
+  Filerequester.cpp
+  - Applied Rick's patch, adds icons to the filerequester.
+
+  Splitter.cpp/splitter.h:
+  - Spelling mistake fixed
+
+  Menu.cpp/menu.h:
+  - Applied Rick's disable-patch.
+  - Added greying to disabled items (so you see that they are disabled).
+  - Moved private members to separate class.
+  - Added methods to acces those members and updated Menu to use those methods
+    instead of accessing private members directly. Apart from improving
+    encapsulation, this also means that subclasses of MenuItem can generate
+    menus dynamically.
+  - Fixed the three RemoveItem mehtods.
+  - Added IsHighlighted(), renamed Highlight() to SetHighlighted().  This
+    method is hardly used outside the Menu class, so the renaming will not
+    have any impact on source compatibility.
+  - Removed 2 pixels from the height of horizontal menu bars. (looks better)
+
+* July 16 2003, Kristian Van Der Vliet *
+
+New MMX 32bit to 16bit colour space conversion functions for all display drivers
+when MMX is supported, from Arno Klenke <arno_klenke@yahoo.de>
+
+* July 14 2003, Henrik Isaksson *
+
+TextView: CTRL+(C|V|X|Z) works with CAPS LOCK now
+
+* July 5 2003, Kristian Van Der Vliet *
+
+Fixes to os::CheckMenu
+
+* July 2 2003, Henrik Isaksson *
+
+Checked in patch from Rick: View* constructor added to Alert.
+
+Moved requester icons from header to cpp file.
+
+* July 1 2003, Henrik Isaksson *
+
+ImageButton fixed for 32 bit screen modes + SetImageFromMemory added
+
+Applied Rick's patches to window.cpp and window.h (adds CenterInScreen method)
+
+* June 30 2003, Henrik Isaksson *
+
+Applied screenshot date+time patch from Rick. (Names screenshot files with date
+& time, instead of just "screenshot.png".)
+
+* June 14 2003, Kaj de Vos *
+
+Imported Bitstream Vera fonts 1.10.
+
+* June 9 2003, Kaj de Vos *
+
+Imported Freetype 2.1.4. Removed Freetype 2 beta 8, but not Freetype 2.1.3, yet.
+
+* May 29 2003, Henrik Isaksson *
+
+Updated makefiles for video drivers and decorators, so that they will find
+freetype includes. Updating freetype should now only be a matter of
+editing /appserver/server/freetype.makefile.
+
+* May 24 2003, Henrik Isaksson *
+
+Changed view.cpp so it adheres flags of the default font (anti-AA).
+
+Added flags field to SET/GET_DEFAULT_FONTS message (passed to the appserver
+to access default fonts). Adding the flags field makes it possible to for
+a prefs programme to enable/disable anti-aliasing.
+
+Re-enabled screenshot support in appserver makefile (turned it off by
+accident...)
+
+Fixed a bug in keyboard.cpp (appserver) concerning dead keys with qualifiers.
+
+* May 17 2003, Henrik Isaksson *
+
+Applied more of Arno's patches (screen_mode struct in guidefines.h and
+some changes in videooverlay.cpp).
+
+* May 11 2003, Henrik Isaksson *
+
+Applied Arno's Video Overlays patches.
+
+* Apr 27 2003, Henrik Isaksson *
+
+Updated appserver with dead key support, support for turning on/off
+antialiasing and support for shearing/rotating glyphs.
+Updated TextView for dead key support.
+
+* Feb 8 2003, Henrik Isaksson *
+
+Added Rick's ImageButton, fixed bugs in image.cpp and tabview.h.
+
+* Jan 4 2003, Henrik Isaksson *
+
+Applied Vanders' patch to textview.cpp & textview.h. (Adds public methods
+Undo() and Redo()).
+
+* Dec 28 2002, Henrik Isaksson *
+
+Added freetype 2.1.3
+Applied Iain Hutchison's patch so the appserver works with freetype 2.1.3
+Added CenterInWindow() to Window (window.cpp and window.h)
+Patched TextView (textview.cpp), adds keyboard shortcuts for copy: CTRL+C,
+paste: CTRL+V, cut: CTRL+X, undo: CTRL+Z, redo: CTRL+Y
+Fixed crash bug and compile warning in TextView::GetValue()
+Changed vertical centering in Button so it hopefully looks better with ft 2.1.3
+Patched vertical centering in the following decorators for ft 2.1.3: amiga,
+beish, drow, mulvane, next, photon, red, win98
+Changed amiga decorator to use thin borders and changed the aspect ratio of
+border buttons to better match the look of the Amiga GUI.
+
+* Dec 4 2002, Henrik Isaksson *
+
+Applied Andrew Kennans patches to Menu and DropdownMenu. DropdownMenus
+will now get a scrollbar if they have more than 12 entries. Limited
+keyboard control were added to DropdownMenus.
+The Menu patch ensures that menus no longer open off screen.
+
+* Oct 6 2002, Henrik Isaksson *
+
+Added the new Thread class.
+
+* Sept 27 2002, Henrik Isaksson *
+
+Added new classes: Image, BitmapImage, ImageView, MemFile, Settings and
+various image filter classes. (image.cpp, imageview.cpp, memfile.cpp and
+settings.cpp).
+Added header files for the classes above.
+Patched pngtrans.cpp for save support.
+Patched os::Message to be a friend class of Settings.
+Patched Color32_s and added a new constructor that takes an uint32
+(needed by os::BitmapImage).
+
+* Sept 15 2002, Henrik Isaksson *
+
+Patched listview.cpp and added calls to ListViewRow::SetRect() in
+InsertRow() so that rows  will know the available width. (Useful when
+adding controls to listview rows.)
+
+* Aug 25 2002, Kristian Van Der Vliet *
+
+Patched both the FileRequester & Alert dialogs
+(filerequester.cpp & requester.cpp) by Rick Caudill < cau0730@cup.edu >
+which improve the functionality of the standard Load / Save dialogs, and
+add the ability to display an icon on an Alert.
+
+* Aug 25 2002, Kristian Van Der Vliet *
+
+Updated screenshot support with a patch from Iain Hutchison
+< iain_hutchison@yahoo.com >  The patch means that the appserver now has
+support for screenshots in all true-colour bit-depths (15, 16, 24, 32 bit).
+
+* Aug 25 2002, Kristian Van Der Vliet *
+
+Added a Splitter class, written by Sebastien Keim < s.keim@laposte.net >  See
+the GUI documentation for more information.
+
+* Aug 11 2002, Kristian Van Der Vliet *
+
+Applied a patch to the appserver, from Henrik Isaksson (henrik@boing.nu)
+The patch removes "hidden" windows (E.g. a File Requester which has been
+canceled) from the focus stack, which stops hidden windows from being given
+focus.
+
+* Aug 10th 2002, Kristian Van Der Vliet *
+
+The CheckMark for CheckMenus has been moved to the left of the label.
+In order for all Menu labels to align, menu labels are now offset to the right,
+which leaves a space to the left of the menu.
+
+* Aug 4th 2002, Kristian Van Der Vliet *
+
+Added the CheckMenu class.
+
+* Aug 3rd 2002, Kristian Van Der Vliet *
+
+Aplied a series of patches from Henrik Isaksson, which adds a "Grayed out" look to
+disabled controls.  The following files have been patched:
+
+	sys/appserver/libatheos/gui/checkbox.cpp
+	sys/appserver/libatheos/gui/dropdownmenu.cpp
+	sys/appserver/libatheos/gui/radiobutton.cpp
+	sys/appserver/libatheos/gui/scrollbar.cpp
+	sys/appserver/libatheos/gui/slider.cpp
+	sys/appserver/libatheos/gui/textview.cpp
+
+	sys/include/gui/scrollbar.h
+
+* Aug 3rd 2002, Kristian Van Der Vliet *
+
+	The sub-menu arrow is now drawn corretly, and menus which have children
+	are now drawn slightly larger to allow for the arrow.
+

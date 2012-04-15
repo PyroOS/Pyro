@@ -1,0 +1,22 @@
+//
+//	Preferences/Locale string catalog
+//
+//	Translated by: And3mD
+//
+
+MSG_MAIN_TITLE=0						Locale
+
+MSG_MAIN_LANGUAGE_TAB=100				Język
+MSG_MAIN_LANGUAGE_ACTIVATE				Aktywuj język >
+MSG_MAIN_LANGUAGE_DEACTIVATE			< Deaktywuj język 
+MSG_MAIN_LANGUAGE_AVAILABLE				Obsługiwane języki
+MSG_MAIN_LANGUAGE_USED					Aktywne języki
+
+MSG_MAIN_COUNTRY_TAB=200				Kraj
+
+MSG_MAIN_APPLY=1000						Z_astosuj
+MSG_MAIN_REVERT							Cofnij
+MSG_MAIN_DEFAULT						_Domyślny
+
+MSG_ERROR_SAVE=1100						Podczas próby zapisu ustawień lokalnych wystąpił błąd.
+

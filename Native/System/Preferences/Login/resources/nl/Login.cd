@@ -1,0 +1,35 @@
+//
+//	Preferences/Login String Catalog
+//
+//	Translated by: Ruud Kuin - Kaj de Vos
+//
+
+MSG_MAINWND_TITLE=0						Aanmelden
+
+MSG_MAINWND_INFORMATION=100				Informatie
+MSG_MAINWND_INFORMATION_WHO				Op dit moment ben je aangemeld als %s
+MSG_MAINWND_INFORMATION_NOPERM			Je hebt onder deze gebruikersnaam geen toestemming\nom aanmeldingsdetails aan te passen.
+
+MSG_MAINWND_LOGINICON=200				Aanmeldingsikoon
+MSG_MAINWND_LOGINICON_TEXT				Klik op het ikoon om het plaatje te veranderen\nwaarmee deze gebruiker wordt aangeduid\nbij het aanmelden bij deze computer.
+
+MSG_MAINWND_CHANGEPASS=300				Wachtwoord wijzigen
+MSG_MAINWND_CHANGEPASS_CURRENTPASS		Huidig wachtwoord:
+MSG_MAINWND_CHANGEPASS_NEWPASS			Nieuw wachtwoord:
+MSG_MAINWND_CHANGEPASS_CONFIRMPASS		Bevestig wachtwoord:
+
+MSG_MAINWND_BUTTON_OK=400				_OK
+MSG_MAINWND_BUTTON_CANCEL				_Annuleren
+
+MSG_ALERTWND_FILEERROR=1000				Bestandsfout
+MSG_ALERTWND_FILEERROR_TEXT				Bestand wegschrijven naar /etc/passwd mislukt. Je wachtwoord is niet aangepast.
+MSG_ALERTWND_FILEERROR_OK				Sluiten
+
+MSG_ALERTWND_NOMATCH=2000				Nieuw wachtwoord
+MSG_ALERTWND_NOMATCH_TEXT				De ingevoerde nieuwe wachtwoorden komen niet overeen. Voer de wachtwoorden alsjeblieft opnieuw in.
+MSG_ALERTWND_NOMATCH_OK					OK
+
+MSG_ALERTWND_INCORRECTPASS=3000			Onjuist wachtwoord
+MSG_ALERTWND_INCORRECTPASS_TEXT			Het ingevoerde huidige wachtwoord is onjuist. Controleer het alsjeblieft en probeer het opnieuw.
+MSG_ALERTWND_INCORRECTPASS_OK			OK
+

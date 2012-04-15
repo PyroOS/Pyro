@@ -1,0 +1,22 @@
+//
+//	Preferences/Locale string catalog
+//
+//	Translated by: Dávid Horváth
+//
+
+MSG_MAIN_TITLE=0						Helyi beállítások
+
+MSG_MAIN_LANGUAGE_TAB=100				Nyelv
+MSG_MAIN_LANGUAGE_ACTIVATE				Nyelv aktiválása >
+MSG_MAIN_LANGUAGE_DEACTIVATE			< Nyelv deaktiválása
+MSG_MAIN_LANGUAGE_AVAILABLE				Támogatott nyelvek
+MSG_MAIN_LANGUAGE_USED					Aktivált nyelvek
+
+MSG_MAIN_COUNTRY_TAB=200				Ország
+
+MSG_MAIN_APPLY=1000						Alkalmaz
+MSG_MAIN_REVERT							Visszaállít
+MSG_MAIN_DEFAULT						Alapértelmezett
+
+MSG_ERROR_SAVE=1100						Hiba lépett fel a helyi beállítások mentése közben.
+

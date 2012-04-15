@@ -1,0 +1,32 @@
+
+Hex Editor
+==========
+
+This is a simple binary file editor for Syllable. It supports hexadecimal and ASCII 
+editing.
+
+
+Building and Installing
+-----------------------
+
+This is just a matter of running make and then copying the HexEditor binary to wherever
+ you want it.
+
+
+Using Hex Editor
+----------------
+
+This should be pretty straight forward. Most normal text editor controls should work. 
+About the only unusual thing is being able to change the selected column with ALT-1 for
+hex and ALT-2 for ASCII.
+
+Future Plans
+------------
+
+* Column types for binary and octal.
+* Make it configurable:
+  * Colours and fonts.
+  * Shortcut keys.
+  * Layout of columns.
+* Maybe put something in the Help menu...
+* Replace the icon :]
