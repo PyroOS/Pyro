@@ -25,9 +25,9 @@
 
 #include <posix/errno.h>
 
-#include <atheos/kernel.h>
-#include <atheos/device.h>
-#include <atheos/pci.h>
+#include <pyro/kernel.h>
+#include <pyro/device.h>
+#include <pyro/pci.h>
 #include <appserver/pci_graphics.h>
 
 

@@ -19,14 +19,14 @@ MSG_MAINWND_MENU_OPTIONS_SPEED_HIGH			Magas
 MSG_MAINWND_MENU_OPTIONS_SPEED_PAUSE		Szünet
 
 MSG_ABOUTWND_TITLE=900						A System Information v.%s névjegye
-MSG_ABOUTWND_TEXT							System Information v.%s\n\nEröforráskezelö Syllable operációs rendszerre.\nJohn Hall, 2001\n
+MSG_ABOUTWND_TEXT							System Information v.%s\n\nEröforráskezelö Pyro operációs rendszerre.\nJohn Hall, 2001\n
 MSG_ABOUTWND_OK								Ok
 
 MSG_TAB_SYSINFO=1000						Rendszerinformáció
 MSG_TAB_SYSINFO_VER_NAME					Név
 MSG_TAB_SYSINFO_VER_VERSION					Verzió
 MSG_TAB_SYSINFO_VER_BUILDDATE				Kiadás dátuma
-MSG_TAB_SYSINFO_VER_SYLLABLE				Syllable
+MSG_TAB_SYSINFO_VER_SYLLABLE				Pyro
 MSG_TAB_SYSINFO_VER_SLBMGR					System Information
 MSG_TAB_SYSINFO_CPU_CPU						CPU
 MSG_TAB_SYSINFO_CPU_CORESPEED				Sebesség

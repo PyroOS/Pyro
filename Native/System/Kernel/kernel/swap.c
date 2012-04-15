@@ -23,13 +23,13 @@
 #include <posix/unistd.h>
 #include <posix/stat.h>
 
-#include <atheos/time.h>
+#include <pyro/time.h>
 
-#include <atheos/types.h>
+#include <pyro/types.h>
 
-#include <atheos/kernel.h>
-#include <atheos/bcache.h>
-#include <atheos/semaphore.h>
+#include <pyro/kernel.h>
+#include <pyro/bcache.h>
+#include <pyro/semaphore.h>
 
 #include <macros.h>
 
@@ -861,7 +861,7 @@ void init_swapper( void )
 
 	register_debug_cmd( "lspc", "list number of memory pages in each age group.", db_list_swap_counts );
 	
-	nSwapFile = open( "/boot/syllable.swp", O_RDWR | O_CREAT );
+	nSwapFile = open( "/boot/SWAP", O_RDWR | O_CREAT );
 	kassertw( nSwapFile >= 0 );
 
 

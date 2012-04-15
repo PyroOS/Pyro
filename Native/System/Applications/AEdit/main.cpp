@@ -17,7 +17,7 @@
 
 #include "main.h"
 #include "settings.h"
-#include "resources/aedit.h"
+#include "resources/AEdit.h"
 
 #include <storage/registrar.h>
 
@@ -43,7 +43,7 @@ AEditApp::AEditApp(int argc, char* argv[]) : Application("application/x-aedit")
 	int i;
 
 	try {
-		SetCatalog( "aedit.catalog" );
+		SetCatalog( "AEdit.catalog" );
 	} catch( errno_exception &e ) {
 		cout << e.what() << endl;
 	}

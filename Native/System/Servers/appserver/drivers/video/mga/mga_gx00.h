@@ -18,7 +18,7 @@
  */
 
 #include "mga_dac.h"
-#include <atheos/types.h>
+#include <pyro/types.h>
 
 class DacGx00 : public MgaDac
 {

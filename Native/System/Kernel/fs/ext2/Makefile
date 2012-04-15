@@ -1,14 +1,13 @@
 CFLAGS   += -kernel -fno-PIC -c -Wno-multichar -I../
 AFLAGS   = -c
 
-C_INCLUDE_PATH=$(ATHEOS_INCLUDE_PATH)
+C_INCLUDE_PATH=$(PYRO_INCLUDE)
 
 FS		:= ext2
 OBJS	:= ext2.o
 
 OBJDIR	:= objs
 OBJS	:= $(addprefix $(OBJDIR)/,$(OBJS))
-
 
 #
 #	rules
@@ -26,8 +25,6 @@ $(OBJDIR)/%.o : %.s
 $(OBJDIR)/%.o : %.S
 	$(CC) $(CFLAGS) -x assembler-with-cpp $< -o $@
 
-
-
 all :	objs $(OBJDIR)/ext2
 
 objs:
@@ -36,11 +33,16 @@ objs:
 $(OBJDIR)/ext2: $(OBJS) Makefile
 	$(CC) -kernel $(OBJS) -o $(OBJDIR)/ext2
 
-install: all
-	cp -f $(OBJDIR)/ext2 $(IMAGE)/system/drivers/fs/ext2
+# ----- ----- ----- ----- ----- ----- ----- ----- ----- -----
 
-dist: install
+dist: all inst clean
+
+inst:
+	mkdir -p $(PYRO_BINARY_DESTINATION)/System/drivers/fs
+	cp -f $(OBJDIR)/$(FS) $(PYRO_BINARY_DESTINATION)/System/drivers/fs/$(FS)
+	addattrib $(PYRO_BINARY_DESTINATION)/System/drivers/fs/$(FS) "CheckSum::MD5" `md5sum $(PYRO_BINARY_DESTINATION)/System/drivers/fs/$(FS) | cut -c1-32`
+	sync
 
 clean:
-	rm -f $(OBJS) $(OBJDIR)/ext2
-
+	rm -rf $(OBJDIR)
+	sync

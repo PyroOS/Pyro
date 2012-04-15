@@ -20,7 +20,7 @@
 #ifndef __F_NET_TCP_H__
 #define __F_NET_TCP_H__
 
-#include <atheos/types.h>
+#include <pyro/types.h>
 
 typedef	long tcpseq;
 

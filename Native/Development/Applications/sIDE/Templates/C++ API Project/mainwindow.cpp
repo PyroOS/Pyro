@@ -1,7 +1,7 @@
 #include "mainwindow.h"
 #include "messages.h"
 
-MainWindow::MainWindow() : os::Window( os::Rect( 0, 0, 300, 300 ), "main_wnd", "Window title" )
+MainWindow::MainWindow() : os::Window( os::Rect( 0, 0, 300, 300 ), "main_wnd", "Your title here" )
 {
 	/* Set Icon */
 	os::Resources cCol( get_image_id() );
@@ -22,11 +22,9 @@ void MainWindow::HandleMessage( os::Message* pcMessage )
 		break;
 	}
 }
-bool MainWindow::OkToQuit()
+bool MainWindow::OkToQuit()  // Obsolete?
 {
 	os::Application::GetInstance()->PostMessage( os::M_QUIT );
 	return( true );
 }
-
-
 

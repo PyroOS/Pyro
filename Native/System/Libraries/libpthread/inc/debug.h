@@ -17,7 +17,7 @@
 
 #ifdef __ENABLE_DEBUG__
 
-#include <atheos/types.h>
+#include <pyro/types.h>
 #include <stdio.h>
 
 #define TRACE_BUF_SIZE	4096

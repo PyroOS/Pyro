@@ -25,7 +25,7 @@
 
 #include <util/string.h>
 #include <util/settings.h>
-#include <atheos/types.h>
+#include <pyro/types.h>
 
 #include <vector>
 

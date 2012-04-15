@@ -43,10 +43,10 @@
 
 #include <posix/errno.h>
 #include <posix/unistd.h>
-#include <atheos/types.h>
-#include <atheos/kernel.h>
-#include <atheos/semaphore.h>
-#include <atheos/spinlock.h>
+#include <pyro/types.h>
+#include <pyro/kernel.h>
+#include <pyro/semaphore.h>
+#include <pyro/spinlock.h>
 
 #include <macros.h>
 

@@ -22,7 +22,7 @@
 #define	__F_UTIL_MESSAGE_H__
 
 #include <sys/types.h>
-#include <atheos/types.h>
+#include <pyro/types.h>
 #include <util/typecodes.h>
 
 #include <util/string.h>

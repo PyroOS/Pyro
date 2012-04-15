@@ -21,7 +21,7 @@
  */
 
 #include <posix/dirent.h>
-#include <atheos/filesystem.h>
+#include <pyro/filesystem.h>
 
 #define AFS_PARANOIA
 
@@ -280,7 +280,7 @@ struct _AfsVNode
 				 */
 };
 
-#include <atheos/threads.h>
+#include <pyro/threads.h>
 #define AFS_LOCK( vnode ) do { lock_semaphore((vnode)->vn_hMutex, SEM_NOSIG, INFINITE_TIMEOUT ); } while(0)
 #define AFS_UNLOCK( vnode ) do { unlock_semaphore((vnode)->vn_hMutex ); } while(0)
 

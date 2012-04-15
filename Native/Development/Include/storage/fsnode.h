@@ -21,9 +21,9 @@
 #ifndef __F_STORAGE_FSNODE_H__
 #define __F_STORAGE_FSNODE_H__
 
-#include <atheos/types.h>
+#include <pyro/types.h>
 #include <sys/types.h>
-#include <atheos/filesystem.h>
+#include <pyro/filesystem.h>
 #include <sys/stat.h>
 #include <fcntl.h>
 #include <dirent.h>

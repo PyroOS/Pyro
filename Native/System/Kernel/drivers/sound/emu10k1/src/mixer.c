@@ -30,10 +30,10 @@
  **********************************************************************
  */
 
-#include <atheos/kernel.h>
-#include <atheos/device.h>
-#include <atheos/isa_io.h>
-#include <atheos/areas.h>
+#include <pyro/kernel.h>
+#include <pyro/device.h>
+#include <pyro/isa_io.h>
+#include <pyro/areas.h>
 
 #include "hwaccess.h"
 #include "8010.h"

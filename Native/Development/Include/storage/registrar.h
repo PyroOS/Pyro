@@ -105,7 +105,7 @@ public:
  * An example to register the current application as a handler for jpeg images:
  * \code
  * ...
- * #include <atheos/image.h>
+ * #include <pyro/image.h>
  * #include <storage/registrar.h>
  *
  * MyApp::MyApp() : os::Application( "application/x-vnd-MyApp" )

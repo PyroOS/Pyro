@@ -1,0 +1,148 @@
+* April 9th 2012 *
+
+WebCore
+	o Changed user-agent to "WebView; Pyro"
+	o Generated patch-set, that can be applied to downloaded source.
+
+JavaScriptCore
+	o Generated patch-set, that can be applied to downloaded source.
+
+* October 6th 2009 *
+
+WebCore
+	ResourceHandleManager.cpp
+		o Replaced all references to ABrowse with Webster.  Fixes cookies.
+		o Strip anchors from URLs before we load them.
+
+* September 21st 2008 *
+
+Webster
+	o Treat any URL entered that begins with a / as a FILE
+	o Automatically focus any tab created with the 'New tab' menu.
+	o Close the Window if the user closes the last tab in the Window
+	o Only call CenterInWindow() on the first application window if the size
+	  wasn't loaded from the settings file. This was causing the saved Window
+	  position to move around.
+
+WebCore
+	LocalizedStringsSyllable.cpp
+		o Renamed 'Open in new tab' to 'Open in new window' to match what actually
+		  happens.
+
+WebView
+	frameloaderclient.cpp
+		o Do *not* accept an empty MIME type as valid loadable type: this was
+		  causing some binary files to be displayed rather than downloaded.
+
+* July 21st 2008 *
+
+WebView
+	EventHandler.cpp
+		o Trap MiddleButton click release events and pass them to
+		  ChromeClient::createWindow()
+
+	WindowFeatures.h
+	WindowFeatures.cpp
+		o Add a new flag suggestBackgroundTab
+
+ABrowse_NG (Webster)
+	New browser built on top of WebView.
+
+* April 23th 2008 *
+
+WebView
+	frameloaderclient.cpp
+		o Accept application/xml & an empty MIME type as valid loadable types.
+
+* April 13th 2008 *
+
+WebCore
+	platform/network/syllable/ResourceHandleManager.h
+	platform/network/syllable/ResourceHandleManager.cpp
+		o Added the ProxyManager class.
+		o Removed the global g_zProxyURL variable.
+
+ABrowse
+	Use the ProxyManager class
+
+Added test, test-install & test-clean targets to the root Makefile
+
+* April 8th 2008 *
+
+ABrowse
+	Applied the following patches from Clayton <ckoeni@gmail.com>
+		o Added shortcuts for "Quit", "Copy", "Paste", "New Tab" & "New Window"
+		o Go to the users configred Home location when the Home button is clicked,
+		  not www.syllable.org
+
+* April 6th 2008 *
+
+WebView
+	New files. Starting to split the core View (Currently HTMLView) out of
+	ABrowse into what will be libwebview.
+
+Test
+	New files. A simple browser shell to test WebView etc.
+
+* April 5th 2008 *
+
+ABrowse
+	Get the version string from version.h, which is generated when the sources
+	are exported from CVS.
+	Generate version.h if one is not present.
+
+WebCore, ABrowse
+	Moved the ChromeClientSyllable class out of WebCore into ABrowse
+
+* March 30th 2008 *
+
+JavaScriptCore
+	wtf/HashTable.h
+		o Comment out the two ASSERTs in reinsert() which fire due to invalid data
+		  in the FontCache HashTable. This is a hack and we need a real	solution to
+		  the invalid HashTable data problem.
+
+WebCore
+	platform/graphics/syllable/FontCacheSyllable.cpp
+		o Simplify the implementation
+
+	platform/graphics/syllable/FontPlatformData.cpp
+		o Cleanup a few obvious issues.
+		o Re-enable the fallback instance code.
+		o Cleanup some of the debug output.
+
+* March 29th 2008 *
+
+JavaScriptCore, WebCore, ABrowse
+
+Simplified the build process by internalising all of the additional commands
+required to build and fixup the generated sources.
+Added a top-level Makefile and our own copy of the rules file.
+Re-wrote the README build instructions to reflect these changes.
+
+* February 16th 2008 *
+
+ABrowse
+	main.cpp
+		o Fix definition of BrowserChromeClient::createWindow
+		o Remove BrowserChromeClient::createModalDialog
+
+* February 16th 2008 *
+
+WebCore
+	platform/syllable/ScrollViewSyllable.cpp
+		o Merge ScrollView off-by-one fix from 0.6.2
+	platform/syllable/RenderThemeSyllable.cpp
+		o Merge paintButton from 0.6.2
+	platform/syllable/EditorClientSyllable.cpp
+		o Swallow editing control characters, don't allow them to propogate into the
+		  text.
+
+* February 16th 2008 *
+
+JavaScriptCore, WebCore
+
+Synced with WebKit SVN HEAD
+	o Revision 29940
+	o Date 2008-02-02
+

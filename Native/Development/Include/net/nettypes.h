@@ -20,7 +20,7 @@
 #ifndef __F_ATHEOS_NETTYPES_H__
 #define __F_ATHEOS_NETTYPES_H__
 
-#include <atheos/types.h>
+#include <pyro/types.h>
 
 typedef struct _Socket Socket_s;
 typedef struct _NetInterface NetInterface_s;

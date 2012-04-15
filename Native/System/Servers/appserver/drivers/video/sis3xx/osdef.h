@@ -129,7 +129,7 @@
 /**********************************************************************/
 
 #ifdef SYLLABLE
-#include <atheos/types.h>
+#include <pyro/types.h>
 #define SIS300
 #define SIS315H
 #define OutPortByte(p,v) outb((uint8)(v),(uint16)(p))

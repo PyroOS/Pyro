@@ -1,11 +1,8 @@
 COPTS   = -I../../../server $(shell freetype-config --cflags) -c
 
-DEVBIN = /system/drivers/appserver/decorators
 OBJS =	WinterDecorator.o
-
 OBJDIR	:= objs
 OBJS	:= $(addprefix $(OBJDIR)/,$(OBJS))
-
 
 #
 #	rules
@@ -17,10 +14,7 @@ $(OBJDIR)/%.o : %.c
 $(OBJDIR)/%.o : %.cpp
 	$(CXX) $(COPTS) $< -o $@
 
-
 all :	objs $(OBJDIR)/Winter
-
-deps:
 
 objs:
 	mkdir objs
@@ -28,10 +22,16 @@ objs:
 $(OBJDIR)/Winter: $(OBJS)
 	$(CXX) -plugin -Xlinker -Bsymbolic $(OBJS) -nodefaultlibs -o $(OBJDIR)/Winter
 
-install: $(OBJDIR)/Winter
-	cp -f $(OBJDIR)/Winter $(IMAGE)/$(DEVBIN)/Winter
+# ----- ----- ----- ----- ----- ----- ----- ----- ----- -----
 
-dist: install
+dist: all inst clean
+
+inst:
+	mkdir -p $(PYRO_BINARY_DESTINATION)/System/drivers/appserver/decorators
+	cp -pf $(OBJDIR)/Winter $(PYRO_BINARY_DESTINATION)/System/drivers/appserver/decorators/
+	addattrib $(PYRO_BINARY_DESTINATION)/System/drivers/appserver/decorators/Winter "CheckSum::MD5" `md5sum $(PYRO_BINARY_DESTINATION)/System/drivers/appserver/decorators/Winter | cut -c1-32`
+	sync
 
 clean:
-	-rm $(OBJS) $(OBJDIR)/Winter
+	rm -rf $(OBJDIR)
+	sync

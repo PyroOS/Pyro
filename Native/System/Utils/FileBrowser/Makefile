@@ -2,10 +2,9 @@
 
 COPTS = -c -fexceptions -ffast-math
 
-APPBIN = /system/bin
 OBJS = main.o application.o mainwindow.o toolbar.o
 
-CATALOGS = da de el es fr hu nl ru sv
+EXE = FileBrowser
 
 OBJDIR := objs
 OBJS	:= $(addprefix $(OBJDIR)/,$(OBJS))
@@ -23,48 +22,69 @@ $(OBJDIR)/%.o : %.s
 	@echo Assembling : $<
 	@$(CC) $(COPTS) -x assembler-with-cpp $< -o $@
 
-all : objs catalogs FileBrowser
+all : objs FileBrowser
 
 objs:
 	@mkdir -p objs
 
 FileBrowser: $(OBJS)
 	@echo Linking...
-	@$(CXX) $(OBJS) -o FileBrowser -lsyllable
+	@$(CXX) $(OBJS) -o FileBrowser -lpyro
 	@echo Adding resources...
-	@rescopy FileBrowser -r home.png up.png breaker.png view.png icon24x24.png icon48x48.png reload.png back.png 
-	rescopy -a FileBrowser resources/FileBrowser.catalog
-	for CATALOG in $(CATALOGS);do \
-		echo $$CATALOG; \
-		rescopy -a FileBrowser $$CATALOG/FileBrowser.catalog=resources/$$CATALOG/FileBrowser.catalog; \
+	@rescopy FileBrowser -r images/* 
+	rescopy -a $(EXE) resources/$(EXE).catalog
+	for CATALOG in `ls -1 resources`;do \
+		if [ -d "resources/$$CATALOG" ] ; then \
+			echo $$CATALOG; \
+			rescopy -a $(EXE) $$CATALOG/$(EXE).catalog=resources/$$CATALOG/$(EXE).catalog; \
+		fi \
 	done;
+	addattrib $(EXE) "os::Category" "System Tools"
+
+# ----- ----- ----- ----- ----- ----- ----- ----- ----- -----
+
+dist: catalogs all inst web clean
 
 catalogs:
 	cd resources; \
-	catcomp -c FileBrowser.cd; \
-	for CATALOG in $(CATALOGS);do \
-		echo $$CATALOG; \
-		cd $$CATALOG; \
-		catcomp -t FileBrowser.cd; \
-		cd ..; \
+	catcomp -c $(EXE).cd; \
+	for CATALOG in `ls -1`;do \
+		if [ -d "$$CATALOG" ] ; then \
+			echo $$CATALOG; \
+			cd $$CATALOG; \
+			catcomp -t $(EXE).cd; \
+			cd ..; \
+		fi \
 	done;
+	sync
 
-clean:
-	@echo Cleaning...
-	@rm -f $(OBJDIR)/*
-	@rm -f FileBrowser
-	@rm resources/FileBrowser.catalog resources/FileBrowser.h; \
-	for CATALOG in $(CATALOGS);do \
-		rm resources/$$CATALOG/FileBrowser.catalog; \
+inst:
+	mkdir -p $(PYRO_BINARY_DESTINATION)/System/binary
+	cp -f $(EXE) $(PYRO_BINARY_DESTINATION)/System/binary/
+	addattrib $(PYRO_BINARY_DESTINATION)/System/binary/$(EXE) "CheckSum::MD5" `md5sum $(PYRO_BINARY_DESTINATION)/System/binary/$(EXE) | cut -c1-32`
+	sync
+
+web:
+	mkdir -p $(PYRO_BINARY_DESTINATION)Web/Languages/LIST
+	mkdir -p $(PYRO_BINARY_DESTINATION)Web/Languages/Utils/$(EXE)
+	cd resources; \
+	for CATALOG in `ls -1`;do \
+		if [ -d "$$CATALOG" ] ; then \
+			touch $(PYRO_BINARY_DESTINATION)Web/Languages/LIST/$$CATALOG; \
+			touch $(PYRO_BINARY_DESTINATION)Web/Languages/Utils/$(EXE)/int; \
+			touch $(PYRO_BINARY_DESTINATION)Web/Languages/Utils/$(EXE)/$$CATALOG; \
+		fi \
 	done;
+	sync
 
-deps:
+clean: catalog-clean
+	rm -rf $(OBJDIR)
+	rm -f $(EXE)
+	sync
 
-install: all
-	@echo Installing...
-	@cp FileBrowser $(APPBIN)/FileBrowser
-
-dist: all
-	@echo Distribution...
-	@cp FileBrowser $(IMAGE)/$(APPBIN)/FileBrowser
-
+catalog-clean:
+	rm -f resources/$(EXE).catalog resources/$(EXE).h
+	for CATALOG in `ls -1 resources`;do \
+		rm -f resources/$$CATALOG/$(EXE).catalog; \
+	done;
+	sync

@@ -2,9 +2,7 @@
 
 COPTS = -c -fexceptions -ffast-math
 
-APPBIN = /system/extensions/dock
 OBJS = Printer.o
-
 OBJDIR := objs
 OBJS	:= $(addprefix $(OBJDIR)/,$(OBJS))
 
@@ -28,22 +26,21 @@ objs:
 
 Printer.so: $(OBJS)
 	@echo Linking...
-	@$(CXX) -shared -Xlinker -soname=Printer.so $(OBJS) -o Printer.so -lsyllable
+	@$(CXX) -shared -Xlinker -soname=Printer.so $(OBJS) -o Printer.so -lpyro
 	@echo Adding resources...
 	@rescopy Printer.so -r *.png 
 
+# ----- ----- ----- ----- ----- ----- ----- ----- ----- -----
+
+dist: all inst clean
+
+inst:
+	mkdir -p $(PYRO_BINARY_DESTINATION)/System/extensions/dock
+	cp -f Printer.so $(PYRO_BINARY_DESTINATION)/System/extensions/dock/
+	addattrib $(PYRO_BINARY_DESTINATION)/System/extensions/dock/Printer.so "CheckSum::MD5" `md5sum $(PYRO_BINARY_DESTINATION)/System/extensions/dock/Printer.so | cut -c1-32`
+	sync
+
 clean:
-	@echo Cleaning...
-	@rm -f $(OBJDIR)/*
-	@rm -f Printer.so
-
-deps:
-
-install: all
-	@echo Installing...
-	@cp Printer.so $(APPBIN)/Printer.so
-
-dist: all
-	@echo Distribution...
-	@cp Printer.so $(IMAGE)/$(APPBIN)/Printer.so
-
+	rm -rf $(OBJDIR)
+	rm -f Printer.so
+	sync

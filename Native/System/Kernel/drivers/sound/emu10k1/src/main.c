@@ -87,11 +87,11 @@
  *********************************************************************/
 
 /* These are only included once per module */
-#include <atheos/kernel.h>
-#include <atheos/pci.h>
-#include <atheos/device.h>
-#include <atheos/irq.h>
-#include <atheos/bitops.h>
+#include <pyro/kernel.h>
+#include <pyro/pci.h>
+#include <pyro/device.h>
+#include <pyro/irq.h>
+#include <pyro/bitops.h>
 #include <posix/errno.h>
 #include <posix/signal.h>
 

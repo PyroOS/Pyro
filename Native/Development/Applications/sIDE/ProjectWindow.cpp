@@ -14,8 +14,8 @@
 // along with this program; if not, write to the Free Software
 // Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
 
-#include <atheos/threads.h>
-#include <atheos/filesystem.h>
+#include <pyro/threads.h>
+#include <pyro/filesystem.h>
 #include <gui/window.h>
 #include <gui/menu.h>
 #include <gui/listview.h>
@@ -330,7 +330,7 @@ void ProjectWindow::RefreshList()
 /* show an about window */
 int ShowAbout(void *data)
 {
-	os::Alert* pcAbout = new os::Alert(MSG_PWND_ABOUT_TITLE, os::String( "sIDE 0.4.7\n" ) + MSG_PWND_ABOUT, os::Alert::ALERT_INFO,
+	os::Alert* pcAbout = new os::Alert(MSG_PWND_ABOUT_TITLE, os::String( "sIDE 0.4.9\n" ) + MSG_PWND_ABOUT, os::Alert::ALERT_INFO,
 											0x00, MSG_BUTTON_OK.c_str(), NULL);
 	pcAbout->Go();
 	return( 0 );
@@ -433,7 +433,7 @@ void ProjectWindow::HandleMessage( os::Message* pcMessage )
 			if( fork() == 0 )
 			{
 				set_thread_priority( -1, 0 );
-				execlp( "/system/bin/FileBrowser", "/system/bin/FileBrowser", zProject.c_str(), (void*)NULL );
+				execlp( "FileBrowser", "FileBrowser", zProject.c_str(), (void*)NULL );
 				exit( 0 );
 			}
 		}
@@ -661,57 +661,3 @@ void ProjectWindow::HandleMessage( os::Message* pcMessage )
 			os::Window::HandleMessage( pcMessage );
 	}
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

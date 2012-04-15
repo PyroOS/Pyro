@@ -31,8 +31,8 @@
 #include <gui/spinner.h>
 #include <gui/textview.h>
 #include <util/application.h>
-#include <atheos/threads.h>
-#include <atheos/kernel.h>
+#include <pyro/threads.h>
+#include <pyro/kernel.h>
 #include <media/inputselector.h>
 #include <media/manager.h>
 #include <media/input.h>

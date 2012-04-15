@@ -4,10 +4,10 @@
 #include <stdlib.h>
 #include <unistd.h>
 
-#include <atheos/types.h>
-#include <atheos/threads.h>
-#include <atheos/strace.h>
-#include <atheos/syscalltable.h>
+#include <pyro/types.h>
+#include <pyro/threads.h>
+#include <pyro/strace.h>
+#include <pyro/syscalltable.h>
 
 int parse_groups( char *zList );
 void show_help( char* pzArgv0, FILE* stream );

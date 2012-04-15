@@ -12,7 +12,7 @@
 
 #ifndef _MC146818RTC_H
 #define _MC146818RTC_H
-#include <atheos/isa_io.h>
+#include <pyro/isa_io.h>
 
 #ifdef __cplusplus
 extern "C"

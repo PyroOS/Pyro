@@ -7,9 +7,9 @@
 */
 
 
-#include <atheos/kernel.h>
-#include <atheos/filesystem.h>
-#include <atheos/bcache.h>
+#include <pyro/kernel.h>
+#include <pyro/filesystem.h>
+#include <pyro/bcache.h>
 
 #include "bfs.h"
 #include "BlockAllocator.h"

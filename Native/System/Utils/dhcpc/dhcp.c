@@ -37,7 +37,7 @@
 #include <net/if.h>
 #include <arpa/inet.h>
 #include <netinet/in.h>
-#include <atheos/semaphore.h>
+#include <pyro/semaphore.h>
 
 static int setup_sockets( DHCPSessionInfo_s* info, bool outbound_broadcast );
 

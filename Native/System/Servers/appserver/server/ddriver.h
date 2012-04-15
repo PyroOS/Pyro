@@ -23,7 +23,7 @@
 #include <gui/region.h>
 #include <gui/guidefines.h>
 #include <util/locker.h>
-#include <atheos/vesa_gfx.h>
+#include <pyro/vesa_gfx.h>
 
 #include "desktop.h"
 

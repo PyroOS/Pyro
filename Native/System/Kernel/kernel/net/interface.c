@@ -22,11 +22,11 @@
 
 #include <posix/errno.h>
 
-#include <atheos/kernel.h>
-#include <atheos/kdebug.h>
-#include <atheos/socket.h>
-#include <atheos/semaphore.h>
-#include <atheos/image.h>
+#include <pyro/kernel.h>
+#include <pyro/kdebug.h>
+#include <pyro/socket.h>
+#include <pyro/semaphore.h>
+#include <pyro/image.h>
 
 #include <net/net.h>
 #include <net/ip.h>
@@ -1299,7 +1299,7 @@ static int load_interface_driver( const char *pzPath, struct stat *psStat, void 
 
 /**
  * \par Description
- * Iterates over the interface drivers in /system/drivers/net/if,
+ * Iterates over the interface drivers in /System/drivers/net/if,
  * attempting to load each interface driver.  Note that these are typically
  * interface class drivers -- ethernet interfaces versus PPP interfaces --
  * rather than specific hardware drivers.
@@ -1319,7 +1319,7 @@ void load_interface_drivers( void )
 		zPath[nPathBase + 1] = '\0';
 	}
 
-	strcat( zPath, "system/drivers/net/if" );
+	strcat( zPath, "System/drivers/net/if" );
 
 	iterate_directory( zPath, false, load_interface_driver, NULL );
 }

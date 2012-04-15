@@ -18,8 +18,8 @@
  *  MA 02111-1307, USA
  */
 
-#include <atheos/kernel.h>
-#include <atheos/image.h>
+#include <pyro/kernel.h>
+#include <pyro/image.h>
 
 #include <memory.h>
 
@@ -66,7 +66,7 @@ void TranslatorFactory::LoadAll()
 {
 	try
 	{
-		Directory cDir( "/system/extensions/translators" );
+		Directory cDir( "/boot/System/extensions/translators" );
 
 		String cName;
 
@@ -76,7 +76,7 @@ void TranslatorFactory::LoadAll()
 			{
 				continue;
 			}
-			String cPath( "/system/extensions/translators/" );
+			String cPath( "/boot/System/extensions/translators/" );
 
 			cPath += cName;
 

@@ -17,7 +17,7 @@
  *  Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  */
 
-#include <atheos/ctype.h>
+#include <pyro/ctype.h>
 #include <posix/fcntl.h>
 #include <posix/resource.h>
 #include <posix/wait.h>
@@ -26,16 +26,16 @@
 #include <posix/dirent.h>
 #include <posix/stat.h>
 
-#include <atheos/kernel.h>
-#include <atheos/resource.h>
-#include <atheos/syscall.h>
-#include <atheos/smp.h>
-#include <atheos/irq.h>
-#include <atheos/semaphore.h>
-#include <atheos/bcache.h>
-#include <atheos/multiboot.h>
-#include <atheos/device.h>
-#include <atheos/config.h>
+#include <pyro/kernel.h>
+#include <pyro/resource.h>
+#include <pyro/syscall.h>
+#include <pyro/smp.h>
+#include <pyro/irq.h>
+#include <pyro/semaphore.h>
+#include <pyro/bcache.h>
+#include <pyro/multiboot.h>
+#include <pyro/device.h>
+#include <pyro/config.h>
 
 #include <net/net.h>
 
@@ -56,7 +56,7 @@ extern int _end;
 static MultiBootHeader_s g_sMultiBootHeader;
 static char *g_apzEnviron[256];	// Environment from init script
 char g_zSysPath[256] = "/boot/";
-static char g_zAppServerPath[256] = "/system/appserver", *g_pzAppserver = NULL;
+static char g_zAppServerPath[256] = "/System/servers/appserver", *g_pzAppserver = NULL;
 static char g_zBootMode[256] = "normal";
 static char g_zKernelParams[4096];
 static const char *g_apzKernelArgs[MAX_KERNEL_ARGS];
@@ -318,8 +318,8 @@ int get_kernel_arguments( int *argc, const char *const **argv )
 #define __ENABLE_DEBUG__
 #endif
 
-#include <atheos/kdebug.h>
-#include <atheos/udelay.h>
+#include <pyro/kdebug.h>
+#include <pyro/udelay.h>
 
 #undef DEBUG_LIMIT
 #define DEBUG_LIMIT   KERN_DEBUG_LOW
@@ -549,7 +549,7 @@ void system_init( void )
 				zSysLibPath[nPathLen] = '/';
 				zSysLibPath[nPathLen + 1] = '\0';
 			}
-			strcat( zSysLibPath, "system/libraries/:/system/indexes/lib/" );
+			strcat( zSysLibPath, "System/libraries/" );
 
 			for ( i = 0; i < 255; ++i )
 			{
@@ -561,7 +561,7 @@ void system_init( void )
 			}
 
 			printk( "Starting init...\n" );
-			execve( "/boot/system/bin/init", apzBootShellArgs, g_apzEnviron );
+			execve( "/boot/System/binary/init", apzBootShellArgs, g_apzEnviron );
 			printk( "Failed to load boot-shell\n" );
 		}
 		else
@@ -755,7 +755,7 @@ int init_kernel( char *pRealMemBase, int nKernelSize )
 	sprintf( zVersion, "%d.%d.%d", ( int )( ( g_nKernelVersion >> 32 ) & 0xffff ), 
 				( int )( ( g_nKernelVersion >> 16 ) % 0xffff ), ( int )( g_nKernelVersion & 0xffff ) );
 
-	printk( "Syllable %s build %s starting...\n", zVersion, g_pzBuildVersion );
+	printk( "Pyro %s build %s starting...\n", zVersion, g_pzBuildVersion );
 
 	nKernelSize = ( nKernelSize + PAGE_SIZE - 1 ) & PAGE_MASK;
 	

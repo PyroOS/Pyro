@@ -19,11 +19,11 @@
  *  Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  */
 
-#include <atheos/types.h>
-#include <atheos/kernel.h>
-#include <atheos/udelay.h>
-#include <atheos/irq.h>
-#include <atheos/spinlock.h>
+#include <pyro/types.h>
+#include <pyro/kernel.h>
+#include <pyro/udelay.h>
+#include <pyro/irq.h>
+#include <pyro/spinlock.h>
 
 #include "inc/scheduler.h"
 #include "inc/sysbase.h"

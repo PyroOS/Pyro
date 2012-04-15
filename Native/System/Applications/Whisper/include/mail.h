@@ -23,7 +23,7 @@
 
 #include <time.h>
 
-#include <atheos/types.h>
+#include <pyro/types.h>
 #include <util/string.h>
 #include <util/variant.h>
 

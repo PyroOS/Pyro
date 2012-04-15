@@ -25,13 +25,13 @@
  * and per-CPU idle time.  All time values are returned in microseconds.
  */
 
-#include <atheos/types.h>
-#include <atheos/isa_io.h>
-#include <atheos/kernel.h>
-#include <atheos/time.h>
-#include <atheos/irq.h>
-#include <atheos/smp.h>
-#include <atheos/seqlock.h>
+#include <pyro/types.h>
+#include <pyro/isa_io.h>
+#include <pyro/kernel.h>
+#include <pyro/time.h>
+#include <pyro/irq.h>
+#include <pyro/smp.h>
+#include <pyro/seqlock.h>
 
 #include <macros.h>
 

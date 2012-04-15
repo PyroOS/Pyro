@@ -4,7 +4,7 @@
 #ifndef BLURSK_H
 #define BLURSK_H
 
-#include <atheos/types.h>
+#include <pyro/types.h>
 #include <gui/window.h>
 
 #define QTY(array)	(sizeof(array) / sizeof(*(array)))

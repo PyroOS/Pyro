@@ -31,9 +31,9 @@
 #include <gui/stringview.h>
 #include <gui/desktop.h>
 
-#include <atheos/device.h>
-#include <atheos/types.h>
-#include <atheos/kernel.h>
+#include <pyro/device.h>
+#include <pyro/types.h>
+#include <pyro/kernel.h>
 
 #include <signal.h>
 

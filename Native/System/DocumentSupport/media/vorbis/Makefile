@@ -2,15 +2,11 @@ CFLAGS   += -c -fexceptions -ffast-math
 CXXFLAGS += -c -fexceptions -ffast-math
 AOPTS    = -c
 
-DRIVERBIN = /system/extensions/media
-
 VPATH = ./
-
 OBJS	= vorbis_input.o vorbis_codec.o
-
 OBJDIR	:= objs
 
-include $(ATHEOS_SRC)/makefile.rules
+include $(PYRO_COMMON)/makefile.rules
 
 all :	$(OBJDIR) $(OBJS) $(OBJDIR)/vorbis.so
 
@@ -18,20 +14,20 @@ $(OBJDIR):
 	mkdir $(OBJDIR)
 
 $(OBJDIR)/vorbis.so: $(OBJS)
-	$(CXX) -shared -Xlinker "-soname=vorbis.so" $(OBJS) -lsyllable -lmedia -lvorbisfile -lvorbis -logg -lm -o $(OBJDIR)/vorbis.so
-
-
-deps:
-
-install: $(OBJDIR)/vorbis.so
-	install -s $(OBJDIR)/vorbis.so $(IMAGE)/$(DRIVERBIN)/vorbis.so
-
-dist: install
+	$(CXX) -shared -Xlinker "-soname=vorbis.so" $(OBJS) -lpyro -lmedia -lvorbisfile -lvorbis -logg -lm -o $(OBJDIR)/vorbis.so
 
 deps: $(OBJDIR) $(DEPS)
 
+# ----- ----- ----- ----- ----- ----- ----- ----- ----- -----
+
+dist: all inst clean
+
+inst:
+	mkdir -p $(PYRO_BINARY_DESTINATION)/System/extensions/media
+	cp -f $(OBJDIR)/vorbis.so $(PYRO_BINARY_DESTINATION)/System/extensions/media/
+	addattrib $(PYRO_BINARY_DESTINATION)/System/extensions/media/vorbis.so "CheckSum::MD5" `md5sum $(PYRO_BINARY_DESTINATION)/System/extensions/media/vorbis.so | cut -c1-32`
+	sync
+
 clean:
-	rm -f $(OBJS) $(OBJDIR)/*
-
--include $(OBJDIR)/*.d
-
+	rm -rf $(OBJDIR)
+	sync

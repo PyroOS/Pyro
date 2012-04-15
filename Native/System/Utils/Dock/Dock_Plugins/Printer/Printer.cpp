@@ -16,7 +16,7 @@
     Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 */
 
-#include <atheos/time.h>
+#include <pyro/time.h>
 #include <gui/menu.h>
 #include <util/looper.h>
 #include <util/resources.h>

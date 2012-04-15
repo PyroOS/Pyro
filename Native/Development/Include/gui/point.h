@@ -20,7 +20,7 @@
 #ifndef	__F_GUI_POINT_H__
 #define	__F_GUI_POINT_H__
 
-#include <atheos/types.h>
+#include <pyro/types.h>
 
 namespace os
 {

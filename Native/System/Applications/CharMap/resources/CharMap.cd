@@ -19,6 +19,6 @@ MSG_HELPWND_TEXT								When you click on a character,\nit will be copied to the
 MSG_HELPWND_OK									Ok
 
 MSG_ABOUTWND_TITLE=2000							CharMap
-MSG_ABOUTWND_TEXT								CharMap V1.1\nCharacter map viewer for Syllable.
+MSG_ABOUTWND_TEXT								CharMap V1.1\nCharacter map viewer for Pyro.
 MSG_ABOUTWND_OK									Ok
 

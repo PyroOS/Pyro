@@ -23,7 +23,7 @@
 #include <gui/image.h>
 #include <util/message.h>
 #include <util/settings.h>
-#include <atheos/time.h>
+#include <pyro/time.h>
 #include <gui/bitmap.h>
 #include <gui/guidefines.h>
 #include <util/message.h>

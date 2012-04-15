@@ -20,7 +20,7 @@
 #ifndef _PREFS_H_
 #define _PREFS_H_
 
-#include <atheos/image.h>
+#include <pyro/image.h>
 #include <gui/window.h>
 #include <gui/desktop.h>
 #include <gui/layoutview.h>

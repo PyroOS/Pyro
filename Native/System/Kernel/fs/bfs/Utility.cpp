@@ -10,8 +10,8 @@
 
 #include "kernel_cpp.h"
 
-#include <atheos/stdlib.h>
-#include <atheos/string.h>
+#include <pyro/stdlib.h>
+#include <pyro/string.h>
 
 
 bool

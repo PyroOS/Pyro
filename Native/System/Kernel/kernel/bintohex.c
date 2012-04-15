@@ -19,7 +19,7 @@
  */
 
 #include <stdio.h>
-#include <atheos/types.h>
+#include <pyro/types.h>
 
 
 static const size_t BUFFER_SIZE = 1024;

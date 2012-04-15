@@ -21,9 +21,9 @@
 #include <string.h>
 #include <stdio.h>
 #include <stdlib.h>
-#include <atheos/types.h>
-#include <atheos/time.h>
-#include <atheos/kernel.h>
+#include <pyro/types.h>
+#include <pyro/time.h>
+#include <pyro/kernel.h>
 
 #include <gui/window.h>
 #include <gui/layoutview.h>

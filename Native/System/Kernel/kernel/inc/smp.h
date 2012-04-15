@@ -21,8 +21,8 @@
 #ifndef __F_SMP_H__
 #define __F_SMP_H__
 
-#include <atheos/kernel.h>
-#include <atheos/types.h>
+#include <pyro/kernel.h>
+#include <pyro/types.h>
 
 #include "typedefs.h"
 #include "intel.h"

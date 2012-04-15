@@ -2,15 +2,13 @@ CFLAGS   += -c -fexceptions
 CXXFLAGS += -c -fexceptions
 AOPTS    = -c
 
-APPBIN = /system
-
 VPATH = ./
 
 OBJS = registrar.o
 
 OBJDIR	:= objs
 
-include $(ATHEOS_SRC)/makefile.rules
+include $(PYRO_COMMON)/makefile.rules
 
 all :	$(OBJDIR) $(OBJS) $(OBJDIR)/registrar
 
@@ -18,20 +16,23 @@ $(OBJDIR):
 	mkdir $(OBJDIR)
 
 $(OBJDIR)/registrar: $(OBJS)
-	$(CXX) $(OBJS) -lsyllable -o registrar
-#	rescopy mediaserver -r *.png
+	$(CXX) $(OBJS) -lpyro -o registrar
 
-deps:
-
-install:  $(OBJDIR)/registrar
-	install -s registrar $(IMAGE)/$(APPBIN)/registrar
-
-dist: install
 
 deps: $(OBJDIR) $(DEPS)
 
+# ----- ----- ----- ----- ----- ----- ----- ----- ----- -----
+
+dist: all inst clean
+
+inst:
+	mkdir -p $(PYRO_BINARY_DESTINATION)/System/servers
+	cp -pf registrar $(PYRO_BINARY_DESTINATION)/System/servers/
+	addattrib $(PYRO_BINARY_DESTINATION)/System/servers/registrar "CheckSum::MD5" `md5sum $(PYRO_BINARY_DESTINATION)/System/servers/registrar | cut -c1-32`
+	addattrib $(PYRO_BINARY_DESTINATION)/System/servers/registrar "os::Icon" "/System/icons/logo.png"
+	addattrib $(PYRO_BINARY_DESTINATION)/System/servers/registrar "os::MimeType" "pyro/server"
+	sync
+
 clean:
-	rm -f $(OBJS) $(OBJDIR)/*.d registrar
-
--include $(OBJDIR)/*.d
-
+	rm -rf $(OBJS) $(OBJDIR) registrar
+	sync

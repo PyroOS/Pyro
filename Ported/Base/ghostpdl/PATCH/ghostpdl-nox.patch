@@ -1,0 +1,32 @@
+diff -ubr ghostpdl-1.51-with-tiff/gs/src/unix-gcc.mak ghostpdl-1.51-noX/gs/src/unix-gcc.mak
+--- ghostpdl-1.51-with-tiff/gs/src/unix-gcc.mak	2008-01-17 03:09:20.000000000 -0500
++++ ghostpdl-1.51-noX/gs/src/unix-gcc.mak	2008-01-17 03:23:48.000000000 -0500
+@@ -368,7 +368,7 @@
+ # Choose the device(s) to include.  See devs.mak for details,
+ # devs.mak and contrib.mak for the list of available devices.
+ 
+-DEVICE_DEVS=$(DISPLAY_DEV) $(DD)x11.dev $(DD)x11alpha.dev $(DD)x11cmyk.dev $(DD)x11gray2.dev $(DD)x11gray4.dev $(DD)x11mono.dev \
++DEVICE_DEVS=$(DISPLAY_DEV) \
+     $(DD)tiffg3.dev $(DD)tiffg32d.dev $(DD)tiffg4.dev 
+ 
+ 
+diff -ubr ghostpdl-1.51-with-tiff/main/pcl6_gcc.mak ghostpdl-1.51-noX/main/pcl6_gcc.mak
+--- ghostpdl-1.51-with-tiff/main/pcl6_gcc.mak	2008-01-17 03:12:41.000000000 -0500
++++ ghostpdl-1.51-noX/main/pcl6_gcc.mak	2008-01-17 03:23:44.000000000 -0500
+@@ -205,7 +205,6 @@
+ CFLAGS+=-DHAVE_STDINT_H
+ STDLIBS=-lm
+ DEVICE_DEVS=$(DEVICES_DEVS) $(DD)tiffg3.dev $(DD)tiffg32d.dev $(DD)tiffg4.dev
+-DEVICE_DEVS=$(DD)x11.dev $(DD)x11alpha.dev $(DD)x11mono.dev $(DD)x11cmyk.dev $(DEVICES_DEVS)
+ 
+ else
+ 
+@@ -213,7 +212,7 @@
+ # some systems may need -ldl as well as pthread
+ STDLIBS=-lm -lpthread -ldl
+ DEVICE_DEVS=$(DEVICES_DEVS) $(DD)tiffg3.dev $(DD)tiffg32d.dev $(DD)tiffg4.dev
+-DEVICE_DEVS=$(DD)x11.dev $(DD)x11alpha.dev $(DD)x11mono.dev $(DD)x11cmyk.dev $(DEVICES_DEVS) $(DD)bmpamono.dev $(DD)bmpa16m.dev
++DEVICE_DEVS=$(DEVICES_DEVS) $(DD)bmpamono.dev $(DD)bmpa16m.dev
+ endif
+ 
+ # Generic makefile

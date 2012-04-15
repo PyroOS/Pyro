@@ -22,11 +22,11 @@
  */
 #include <posix/errno.h>
 
-#include <atheos/kernel.h>
-#include <atheos/device.h>
-#include <atheos/pci.h>
-#include <atheos/irq.h>
-#include <atheos/semaphore.h>
+#include <pyro/kernel.h>
+#include <pyro/device.h>
+#include <pyro/pci.h>
+#include <pyro/irq.h>
+#include <pyro/semaphore.h>
 #include <posix/signal.h>
 #include <macros.h>
 

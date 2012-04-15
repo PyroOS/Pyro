@@ -24,8 +24,8 @@
 #ifndef SCSI_COMMON_H_
 #define SCSI_COMMON_H_
 
-#include <atheos/types.h>
-#include <atheos/scsi.h>
+#include <pyro/types.h>
+#include <pyro/scsi.h>
 
 extern SCSI_device_s *g_psFirstDevice;
 

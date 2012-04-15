@@ -122,23 +122,23 @@
 #include <posix/wait.h>
 #include <posix/signal.h>
 
-#include <atheos/kernel.h>
-#include <atheos/device.h>
-#include <atheos/semaphore.h>
-#include <atheos/schedule.h>
-#include <atheos/smp.h>
+#include <pyro/kernel.h>
+#include <pyro/device.h>
+#include <pyro/semaphore.h>
+#include <pyro/schedule.h>
+#include <pyro/smp.h>
 #include <posix/fcntl.h>
-#include <atheos/spinlock.h>
-#include <atheos/pci.h>
-#include <atheos/linux_compat.h>
-#include <atheos/udelay.h>
-#include <atheos/device.h>
-#include <atheos/irq.h>
-#include <atheos/bitops.h>
+#include <pyro/spinlock.h>
+#include <pyro/pci.h>
+#include <pyro/linux_compat.h>
+#include <pyro/udelay.h>
+#include <pyro/device.h>
+#include <pyro/irq.h>
+#include <pyro/bitops.h>
 #include <macros.h>
 
 #define LP_STATS
-#include <atheos/lp.h>
+#include <pyro/lp.h>
 
 #include "parport.h"
 

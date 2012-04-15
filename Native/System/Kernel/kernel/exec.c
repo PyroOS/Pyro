@@ -22,12 +22,12 @@
 #include <posix/errno.h>
 #include <posix/limits.h>
 
-#include <atheos/types.h>
-#include <atheos/kernel.h>
-#include <atheos/smp.h>
-#include <atheos/elf.h>
-#include <atheos/syscall.h>
-#include <atheos/irq.h>
+#include <pyro/types.h>
+#include <pyro/kernel.h>
+#include <pyro/smp.h>
+#include <pyro/elf.h>
+#include <pyro/syscall.h>
+#include <pyro/irq.h>
 
 #include <macros.h>
 

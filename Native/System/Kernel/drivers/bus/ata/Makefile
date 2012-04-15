@@ -1,7 +1,7 @@
 CFLAGS   += -kernel -fno-PIC -c
 AFLAGS   = -c
 
-C_INCLUDE_PATH=$(ATHEOS_INCLUDE_PATH)
+C_INCLUDE_PATH=$(PYRO_INCLUDE)
 
 # Enable the following to enable debug output
 CFLAGS += -D__ENABLE_DEBUG__
@@ -27,9 +27,6 @@ $(OBJDIR)/%.o : %.s
 $(OBJDIR)/%.o : %.S
 	$(CC) $(CFLAGS) -x assembler-with-cpp $< -o $@
 
-
-
-
 all :	objs $(OBJDIR)/ata 
 
 objs:
@@ -38,15 +35,16 @@ objs:
 $(OBJDIR)/ata: $(OBJS) Makefile
 	$(CC) -kernel $(OBJS) -o $(OBJDIR)/ata
 
-install: all
-	cp -f $(OBJDIR)/ata $(IMAGE)/system/drivers/dev/bus/ata
+# ----- ----- ----- ----- ----- ----- ----- ----- ----- -----
 
-dist: install
+dist: all inst clean
+
+inst:
+	mkdir -p $(PYRO_BINARY_DESTINATION)/System/drivers/dev/bus
+	cp -f $(OBJDIR)/ata $(PYRO_BINARY_DESTINATION)/System/drivers/dev/bus/
+	addattrib $(PYRO_BINARY_DESTINATION)/System/drivers/dev/bus/ata "CheckSum::MD5" `md5sum $(PYRO_BINARY_DESTINATION)/System/drivers/dev/bus/ata | cut -c1-32`
+	sync
 
 clean:
-	-rm -f $(OBJS)
-	-rm -f $(OBJDIR)/ata
-
-copy: all
-	cp -f $(OBJDIR)/ata /home/root/Build/
-
+	rm -rf $(OBJDIR)
+	sync

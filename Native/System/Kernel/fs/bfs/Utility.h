@@ -8,9 +8,9 @@
 
 
 
-#include <atheos/kernel.h>
-#include <atheos/filesystem.h>
-#include <atheos/fs_attribs.h>
+#include <pyro/kernel.h>
+#include <pyro/filesystem.h>
+#include <pyro/fs_attribs.h>
 #include <posix/stat.h>
 #include <posix/limits.h>
 #include <posix/unistd.h>

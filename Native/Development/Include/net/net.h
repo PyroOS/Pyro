@@ -4,7 +4,7 @@
 #ifdef __KERNEL__
 
 #include <net/nettypes.h>
-#include <atheos/socket.h>
+#include <pyro/socket.h>
 #include <net/in.h>
 #include <net/if.h>
 #include <net/if_ether.h>

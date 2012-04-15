@@ -233,13 +233,15 @@ void PrefsDesktopWin::UpdateBackgroundList()
 	m_pcBackgroundList->InsertRow( pcRow );
 	
 	
-	/* Fill list with entries from /system/resources/wallpapers/ */
+	/* Fill list with entries from ~/Pictures */
 	os::Directory* pcDir = NULL;
 	os::Path cPath;
 	
 	try
 	{
-		cPath = "/system/resources/wallpapers";
+		os::String zPath = getenv( "HOME" );
+		zPath += "/Pictures";
+		cPath = zPath;
 		pcDir = new os::Directory( cPath.GetPath() );
 	} catch( ... )
 	{

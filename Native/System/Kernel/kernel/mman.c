@@ -19,11 +19,11 @@
  */
 
 #include <posix/errno.h>
-#include <atheos/types.h>
-#include <atheos/bcache.h>
+#include <pyro/types.h>
+#include <pyro/bcache.h>
 
-#include <atheos/kernel.h>
-#include <atheos/spinlock.h>
+#include <pyro/kernel.h>
+#include <pyro/spinlock.h>
 #include <macros.h>
 
 #include "inc/sysbase.h"

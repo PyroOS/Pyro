@@ -20,8 +20,8 @@
 #include <stdio.h>
 #include <limits.h>
 #include <signal.h>
-#include <atheos/types.h>
-#include <atheos/time.h>
+#include <pyro/types.h>
+#include <pyro/time.h>
 #include <float.h>
 
 #include "ddriver.h"
@@ -41,7 +41,7 @@
 #include "clipboard.h"
 #include "event.h"
 
-#include <atheos/kernel.h>
+#include <pyro/kernel.h>
 
 #include <gui/window.h>
 #include <gui/guidefines.h>

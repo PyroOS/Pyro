@@ -32,9 +32,9 @@ SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 #ifndef	__I855_H__
 #define	__I855_H__
 
-#include <atheos/kernel.h>
-#include <atheos/vesa_gfx.h>
-#include <atheos/pci.h>
+#include <pyro/kernel.h>
+#include <pyro/vesa_gfx.h>
+#include <pyro/pci.h>
 
 #include "../../../server/ddriver.h"
 #include "i855_regs.h"

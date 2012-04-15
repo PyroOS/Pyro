@@ -22,7 +22,7 @@
 #define __F_UTIL_REGEXP_H__
 
 #include <storage/file.h>
-#include <atheos/image.h>
+#include <pyro/image.h>
 #include <util/string.h>
 
 #include <vector>

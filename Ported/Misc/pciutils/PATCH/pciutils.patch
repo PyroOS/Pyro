@@ -1,0 +1,11 @@
+--- original/lib/i386-ports.c	2011-01-07 21:04:28.000000000 +0000
++++ current/lib/i386-ports.c	2011-12-01 18:32:58.000000000 +0000
+@@ -26,6 +26,8 @@
+ #include "i386-io-haiku.h"
+ #elif defined(PCI_OS_BEOS)
+ #include "i386-io-beos.h"
++#elif defined(PCI_OS_PYRO)
++#include "i386-io-pyro.h"
+ #else
+ #error Do not know how to access I/O ports on this OS.
+ #endif

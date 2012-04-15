@@ -1,7 +1,7 @@
 CFLAGS   += -c -kernel
 AFLAGS   = -c
 
-C_INCLUDE_PATH=$(ATHEOS_INCLUDE_PATH)
+C_INCLUDE_PATH=$(PYRO_INCLUDE)
 
 OBJS := ramfs.o
 
@@ -26,9 +26,6 @@ $(OBJDIR)/%.o : %.s
 $(OBJDIR)/%.o : %.S
 	$(CC) $(CFLAGS) -x assembler-with-cpp $< -o $@
 
-
-
-
 all : objs $(OBJDIR)/$(FS)
 
 objs:
@@ -40,13 +37,16 @@ $(OBJDIR)/$(FS): $(OBJS) Makefile
 $(OBJDIR)/ramfs.o: ramfs.c
 	$(CC) $(CFLAGS) -fno-PIC $< -o $@
 
-deps:
+# ----- ----- ----- ----- ----- ----- ----- ----- ----- -----
 
-install: all
-	install -s $(OBJDIR)/$(FS) $(IMAGE)/system/drivers/fs/$(FS)
+dist: all inst clean
 
-dist: install
+inst:
+	mkdir -p $(PYRO_BINARY_DESTINATION)/System/drivers/fs
+	cp -f $(OBJDIR)/$(FS) $(PYRO_BINARY_DESTINATION)/System/drivers/fs/$(FS)
+	addattrib $(PYRO_BINARY_DESTINATION)/System/drivers/fs/$(FS) "CheckSum::MD5" `md5sum $(PYRO_BINARY_DESTINATION)/System/drivers/fs/$(FS) | cut -c1-32`
+	sync
 
 clean:
-	rm -f $(OBJS)
-
+	rm -rf $(OBJDIR)
+	sync

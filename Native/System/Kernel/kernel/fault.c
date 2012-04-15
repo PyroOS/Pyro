@@ -19,8 +19,8 @@
  */
 
 #include <posix/errno.h>
-#include <atheos/kernel.h>
-#include <atheos/irq.h>
+#include <pyro/kernel.h>
+#include <pyro/irq.h>
 
 #include <macros.h>
 

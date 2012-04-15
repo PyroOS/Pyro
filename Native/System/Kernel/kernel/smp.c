@@ -26,13 +26,13 @@
 #include <inc/sysbase.h>
 #include <inc/areas.h>
 
-#include <atheos/kernel.h>
-#include <atheos/kdebug.h>
-#include <atheos/irq.h>
-#include <atheos/bitops.h>
-#include <atheos/udelay.h>
-#include <atheos/spinlock.h>
-#include <atheos/time.h>
+#include <pyro/kernel.h>
+#include <pyro/kdebug.h>
+#include <pyro/irq.h>
+#include <pyro/bitops.h>
+#include <pyro/udelay.h>
+#include <pyro/spinlock.h>
+#include <pyro/time.h>
 
 /* Kernel-global variables */
 ProcessorInfo_s g_asProcessorDescs[MAX_CPU_COUNT];

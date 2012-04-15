@@ -22,7 +22,7 @@
 #include "mga_tvp3026.h"
 #include "mga_regs.h"
 
-#include <atheos/kernel.h>	// For dbprintf()
+#include <pyro/kernel.h>	// For dbprintf()
 #include <math.h>				// pow()
 
 DacTVP3026::DacTVP3026( vuint8 *pRegisterBase )

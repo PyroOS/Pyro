@@ -21,10 +21,10 @@
 
 #include <posix/errno.h>
 
-#include <atheos/kernel.h>
-#include <atheos/syscall.h>
-#include <atheos/semaphore.h>
-#include <atheos/spinlock.h>
+#include <pyro/kernel.h>
+#include <pyro/syscall.h>
+#include <pyro/semaphore.h>
+#include <pyro/spinlock.h>
 
 #include <macros.h>
 

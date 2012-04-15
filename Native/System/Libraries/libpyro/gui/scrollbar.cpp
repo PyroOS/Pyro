@@ -19,7 +19,7 @@
  */
 
 #include <assert.h>
-#include <atheos/types.h>
+#include <pyro/types.h>
 
 #include <gui/scrollbar.h>
 #include <util/looper.h>

@@ -24,7 +24,7 @@
 
 #include <gui/guidefines.h>
 #include <util/string.h>
-#include <atheos/types.h>
+#include <pyro/types.h>
 
 namespace os {
 

@@ -8,7 +8,7 @@
 
 
 
-#include <atheos/kernel.h>
+#include <pyro/kernel.h>
 
 #ifdef USER
 //#	include "myfs.h"

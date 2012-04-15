@@ -2,11 +2,9 @@ CFLAGS   += -c -fexceptions
 CXXFLAGS += -c -fexceptions -I.
 AOPTS    = -c
 
-CATALOGS = da de es fr hu nl pl pt-br ru sv
+LIBBIN = $(PYRO_BINARY_DESTINATION)/System/libraries
 
-LIBBIN = /system/libraries
-
-LIBNAME = libsyllable.so.7
+LIBNAME = libpyro.so.1
 
 VPATH = ./ gui storage util translation gui/colorselector gui/fontrequester
 
@@ -35,9 +33,9 @@ OBJS += vstubs.o
 
 OBJDIR	:= objs
 
-include $(ATHEOS_SRC)/makefile.rules
+include $(PYRO_COMMON)/makefile.rules
 
-all :	$(OBJDIR) catalogs $(OBJDIR)/$(LIBNAME)
+all :	$(OBJDIR) $(OBJDIR)/$(LIBNAME)
 
 $(OBJDIR):
 	mkdir $(OBJDIR)
@@ -45,46 +43,81 @@ $(OBJDIR):
 $(OBJDIR)/$(LIBNAME): $(OBJS)
 	$(CXX) -shared -Xlinker "-soname=$(LIBNAME)" $(OBJS) -lm -o $(OBJDIR)/$(LIBNAME)
 
-catalogs: catalogs/libsyllable.h
-
-catalogs/libsyllable.h: catalogs/libsyllable.cd
-	cd catalogs; \
-	catcomp -c libsyllable.cd; \
-	for CATALOG in $(CATALOGS); do \
-		echo $$CATALOG; \
-		cd $$CATALOG; \
-		catcomp -t libsyllable.cd; \
-		cd ..; \
-	done
-
-deps: $(OBJDIR) catalogs $(DEPS)
-
-install: $(OBJDIR)/$(LIBNAME)
-	install -s $(OBJDIR)/$(LIBNAME) $(IMAGE)/$(LIBBIN)/$(LIBNAME)
-	ln -sf $(LIBNAME) $(IMAGE)/$(LIBBIN)/libsyllable.so
-	cp catalogs/libsyllable.catalog $(IMAGE)/system/resources/catalogs/
-	for CATALOG in $(CATALOGS); do \
-		echo $$CATALOG; \
-		cp catalogs/$$CATALOG/libsyllable.catalog $(IMAGE)/system/resources/catalogs/$$CATALOG/; \
-	done
-
-dist: install
-
-doc:
-	-rm -R docs/*
-	doxygen libsyllable.dox
-
-install-doc:
-	-rm -R /atheos/Documentation/gui/*
-	-mkdir -p /atheos/Documentation/gui
-	cp -R docs/html/* /atheos/Documentation/gui
-
-clean:
-	-rm -f $(OBJS) $(OBJDIR)/*
-	-rm catalogs/libsyllable.catalog catalogs/libsyllable.h
-	for CATALOG in $(CATALOGS); do \
-		rm catalogs/$$CATALOG/libsyllable.catalog; \
-	done
+deps: $(OBJDIR) $(DEPS)
 
 -include $(OBJDIR)/*.d
 
+# ----- ----- ----- ----- ----- ----- ----- ----- ----- -----
+
+dist: catalog all catalog-inst inst doc web clean
+
+catalog:
+	cd catalogs; \
+	catcomp -c libsyllable.cd; \
+	for CATALOG in `ls -1`;do \
+		if [ -d "$$CATALOG" ] ; then \
+			echo $$CATALOG; \
+			cd $$CATALOG; \
+			catcomp -t libsyllable.cd; \
+			cd ..; \
+		fi \
+	done;
+	sync
+
+catalog-inst:
+	mkdir -p $(PYRO_BINARY_DESTINATION)/System/resources/catalogs
+	cp -f catalogs/libsyllable.catalog $(PYRO_BINARY_DESTINATION)/System/resources/catalogs/
+	addattrib $(PYRO_BINARY_DESTINATION)/System/resources/catalogs/libsyllable.catalog "CheckSum::MD5" `md5sum $(PYRO_BINARY_DESTINATION)/System/resources/catalogs/libsyllable.catalog | cut -c1-32`
+	for CATALOG in `ls -1 catalogs`;do \
+		if [ -d "catalogs/$$CATALOG" ] ; then \
+			echo $$CATALOG; \
+			mkdir -p $(PYRO_BINARY_DESTINATION)/System/resources/catalogs/$$CATALOG; \
+			cp catalogs/$$CATALOG/libsyllable.catalog $(PYRO_BINARY_DESTINATION)/System/resources/catalogs/$$CATALOG/; \
+			addattrib $(PYRO_BINARY_DESTINATION)/System/resources/catalogs/$$CATALOG/libsyllable.catalog "CheckSum::MD5" `md5sum $(PYRO_BINARY_DESTINATION)/System/resources/catalogs/$$CATALOG/libsyllable.catalog | cut -c1-32`; \
+		fi \
+	done
+	sync
+
+inst:
+	mkdir -p $(PYRO_BINARY_DESTINATION)/System/libraries
+	mkdir -p $(PYRO_BINARY_DESTINATION)/System/resources/catalogs
+	cp -f $(OBJDIR)/$(LIBNAME) $(PYRO_BINARY_DESTINATION)/System/libraries/
+	ln -sf $(LIBNAME) $(PYRO_BINARY_DESTINATION)/System/libraries/libpyro.so
+	addattrib $(PYRO_BINARY_DESTINATION)/System/libraries/$(LIBNAME) "CheckSum::MD5" `md5sum $(PYRO_BINARY_DESTINATION)/System/libraries/$(LIBNAME) | cut -c1-32`
+	addattrib $(PYRO_BINARY_DESTINATION)/System/libraries/$(LIBNAME) "os::Icon" "/System/icons/logo.png"
+	addattrib $(PYRO_BINARY_DESTINATION)/System/libraries/$(LIBNAME) "os::MimeType" "pyro/library"
+	sync
+
+doc:
+	mkdir -p docs
+	doxygen libpyro.dox
+	mkdir -p $(PYRO_BINARY_DESTINATION)Native/Development/Documentation/API/LibPyro
+	cp -rf docs/html/* $(PYRO_BINARY_DESTINATION)Native/Development/Documentation/API/LibPyro/
+	sync
+
+web:
+	mkdir -p $(PYRO_BINARY_DESTINATION)Web/Documentation/API/LibPyro
+	cp -rf docs/html/* $(PYRO_BINARY_DESTINATION)Web/Documentation/API/LibPyro/
+	mkdir -p $(PYRO_BINARY_DESTINATION)Web/Languages/LIST
+	mkdir -p $(PYRO_BINARY_DESTINATION)Web/Languages/Libraries/libpyro
+	cd catalogs; \
+	for CATALOG in `ls -1`;do \
+		if [ -d "$$CATALOG" ] ; then \
+			touch $(PYRO_BINARY_DESTINATION)Web/Languages/LIST/$$CATALOG; \
+			touch $(PYRO_BINARY_DESTINATION)Web/Languages/Libraries/libpyro/int; \
+			touch $(PYRO_BINARY_DESTINATION)Web/Languages/Libraries/libpyro/$$CATALOG; \
+		fi \
+	done;
+	sync
+
+clean: catalog-clean
+	rm -rf $(OBJDIR)
+	rm -rf docs
+	sync
+
+catalog-clean:
+	rm -f catalogs/libsyllable.catalog catalogs/libsyllable.h
+	for CATALOG in `ls -1 catalogs`;do \
+		rm -f catalogs/$$CATALOG/libsyllable.catalog; \
+	done;
+	sync

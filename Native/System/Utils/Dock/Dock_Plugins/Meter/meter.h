@@ -16,9 +16,9 @@
 //  Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 
 #include <unistd.h>
-#include <atheos/filesystem.h>
-#include <atheos/kernel.h>
-#include <atheos/time.h>
+#include <pyro/filesystem.h>
+#include <pyro/kernel.h>
+#include <pyro/time.h>
 #include <gui/image.h>
 #include <gui/requesters.h>
 #include <storage/file.h>

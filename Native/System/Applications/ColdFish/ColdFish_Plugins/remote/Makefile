@@ -2,15 +2,13 @@ CFLAGS   += -c -fexceptions
 CXXFLAGS += -c -fexceptions
 AOPTS   = -c
 
-DRIVERBIN = /Applications/Media/Plugins/
-
 VPATH = ./
 
 OBJS	= Remote.o
 
-OBJDIR	:= objs
+OBJDIR	= objs/
 
-include $(ATHEOS_SRC)/makefile.rules
+include $(PYRO_COMMON)/makefile.rules
 
 all :	$(OBJDIR) $(OBJS) $(OBJDIR)/Remote
 
@@ -18,20 +16,20 @@ $(OBJDIR):
 	mkdir $(OBJDIR)
 
 $(OBJDIR)/Remote: $(OBJS)
-	$(CXX) -shared -Xlinker "-soname=Remote" $(OBJS) -lsyllable -o $(OBJDIR)/Remote
-
-deps:
-
-install:  $(OBJDIR)/Remote
-	mkdir -p $(IMAGE)/$(DRIVERBIN)
-	install -s $(OBJDIR)/Remote $(IMAGE)/$(DRIVERBIN)
-
-dist: install
+	$(CXX) -shared -Xlinker "-soname=Remote" $(OBJS) -lpyro -o $(OBJDIR)/Remote
 
 deps: $(OBJDIR) $(DEPS)
 
+# ----- ----- ----- ----- ----- ----- ----- ----- ----- -----
+
+dist: all inst clean
+
+inst:
+	mkdir -p $(PYRO_BINARY_DESTINATION)/Applications/ColdFish/Plugins
+	cp -pf objs/Remote $(PYRO_BINARY_DESTINATION)/Applications/ColdFish/Plugins/
+	addattrib $(PYRO_BINARY_DESTINATION)/Applications/ColdFish/Plugins/Remote "CheckSum::MD5" `md5sum $(PYRO_BINARY_DESTINATION)/Applications/ColdFish/Plugins/Remote | cut -c1-32`
+	sync
+
 clean:
-	rm -f $(OBJS) $(OBJDIR)/*
-
--include $(OBJDIR)/*.d
-
+	rm -rf $(OBJS) $(OBJDIR) Remote
+	sync

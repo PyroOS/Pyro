@@ -15,11 +15,11 @@
  *
  */
 
-#include <atheos/types.h>
+#include <pyro/types.h>
 #include <posix/errno.h>
-#include <atheos/kernel.h>
-#include <atheos/smp.h>
-#include <atheos/spinlock.h>
+#include <pyro/kernel.h>
+#include <pyro/smp.h>
+#include <pyro/spinlock.h>
 
 #include "inc/scheduler.h"
 #include "inc/sysbase.h"

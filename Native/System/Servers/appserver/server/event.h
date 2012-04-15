@@ -21,8 +21,8 @@
 #ifndef	__F_EVENT_H__
 #define	__F_EVENT_H__
 
-#include <atheos/types.h>
-#include <atheos/semaphore.h>
+#include <pyro/types.h>
+#include <pyro/semaphore.h>
 #include <util/string.h>
 #include <util/message.h>
 #include <vector>

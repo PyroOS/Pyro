@@ -3,7 +3,7 @@
 <LinkerFlags>
 <Target>App
 <Category>Other
-<InstallPath>/Applications/App
+<InstallPath>/boot/Applications/App
 <Group>Source
 <FileName>main.cpp
 <FileType>
@@ -19,10 +19,9 @@
 <FileName>messages.h
 <FileType>
 <Group>Libraries
-<FileName>syllable
-<FileType>
-<FileName>stdc++
+<FileName>pyro
 <FileType>
 <Group>Resources
 <FileName>icon48x48.png
 <FileType>
+

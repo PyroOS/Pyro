@@ -217,7 +217,7 @@ MSG_STATUS_FAILEDTOSENDMESSAGE							Sikertelenül kézbesítve: %3i.
 MSG_STATUS_MESSAGESENT									Üzenet (%3i) elküldve.
 
 MSG_ABOUTWND_TITLE=10000								A Whisper névjegye
-MSG_ABOUTWND_TEXT_LINEONE								Whisper - email kliens Syllable operációs rendszerre
+MSG_ABOUTWND_TEXT_LINEONE								Whisper - email kliens Pyro operációs rendszerre
 MSG_ABOUTWND_TEXT_VERSION								Verzió
 MSG_ABOUTWND_TEXT_WEBSITEONE							Látogasd meg a
 MSG_ABOUTWND_TEXT_WEBSITETWO							weboldalt a frissítésekért!

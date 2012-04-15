@@ -1,14 +1,12 @@
 CFLAGS   += -kernel -fno-PIC -c -I../
 AFLAGS   = -c
 
-C_INCLUDE_PATH=$(ATHEOS_INCLUDE_PATH)
+C_INCLUDE_PATH=$(PYRO_INCLUDE)
 
 OBJS := audio.o ac97audio.o i8xx.o
 
-
 OBJDIR	:= objs
 OBJS	:= $(addprefix $(OBJDIR)/,$(OBJS))
-
 
 #
 #	rules
@@ -26,9 +24,6 @@ $(OBJDIR)/%.o : %.s
 $(OBJDIR)/%.o : %.S
 	$(CC) $(CFLAGS) -x assembler-with-cpp $< -o $@
 
-
-
-
 all :	objs $(OBJDIR)/i8xx
 
 objs:
@@ -37,11 +32,16 @@ objs:
 $(OBJDIR)/i8xx: $(OBJS) Makefile
 	$(CC) -kernel $(OBJS) -o $(OBJDIR)/i8xx
 
-install: all
-	cp -f $(OBJDIR)/i8xx $(IMAGE)/system/drivers/dev/audio/
+# ----- ----- ----- ----- ----- ----- ----- ----- ----- -----
 
-dist: install
+dist: all inst clean
+
+inst:
+	mkdir -p $(PYRO_BINARY_DESTINATION)/System/drivers/dev/audio
+	cp -f $(OBJDIR)/i8xx $(PYRO_BINARY_DESTINATION)/System/drivers/dev/audio/
+	addattrib $(PYRO_BINARY_DESTINATION)/System/drivers/dev/audio/i8xx "CheckSum::MD5" `md5sum $(PYRO_BINARY_DESTINATION)/System/drivers/dev/audio/i8xx | cut -c1-32`
+	sync
 
 clean:
-	-rm -f $(OBJS) $(OBJDIR)/i8xx
-
+	rm -rf $(OBJDIR)
+	sync

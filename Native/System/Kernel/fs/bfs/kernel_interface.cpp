@@ -14,9 +14,9 @@
 #include "Query.h"
 #include "bfs_control.h"
 
-#include <atheos/string.h>
-#include <atheos/time.h>
-#include <atheos/device.h>
+#include <pyro/string.h>
+#include <pyro/time.h>
+#include <pyro/device.h>
 
 #define BFS_IO_SIZE	65536
 

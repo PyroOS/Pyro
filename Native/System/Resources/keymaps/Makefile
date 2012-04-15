@@ -1,23 +1,23 @@
-# Makefile for keymaps.
+# Makefile for non-compilable items.
 
-DIST_TARGET_PATH := $(IMAGE)/system/keymaps/
+dist: inst checksum
 
-all:
-
-deps:
-
-install:
-
-doc:
-
-install-doc:
-
-dist:
-	@for keymap in *.map; do\
+inst:
+	mkdir -p $(PYRO_BINARY_DESTINATION)/System/keymaps
+	for keymap in *.map; do\
 		destname=`basename $$keymap .map`;\
-		rm -f $(DIST_TARGET_PATH)$$destname;\
-		keymapconv $$destname.map $(DIST_TARGET_PATH)$$destname;\
-        done
+		rm -f $(PYRO_BINARY_DESTINATION)/System/keymaps/$$destname;\
+		keymapconv $$destname.map $(PYRO_BINARY_DESTINATION)/System/keymaps/$$destname;\
+	done
+	sync
+
+checksum:
+	for FILES in `find $(PYRO_BINARY_DESTINATION)/System/keymaps/`; do \
+		if test -f $$FILES; then \
+			addattrib $$FILES "CheckSum::MD5" `md5sum $$FILES | cut -c1-32`; \
+		fi; \
+	done;
+	sync
 
 clean:
-
+	sync

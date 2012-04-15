@@ -7,7 +7,7 @@
 */
 
 
-#include <atheos/kernel.h>
+#include <pyro/kernel.h>
 #ifdef USER
 //#	include "myfs.h"
 #	include <stdio.h>
@@ -17,7 +17,7 @@
 #	define _IMPEXP_KERNEL
 #endif
 
-#include <atheos/string.h>
+#include <pyro/string.h>
 
 #include "Volume.h"
 #include "Journal.h"

@@ -19,7 +19,7 @@
 #include <dhcp.h>
 #include <debug.h>
 
-#include <atheos/semaphore.h>
+#include <pyro/semaphore.h>
 #include <posix/errno.h>
 
 int change_state( DHCPSessionInfo_s *info, int new_state )

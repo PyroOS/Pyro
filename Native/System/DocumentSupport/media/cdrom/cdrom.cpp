@@ -19,7 +19,7 @@
  
 #include <media/input.h>
 #include <media/addon.h>
-#include <atheos/cdrom.h>
+#include <pyro/cdrom.h>
 #include <posix/ioctl.h>
 #include <sys/ioctl.h>
 #include <sys/stat.h>

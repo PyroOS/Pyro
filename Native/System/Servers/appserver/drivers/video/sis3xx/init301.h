@@ -58,8 +58,8 @@
 
 
 #ifdef SYLLABLE
-#include <atheos/types.h>
-#include <atheos/pci.h>
+#include <pyro/types.h>
+#include <pyro/pci.h>
 #include "sis_video.h"
 #include "sis.h"
 #endif

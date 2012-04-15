@@ -1,12 +1,11 @@
 CFLAGS   += -kernel -fno-PIC -c -Wno-multichar -fno-strict-aliasing -Itextencoding -I../
 AFLAGS   = -c
 
-C_INCLUDE_PATH=$(ATHEOS_INCLUDE_PATH)
+C_INCLUDE_PATH=$(PYRO_INCLUDE)
 
 #OBJS := afs.o balloc.o afs_inode.o attribs.o journal.o stream.o btree.o bt_delete.o
 
 VPATH =	./ textencoding
-
 
 OBJS := dosfs.o dir.o dlist.o fat.o file.o iter.o util.o vcache.o encodings.o EncodingConversions.o UnicodeMappings.o version.o attr.o
 #       dosfs.o dir.o dlist.o fat.o file.o iter.o util.o vcache.o encodings.o EncodingConversions.o UnicodeMappings.o version.o
@@ -14,7 +13,6 @@ OBJS := dosfs.o dir.o dlist.o fat.o file.o iter.o util.o vcache.o encodings.o En
 
 OBJDIR	:= objs
 OBJS	:= $(addprefix $(OBJDIR)/,$(OBJS))
-
 
 #
 #	rules
@@ -32,9 +30,6 @@ $(OBJDIR)/%.o : %.s
 $(OBJDIR)/%.o : %.S
 	$(CC) $(CFLAGS) -x assembler-with-cpp $< -o $@
 
-
-
-
 all :	objs $(OBJDIR)/fatfs
 
 objs:
@@ -43,13 +38,16 @@ objs:
 $(OBJDIR)/fatfs: $(OBJS) Makefile
 	$(CC) -kernel $(OBJS) -o $(OBJDIR)/fatfs
 
-deps:
+# ----- ----- ----- ----- ----- ----- ----- ----- ----- -----
 
-install: all
-	cp -f $(OBJDIR)/fatfs $(IMAGE)/system/drivers/fs/fatfs
+dist: all inst clean
 
-dist: install
+inst:
+	mkdir -p $(PYRO_BINARY_DESTINATION)/System/drivers/fs
+	cp -f $(OBJDIR)/fatfs $(PYRO_BINARY_DESTINATION)/System/drivers/fs/$(FS)
+	addattrib $(PYRO_BINARY_DESTINATION)/System/drivers/fs/fatfs "CheckSum::MD5" `md5sum $(PYRO_BINARY_DESTINATION)/System/drivers/fs/fatfs | cut -c1-32`
+	sync
 
 clean:
-	rm -f $(OBJS) $(OBJDIR)/fatfs
-
+	rm -rf $(OBJDIR)
+	sync

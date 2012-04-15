@@ -1,15 +1,15 @@
-/*! \mainpage Documentation of the Syllable highlevel C++ API
+/*! \mainpage Documentation of the Pyro highlevel C++ API
 
 
 
-\ref media "The Syllable Media API"
+\ref media "The Pyro Media API"
 
 */
 
 
 /*!
 
-\defgroup media The Syllable Media API
+\defgroup media The Pyro Media API
 
 Here you will find documentation of the various C++ classes involved
 in the Media API

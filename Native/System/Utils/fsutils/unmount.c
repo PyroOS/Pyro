@@ -4,7 +4,7 @@
 #include <getopt.h>
 #include <limits.h>
 
-#include <atheos/kernel.h>
+#include <pyro/kernel.h>
 
 static int g_bForce = 0;
 static int g_nShowHelp = 0;
@@ -60,7 +60,7 @@ int main( int argc, char** argv )
 	exit( 0 );
     }
     if ( g_nShowVersion ) {
-	printf( "AtheOS unmount V0.1.1 compiled %s\n", __DATE__ );
+	printf( "Pyro unmount V0.1.1 compiled %s\n", __DATE__ );
 	exit( 0 );
     }
   
@@ -79,6 +79,8 @@ int main( int argc, char** argv )
     }
     if ( unmount( zPath, g_bForce ) < 0 ) {
 	printf( "Error: Failed to unmount %s: %s\n", zPath, strerror( errno ));
-    }
+    } else {
+	rmdir ( zPath );
+	}
     return( 0 );
 }

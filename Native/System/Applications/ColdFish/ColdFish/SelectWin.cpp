@@ -19,7 +19,7 @@
  */
 
 
-#include "resources/coldfish.h"
+#include "resources/ColdFish.h"
 #include "messages.h"
 #include "SelectWin.h"
 
@@ -108,4 +108,3 @@ void SelectWin::HandleMessage( os::Message* pcMessage )
 			os::Window::HandleMessage( pcMessage );
 	}
 }
-

@@ -1,0 +1,15 @@
+#!/bin/sh
+
+COUNT=0
+
+while [ $COUNT -lt 5 ]; do
+	CMD=`$1`
+	if [ $? -ne 0 ]
+	then
+		let COUNT=$COUNT+1
+		echo "Failure $COUNT"
+	else
+		let COUNT=5
+		echo "Success"
+	fi
+done

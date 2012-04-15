@@ -2,7 +2,7 @@ CFLAGS   = -Wall -c -O2 -std=gnu99 -fno-optimize-sibling-calls -Wstrict-prototyp
 AFLAGS   = -c
 
 OLD_INCLUDE_PATH:=$(C_INCLUDE_PATH)
-C_INCLUDE_PATH=$(ATHEOS_INCLUDE_PATH)
+C_INCLUDE_PATH=$(PYRO_INCLUDE)
 
 VPATH =	./ lib vfs net nls
 
@@ -30,25 +30,23 @@ OBJDIR	:= objs
 
 IF_OBJS	:= $(addprefix $(OBJDIR)/,$(IF_OBJS))
 
-include $(ATHEOS_SRC)/makefile.rules
+include $(PYRO_COMMON)/makefile.rules
 
 #
 #	Final targets
 #
 
-all:	$(OBJDIR) $(OBJDIR)/kernel.so $(OBJDIR)/eth_if
+all: $(OBJDIR) $(OBJDIR)/kernel $(OBJDIR)/eth_if
 
 $(OBJDIR):
 	mkdir $(OBJDIR)
 
-
-$(OBJDIR)/kernel.so: $(OBJDIR)/version.o
+$(OBJDIR)/kernel: $(OBJDIR)/version.o
 	ld -m elf_i386_syllable -Tkernel.lnk $(OBJS) $(OBJDIR)/version.o -o \
-	   $(OBJDIR)/kernel.so `$(CC) -kernel -print-libgcc-file-name`
+	   $(OBJDIR)/kernel `$(CC) -kernel -print-libgcc-file-name`
 	$(CC) -nostdlib -w $(OBJDIR)/kernel.exports.c -o $(OBJDIR)/libkernel.so
 
-
-$(OBJDIR)/eth_if: $(IF_OBJS) $(OBJDIR)/kernel.so
+$(OBJDIR)/eth_if: $(IF_OBJS) $(OBJDIR)/kernel
 	$(CC) -kernel $(IF_OBJS) -L$(OBJDIR) -o $(OBJDIR)/eth_if
 
 $(OBJDIR)/bintohex: bintohex.c
@@ -67,21 +65,6 @@ $(OBJDIR)/smp_entry.hex: $(OBJDIR)/smp_entry.bin $(OBJDIR)/bintohex
 $(OBJDIR)/smp_entry.bin: smp_entry.asm
 	nasm smp_entry.asm -o $(OBJDIR)/smp_entry.bin
 
-install: all
-	-mv /system/kernel.so /system/kernel.so.original
-	-mv /system/drivers/net/if/eth_if /system/drivers/net/if/eth_if.original
-	-mv /system/libraries/libkernel.so /system/libraries/libkernel.so.original
-	cp -f $(OBJDIR)/kernel.so	/system/kernel.so
-	cp -f $(OBJDIR)/eth_if		/system/drivers/net/if/eth_if
-	$(CP) $(OBJDIR)/libkernel.so	/system/libraries/libkernel.so
-	strip --strip-all /system/kernel.so
-
-dist: all
-	cp -f $(OBJDIR)/kernel.so	$(IMAGE)/system/kernel.so
-	cp -f $(OBJDIR)/eth_if		$(IMAGE)/system/drivers/net/if/eth_if
-	$(CP) $(OBJDIR)/libkernel.so	$(IMAGE)/system/libraries/libkernel.so
-	strip --strip-all $(IMAGE)/system/kernel.so
-
 #
 # dependencies for kernel
 #
@@ -90,25 +73,9 @@ $(OBJDIR)/version.o: version.c
 version.c:	$(OBJS) $(OBJDIR)/kernel.exports.c Makefile
 	touch version.c
 
-
 #syscall.o:	syscall.s
 #intel.o:	intel.s
 
-doc:
-	-rm -R docs/DriverAPI/* docs/Syscalls/* docs/Private/*
-	doxygen driverapi.dox
-	doxygen syscalls.dox
-	doxygen private.dox
-
-install-doc:
-	-rm -R /Documentation/kernel/*
-	-mkdir -p /Documentation/kernel
-	cp -R docs/* /Documentation/kernel/
-
 deps: $(OBJDIR) $(DEPS)
 
-clean:
-	rm -f $(OBJS) $(DEPS) $(IF_OBJS) $(OBJDIR)/version.o $(OBJDIR)/kernel.so $(OBJDIR)/libkernel.so $(OBJDIR)/eth_if $(OBJDIR)/kernel.exports.c
-
 -include $(OBJDIR)/*.d
-

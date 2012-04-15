@@ -3,9 +3,9 @@
 #include <posix/errno.h>
 #include <posix/uio.h>
 
-#include <atheos/kernel.h>
-#include <atheos/socket.h>
-#include <atheos/semaphore.h>
+#include <pyro/kernel.h>
+#include <pyro/socket.h>
+#include <pyro/semaphore.h>
 
 #include <macros.h>
 

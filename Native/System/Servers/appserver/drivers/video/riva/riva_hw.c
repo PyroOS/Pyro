@@ -38,8 +38,8 @@
  \***************************************************************************/
 /* $XFree86: xc/programs/Xserver/hw/xfree86/drivers/nv/riva_hw.c,v 1.32 2002/04/30 20:04:44 mvojkovi Exp $ */
 
-#include <atheos/types.h>
-#include <atheos/pci.h>
+#include <pyro/types.h>
+#include <pyro/pci.h>
 #include "riva_hw.h"
 #include "riva_tbl.h"
 

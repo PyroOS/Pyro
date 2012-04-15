@@ -217,7 +217,7 @@ MSG_STATUS_FAILEDTOSENDMESSAGE							Kunne ikke sende %3i.
 MSG_STATUS_MESSAGESENT									%3i sendt.
 
 MSG_ABOUTWND_TITLE=10000								Om Whisper
-MSG_ABOUTWND_TEXT_LINEONE								Whisper, en email klient for Syllable
+MSG_ABOUTWND_TEXT_LINEONE								Whisper, en email klient for Pyro
 MSG_ABOUTWND_TEXT_VERSION								Version
 MSG_ABOUTWND_TEXT_WEBSITEONE							Se
 MSG_ABOUTWND_TEXT_WEBSITETWO							for opdateringer og information

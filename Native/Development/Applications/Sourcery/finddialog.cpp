@@ -27,9 +27,9 @@ FindDialog::FindDialog( Window * pcParent, const String &str, bool down, bool ca
 void FindDialog::Layout()
 {
 
-	os::FrameView * dirFrame = new os::FrameView( os::Rect(), "dirFrame", "Direction" );
-	os::FrameView * caseFrame = new os::FrameView( os::Rect(), "caseFrame", "Case" );
-	os::FrameView * syntaxFrame = new os::FrameView( os::Rect(), "syntaxFrame", "Syntax" );
+	os::FrameView * dirFrame = new os::FrameView( os::Rect(), "dirFrame", "_Direction" );
+	os::FrameView * caseFrame = new os::FrameView( os::Rect(), "caseFrame", "C_ase" );
+	os::FrameView * syntaxFrame = new os::FrameView( os::Rect(), "syntaxFrame", "_Syntax" );
 
 	os::LayoutView * rootView = new os::LayoutView( os::Rect(), "" );
 
@@ -84,8 +84,8 @@ void FindDialog::Layout()
 
 void FindDialog::Init()
 {
-	findButton = new os::Button( os::Rect(), "findButton", "Find", new os::Message( M_SEND_FIND ) );
-	closeButton = new os::Button( os::Rect(), "closeButton", "Close", new os::Message(M_FIND_QUIT ) );
+	findButton = new os::Button( os::Rect(), "findButton", "_Find", new os::Message( M_SEND_FIND ) );
+	closeButton = new os::Button( os::Rect(), "closeButton", "_Close", new os::Message(M_FIND_QUIT ) );
 
 	rUp = new os::RadioButton( os::Rect(), "rUp", "Up", NULL );
 	rDown = new os::RadioButton( os::Rect(), "rDown", "Down", NULL );
@@ -159,4 +159,3 @@ void FindDialog::HandleMessage( os::Message * msg )
 		os::Window::HandleMessage( msg );
 	}
 }
-

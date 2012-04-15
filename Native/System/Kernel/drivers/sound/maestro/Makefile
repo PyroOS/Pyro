@@ -2,11 +2,10 @@ CFLAGS   += -kernel -fno-PIC -c -I. -D__ENABLE_DEBUG__
 #CFLAGS   += -DDEBUG_LIMIT=KERN_INFO
 AFLAGS   = -c
 
-C_INCLUDE_PATH=$(ATHEOS_INCLUDE_PATH)
+C_INCLUDE_PATH=$(PYRO_INCLUDE)
 
 OBJS := maestro.o
 DRIVER := maestro
-
 OBJDIR	:= objs
 OBJS	:= $(addprefix $(OBJDIR)/,$(OBJS))
 
@@ -32,20 +31,22 @@ $(OBJDIR)/%.o : %.S
 
 all :	objs $(OBJDIR)/$(DRIVER)
 
-deps:
-
 objs:
 	mkdir $(OBJDIR)
 
 $(OBJDIR)/$(DRIVER): $(OBJS) Makefile
 	$(CC) -kernel $(OBJS) -o $@
 
-install: all
-	cp -f $(OBJDIR)/$(DRIVER) $(IMAGE)/system/drivers/dev/audio/$(DRIVER)
+# ----- ----- ----- ----- ----- ----- ----- ----- ----- -----
 
-dist: install
+dist: all inst clean
+
+inst:
+	mkdir -p $(PYRO_BINARY_DESTINATION)/System/drivers/dev/audio
+	cp -f $(OBJDIR)/$(DRIVER) $(PYRO_BINARY_DESTINATION)/System/drivers/dev/audio/
+	addattrib $(PYRO_BINARY_DESTINATION)/System/drivers/dev/audio/$(DRIVER) "CheckSum::MD5" `md5sum $(PYRO_BINARY_DESTINATION)/System/drivers/dev/audio/$(DRIVER) | cut -c1-32`
+	sync
 
 clean:
-	-rm -f $(OBJS)
-	-rm -f $(OBJDIR)/$(DRIVER)
-
+	rm -rf $(OBJDIR)
+	sync

@@ -16,9 +16,9 @@ The network preferences reads and modifies the following files:
 	/etc/resolv.conf		- Nameservers and search domains.
 	/etc/hostname			- System host name and domain.
 	/etc/hosts				- Host definitions and aliases.
-	/system/config/net.cfg	- Network interface configuration
+	/System/config/net.cfg	- Network interface configuration
 
-The configuration stored in /system/config/net.cfg is not compatible with the
+The configuration stored in /boot/System/config/net.cfg is not compatible with the
 previous version of the network preferences application.
 
 3) Usage

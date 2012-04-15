@@ -20,7 +20,7 @@
 #ifndef __ATHEOS_MOUSE_H_
 #define __ATHEOS_MOUSE_H_
 
-#include <atheos/types.h>
+#include <pyro/types.h>
 
 typedef struct
 {

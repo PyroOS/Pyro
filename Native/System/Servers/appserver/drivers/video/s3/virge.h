@@ -20,8 +20,8 @@
  *  Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  */
 
-#include <atheos/types.h>
-#include <atheos/pci.h>
+#include <pyro/types.h>
+#include <pyro/pci.h>
 #include <gui/guidefines.h>
 
 #include "../../../server/ddriver.h"

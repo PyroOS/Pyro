@@ -14,7 +14,7 @@
 
 #include <util/regexp.h>
 
-#include <atheos/time.h>	/* For get_system_time() */
+#include <pyro/time.h>	/* For get_system_time() */
 
 using namespace os;
 

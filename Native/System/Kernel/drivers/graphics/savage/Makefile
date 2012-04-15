@@ -1,13 +1,9 @@
 CFLAGS   = -kernel -fno-PIC -c -I.
 AFLAGS   = -c
 
-
 OBJS := savage.o
-
-
 OBJDIR	:= objs
 OBJS	:= $(addprefix $(OBJDIR)/,$(OBJS))
-
 
 #
 #	rules
@@ -25,9 +21,6 @@ $(OBJDIR)/%.o : %.s
 $(OBJDIR)/%.o : %.S
 	$(CC) $(CFLAGS) -x assembler-with-cpp $< -o $@
 
-
-
-
 all :	objs $(OBJDIR)/savage
 
 objs:
@@ -36,11 +29,16 @@ objs:
 $(OBJDIR)/savage: $(OBJS) Makefile
 	$(CC) -kernel $(OBJS) -o $(OBJDIR)/savage
 
-install: all
-	cp -f $(OBJDIR)/savage $(IMAGE)/system/drivers/dev/graphics/
+# ----- ----- ----- ----- ----- ----- ----- ----- ----- -----
 
-dist: install
+dist: all inst clean
+
+inst:
+	mkdir -p $(PYRO_BINARY_DESTINATION)/System/drivers/dev/graphics
+	cp -f $(OBJDIR)/savage $(PYRO_BINARY_DESTINATION)/System/drivers/dev/graphics/
+	addattrib $(PYRO_BINARY_DESTINATION)/System/drivers/dev/graphics/savage "CheckSum::MD5" `md5sum $(PYRO_BINARY_DESTINATION)/System/drivers/dev/graphics/savage | cut -c1-32`
+	sync
 
 clean:
-	-rm -f $(OBJS) $(OBJDIR)/savage
-
+	rm -rf $(OBJDIR)
+	sync

@@ -21,10 +21,10 @@
 #include <media/addon.h>
 #include <gui/point.h>
 #include <gui/desktop.h>
-#include <atheos/threads.h>
-#include <atheos/semaphore.h>
-#include <atheos/kernel.h>
-#include <atheos/time.h>
+#include <pyro/threads.h>
+#include <pyro/semaphore.h>
+#include <pyro/kernel.h>
+#include <pyro/time.h>
 #include <util/messenger.h>
 #include <util/message.h>
 #include <util/application.h>

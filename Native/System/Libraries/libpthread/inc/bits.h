@@ -21,7 +21,7 @@ extern "C"{
 
 #include <time.h>
 
-#include <atheos/semaphore.h>
+#include <pyro/semaphore.h>
 
 inline status_t __pt_lock_mutex( sem_id mutex );
 inline status_t __pt_unlock_mutex( sem_id mutex );

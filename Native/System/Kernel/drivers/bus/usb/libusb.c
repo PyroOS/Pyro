@@ -19,15 +19,15 @@
  *
  */
 
-#include <atheos/kernel.h>
-#include <atheos/kdebug.h>
-#include <atheos/string.h>
-#include <atheos/device.h>
-#include <atheos/semaphore.h>
-#include <atheos/spinlock.h>
-#include <atheos/smp.h>
-#include <atheos/usb.h>
-#include <atheos/libusb.h>
+#include <pyro/kernel.h>
+#include <pyro/kdebug.h>
+#include <pyro/string.h>
+#include <pyro/device.h>
+#include <pyro/semaphore.h>
+#include <pyro/spinlock.h>
+#include <pyro/smp.h>
+#include <pyro/usb.h>
+#include <pyro/libusb.h>
 
 #include <posix/errno.h>
 

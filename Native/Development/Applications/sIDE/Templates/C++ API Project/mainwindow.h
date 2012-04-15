@@ -13,7 +13,7 @@ public:
 	MainWindow();
 	void HandleMessage( os::Message* );
 private:
-	bool OkToQuit();
+	bool OkToQuit(); // Obsolete?
 };
 
 #endif

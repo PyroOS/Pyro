@@ -20,7 +20,7 @@
 #ifndef __F_UTIL_VARIANT_H__
 #define __F_UTIL_VARIANT_H__
 
-#include <atheos/types.h>
+#include <pyro/types.h>
 #include <util/string.h>
 #include <util/typecodes.h>
 

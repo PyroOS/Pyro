@@ -1,23 +1,16 @@
-# Blank Makefile for non-compilable items (I.E Fonts, Icons etc.)
-# Just set DIST_TARGET_PATH below & copy this into
-# the directory you are adding.
-# REMEMBER: Add the new directory to the Makefile in the parent
-# directory!
+# Makefile for non-compilable items.
 
-DIST_TARGET_PATH := $(IMAGE)/system/
+dist: inst symlinks
 
-all:
+inst:
+	mkdir -p $(PYRO_BINARY_DESTINATION)/System/scripts
+	cp -f * $(PYRO_BINARY_DESTINATION)/System/scripts/
+	rm $(PYRO_BINARY_DESTINATION)/System/scripts/Makefile
+	sync
 
-deps:
-
-install:
-
-doc:
-
-install-doc:
-
-dist:
-	cp -a *.sh $(DIST_TARGET_PATH)
+symlinks:
+	ln -sf /boot/System/scripts/updatepath.sh $(PYRO_BINARY_DESTINATION)/System/binary/updatepath
+	chmod -x $(PYRO_BINARY_DESTINATION)/System/binary/updatepath
 
 clean:
-
+	sync

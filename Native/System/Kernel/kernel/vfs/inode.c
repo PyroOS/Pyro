@@ -17,12 +17,12 @@
  *  Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  */
 
-#include <atheos/types.h>
-#include <atheos/kernel.h>
-#include <atheos/device.h>
-#include <atheos/semaphore.h>
-#include <atheos/image.h>
-#include <atheos/udelay.h>
+#include <pyro/types.h>
+#include <pyro/kernel.h>
+#include <pyro/device.h>
+#include <pyro/semaphore.h>
+#include <pyro/image.h>
+#include <pyro/udelay.h>
 #include <posix/limits.h>
 #include <posix/errno.h>
 
@@ -1116,7 +1116,7 @@ static void release_fs( FileSysDesc_s *psDesc )
 	/* Do not unload bootmodule fs drivers */
 	for ( i = 0; i < g_sSysBase.ex_nBootModuleCount; i++ )
 	{
-		strcpy( zPath, "/system/drivers/fs/" );
+		strcpy( zPath, "/System/drivers/fs/" );
 		strcat( zPath, psDesc->fs_zName );
 		if ( !strcmp( zPath, g_sSysBase.ex_asBootModules[i].bm_pzModuleArgs ) )
 		{
@@ -1335,7 +1335,7 @@ static FileSysDesc_s *load_filesystem( const char *pzName, const char *pzDeviceP
 		zPath[nPathLen] = '/';
 		zPath[nPathLen + 1] = '\0';
 	}
-	strcat( zPath, "system/drivers/fs/" );
+	strcat( zPath, "System/drivers/fs/" );
 
 	if ( pzName != NULL )
 	{
@@ -1634,7 +1634,7 @@ status_t sys_probe_fs( int nVersion, const char *pzDevicePath, fs_info * psInfo 
 		zPath[nPathLen] = '/';
 		zPath[nPathLen + 1] = '\0';
 	}
-	strcat( zPath, "system/drivers/fs/" );
+	strcat( zPath, "System/drivers/fs/" );
 
 	LOCK( g_hFSListSema );
 	nError = probe_device_path( zPath, pzDevicePath, psInfo, &psDesc );

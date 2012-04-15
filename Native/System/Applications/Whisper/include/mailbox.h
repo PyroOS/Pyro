@@ -21,7 +21,7 @@
 #ifndef WHISPER_MAILBOX_H_
 #define WHISPER_MAILBOX_H_
 
-#include <atheos/types.h>
+#include <pyro/types.h>
 #include <util/string.h>
 #include <util/variant.h>
 #include <util/locker.h>

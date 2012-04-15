@@ -2,7 +2,7 @@
 #include <stdlib.h>
 #include <errno.h>
 
-#include <atheos/semaphore.h>
+#include <pyro/semaphore.h>
 
 int main( int argc, char** argv )
 {

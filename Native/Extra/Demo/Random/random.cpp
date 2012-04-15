@@ -192,11 +192,3 @@ os::DateTime Random::AsDateTime()
 	
 	return os::DateTime(y,m,d);
 }
-
-
-
-
-
-
-
-

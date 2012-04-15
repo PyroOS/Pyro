@@ -28,7 +28,7 @@
 #include <gui/textview.h>
 #include <gui/button.h>
 #include <gui/filerequester.h>
-#include <atheos/types.h>
+#include <pyro/types.h>
 #include <util/string.h>
 #include <util/message.h>
 #include <util/messenger.h>

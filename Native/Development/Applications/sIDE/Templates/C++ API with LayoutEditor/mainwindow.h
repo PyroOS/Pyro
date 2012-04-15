@@ -15,14 +15,9 @@ public:
 	MainWindow();
 	void HandleMessage( os::Message* );
 private:
-	bool OkToQuit();
+	bool OkToQuit();  // Obsolete?
 	#include "mainwindowLayout.h"
 };
 
 #endif
-
-
-
-
-
 

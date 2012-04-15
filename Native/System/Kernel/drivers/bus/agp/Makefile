@@ -3,14 +3,12 @@ AFLAGS   = -c
 
 CFLAGS += -D__ENABLE_DEBUG__
 
-C_INCLUDE_PATH=$(ATHEOS_INCLUDE_PATH)
+C_INCLUDE_PATH=$(PYRO_INCLUDE)
 
 OBJS := agp.o
 
-
 OBJDIR	:= objs
 OBJS	:= $(addprefix $(OBJDIR)/,$(OBJS))
-
 
 #
 #	rules
@@ -28,9 +26,6 @@ $(OBJDIR)/%.o : %.s
 $(OBJDIR)/%.o : %.S
 	$(CC) $(CFLAGS) -x assembler-with-cpp $< -o $@
 
-
-
-
 all :	objs $(OBJDIR)/agp
 
 objs:
@@ -39,11 +34,16 @@ objs:
 $(OBJDIR)/agp: $(OBJS) Makefile
 	$(CC) -kernel $(OBJS) -o $(OBJDIR)/agp
 
-install: all
-	cp -f $(OBJDIR)/agp $(IMAGE)/system/drivers/dev/bus/agp
+# ----- ----- ----- ----- ----- ----- ----- ----- ----- -----
 
-dist: install
+dist: all inst clean
+
+inst:
+	mkdir -p $(PYRO_BINARY_DESTINATION)/System/drivers/dev/bus
+	cp -f $(OBJDIR)/agp $(PYRO_BINARY_DESTINATION)/System/drivers/dev/bus/
+	addattrib $(PYRO_BINARY_DESTINATION)/System/drivers/dev/bus/agp "CheckSum::MD5" `md5sum $(PYRO_BINARY_DESTINATION)/System/drivers/dev/bus/agp | cut -c1-32`
+	sync
 
 clean:
-	-rm -f $(OBJS) $(OBJDIR)/agp
-
+	rm -rf $(OBJDIR)
+	sync

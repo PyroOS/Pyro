@@ -22,14 +22,14 @@
 #define	DEVICES_DISPLAY_PACKETS_H
 
 #include <string.h>
-#include <atheos/types.h>
+#include <pyro/types.h>
 
 #include <gui/gfxtypes.h>
 #include <gui/font.h>
 #include <gui/region.h>
 #include <gui/guidefines.h>
 
-//#include  <atheos/mouse.h>
+//#include  <pyro/mouse.h>
 
 class SrvWindow;
 

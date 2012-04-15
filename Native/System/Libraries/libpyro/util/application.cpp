@@ -21,9 +21,9 @@
 #include <assert.h>
 #include <errno.h>
 #include <string.h>
-#include <atheos/types.h>
-#include <atheos/threads.h>
-#include <atheos/kernel.h>
+#include <pyro/types.h>
+#include <pyro/threads.h>
+#include <pyro/kernel.h>
 #include <util/application.h>
 #include <util/message.h>
 #include <util/messenger.h>

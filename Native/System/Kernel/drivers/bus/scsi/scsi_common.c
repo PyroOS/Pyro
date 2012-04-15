@@ -21,13 +21,13 @@
  *
  */
 
-#include <atheos/types.h>
-#include <atheos/kernel.h>
-#include <atheos/device.h>
-#include <atheos/scsi.h>
-#include <atheos/cdrom.h>
-#include <atheos/bootmodules.h>
-#include <atheos/udelay.h>
+#include <pyro/types.h>
+#include <pyro/kernel.h>
+#include <pyro/device.h>
+#include <pyro/scsi.h>
+#include <pyro/cdrom.h>
+#include <pyro/bootmodules.h>
+#include <pyro/udelay.h>
 #include <posix/errno.h>
 #include <macros.h>
 

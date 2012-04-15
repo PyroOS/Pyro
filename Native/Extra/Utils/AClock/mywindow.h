@@ -73,8 +73,3 @@ class MyApp : public Application
     bool bSec;
     Message* pcMsg;
 };
-
-
-
-
-

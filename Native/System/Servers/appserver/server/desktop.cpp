@@ -22,9 +22,9 @@
 #include <dirent.h>
 #include <assert.h>
 
-#include <atheos/areas.h>
-#include <atheos/image.h>
-#include <atheos/device.h>
+#include <pyro/areas.h>
+#include <pyro/image.h>
+#include <pyro/device.h>
 
 #include <gui/desktop.h>
 #include <gui/window.h>
@@ -805,7 +805,7 @@ bool init_desktops()
 			}
 
 			/* Get appserver driver */
-			char zAppserverDriverPath[PATH_MAX] = "/system/drivers/appserver/video/";
+			char zAppserverDriverPath[PATH_MAX] = "/boot/System/drivers/appserver/video/";
 			char zDriverPath[PATH_MAX];
 
 			memset( zDriverPath, 0, PATH_MAX );

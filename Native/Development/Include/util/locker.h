@@ -23,10 +23,10 @@
 #include <stdio.h>
 #include <errno.h>
 #include <sys/debug.h>
-#include <atheos/types.h>
-#include <atheos/semaphore.h>
-#include <atheos/threads.h>
-#include <atheos/atomic.h>
+#include <pyro/types.h>
+#include <pyro/semaphore.h>
+#include <pyro/threads.h>
+#include <pyro/atomic.h>
 
 namespace os
 {

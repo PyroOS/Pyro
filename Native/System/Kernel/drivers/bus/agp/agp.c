@@ -51,15 +51,15 @@
  * SUCH DAMAGE.
  */
 
-#include <atheos/types.h>
-#include <atheos/kernel.h>
-#include <atheos/device.h>
-#include <atheos/dlist.h>
-#include <atheos/pci.h>
-#include <atheos/agpgart.h>
-#include <atheos/agp.h>
-#include <atheos/string.h>
-#include <atheos/bootmodules.h>
+#include <pyro/types.h>
+#include <pyro/kernel.h>
+#include <pyro/device.h>
+#include <pyro/dlist.h>
+#include <pyro/pci.h>
+#include <pyro/agpgart.h>
+#include <pyro/agp.h>
+#include <pyro/string.h>
+#include <pyro/bootmodules.h>
 #include <posix/errno.h>
 #include <macros.h>
 

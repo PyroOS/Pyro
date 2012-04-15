@@ -9,7 +9,7 @@
 #include <gui/stringview.h>
 #include <gui/imageview.h>
 #include <util/resources.h>
-#include <atheos/image.h>
+#include <pyro/image.h>
 #include <gui/filerequester.h>
 #include <gui/dropdownmenu.h>
 #include <util/settings.h>

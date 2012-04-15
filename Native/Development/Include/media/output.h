@@ -21,8 +21,8 @@
 #define __F_MEDIA_OUTPUT_H_
 
 #include <util/resource.h>
-#include <atheos/types.h>
-#include <atheos/time.h>
+#include <pyro/types.h>
+#include <pyro/time.h>
 #include <gui/view.h>
 #include <util/string.h>
 #include <media/packet.h>

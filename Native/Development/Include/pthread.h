@@ -20,8 +20,8 @@
 extern "C"{
 #endif
 
-#include <atheos/types.h>
-#include <atheos/tld.h>
+#include <pyro/types.h>
+#include <pyro/tld.h>
 
 #include <sched.h>
 #include <time.h>

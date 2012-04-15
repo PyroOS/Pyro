@@ -61,5 +61,3 @@ class ProjectPrefs : public os::Window
 
 
 
-
-

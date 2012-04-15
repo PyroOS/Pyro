@@ -24,7 +24,7 @@
 #include <gui/view.h>
 #include <gui/image.h>
 #include <util/string.h>
-#include <atheos/types.h>
+#include <pyro/types.h>
 
 using namespace os;
 

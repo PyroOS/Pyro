@@ -19,14 +19,14 @@ MSG_MAINWND_MENU_OPTIONS_SPEED_HIGH			High
 MSG_MAINWND_MENU_OPTIONS_SPEED_PAUSE		Pause
 
 MSG_ABOUTWND_TITLE=900						About System Information v.%s
-MSG_ABOUTWND_TEXT							System Information v.%s\n\nSystem Information for Syllable\nJohn Hall, 2001\n\nSystem Information is released under the GNU Public License (GPL)\n"
+MSG_ABOUTWND_TEXT							System Information v.%s\n\nSystem Information for Pyro\nJohn Hall, 2001\n\nSystem Information is released under the GNU Public License (GPL)\n"
 MSG_ABOUTWND_OK								_Ok
 
 MSG_TAB_SYSINFO=1000						System Info
 MSG_TAB_SYSINFO_VER_NAME					Name
 MSG_TAB_SYSINFO_VER_VERSION					Version
 MSG_TAB_SYSINFO_VER_BUILDDATE				Build Date
-MSG_TAB_SYSINFO_VER_SYLLABLE				Syllable
+MSG_TAB_SYSINFO_VER_SYLLABLE				Pyro
 MSG_TAB_SYSINFO_VER_SLBMGR					System Information
 MSG_TAB_SYSINFO_CPU_CPU						CPU
 MSG_TAB_SYSINFO_CPU_CORESPEED				Core Speed

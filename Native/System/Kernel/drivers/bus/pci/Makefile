@@ -1,14 +1,12 @@
 CFLAGS   += -Wstrict-prototypes -kernel -fno-PIC -c -fno-strict-aliasing -Wno-trigraphs -fno-common -D__ENABLE_DEBUG__ -I../acpi/include
 AFLAGS   = -c
 
-C_INCLUDE_PATH=$(ATHEOS_INCLUDE_PATH)
+C_INCLUDE_PATH=$(PYRO_INCLUDE)
 
 OBJS := pci.o pci_acpi_link.o pci_acpi_router.o pci_registers.o
 
-
 OBJDIR	:= objs
 OBJS	:= $(addprefix $(OBJDIR)/,$(OBJS))
-
 
 #
 #	rules
@@ -26,9 +24,6 @@ $(OBJDIR)/%.o : %.s
 $(OBJDIR)/%.o : %.S
 	$(CC) $(CFLAGS) -x assembler-with-cpp $< -o $@
 
-
-
-
 all :	objs $(OBJDIR)/pci
 
 objs:
@@ -37,10 +32,16 @@ objs:
 $(OBJDIR)/pci: $(OBJS) Makefile
 	$(CC) -kernel $(OBJS) -o $(OBJDIR)/pci
 
-install: all
-	cp -f $(OBJDIR)/pci $(IMAGE)/system/drivers/dev/bus/pci
+# ----- ----- ----- ----- ----- ----- ----- ----- ----- -----
 
-dist: install
+dist: all inst clean
+
+inst:
+	mkdir -p $(PYRO_BINARY_DESTINATION)/System/drivers/dev/bus
+	cp -f $(OBJDIR)/pci $(PYRO_BINARY_DESTINATION)/System/drivers/dev/bus/
+	addattrib $(PYRO_BINARY_DESTINATION)/System/drivers/dev/bus/pci "CheckSum::MD5" `md5sum $(PYRO_BINARY_DESTINATION)/System/drivers/dev/bus/pci | cut -c1-32`
+	sync
 
 clean:
-	-rm -f $(OBJS) $(OBJDIR)/pci
+	rm -rf $(OBJDIR)
+	sync

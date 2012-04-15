@@ -15,7 +15,7 @@ MSG_MENU_CATEGORY_EMULATORS				Emuladores
 MSG_MENU_CATEGORY_SYSTEMTOOLS			Herramientas del sistema
 
 MSG_MENU_ABOUT_MENU=2000				Acerca...
-MSG_MENU_ABOUT_TITLE					Acerca de Syllable
+MSG_MENU_ABOUT_TITLE					Acerca de Pyro
 MSG_MENU_ABOUT_BUILDDATE				Fecha de compilación:
 MSG_MENU_ABOUT_TEXTONE					Ver
 MSG_MENU_ABOUT_TEXTTWO					para actualizaciones e información

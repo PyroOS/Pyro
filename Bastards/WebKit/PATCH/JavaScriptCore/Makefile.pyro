@@ -1,0 +1,44 @@
+CXXFLAGS += -O2 -c -fexceptions $(INCLUDES) -DBUILDING_SYLLABLE__=1 -DUSE_SYSTEM_MALLOC=1 -DHAVE_POSIX_MEMALIGN=1 -DHAVE_CONFIG_H=1
+
+INCLUDES = -I./ -I../ -Iwtf -I../wtf -Ibindings -Ikjs -Ibindings/c -IDerivedSources/JavaScriptCore -IForwardingHeaders -Ipcre -I../WebCore/ForwardingHeaders
+
+VPATH = ./ DerivedSources/JavaScriptCore ForwardingHeaders/JavaScriptCore bindings bindings/c kjs wtf wtf/unicode pcre API
+
+LIBNAME = libjavascriptcore.so.1
+
+OBJDIR = objs
+
+API_OBJS = JSBase.o JSCallbackConstructor.o JSCallbackFunction.o \
+    JSCallbackObject.o JSClassRef.o JSContextRef.o JSObjectRef.o \
+    JSStringRef.o JSValueRef.o
+
+OTHER_OBJS	= NP_jsobject.o npruntime.o runtime_array.o runtime.o runtime_method.o runtime_object.o runtime_root.o  \
+	c_class.o c_instance.o c_runtime.o c_utility.o DateMath.o JSWrapperObject.o PropertyNameArray.o  \
+	array_instance.o array_object.o bool_object.o collector.o CommonIdentifiers.o date_object.o debugger.o dtoa.o error_object.o  \
+	function.o function_object.o grammar.o identifier.o internal.o interpreter.o  \
+	JSImmediate.o JSLock.o lexer.o list.o lookup.o math_object.o nodes.o nodes2string.o number_object.o  \
+	object.o object_object.o operations.o Parser.o property_map.o property_slot.o regexp.o  \
+	regexp_object.o scope_chain.o string_object.o ustring.o value.o ExecState.o JSGlobalObject.o JSVariableObject.o \
+	UTF8.o TCSystemAlloc.o Assertions.o HashTable.o FastMalloc.o \
+	pcre_compile.o pcre_exec.o pcre_tables.o pcre_ucp_searchfuncs.o pcre_xclass.o 
+
+OBJS := $(API_OBJS) $(OTHER_OBJS)
+
+include $(PYRO_COMMON)/makefile.rules
+
+all: $(OBJDIR) gensources $(OBJDIR)/$(LIBNAME)
+
+$(OBJDIR):
+	mkdir $(OBJDIR)
+
+$(OBJDIR)/$(LIBNAME): $(OBJS)
+	$(CXX) -shared -Xlinker "-soname=$(LIBNAME)" $(OBJS) -lm -lsicuuc -licudata -o $(OBJDIR)/$(LIBNAME)
+	cd $(OBJDIR) &&	ln -sf $(LIBNAME) libjavascriptcore.so
+
+gensources:
+	if [ ! -e DerivedSources ];then \
+		sh make-generated-sources.sh; \
+	fi;
+
+clean:
+	rm -rf $(OBJS) $(OBJDIR) DerivedSources

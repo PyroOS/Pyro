@@ -20,7 +20,7 @@
 #ifndef __F_APP_APPSERVERCONFIG_H__
 #define __F_APP_APPSERVERCONFIG_H__
 
-#include <atheos/types.h>
+#include <pyro/types.h>
 #include <util/message.h>
 
 namespace os

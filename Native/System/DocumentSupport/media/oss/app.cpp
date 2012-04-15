@@ -22,7 +22,7 @@
 #include <fcntl.h>
 #include <stropts.h>
 #include <unistd.h>
-#include <atheos/soundcard.h>
+#include <pyro/soundcard.h>
 #include <util/application.h>
 #include <util/string.h>
 #include <gui/view.h>
@@ -34,8 +34,8 @@
 #include <gui/requesters.h>
 
 
-#include "channel.h"
-#include "view.h"
+#include "mixerchannel.h"
+#include "mixerview.h"
 #include "window.h"
 
 using namespace os;

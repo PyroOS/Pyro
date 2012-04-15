@@ -26,7 +26,7 @@
 
 #include "ata.h"
 #include "ata_timing.h"
-#include <atheos/pci.h> 
+#include <pyro/pci.h> 
 extern PCI_bus_s* g_psPCIBus;
 
 #define AMD_IDE_ENABLE		( 0x00 + psBridge->nBase )

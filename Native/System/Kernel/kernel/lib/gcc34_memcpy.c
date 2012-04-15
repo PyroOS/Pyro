@@ -3,7 +3,7 @@
  * as a non-inlined function, even with -ffreestanding flag (GCC bug?).
  */
 
-#include <atheos/types.h>
+#include <pyro/types.h>
 
 
 void * memcpy( void* to, const void* from, size_t n )

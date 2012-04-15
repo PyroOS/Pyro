@@ -35,8 +35,8 @@
 #include <sys/ioctl.h>
 #include <sys/wait.h>
 
-#include <atheos/threads.h>
-#include <atheos/kernel.h>
+#include <pyro/threads.h>
+#include <pyro/kernel.h>
 
 #include <gui/window.h>
 #include <gui/desktop.h>
@@ -215,7 +215,7 @@ void OpenWindow()
 		cWinRect.bottom = cWinRect.top + 200;
 	}
 	/* Instanciate window */
-	g_pcWindow = new MyWindow( cWinRect, "_sterm_", "Syllable Terminal", g_bWindowBorder ? 0 : WND_NO_CLOSE_BUT | WND_NO_ZOOM_BUT | WND_NO_DEPTH_BUT | WND_NO_TITLE | WND_NO_BORDER, (g_nDesktop == os::Desktop::ACTIVE_DESKTOP ? CURRENT_DESKTOP : 1 << g_nDesktop) );
+	g_pcWindow = new MyWindow( cWinRect, "_sterm_", "Pyro Terminal", g_bWindowBorder ? 0 : WND_NO_CLOSE_BUT | WND_NO_ZOOM_BUT | WND_NO_DEPTH_BUT | WND_NO_TITLE | WND_NO_BORDER, (g_nDesktop == os::Desktop::ACTIVE_DESKTOP ? CURRENT_DESKTOP : 1 << g_nDesktop) );
 
 	Rect cTermFrame = g_pcWindow->GetBounds();
 	Rect cScrollBarFrame = cTermFrame;
@@ -441,7 +441,7 @@ int main( int argc, char **argv )
 	}
 	if( g_nShowVersion )
 	{
-		printf( "Syllable virtual terminal " VERSION "\n" );
+		printf( "Pyro virtual terminal " VERSION "\n" );
 		exit( 0 );
 	}
 	if( g_nShowHelp )

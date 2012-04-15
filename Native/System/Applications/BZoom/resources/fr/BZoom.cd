@@ -16,6 +16,6 @@ MSG_MAINWND_MENU_HELP=300					Aide
 MSG_MAINWND_MENU_HELP_ABOUT					À propos
 
 MSG_ABOUTWND_TITLE=1000						À propos de BZoom
-MSG_ABOUTWND_TEXT							BZoom V1.0\n\nUn simple zoomer pour AtheOS.\nBasé sur AZoom par Chir.\nBZoom est mis à disposition sous license\nGNU GPL
+MSG_ABOUTWND_TEXT							BZoom V1.0\n\nUn simple zoomer pour Pyro.\nBasé sur AZoom par Chir.\nBZoom est mis à disposition sous license\nGNU GPL
 MSG_ABOUTWND_OK								Ok
 

@@ -21,7 +21,7 @@
 #ifndef WHISPER_SYLLABLE__APPWINDOW_H_
 #define WHISPER_SYLLABLE__APPWINDOW_H_
 
-#include <atheos/types.h>
+#include <pyro/types.h>
 #include <util/message.h>
 #include <util/string.h>
 #include <util/settings.h>

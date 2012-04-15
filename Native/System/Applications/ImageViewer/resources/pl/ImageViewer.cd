@@ -1,0 +1,19 @@
+//
+//	ImageView String Catalog
+//
+//	Translated by: Antesenamon
+//
+
+ID_TITLE=0							ImageViewer
+ID_FILE_NOT_FOUND					Error: File not found!
+ID_NO_VIEW							Unable to view image
+
+MSG_MIMETYPE_IMAGE_PNG=10000		Obraz PNG
+MSG_MIMETYPE_IMAGE_JPEG				Obraz JPEG
+MSG_MIMETYPE_IMAGE_GIF				Obraz GIF
+MSG_MIMETYPE_IMAGE_BMP				Obraz BMP
+MSG_MIMETYPE_IMAGE_TIFF				Obraz TIFF
+MSG_MIMETYPE_IMAGE_XBM				Obraz XBM
+MSG_MIMETYPE_IMAGE_XPM				Obraz XPM
+MSG_MIMETYPE_IMAGE_TGA				Obraz TGA
+MSG_MIMETYPE_IMAGE_PCX				Obraz PCX

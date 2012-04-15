@@ -1,12 +1,10 @@
-CFLAGS   += -kernel -fno-PIC -c -D__ENABLE_DEBUG__ -I.
+CFLAGS   += -kernel -fno-PIC -c -D__ENABLE_DEBUG__ -I. -O
 
-C_INCLUDE_PATH=$(ATHEOS_INCLUDE_PATH)
+C_INCLUDE_PATH=$(PYRO_INCLUDE)
 
 SOURCE_DIR=.
-
 OBJS := dl2k.o
 DRIVER := dl2k
-
 OBJDIR	:= objs
 OBJS	:= $(addprefix $(OBJDIR)/,$(OBJS))
 
@@ -15,20 +13,22 @@ $(OBJDIR)/%.o : $(SOURCE_DIR)/%.c
 
 all:	objs $(OBJDIR)/$(DRIVER)
 
-deps:
-
 objs:
 	mkdir objs
 
 $(OBJDIR)/$(DRIVER): $(OBJS) Makefile
 	$(CC) -kernel $(OBJS) -o $@
 
-install: all
-	cp -f $(OBJDIR)/$(DRIVER) $(IMAGE)/system/drivers/dev/net/eth/$(DRIVER)
+# ----- ----- ----- ----- ----- ----- ----- ----- ----- -----
 
-dist: install
+dist: all inst clean
+
+inst:
+	mkdir -p $(PYRO_BINARY_DESTINATION)/System/drivers/dev/net/eth
+	cp -f $(OBJDIR)/$(DRIVER) $(PYRO_BINARY_DESTINATION)/System/drivers/dev/net/eth/
+	addattrib $(PYRO_BINARY_DESTINATION)/System/drivers/dev/net/eth/$(DRIVER) "CheckSum::MD5" `md5sum $(PYRO_BINARY_DESTINATION)/System/drivers/dev/net/eth/$(DRIVER) | cut -c1-32`
+	sync
 
 clean:
-	-rm -f $(OBJS)
-	-rm -f $(OBJDIR)/$(DRIVER)
-
+	rm -rf $(OBJDIR)
+	sync

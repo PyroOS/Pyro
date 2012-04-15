@@ -5,7 +5,7 @@
 #include <getopt.h>
 
 #include <sys/ioctl.h>
-#include <atheos/types.h>
+#include <pyro/types.h>
 #include <sys/socket.h>
 #include <net/nettypes.h>
 #include <net/if.h>

@@ -3,56 +3,75 @@ CXXFLAGS += -c
 
 EXE = DiskManager
 
-CATALOGS = da de es fr hu nl pl sv
-
 OBJS =	main.o diskview.o partitionview.o
-
 OBJDIR	:= objs
 
-include $(ATHEOS_SRC)/makefile.rules
+include $(PYRO_COMMON)/makefile.rules
 
 all :	$(OBJDIR) $(OBJDIR)/$(EXE)
 
 $(OBJDIR):
 	mkdir $(OBJDIR)
 
-$(OBJDIR)/$(EXE): catalogs $(OBJS)
-	$(CXX) $(OBJS) -o $(OBJDIR)/$(EXE) -lsyllable
+$(OBJDIR)/$(EXE): $(OBJS)
+	$(CXX) $(OBJS) -o $(OBJDIR)/$(EXE) -lpyro
 	strip --strip-all $(OBJDIR)/$(EXE)
 	rescopy -r $(OBJDIR)/$(EXE) icons/*.png
 	rescopy -a $(OBJDIR)/$(EXE) resources/$(EXE).catalog
-	for CATALOG in $(CATALOGS);do \
-		echo $$CATALOG; \
-		rescopy -a $(OBJDIR)/$(EXE) $$CATALOG/$(EXE).catalog=resources/$$CATALOG/$(EXE).catalog; \
+	for CATALOG in `ls -1 resources`;do \
+		if [ -d "resources/$$CATALOG" ] ; then \
+			echo $$CATALOG; \
+			rescopy -a $(OBJDIR)/$(EXE) $$CATALOG/$(EXE).catalog=resources/$$CATALOG/$(EXE).catalog; \
+		fi \
 	done;
+	addattrib $(OBJDIR)/$(EXE) "os::Category" "System Tools"
+
+deps: $(OBJDIR) $(DEPS)
+
+# ----- ----- ----- ----- ----- ----- ----- ----- ----- -----
+
+dist: catalogs all inst web clean
 
 catalogs:
 	cd resources; \
 	catcomp -c $(EXE).cd; \
-	for CATALOG in $(CATALOGS);do \
-		echo $$CATALOG; \
-		cd $$CATALOG; \
-		catcomp -t $(EXE).cd; \
-		cd ..; \
+	for CATALOG in `ls -1`;do \
+		if [ -d "$$CATALOG" ] ; then \
+			echo $$CATALOG; \
+			cd $$CATALOG; \
+			catcomp -t $(EXE).cd; \
+			cd ..; \
+		fi \
 	done;
+	sync
 
-install: $(OBJDIR)/$(EXE)
-	mkdir -p "$(IMAGE)/Applications/System Tools"
-	cp -f $(OBJDIR)/$(EXE) "$(IMAGE)/Applications/System Tools/Disk Manager"
-	addattrib "$(IMAGE)/Applications/System Tools/Disk Manager" "os::Category" "System Tools"
+inst:
+	mkdir -p $(PYRO_BINARY_DESTINATION)/System/binary
+	cp -f $(OBJDIR)/$(EXE) $(PYRO_BINARY_DESTINATION)/System/binary/
+	addattrib $(PYRO_BINARY_DESTINATION)/System/binary/$(EXE) "CheckSum::MD5" `md5sum $(PYRO_BINARY_DESTINATION)/System/binary/$(EXE) | cut -c1-32`
+	sync
 
-dist: install
-
-deps: $(OBJDIR) $(DEPS)
+web:
+	mkdir -p $(PYRO_BINARY_DESTINATION)Web/Languages/LIST
+	mkdir -p $(PYRO_BINARY_DESTINATION)Web/Languages/Utils/$(EXE)
+	cd resources; \
+	for CATALOG in `ls -1`;do \
+		if [ -d "$$CATALOG" ] ; then \
+			touch $(PYRO_BINARY_DESTINATION)Web/Languages/LIST/$$CATALOG; \
+			touch $(PYRO_BINARY_DESTINATION)Web/Languages/Utils/$(EXE)/int; \
+			touch $(PYRO_BINARY_DESTINATION)Web/Languages/Utils/$(EXE)/$$CATALOG; \
+		fi \
+	done;
+	sync
 
 clean: catalog-clean
-	rm -f $(OBJS) $(OBJDIR)/*.d $(OBJDIR)/$(EXE)
+	rm -rf $(OBJDIR)
+	rm -f $(EXE)
+	sync
 
 catalog-clean:
-	-rm resources/$(EXE).catalog resources/$(EXE).h; \
-	for CATALOG in $(CATALOGS);do \
-		rm resources/$$CATALOG/$(EXE).catalog; \
+	rm -f resources/$(EXE).catalog resources/$(EXE).h
+	for CATALOG in `ls -1 resources`;do \
+		rm -f resources/$$CATALOG/$(EXE).catalog; \
 	done;
-
--include $(OBJDIR)/*.d
-
+	sync

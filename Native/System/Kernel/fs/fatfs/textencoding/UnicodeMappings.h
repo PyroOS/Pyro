@@ -8,7 +8,7 @@
 
 //#include <SupportDefs.h>
 
-#include <atheos/types.h>
+#include <pyro/types.h>
 
 extern const uint16 mswintou[];
 extern const uint16 msdostou[];

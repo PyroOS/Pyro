@@ -35,7 +35,7 @@ int main(int argc, char *argv[])
 	bool deamonize, do_ntp;
 	int c, n, if_count, children, child_status;
 	struct sigaction sa;
-	const char *logfile_name = "/var/log/dhcpc";
+	const char *logfile_name = "/log/dhcpc";
 	logfile = stderr;	/* Redirect to stderr until we have opened the log file */
 
 	if( argc < 2 )

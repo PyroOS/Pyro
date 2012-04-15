@@ -19,9 +19,9 @@
 #include <assert.h>
 
 #include <posix/errno.h>
-#include <atheos/atomic.h>
-#include <atheos/threads.h>
-#include <atheos/kernel.h>
+#include <pyro/atomic.h>
+#include <pyro/threads.h>
+#include <pyro/kernel.h>
 
 #include "inc/bits.h"
 

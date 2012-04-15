@@ -14,7 +14,7 @@
 #include <stdio.h>
 #include <unistd.h>
 #include <sys/ioctl.h>
-#include <atheos/acpi.h>
+#include <pyro/acpi.h>
 
 #define PLUGIN_NAME       "CpuSpeed"
 #define PLUGIN_VERSION    "1.0"

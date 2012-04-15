@@ -21,7 +21,7 @@
 #define __F_UTIL_CIRCULARBUFFER_H__
 
 #include <sys/types.h>
-#include <atheos/types.h>
+#include <pyro/types.h>
 
 namespace os
 {

@@ -13,7 +13,7 @@ Keymap::~Keymap()
 
 os::String Keymap::GetKeymapDirectory()
 {
-	return "/system/keymaps/";
+	return "/boot/System/keymaps/";
 }
 
 std::vector<os::String> Keymap::GetKeymapNames()

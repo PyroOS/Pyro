@@ -6,10 +6,10 @@ extern "C" {
 #endif
 
 #ifndef ASSEMBLER	
-#include <atheos/types.h> /* NOT POSIX but you can't include just unistd.h without it */
+#include <pyro/types.h> /* NOT POSIX but you can't include just unistd.h without it */
 #endif
 	
-#include <atheos/syscall.h>
+#include <pyro/syscall.h>
 
 #define SEEK_SET	0
 #define SEEK_CUR	1

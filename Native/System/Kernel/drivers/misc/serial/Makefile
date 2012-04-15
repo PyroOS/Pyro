@@ -1,14 +1,11 @@
 CFLAGS   += -kernel -fno-PIC -c
 AFLAGS   = -c
 
-C_INCLUDE_PATH=$(ATHEOS_INCLUDE_PATH)
+C_INCLUDE_PATH=$(PYRO_INCLUDE)
 
 OBJS := serial.o
-
-
 OBJDIR	:= objs
 OBJS	:= $(addprefix $(OBJDIR)/,$(OBJS))
-
 
 #
 #	rules
@@ -26,9 +23,6 @@ $(OBJDIR)/%.o : %.s
 $(OBJDIR)/%.o : %.S
 	$(CC) $(CFLAGS) -x assembler-with-cpp $< -o $@
 
-
-
-
 all :	objs $(OBJDIR)/serial
 
 objs:
@@ -37,11 +31,16 @@ objs:
 $(OBJDIR)/serial: $(OBJS) Makefile
 	$(CC) -kernel $(OBJS) -o $(OBJDIR)/serial
 
-install: all
-	cp -f $(OBJDIR)/serial $(IMAGE)/system/drivers/dev/misc/serial
+# ----- ----- ----- ----- ----- ----- ----- ----- ----- -----
 
-dist: install
+dist: all inst clean
+
+inst:
+	mkdir -p $(PYRO_BINARY_DESTINATION)/System/drivers/dev/misc
+	cp -f $(OBJDIR)/serial $(PYRO_BINARY_DESTINATION)/System/drivers/dev/misc/
+	addattrib $(PYRO_BINARY_DESTINATION)/System/drivers/dev/misc/serial "CheckSum::MD5" `md5sum $(PYRO_BINARY_DESTINATION)/System/drivers/dev/misc/serial | cut -c1-32`
+	sync
 
 clean:
-	-rm -f $(OBJS) $(OBJDIR)/serial
-
+	rm -rf $(OBJDIR)
+	sync

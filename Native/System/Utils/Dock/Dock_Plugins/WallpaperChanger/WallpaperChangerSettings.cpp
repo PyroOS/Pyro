@@ -128,7 +128,8 @@ void WallpaperChangerSettings::HandleMessage(Message* pcMessage)
 		case M_CHANGE_IMAGE:
 		{
 			ListViewStringRow* pcRow = (ListViewStringRow*)pcDirectoryList->GetRow(pcDirectoryList->GetLastSelected());
-			String cImage = String("/system/resources/wallpapers/") + pcRow->GetString(0);
+			String cImage = getenv( "HOME" );
+			cImage += String("/Pictures/") + pcRow->GetString(0);
 			BitmapImage* pcNewImage = new BitmapImage(new File(cImage));
 			Bitmap* pcNewBitmap = new Bitmap(201,90,CS_RGB32);
 			Scale(pcNewImage->LockBitmap(),pcNewBitmap,filter_box,0);
@@ -221,7 +222,8 @@ void WallpaperChangerSettings::LoadTimeSettings()
 **************************************************/
 void WallpaperChangerSettings::LoadDirectoryList()
 {
-	String cDir = String("/system/resources/wallpapers/");
+	String cDir = getenv( "HOME" );
+	cDir += "/Pictures/";
 	String cFile;
 	
 	Directory* pcDir = new Directory(cDir);
@@ -240,26 +242,3 @@ void WallpaperChangerSettings::LoadDirectoryList()
 	}
 	delete pcDir;
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

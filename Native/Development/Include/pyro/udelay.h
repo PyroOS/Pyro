@@ -7,7 +7,7 @@
 #ifndef __ATHEOS_UDELAY_H__
 #define __ATHEOS_UDELAY_H__
 
-#include <atheos/kernel.h>
+#include <pyro/kernel.h>
 
 #ifdef __cplusplus
 extern "C" {

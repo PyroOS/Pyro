@@ -1,11 +1,8 @@
 COPTS   = -I$(TOP)/src $(shell freetype-config --cflags) -c
 
-DEVBIN = /system/drivers/appserver/video
 OBJS = init301.o init.o sis_video.o sis.o sis3xx.o
-
 OBJDIR	:= objs
 OBJS	:= $(addprefix $(OBJDIR)/,$(OBJS))
-
 
 #
 #	rules
@@ -17,7 +14,6 @@ $(OBJDIR)/%.o : %.c
 $(OBJDIR)/%.o : %.cpp
 	$(CXX) $(COPTS) $< -o $@
 
-
 all :	objs $(OBJDIR)/sis3xx
 
 objs:
@@ -26,12 +22,16 @@ objs:
 $(OBJDIR)/sis3xx: $(OBJS)
 	$(CXX) -plugin -Xlinker -Bsymbolic -nodefaultlibs $(OBJS) -o $(OBJDIR)/sis3xx
 
-install: $(OBJDIR)/sis3xx
-	cp -f $(OBJDIR)/sis3xx $(IMAGE)/$(DEVBIN)/sis3xx
+# ----- ----- ----- ----- ----- ----- ----- ----- ----- -----
 
+dist: all inst clean
 
-dist: install
+inst:
+	mkdir -p $(PYRO_BINARY_DESTINATION)/System/drivers/appserver/video
+	cp -pf $(OBJDIR)/sis3xx $(PYRO_BINARY_DESTINATION)/System/drivers/appserver/video/
+	addattrib $(PYRO_BINARY_DESTINATION)/System/drivers/appserver/video/sis3xx "CheckSum::MD5" `md5sum $(PYRO_BINARY_DESTINATION)/System/drivers/appserver/video/sis3xx | cut -c1-32`
+	sync
 
 clean:
-	-rm $(OBJS) $(OBJDIR)/sis3xx
-
+	rm -rf $(OBJDIR)
+	sync

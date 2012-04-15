@@ -17,6 +17,3 @@
 
 #define AEDIT_VERSION "2.3"
 #define AEDIT_RELEASE_STRING "AEdit 2.3"
-
-
-

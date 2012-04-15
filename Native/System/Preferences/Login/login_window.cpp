@@ -127,7 +127,7 @@ LoginWindow::LoginWindow( const os::Rect cFrame ) : Window( cFrame, "Login", MSG
 	AddChild( m_pcIconFrame );
 
 	/* Requester to allow the user to pick a new icon for themselves */
-	m_pcIconRequester = new FileRequester( FileRequester::LOAD_REQ, new Messenger( this ), "/system/icons/", FileRequester::NODE_FILE, false );
+	m_pcIconRequester = new FileRequester( FileRequester::LOAD_REQ, new Messenger( this ), "/boot/System/icons/", FileRequester::NODE_FILE, false );
 
 	/* Change password */
 	cChildFrame.top = cChildFrame.bottom + 10;
@@ -472,7 +472,7 @@ status_t LoginWindow::SavePassword( const std::string cNew )
 BitmapImage * LoginWindow::GetUserIcon( void )
 {
 	BitmapImage *pcIcon = new BitmapImage();
-	String cPath = String( "/system/icons/users/" ) + m_cLogin + String( ".png" );
+	String cPath = String( "/boot/System/icons/users/" ) + m_cLogin + String( ".png" );
 
 	/* If the file exists, load that, otherwise load the default icon */
 	try
@@ -490,7 +490,7 @@ BitmapImage * LoginWindow::GetUserIcon( void )
 
 status_t LoginWindow::SetUserIcon()
 {
-	String cPath = String( "/system/icons/users/" ) + m_cLogin + String( ".png" );
+	String cPath = String( "/boot/System/icons/users/" ) + m_cLogin + String( ".png" );
 
 	try
 	{

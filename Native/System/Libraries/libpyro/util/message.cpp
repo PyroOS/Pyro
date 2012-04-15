@@ -20,7 +20,7 @@
 
 #include <malloc.h>
 #include <assert.h>
-#include <atheos/kernel.h>
+#include <pyro/kernel.h>
 
 #include <util/message.h>
 #include <gui/region.h>

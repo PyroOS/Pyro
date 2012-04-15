@@ -1,6 +1,6 @@
 #include <stdio.h>
-#include <atheos/semaphore.h>
-#include <atheos/threads.h>
+#include <pyro/semaphore.h>
+#include <pyro/threads.h>
 
 #include <util/string.h>
 

@@ -32,7 +32,7 @@
 #include <gui/desktop.h>
 #include <gui/image.h>
 #include <storage/file.h>
-#include <atheos/time.h>
+#include <pyro/time.h>
 #include <storage/streamableio.h>
 #include <iostream>
 
@@ -90,9 +90,3 @@ class DockWallpaperChanger : public View
 		DockWallpaperChangerLooper* pcChangeLooper;
 		bigtime_t nTimerTime;
 };
-
-
-
-
-
-

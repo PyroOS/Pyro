@@ -20,7 +20,7 @@
 #ifndef __F_APPSERVER_INPUTNODE_H__
 #define __F_APPSERVER_INPUTNODE_H__
 
-#include <atheos/mouse.h>
+#include <pyro/mouse.h>
 #include <gui/region.h>
 #include <util/messagequeue.h>
 

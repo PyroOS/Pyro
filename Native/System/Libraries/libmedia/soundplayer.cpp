@@ -17,7 +17,7 @@
  *  MA 02111-1307, USA
  */
 
-#include <atheos/kernel.h>
+#include <pyro/kernel.h>
 #include <media/soundplayer.h>
 
 using namespace os;

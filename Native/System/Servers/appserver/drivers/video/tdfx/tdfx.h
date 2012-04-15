@@ -31,7 +31,7 @@
 #ifndef __TDFX_H__
 #define __TDFX_H__
 
-#include <atheos/isa_io.h>
+#include <pyro/isa_io.h>
 
 #include "../../../server/ddriver.h"
 

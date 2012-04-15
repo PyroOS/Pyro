@@ -23,9 +23,9 @@
 #ifndef	__S3_CHROME_H__
 #define	__S3_CHROME_H__
 
-#include <atheos/kernel.h>
-#include <atheos/vesa_gfx.h>
-#include <atheos/pci.h>
+#include <pyro/kernel.h>
+#include <pyro/vesa_gfx.h>
+#include <pyro/pci.h>
 
 #include "../../../server/ddriver.h"
 

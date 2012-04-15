@@ -58,8 +58,3 @@ PrefsFontApp::PrefsFontApp() : os::Application("application/x-vnd-FontPreference
 PrefsFontApp::~PrefsFontApp()
 {
 }
-
-
-
-
-

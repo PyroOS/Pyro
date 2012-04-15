@@ -31,12 +31,12 @@
  *
  */
 
-#include <atheos/kernel.h>
-#include <atheos/irq.h>
-#include <atheos/types.h>
-#include <atheos/list.h>
-#include <atheos/timer.h>
-#include <atheos/acpi.h>
+#include <pyro/kernel.h>
+#include <pyro/irq.h>
+#include <pyro/types.h>
+#include <pyro/list.h>
+#include <pyro/timer.h>
+#include <pyro/acpi.h>
 #include <posix/errno.h>
 #include <posix/unistd.h>
 #include <acpi/processor.h>

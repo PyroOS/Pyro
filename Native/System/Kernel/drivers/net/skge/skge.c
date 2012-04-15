@@ -27,17 +27,17 @@
  * Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  */
 
-#include <atheos/kernel.h>
-#include <atheos/kdebug.h>
-#include <atheos/types.h>
-#include <atheos/device.h>
-#include <atheos/pci.h>
-#include <atheos/spinlock.h>
-#include <atheos/semaphore.h>
-#include <atheos/irq.h>
-#include <atheos/udelay.h>
-#include <atheos/bitops.h>
-#include <atheos/seqlock.h>
+#include <pyro/kernel.h>
+#include <pyro/kdebug.h>
+#include <pyro/types.h>
+#include <pyro/device.h>
+#include <pyro/pci.h>
+#include <pyro/spinlock.h>
+#include <pyro/semaphore.h>
+#include <pyro/irq.h>
+#include <pyro/udelay.h>
+#include <pyro/bitops.h>
+#include <pyro/seqlock.h>
 #include <posix/errno.h>
 #include <posix/signal.h>
 #include <net/net_device.h>
@@ -45,7 +45,7 @@
 #include <net/sockios.h>
 
 #define NO_DEBUG_STUBS 1
-#include <atheos/linux_compat.h>
+#include <pyro/linux_compat.h>
 
 #include <skge.h>
 

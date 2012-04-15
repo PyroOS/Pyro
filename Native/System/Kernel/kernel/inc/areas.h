@@ -21,8 +21,8 @@
 #ifndef __AREAS_H__
 #define __AREAS_H__
 
-#include <atheos/types.h>
-#include <atheos/semaphore.h>
+#include <pyro/types.h>
+#include <pyro/semaphore.h>
 
 #include "../vfs/vfs.h"
 #include "mman.h"

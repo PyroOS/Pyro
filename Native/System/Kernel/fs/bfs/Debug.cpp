@@ -11,8 +11,8 @@
 #include "BPlusTree.h"
 #include "Inode.h"
 
-#include <atheos/kernel.h>
-#include <atheos/time.h>
+#include <pyro/kernel.h>
+#include <pyro/time.h>
 
 #define Print __out
 

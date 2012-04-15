@@ -23,7 +23,7 @@
 #include <util/handler.h>
 #include <util/looper.h>
 #include <util/messagefilter.h>
-#include <atheos/kernel.h>
+#include <pyro/kernel.h>
 
 using namespace os;
 

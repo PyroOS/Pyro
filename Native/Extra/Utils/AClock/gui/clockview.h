@@ -20,7 +20,7 @@
 
 #include <gui/window.h>
 #include <gui/layoutview.h>
-#include <atheos/time.h>
+#include <pyro/time.h>
 #include <strings.h>
 #include <stdio.h>
 
@@ -49,5 +49,3 @@ class ClockView : public LayoutView
 	bool GetShowSeconds();
 
 };
-
-

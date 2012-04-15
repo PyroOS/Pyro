@@ -37,7 +37,7 @@
 #include "iconbar.h"
 #include "messages.h"
 #include "main.h"
-#include "resources/lang.h"
+#include "resources/ImageViewer.h"
 
 using namespace os;
 using namespace std;

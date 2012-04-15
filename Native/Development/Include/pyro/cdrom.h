@@ -25,8 +25,8 @@
 #ifndef __F_SYLLABLE_CDROM_H__
 #define __F_SYLLABLE_CDROM_H__
 
-#include <atheos/types.h>
-#include <atheos/device.h>
+#include <pyro/types.h>
+#include <pyro/device.h>
 
 #ifdef __cplusplus
 extern "C" {

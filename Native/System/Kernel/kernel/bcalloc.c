@@ -18,9 +18,9 @@
  *  Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  */
 
-#include <atheos/kernel.h>
-#include <atheos/bcache.h>
-#include <atheos/semaphore.h>
+#include <pyro/kernel.h>
+#include <pyro/bcache.h>
+#include <pyro/semaphore.h>
 #include <posix/errno.h>
 
 #include <macros.h>

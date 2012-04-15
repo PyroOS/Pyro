@@ -2,12 +2,10 @@ COPTS   = -I../../../server  -c -O2 -Wall
 
 DRIVERNAME := sylvnc_mouse
 
-DEVBIN = /system/drivers/appserver/input
 OBJS =	$(DRIVERNAME).o
 
 OBJDIR	:= objs
 OBJS	:= $(addprefix $(OBJDIR)/,$(OBJS))
-
 
 #
 #	rules
@@ -19,23 +17,24 @@ $(OBJDIR)/%.o : %.c
 $(OBJDIR)/%.o : %.cpp
 	$(CC) $(COPTS) $< -o $@
 
-
 all :	objs $(OBJDIR)/$(DRIVERNAME)
 
 objs:
 	mkdir objs
 
 $(OBJDIR)/$(DRIVERNAME): $(OBJS)
-	$(CXX) -plugin $(OBJS) -o $(OBJDIR)/$(DRIVERNAME) -lsyllable
+	$(CXX) -plugin $(OBJS) -o $(OBJDIR)/$(DRIVERNAME) -lpyro
 
-deps:
+# ----- ----- ----- ----- ----- ----- ----- ----- ----- -----
 
-install: $(OBJDIR)/$(DRIVERNAME)
-	cp -f $(OBJDIR)/$(DRIVERNAME) $(DEVBIN)/$(DRIVERNAME)
+dist: all inst clean
 
-dist: $(OBJDIR)/sermouse
-	cp -f $(OBJDIR)/$(DRIVERNAME) $(DIST_DIR)/atheos/sys/drivers/appserver/input/$(DRIVERNAME)
+inst:
+	mkdir -p $(PYRO_BINARY_DESTINATION)Native/Extra/System/SylVNC/System/drivers/appserver/input
+	cp -pf $(OBJDIR)/$(DRIVERNAME) $(PYRO_BINARY_DESTINATION)Native/Extra/System/SylVNC/System/drivers/appserver/input/
+	addattrib $(PYRO_BINARY_DESTINATION)Native/Extra/System/SylVNC/System/drivers/appserver/input/$(DRIVERNAME) "CheckSum::MD5" `md5sum $(PYRO_BINARY_DESTINATION)Native/Extra/System/SylVNC/System/drivers/appserver/input/$(DRIVERNAME) | cut -c1-32`
+	sync
 
 clean:
-	-rm $(OBJS) $(OBJDIR)/$(DRIVERNAME)
-
+	rm -rf $(OBJDIR)
+	sync

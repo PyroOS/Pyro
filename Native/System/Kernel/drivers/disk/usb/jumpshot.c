@@ -49,8 +49,8 @@
 
 
 
-#include <atheos/types.h>
-#include <atheos/kdebug.h>
+#include <pyro/types.h>
+#include <pyro/kdebug.h>
 #include <posix/errno.h>
 #include <macros.h>
 #include "transport.h"

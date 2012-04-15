@@ -20,7 +20,7 @@
 #ifndef __F_ATHEOS_ICMP_H__
 #define __F_ATHEOS_ICMP_H__
 
-#include <atheos/types.h>
+#include <pyro/types.h>
 
 #define ICMP_ECHOREPLY		0	/* Echo Reply			*/
 #define ICMP_DEST_UNREACH	3	/* Destination Unreachable	*/

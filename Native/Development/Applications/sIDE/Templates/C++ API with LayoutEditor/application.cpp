@@ -1,7 +1,7 @@
 #include "application.h"
 #include "mainwindow.h"
 
-App::App() : os::Application( "application/x-vnd.syllable-application" )
+App::App() : os::Application( "application/x-vnd.pyro-application" )
 {
 	m_pcMainWindow = new MainWindow();
 	m_pcMainWindow->CenterInScreen();

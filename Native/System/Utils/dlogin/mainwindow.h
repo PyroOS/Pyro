@@ -43,9 +43,3 @@ private:
 	NodeMonitor* pcMonitorFile;
 };
 #endif
-
-
-
-
-
-

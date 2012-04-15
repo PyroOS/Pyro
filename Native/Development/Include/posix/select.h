@@ -20,7 +20,7 @@
 #ifndef _ATHEOS_SELECT_H_
 #define _ATHEOS_SELECT_H_
 
-#include <atheos/types.h>
+#include <pyro/types.h>
 #include <posix/types.h>
 #include <posix/time.h>
 

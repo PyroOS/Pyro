@@ -16,6 +16,6 @@ MSG_MAINWND_MENU_HELP=300					Ajuda
 MSG_MAINWND_MENU_HELP_ABOUT					Sobre
 
 MSG_ABOUTWND_TITLE=1000						Sobre BZoom
-MSG_ABOUTWND_TEXT							BZoom V1.0\n\nA ampliador de pixels para o AtheOS.\nBaseado no AZoom de Chir.\nBZoom sob \nGNU GPL
+MSG_ABOUTWND_TEXT							BZoom V1.0\n\nA ampliador de pixels para o Pyro.\nBaseado no AZoom de Chir.\nBZoom sob \nGNU GPL
 MSG_ABOUTWND_OK								Ok
 

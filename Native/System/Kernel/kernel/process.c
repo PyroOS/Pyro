@@ -20,9 +20,9 @@
 	
 #include <posix/errno.h>
 	
-#include <atheos/kernel.h>
-#include <atheos/spinlock.h>
-#include <atheos/semaphore.h>
+#include <pyro/kernel.h>
+#include <pyro/spinlock.h>
+#include <pyro/semaphore.h>
 	
 #include <macros.h>
 	
@@ -393,7 +393,7 @@ int sys_free_tld( int nHandle )
 }
 
 
-/* NOTE: set_tld() is implemented as a inline function in <atheos/tld.h> */ 
+/* NOTE: set_tld() is implemented as a inline function in <pyro/tld.h> */ 
 
 //****************************************************************************/
 /** \fn void set_tld( int nHandle, int nValue )
@@ -421,7 +421,7 @@ void set_tld( int nHandle, int nValue )
 #endif	/*  */
 	
 
-/* NOTE: get_tld() is implemented as a inline function in <atheos/tld.h> */ 
+/* NOTE: get_tld() is implemented as a inline function in <pyro/tld.h> */ 
 
 //****************************************************************************/
 /** \fn int get_tld( int nHandle )

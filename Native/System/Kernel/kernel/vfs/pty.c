@@ -25,17 +25,17 @@
 #include <posix/dirent.h>
 #include <posix/signal.h>
 
-#include <atheos/types.h>
-#include <atheos/time.h>
+#include <pyro/types.h>
+#include <pyro/time.h>
 
-#include <atheos/kernel.h>
-#include <atheos/smp.h>
-#include <atheos/filesystem.h>
-#include <atheos/schedule.h>
-#include <atheos/irq.h>
+#include <pyro/kernel.h>
+#include <pyro/smp.h>
+#include <pyro/filesystem.h>
+#include <pyro/schedule.h>
+#include <pyro/irq.h>
 
-#include <atheos/ctype.h>
-#include <atheos/semaphore.h>
+#include <pyro/ctype.h>
+#include <pyro/semaphore.h>
 
 #include <macros.h>
 

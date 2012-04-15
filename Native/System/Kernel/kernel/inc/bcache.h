@@ -29,7 +29,7 @@ extern "C"
 #endif
 #endif
 
-#include <atheos/bcache.h>
+#include <pyro/bcache.h>
 
 typedef struct _CacheBlock CacheBlock_s;
 

@@ -1,14 +1,11 @@
 CFLAGS   += -kernel -fno-PIC -c
 AFLAGS   = -c
 
-C_INCLUDE_PATH=$(ATHEOS_INCLUDE_PATH)
+C_INCLUDE_PATH=$(PYRO_INCLUDE)
 
 OBJS := hid.o
-
-
 OBJDIR	:= objs
 OBJS	:= $(addprefix $(OBJDIR)/,$(OBJS))
-
 
 #
 #	rules
@@ -26,9 +23,6 @@ $(OBJDIR)/%.o : %.s
 $(OBJDIR)/%.o : %.S
 	$(CC) $(CFLAGS) -x assembler-with-cpp $< -o $@
 
-
-
-
 all :	objs $(OBJDIR)/usb_hid
 
 objs:
@@ -37,11 +31,16 @@ objs:
 $(OBJDIR)/usb_hid: $(OBJS) Makefile
 	$(CC) -kernel $(OBJS) -o $(OBJDIR)/usb_hid
 
-install: all
-	cp -f $(OBJDIR)/usb_hid $(IMAGE)/system/drivers/dev/input/usb_hid
+# ----- ----- ----- ----- ----- ----- ----- ----- ----- -----
 
-dist: install
+dist: all inst clean
+
+inst:
+	mkdir -p $(PYRO_BINARY_DESTINATION)/System/drivers/dev/input
+	cp -f $(OBJDIR)/usb_hid $(PYRO_BINARY_DESTINATION)/System/drivers/dev/input/
+	addattrib $(PYRO_BINARY_DESTINATION)/System/drivers/dev/input/usb_hid "CheckSum::MD5" `md5sum $(PYRO_BINARY_DESTINATION)/System/drivers/dev/input/usb_hid | cut -c1-32`
+	sync
 
 clean:
-	-rm -f $(OBJS) $(OBJDIR)/usb_hid
-
+	rm -rf $(OBJDIR)
+	sync

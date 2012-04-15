@@ -1,0 +1,19 @@
+//
+//	ImageView String Catalog
+//
+//	Translated by: Ioannis Koniaris
+//
+
+ID_TITLE=0							ImageViewer
+ID_FILE_NOT_FOUND					Error: File not found!
+ID_NO_VIEW							Unable to view image
+
+MSG_MIMETYPE_IMAGE_PNG=10000		Εικόνα PNG
+MSG_MIMETYPE_IMAGE_JPEG				Εικόνα JPEG
+MSG_MIMETYPE_IMAGE_GIF				Εικόνα GIF
+MSG_MIMETYPE_IMAGE_BMP				Εικόνα BMP
+MSG_MIMETYPE_IMAGE_TIFF				Εικόνα TIFF
+MSG_MIMETYPE_IMAGE_XBM				Εικόνα XBM
+MSG_MIMETYPE_IMAGE_XPM				Εικόνα XPM
+MSG_MIMETYPE_IMAGE_TGA				Εικόνα TGA
+MSG_MIMETYPE_IMAGE_PCX				Εικόνα PCX

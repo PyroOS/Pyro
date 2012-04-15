@@ -29,7 +29,7 @@
 #include <savage_driver.h>
 #include <savage_streams.h>
 
-#include <atheos/areas.h>
+#include <pyro/areas.h>
 #include <gui/bitmap.h>
 
 using namespace os;

@@ -21,10 +21,10 @@
 
 #include <posix/errno.h>
 #include <posix/signal.h>
-#include <atheos/atomic.h>
-#include <atheos/tld.h>			/* Thread specific local data       */
-#include <atheos/threads.h>		/* Kernel threads interface         */
-#include <atheos/kernel.h>		/* Additional kernel & thread API's */
+#include <pyro/atomic.h>
+#include <pyro/tld.h>			/* Thread specific local data       */
+#include <pyro/threads.h>		/* Kernel threads interface         */
+#include <pyro/kernel.h>		/* Additional kernel & thread API's */
 
 #include <bits.h>
 #include <debug.h>

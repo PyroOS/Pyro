@@ -29,7 +29,7 @@
 #include <string.h>
 #include <stdlib.h>
 #include <stdio.h>
-#include <atheos/types.h>
+#include <pyro/types.h>
 
 #include "CursorInfo.h"
 #include "svga_reg.h"

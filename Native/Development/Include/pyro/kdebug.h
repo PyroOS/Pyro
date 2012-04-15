@@ -20,8 +20,8 @@
 #ifndef __F_KDEBUG_H__
 #define __F_KDEBUG_H__
 
-#include <atheos/types.h>
-#include <atheos/threads.h>
+#include <pyro/types.h>
+#include <pyro/threads.h>
 
 #ifdef __cplusplus
 extern "C" {

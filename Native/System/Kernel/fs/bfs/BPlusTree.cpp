@@ -14,10 +14,10 @@
 #include "Stack.h"
 
 #include "kernel_cpp.h"
-#include <atheos/types.h>
+#include <pyro/types.h>
 
-#include <atheos/string.h>
-#include <atheos/stdlib.h>
+#include <pyro/string.h>
+#include <pyro/stdlib.h>
 
 
 

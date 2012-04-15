@@ -91,11 +91,11 @@
 
 
 #ifdef SYLLABLE
-#include <atheos/types.h>
-#include <atheos/kernel.h>
-#include <atheos/kdebug.h>
-#include <atheos/isa_io.h>
-#include <atheos/pci.h>
+#include <pyro/types.h>
+#include <pyro/kernel.h>
+#include <pyro/kdebug.h>
+#include <pyro/isa_io.h>
+#include <pyro/pci.h>
 #include <appserver/pci_graphics.h>
 #include "vgatypes.h"
 #include "vstruct.h"

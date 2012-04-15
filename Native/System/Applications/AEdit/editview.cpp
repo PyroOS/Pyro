@@ -21,7 +21,7 @@
 
 #include <gui/textview.h>
 #include "appwindow.h"
-#include "resources/aedit.h"
+#include "resources/AEdit.h"
 
 EditView::EditView(const Rect& cFrame, AEditWindow *pcMain) : TextView(cFrame,"edit_view","",CF_FOLLOW_BOTTOM | CF_FOLLOW_TOP |  CF_FOLLOW_LEFT | CF_FOLLOW_RIGHT)//,WID_WILL_DRAW)
 {

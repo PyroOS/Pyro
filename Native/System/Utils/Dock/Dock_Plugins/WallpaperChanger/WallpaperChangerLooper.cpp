@@ -29,11 +29,3 @@ void DockWallpaperChangerLooper::TimerTick(int nID)
 {
 	pcParentView->GetLooper()->PostMessage(new Message(M_CHANGE_FILE),pcParentView);
 }
-
-
-
-
-
-
-
-

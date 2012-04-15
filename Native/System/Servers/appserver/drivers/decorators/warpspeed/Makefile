@@ -1,11 +1,8 @@
 COPTS   = -I../../../server $(shell freetype-config --cflags) -c
 
-DEVBIN = /system/drivers/appserver/decorators
 OBJS =	warpspeeddecorator.o
-
 OBJDIR	:= objs
 OBJS	:= $(addprefix $(OBJDIR)/,$(OBJS))
-
 
 #
 #	rules
@@ -17,7 +14,6 @@ $(OBJDIR)/%.o : %.c
 $(OBJDIR)/%.o : %.cpp
 	$(CXX) $(COPTS) $< -o $@
 
-
 all :	objs $(OBJDIR)/WarpSpeed
 
 objs:
@@ -26,13 +22,16 @@ objs:
 $(OBJDIR)/WarpSpeed: $(OBJS)
 	$(CXX) -plugin -Xlinker -Bsymbolic $(OBJS) -nodefaultlibs -o $(OBJDIR)/WarpSpeed
 
-deps:
+# ----- ----- ----- ----- ----- ----- ----- ----- ----- -----
 
-install: $(OBJDIR)/WarpSpeed
-	cp -f $(OBJDIR)/WarpSpeed $(IMAGE)/$(DEVBIN)/WarpSpeed
+dist: all inst clean
 
-dist: install
+inst:
+	mkdir -p $(PYRO_BINARY_DESTINATION)/System/drivers/appserver/decorators
+	cp -pf $(OBJDIR)/WarpSpeed $(PYRO_BINARY_DESTINATION)/System/drivers/appserver/decorators/
+	addattrib $(PYRO_BINARY_DESTINATION)/System/drivers/appserver/decorators/WarpSpeed "CheckSum::MD5" `md5sum $(PYRO_BINARY_DESTINATION)/System/drivers/appserver/decorators/WarpSpeed | cut -c1-32`
+	sync
 
 clean:
-	-rm $(OBJS) $(OBJDIR)/WarpSpeed
-
+	rm -rf $(OBJDIR)
+	sync

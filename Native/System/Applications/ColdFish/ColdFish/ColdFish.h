@@ -21,7 +21,7 @@
 #ifndef _COLDFISH_H_
 #define _COLDFISH_H_
 
-#include <atheos/time.h>
+#include <pyro/time.h>
 #include <gui/view.h>
 #include <gui/window.h>
 #include <gui/imagebutton.h>
@@ -34,7 +34,7 @@
 #include <util/application.h>
 #include <util/settings.h>
 #include <util/locale.h>
-#include <atheos/threads.h>
+#include <pyro/threads.h>
 #include <media/manager.h>
 #include <media/input.h>
 #include <media/output.h>
@@ -47,7 +47,7 @@
 #include <storage/directory.h>
 #include <storage/fsnode.h>
 
-#include "resources/coldfish.h"
+#include "resources/ColdFish.h"
 #include "messages.h"
 #include "lcd.h"
 #include "SelectWin.h"

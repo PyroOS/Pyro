@@ -1,8 +1,6 @@
 COPTS   = -I$(TOP)/src $(shell freetype-config --cflags) -c -fexceptions
 
-DEVBIN = /system/drivers/appserver/video
 OBJS =	mga.o mga_crtc.o mga_gx00.o mga_tvp3026.o
-
 OBJDIR	:= objs
 OBJS	:= $(addprefix $(OBJDIR)/,$(OBJS))
 
@@ -18,7 +16,6 @@ $(OBJDIR)/%.o : %.c
 $(OBJDIR)/%.o : %.cpp
 	$(CXX) $(COPTS) $< -o $@
 
-
 all :	objs $(DRIVER)
 
 objs:
@@ -27,13 +24,16 @@ objs:
 $(DRIVER): $(OBJS)
 	$(CXX) -plugin -Xlinker -Bsymbolic -nodefaultlibs $(OBJS) -o $(DRIVER)
 
-deps:
+# ----- ----- ----- ----- ----- ----- ----- ----- ----- -----
 
-install: $(DRIVER)
-	cp -f $(DRIVER) $(IMAGE)/$(DEVBIN)/mga
+dist: all inst clean
 
-dist: install
+inst:
+	mkdir -p $(PYRO_BINARY_DESTINATION)/System/drivers/appserver/video
+	cp -pf $(OBJDIR)/mga $(PYRO_BINARY_DESTINATION)/System/drivers/appserver/video/
+	addattrib $(PYRO_BINARY_DESTINATION)/System/drivers/appserver/video/mga "CheckSum::MD5" `md5sum $(PYRO_BINARY_DESTINATION)/System/drivers/appserver/video/mga | cut -c1-32`
+	sync
 
 clean:
-	-rm $(OBJS) $(DRIVER)
-
+	rm -rf $(OBJDIR)
+	sync

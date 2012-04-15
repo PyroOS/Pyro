@@ -16,6 +16,6 @@ MSG_MAINWND_MENU_HELP=300					Помощ
 MSG_MAINWND_MENU_HELP_ABOUT					Относно
 
 MSG_ABOUTWND_TITLE=1000						Относно BZoom
-MSG_ABOUTWND_TEXT							BZoom V1.0\n\nе опростена лупа за пиксели за AtheOS.\nБазиран на AZoom от Chir.\nBZoom е под\nGNU GPL
+MSG_ABOUTWND_TEXT							BZoom V1.0\n\nе опростена лупа за пиксели за Pyro.\nБазиран на AZoom от Chir.\nBZoom е под\nGNU GPL
 MSG_ABOUTWND_OK								Потвърди
 

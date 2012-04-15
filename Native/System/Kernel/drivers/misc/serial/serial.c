@@ -3,11 +3,11 @@
 #include <posix/fcntl.h>
 #include <posix/termios.h>
 
-#include <atheos/kernel.h>
-#include <atheos/device.h>
-#include <atheos/semaphore.h>
-#include <atheos/spinlock.h>
-#include <atheos/irq.h>
+#include <pyro/kernel.h>
+#include <pyro/device.h>
+#include <pyro/semaphore.h>
+#include <pyro/spinlock.h>
+#include <pyro/irq.h>
 
 #include "serial_reg.h"
 

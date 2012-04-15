@@ -110,16 +110,3 @@ void App::HandleMessage( os::Message* pcMessage )
 			os::Application::HandleMessage( pcMessage );
 	}
 }
-
-
-
-
-
-
-
-
-
-
-
-
-

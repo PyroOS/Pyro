@@ -9,8 +9,6 @@ LL	= gcc
 $(EXE) : $(OBJS)
 	$(LL) $(OBJS) -o $@
 
-install: $(EXE)
-	cp -f $(EXE) /bin/$(EXE)
 clean:
 	-rm $(OBJS)
 #.c.o :

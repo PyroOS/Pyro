@@ -20,10 +20,10 @@
 
 #include <posix/errno.h>
 
-#include <atheos/kernel.h>
-#include <atheos/time.h>
-#include <atheos/socket.h>
-#include <atheos/semaphore.h>
+#include <pyro/kernel.h>
+#include <pyro/time.h>
+#include <pyro/socket.h>
+#include <pyro/semaphore.h>
 
 #include <net/net.h>
 #include <net/in.h>

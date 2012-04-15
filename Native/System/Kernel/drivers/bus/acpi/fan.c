@@ -23,13 +23,13 @@
  * ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
  */
 
-#include <atheos/kernel.h>
-#include <atheos/irq.h>
-#include <atheos/types.h>
-#include <atheos/list.h>
-#include <atheos/msgport.h>
-#include <atheos/acpi.h>
-#include <atheos/resource.h>
+#include <pyro/kernel.h>
+#include <pyro/irq.h>
+#include <pyro/types.h>
+#include <pyro/list.h>
+#include <pyro/msgport.h>
+#include <pyro/acpi.h>
+#include <pyro/resource.h>
 #include <posix/errno.h>
 #include <macros.h>
 

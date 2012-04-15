@@ -1,0 +1,35 @@
+Boot Options
+
+You can add a temporary option by editing the GRUB configuration at boot, or you
+can add a permanent option by editing the GRUB configuration file within Pyro.
+
+To add a temporary boot option:
+When the boot loader (GRUB) starts it will display a menu of available systems.
+At this menu, select the Pyro entry and press the "e" key. This will display the
+GRUB configuration. Using the arrow keys, select the line that begins with "kernel"
+and press "e" again to edit this line. At the end of the line, add the options you
+require. Once you are done, press "ENTER" to accept the changes, then press "b" to
+boot with the modified GRUB configuration. Changes made this way will not be permanent.
+
+To add a permanent boot option:
+The GRUB configuration file can be found in /boot/boot/grub/menu.lst. Open it with
+your preferred text editor (usually aedit) and add the options you require to the
+end of the line that begins with "kernel". Once you are done, save the file. The
+next time you boot Pyro, the new kernel options will be used.
+
+
+disable_acpi=true
+
+disable_smp=true
+
+disable_gfx_drivers=true
+
+disable_pci_irq_routing=true
+
+enable_ata_dma=false
+
+disable_agp=false
+
+printk_max=n
+Makes the kernel stop displaying messages after the first n.
+You can use trial-and-error with n to stop the debug output at the relevant place.

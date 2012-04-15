@@ -23,7 +23,7 @@
 #include <util/resource.h>
 #include <gui/view.h>
 #include <gui/image.h>
-#include <atheos/types.h>
+#include <pyro/types.h>
 #include <util/string.h>
 #include <media/packet.h>
 #include <media/format.h>

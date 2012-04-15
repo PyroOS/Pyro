@@ -20,7 +20,7 @@
 #ifndef	__F_V86_H__
 #define	__F_V86_H__
 
-#include <atheos/types.h>
+#include <pyro/types.h>
 
 #ifdef __cplusplus
 extern "C" {

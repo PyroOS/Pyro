@@ -1,8 +1,8 @@
 #ifndef __NVIDIA_H__
 #define __NVIDIA_H__
 
-#include <atheos/kernel.h>
-#include <atheos/pci.h>
+#include <pyro/kernel.h>
+#include <pyro/pci.h>
 
 #include "../../../server/ddriver.h"
 #include "fx_hw.h"

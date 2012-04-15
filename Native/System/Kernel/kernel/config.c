@@ -19,11 +19,11 @@
  *  Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  */
 
-#include <atheos/types.h>
-#include <atheos/filesystem.h>
-#include <atheos/ctype.h>
-#include <atheos/config.h>
-#include <atheos/device.h>
+#include <pyro/types.h>
+#include <pyro/filesystem.h>
+#include <pyro/ctype.h>
+#include <pyro/config.h>
+#include <pyro/device.h>
 #include <posix/errno.h>
 #include <posix/unistd.h>
 #include <posix/fcntl.h>
@@ -173,14 +173,14 @@ status_t read_kernel_config_entry( char *pzName, uint8 **pBuffer, size_t *pnSize
 void write_kernel_config( void )
 {
 
-	char zPath[255];	/* /system/config/kernel.cfg */
+	char zPath[255];	/* /System/config/kernel.cfg */
 	
 	if( g_bDisableKernelConfig )
 		return;
 
 	/* Build path */
 	sys_get_system_path( zPath, 256 );
-	strcat( zPath, "system/config/kernel.cfg" );
+	strcat( zPath, "System/config/kernel.cfg" );
 
 	/* Open file */
 	g_nConfigFd = open( zPath, O_WRONLY | O_CREAT | O_TRUNC );
@@ -230,7 +230,7 @@ void init_kernel_config( void )
 		{
 			continue;
 		}
-		strcpy( zFullPath, "/boot/system" );
+		strcpy( zFullPath, "/boot/System" );
 		j = strlen( zFullPath );
 		while ( *pzPath != '\0' && isspace( *pzPath ) == false )
 		{

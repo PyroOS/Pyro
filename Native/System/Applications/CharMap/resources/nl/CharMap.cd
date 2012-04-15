@@ -19,5 +19,5 @@ MSG_HELPWND_TEXT								Wanneer u op een karakter klikt,\nwordt het naar het kle
 MSG_HELPWND_OK									OK
 
 MSG_ABOUTWND_TITLE=2000							Over Tekentabel
-MSG_ABOUTWND_TEXT								Tekentabel 1.1\nTekensetprogramma voor Syllable.\n\nNederlandse vertaling door Ruud Kuin en Kaj de Vos.
+MSG_ABOUTWND_TEXT								Tekentabel 1.1\nTekensetprogramma voor Pyro.\n\nNederlandse vertaling door Ruud Kuin en Kaj de Vos.
 MSG_ABOUTWND_OK									OK

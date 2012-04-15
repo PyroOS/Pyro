@@ -16,6 +16,6 @@ MSG_MAINWND_MENU_HELP=300					Βοήθεια
 MSG_MAINWND_MENU_HELP_ABOUT					Σχετικά
 
 MSG_ABOUTWND_TITLE=1000						Σχετικά με το BZoom
-MSG_ABOUTWND_TEXT							BZoom V1.0\n\nΈνας απλός μεγεθυντής εικονοστοιχείων για το AtheOS.\nΒασισμένο στο AZoom από τον Chir.\nΤο BZoom εκδίδεται υπό τους όρους της\nGNU GPL
+MSG_ABOUTWND_TEXT							BZoom V1.0\n\nΈνας απλός μεγεθυντής εικονοστοιχείων για το Pyro.\nΒασισμένο στο AZoom από τον Chir.\nΤο BZoom εκδίδεται υπό τους όρους της\nGNU GPL
 MSG_ABOUTWND_OK								ΟΚ
 

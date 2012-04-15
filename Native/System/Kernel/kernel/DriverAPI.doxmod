@@ -1,9 +1,9 @@
 /*!
- * \defgroup DriverAPI Syllable Device Driver API
+ * \defgroup DriverAPI Pyro Device Driver API
  */
 
 
-/*! \mainpage Documentation of the Syllable device driver API
+/*! \mainpage Documentation of the Pyro device driver API
 
 Note: This documentation is very far from being complete.
 
@@ -31,13 +31,13 @@ like soundcards, networkcards and also for file-system addons. Graphics
 drivers and the highlevel part of input drivers are handled by the
 appserver. While kernel drivers are written in C, appserver addons are
 written in C++. Common to both is that they are simple ELF modules, which are
-loaded if necessary. Unlike some UNIX systems, Syllable has a defined 
+loaded if necessary. Unlike some UNIX systems, Pyro has a defined 
 interface between the drivers and the kernel/appserver, which is not
 changed very often.
 
 Please note that you have to be careful when writing drivers because
 a bug in a driver can cause the system to lock up and make it 
-completely unusable. If you can, you should have a second Syllable
+completely unusable. If you can, you should have a second Pyro
 installation, which you can use to remove invalid drivers.
 
 */
@@ -45,11 +45,11 @@ installation, which you can use to remove invalid drivers.
 /*! \page kernel_drivers
 
 \section sec1 Basic description
-Device drivers in Syllable are abstracted through the filesystem in much
+Device drivers in Pyro are abstracted through the filesystem in much
 the same way as in UNIX. All device drivers export their
 functionality through special files inside the /dev/ directory or a
 sub-directory of /dev/. Unlike in traditional UNIXes the /dev/
-directory in Syllable is hierarchial and is very dynamic in that device
+directory in Pyro is hierarchial and is very dynamic in that device
 drivers can add and remove nodes at runtime if it for example controll
 a removable device that might be added or removed after the driver is
 initialized.
@@ -72,17 +72,17 @@ claimed device before device_uninit() is called for the driver.
 
 This device_init() and device_uninit() are the only functions that will
 be called directly by the kernel. For the driver to do any usefull
-work it must export one or more device-nodes through the Syllable Device
+work it must export one or more device-nodes through the Pyro Device
 FS. This is a logical file system that is mounted at "/dev/"
 and controll all devices. Each device is present as a magic file
 located in "/dev/" or a sub-directory of "/dev/". Initially "/dev/"
-only contain "/dev/null" and "/dev/zero" which is controlled by the Syllable
+only contain "/dev/null" and "/dev/zero" which is controlled by the Pyro
 VFS itself. All other directory and device-nodes are created by device
 drivers. A device driver can create a device-node with
 create_device_node() and remove it with delete_device_node().  When
 creating a device node the driver must provide a function pointer
 table with entry points to the drivers functionality. The functions in
-the table will be called by the Syllable VFS to controll the device. The most
+the table will be called by the Pyro VFS to controll the device. The most
 important functions are read(), write() and ioctl() but there are also
 functions to open/close the device aswell as functions called by
 select() to make it possible for one thread to wait for IO on multiple
@@ -205,7 +205,7 @@ are different.
 
 \section sec5 Device management
 
-Although the Syllable kernel driver interface is easy to use, it has one problem:
+Although the Pyro kernel driver interface is easy to use, it has one problem:
 It is possible that two device drivers try to access one device. Also, the kernel
 does not know what devices are supported by the drivers and so cannot show a list
 of the supported/not supported hardware to the user. To solve this problems, the kernel
@@ -359,18 +359,18 @@ network stuff.
 
 \section sec_gfx_start Basic description
 
-The Syllable Video Driver API is unique to Syllable, and may at first appear to be a little confusing. 
+The Pyro Video Driver API is unique to Pyro, and may at first appear to be a little confusing. 
 This guide tries to explain the basic structure of a video driver and how the appserver handles video drivers and drawing functions. 
 
 
 \section sec_gfx_1 The basic driver model
 
-Syllable Video Drivers are written in C++ and provide methods required to open a video framebuffer, 
+Pyro Video Drivers are written in C++ and provide methods required to open a video framebuffer, 
 accelerated drawing functions and video overlay controls.
 
 The DisplayDriver base class provides unacclerated software rendering functions which can draw a line between 
 two points, or Blit a bitmap into the video framebuffer. The VesaDriver class is a fully functional VESA 2.0 
-display driver, and is the default display driver which Syllable will attempt to use if no accelerated display 
+display driver, and is the default display driver which Pyro will attempt to use if no accelerated display 
 driver can be found for the installed hardware. Most video drivers generally inherit from the DisplayDriver 
 base class, but some may choose to inherit from the VesaDriver class. The VesaDriver provides additional 
 VESA mode switching functions which may be used for certain hardware E.g. the Mach64 accelerated driver inherits 
@@ -435,7 +435,7 @@ the video framebuffer to perform drawing functions.
 
 \section sec_gfx_4 Accelerated Drawing
 
-In previous versions of Syllable the video driver had to make sure that the framebuffer content was up to date
+In previous versions of Pyro the video driver had to make sure that the framebuffer content was up to date
 after every call to an accelerated method. This causes a big performance hit especially if there is a lot of
 hardware accelerated drawing and the card/driver uses a command buffer. There are two new methods to solve this
 problem: 

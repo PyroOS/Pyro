@@ -20,7 +20,7 @@
 #ifndef __MGA_DAC_H_
 #define __MGA_DAC_H_
 
-#include <atheos/types.h>
+#include <pyro/types.h>
 #include "mga_regs.h"
 
 #define RAMDAC_OFFSET	0x3c00	// Offset from the first MGA register to the

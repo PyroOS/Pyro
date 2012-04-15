@@ -438,7 +438,8 @@ void DockWallpaperChanger::SaveSettings()
 **************************************************/
 void DockWallpaperChanger::ChangeFile()
 {
-	String cDir = String("/system/resources/wallpapers");
+	String cDir = getenv( "HOME" );
+	cDir += "/Pictures";
 	Directory* pcDir = new Directory(cDir);
 	String cFile;
 	String cWholeFile;
@@ -485,7 +486,8 @@ void DockWallpaperChanger::ChangeFile()
 **************************************************/
 void DockWallpaperChanger::UpdateImage()
 {
-	String cDir = String("/system/resources/wallpapers");
+	String cDir = getenv( "HOME" );
+	cDir += "/Pictures";
 	String cWholeFile = cDir + "/" + cCurrentImage;
 	
 	try

@@ -21,8 +21,8 @@
 #ifndef __F_MGA_MGA_H__
 #define __F_MGA_MGA_H__
 
-#include <atheos/kernel.h>
-#include <atheos/pci.h>
+#include <pyro/kernel.h>
+#include <pyro/pci.h>
 
 #include "mga_crtc.h"
 #include "mga_regs.h"

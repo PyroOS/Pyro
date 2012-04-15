@@ -24,7 +24,7 @@
 
 #include "cpuview.h"
 
-#include <atheos/time.h>
+#include <pyro/time.h>
 
 #include <gui/window.h>
 #include <gui/stringview.h>

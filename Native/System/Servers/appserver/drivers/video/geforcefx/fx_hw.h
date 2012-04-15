@@ -5,9 +5,9 @@
 extern "C" {
 #endif
 
-#include <atheos/types.h>
-#include <atheos/isa_io.h>
-#include <atheos/kdebug.h>
+#include <pyro/types.h>
+#include <pyro/isa_io.h>
+#include <pyro/kdebug.h>
 #include <appserver/pci_graphics.h>
 
 #define NV_ARCH_10  0x10

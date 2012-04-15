@@ -1,0 +1,19 @@
+//
+//	ImageView String Catalog
+//
+//	Translated by: Ruud Kuin - Kaj de Vos
+//
+
+ID_TITLE=0							ImageViewer
+ID_FILE_NOT_FOUND					Error: File not found!
+ID_NO_VIEW							Unable to view image
+
+MSG_MIMETYPE_IMAGE_PNG=10000		PNG-afbeelding
+MSG_MIMETYPE_IMAGE_JPEG				JPEG-afbeelding
+MSG_MIMETYPE_IMAGE_GIF				GIF-afbeelding
+MSG_MIMETYPE_IMAGE_BMP				BMP-afbeelding
+MSG_MIMETYPE_IMAGE_TIFF				TIFF-afbeelding
+MSG_MIMETYPE_IMAGE_XBM				XBM-afbeelding
+MSG_MIMETYPE_IMAGE_XPM				XPM-afbeelding
+MSG_MIMETYPE_IMAGE_TGA				TGA-afbeelding
+MSG_MIMETYPE_IMAGE_PCX				PCX-afbeelding

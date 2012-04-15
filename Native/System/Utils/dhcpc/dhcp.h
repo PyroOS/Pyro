@@ -22,7 +22,7 @@
 #include <stdio.h>
 #include <malloc.h>
 #include <arpa/inet.h>
-#include <atheos/semaphore.h>
+#include <pyro/semaphore.h>
 
 enum op{
 	DHCPNOP = 0,

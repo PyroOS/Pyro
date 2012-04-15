@@ -44,7 +44,7 @@ MSG_PROTOCOL_UNKNOWN							Неизвестен
 MSG_PROTOCOL_HPJETDIRECT						HP JetDirect
 
 MSG_ABOUTWND_TITLE=1000							Принтери
-MSG_ABOUTWND_TEXT1								Syllable - мениджър притери
+MSG_ABOUTWND_TEXT1								Pyro - мениджър притери
 MSG_ABOUTWND_TEXT2								Използва CUPS версия %d.%d.%d\n
 MSG_ABOUTWND_CLOSE								_Затвори
 
@@ -58,7 +58,7 @@ MSG_ALRTWND_SAVE_TEXT							конфигурирането на CUPS неусп�
 MSG_ALRTWND_SAVE_CLOSE							_Затвори
 
 MSG_ALRTWND_INSERTCD_TITLE=1300					Постави компакт диск
-MSG_ALRTWND_INSERTCD_TEXT						Моля поставете и монтирайте вашия Syllable инсталлационен диск.
+MSG_ALRTWND_INSERTCD_TEXT						Моля поставете и монтирайте вашия Pyro инсталлационен диск.
 MSG_ALRTWND_INSERTCD_OK							Потвърди
 MSG_ALRTWND_INSERTCD_CANCEL						Отказ
 

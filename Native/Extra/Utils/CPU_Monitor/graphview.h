@@ -20,7 +20,7 @@
 #ifndef __F_GRAPHVIEW_H__
 #define __F_GRAPHVIEW_H__
 
-#include <atheos/kernel.h>
+#include <pyro/kernel.h>
 #include <gui/view.h>
 #include <gui/layoutview.h>
 

@@ -208,7 +208,7 @@ StreamableIO* Locale::GetSystemResourceStream( const String& cName )
 
 	if( !pcStream ) {
 		try {
-			pcStream = new File( String("/system/resources/") + cName );
+			pcStream = new File( String("/boot/System/resources/") + cName );
 		} catch( ... ) {
 			if( pcStream ) delete pcStream;
 			pcStream = NULL;

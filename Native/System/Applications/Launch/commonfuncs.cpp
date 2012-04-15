@@ -74,7 +74,7 @@ bool LaunchFile(const String& cFile)
 	
 	if (IsDirectory(cFile))
 	{
-		cExecute.SetCommand("/system/bin/FileBrowser");
+		cExecute.SetCommand("/boot/System/binary/EFileBrowser");
 		cExecute.SetArguments(cFile);
 		cExecute.Run();
 		return true;

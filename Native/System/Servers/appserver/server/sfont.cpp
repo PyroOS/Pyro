@@ -1017,7 +1017,7 @@ FontServer::FontServer()
 		dbprintf( "ERROR: While initializing font renderer, code = %d\n", nError );
 	}
 
-	ScanDirectory( "/system/fonts/" );
+	ScanDirectory( "/boot/System/fonts/" );
 }
 
 //----------------------------------------------------------------------------

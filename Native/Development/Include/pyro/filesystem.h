@@ -20,9 +20,9 @@
 #ifndef	__F_ATHEOS_FILESYSTEM_H__
 #define	__F_ATHEOS_FILESYSTEM_H__
 
-#include <atheos/types.h>
-#include <atheos/atomic.h>
-#include <atheos/fs_attribs.h>
+#include <pyro/types.h>
+#include <pyro/atomic.h>
+#include <pyro/fs_attribs.h>
 
 #include <posix/types.h>
 #include <posix/stat.h>

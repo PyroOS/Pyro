@@ -18,8 +18,8 @@
  *  Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  */
 
-#include <atheos/kernel.h>
-#include <atheos/elf.h>
+#include <pyro/kernel.h>
+#include <pyro/elf.h>
 #include <posix/ioctl.h>
 #include <net/net.h>
 #include <net/if.h>

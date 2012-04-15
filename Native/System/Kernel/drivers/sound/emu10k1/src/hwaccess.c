@@ -30,7 +30,7 @@
  **********************************************************************
  */
 
-#include <atheos/isa_io.h>
+#include <pyro/isa_io.h>
 
 #include "hwaccess.h"
 #include "8010.h"

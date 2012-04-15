@@ -45,16 +45,3 @@ void init_kernel_config( void );
 #endif
 
 #endif /* _SYLLABLE_CONFIG_H_ */
-
-
-
-
-
-
-
-
-
-
-
-
-

@@ -7,17 +7,17 @@
 */
 
 
-#include <atheos/kernel.h>
+#include <pyro/kernel.h>
 
 #ifdef DEBUG
-#	include <atheos/string.h>
+#	include <pyro/string.h>
 #endif
 
 #ifdef USER
 #	include <stdio.h>
 #	define __out printf
 #else
-#	include <atheos/kdebug.h>
+#	include <pyro/kdebug.h>
 #	define __out printk
 #endif
 

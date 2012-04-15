@@ -41,7 +41,7 @@ MSG_MAINWND_JOBSIZE_MB							%d MB
 MSG_MAINWND_JOBSIZE_GB							%d GB
 
 MSG_ABOUTWND_TITLE=1000							Druckaufträge
-MSG_ABOUTWND_TEXT1								Syllable Druckauftragsverwaltung
+MSG_ABOUTWND_TEXT1								Pyro Druckauftragsverwaltung
 MSG_ABOUTWND_TEXT2								Verwende CUPS in Version %d.%d.%d\n
 MSG_ABOUTWND_CLOSE								_Schließen
 

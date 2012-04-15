@@ -268,7 +268,7 @@ void MainWindow::ShowData()
   pcDDMDecor->Clear();
 
   // Check decor directory exists
-  DIR *pDir = opendir("/system/drivers/appserver/decorators/");
+  DIR *pDir = opendir("/boot/System/drivers/appserver/decorators/");
   if (pDir != NULL) {
 
     // Loop through all entries in directory and add to dropdown
@@ -291,7 +291,7 @@ void MainWindow::ShowData()
   pcDDMTheme->Clear();
 
   // Check theme directory exists
-  pDir = opendir("/system/config/appearance/colour-schemes/");
+  pDir = opendir("/boot/System/config/appearance/colour-schemes/");
   if (pDir != NULL) {
     
     // Loop through
@@ -315,7 +315,7 @@ void MainWindow::Apply()
 {
   // Apply decor
   char zPath[256];
-  strcpy( zPath, "/system/drivers/appserver/decorators/" );
+  strcpy( zPath, "/boot/System/drivers/appserver/decorators/" );
   strcat( zPath, pcDDMDecor->GetCurrentString().c_str() );
   os::Application::GetInstance()->SetWindowDecorator( zPath );
 
@@ -399,7 +399,7 @@ void MainWindow::Load()
 {
   // Work out filename
   char pzFilename[1024];
-  strcpy(pzFilename, "/system/config/appearance/colour-schemes/");
+  strcpy(pzFilename, "/boot/System/config/appearance/colour-schemes/");
   strcat(pzFilename, pcDDMTheme->GetCurrentString().c_str());
 
   // Open up for reading
@@ -432,7 +432,7 @@ void MainWindow::Save()
 {
   // Work out filename
   char pzFilename[1024];
-  strcpy(pzFilename, "/system/config/appearance/colour-schemes/");
+  strcpy(pzFilename, "/boot/System/config/appearance/colour-schemes/");
   strcat(pzFilename, pcDDMTheme->GetCurrentString().c_str());
   std::string zName = pcDDMTheme->GetCurrentString(); 
 
@@ -458,7 +458,7 @@ void MainWindow::Save()
 void MainWindow::Delete()
 {
   // Work out filename
-  std::string zFilename = "/system/config/appearance/colour-schemes/";
+  std::string zFilename = "/boot/System/config/appearance/colour-schemes/";
   zFilename += pcDDMTheme->GetCurrentString();
 
   // Get reference to file

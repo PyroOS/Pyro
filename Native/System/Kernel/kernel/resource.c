@@ -6,13 +6,13 @@
  *
  */
 
-#include <atheos/types.h>
-#include <atheos/kernel.h>
-#include <atheos/spinlock.h>
-#include <atheos/kernel.h>
+#include <pyro/types.h>
+#include <pyro/kernel.h>
+#include <pyro/spinlock.h>
+#include <pyro/kernel.h>
 #include <posix/errno.h>
-#include <atheos/resource.h>
-#include <atheos/semaphore.h>
+#include <pyro/resource.h>
+#include <pyro/semaphore.h>
 #include <macros.h>
 #include "inc/sysbase.h"
 

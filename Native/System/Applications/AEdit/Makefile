@@ -2,19 +2,17 @@ COPTS = -Wno-deprecated -c
 
 OBJSDIR = objs/
 
-CATALOGS = bg da de el es fr fy hu it nl pl pt-br ro ru sv
-
 OBJS = $(OBJSDIR)main.o $(OBJSDIR)appwindow.o $(OBJSDIR)editview.o $(OBJSDIR)aboutdialog.o $(OBJSDIR)gotodialog.o $(OBJSDIR)finddialog.o $(OBJSDIR)replacedialog.o $(OBJSDIR)buffer.o $(OBJSDIR)mytabview.o $(OBJSDIR)tabview.o $(OBJSDIR)icons.o $(OBJSDIR)dialog.o
-EXE = aedit
+EXE = AEdit
 
 all: $(OBJSDIR) $(EXE)
 
 $(OBJSDIR):
 	mkdir $(OBJSDIR)
 
-$(EXE): catalogs $(OBJS)
-	$(CXX) $(OBJS) -lsyllable -o $(EXE)
-	rescopy -r $(EXE) resources/aedit.catalog
+$(EXE): $(OBJS)
+	$(CXX) $(OBJS) -lpyro -o $(EXE)
+	rescopy -r $(EXE) resources/AEdit.catalog
 	rescopy -a $(EXE) stock_copy_16=pixmaps/stock_copy_16.png
 	rescopy -a $(EXE) stock_copy_24=pixmaps/stock_copy_24.png
 	rescopy -a $(EXE) stock_cut_16=pixmaps/stock_cut_16.png
@@ -46,38 +44,13 @@ $(EXE): catalogs $(OBJS)
 	rescopy -a $(EXE) icon48x48.png=pixmaps/icon48x48.png
 	rescopy -a $(EXE) text_plain.png=pixmaps/text_plain.png
 	rescopy -a $(EXE) about=pixmaps/about.png
-	for CATALOG in $(CATALOGS);do \
-		echo $$CATALOG; \
-		rescopy -a $(EXE) $$CATALOG/$(EXE).catalog=resources/$$CATALOG/$(EXE).catalog; \
+	rescopy -a $(EXE) resources/$(EXE).catalog
+	for CATALOG in `ls -1 resources`;do \
+		if [ -d "resources/$$CATALOG" ] ; then \
+			echo $$CATALOG; \
+			rescopy -a $(EXE) $$CATALOG/$(EXE).catalog=resources/$$CATALOG/$(EXE).catalog; \
+		fi \
 	done;
-
-catalogs:
-	cd resources; \
-	catcomp -c $(EXE).cd; \
-	for CATALOG in $(CATALOGS);do \
-		echo $$CATALOG; \
-		cd $$CATALOG; \
-		catcomp -t $(EXE).cd; \
-		cd ..; \
-	done;
-
-deps:
-
-install: all
-	strip --strip-all $(EXE)
-	mkdir -p /Applications/AEdit
-	cp $(EXE) /Applications/AEdit/AEdit
-	ln -sf /Applications/AEdit/AEdit /system/bin/$(EXE)
-
-dist: all
-	strip --strip-all $(EXE)
-	mkdir -p $(IMAGE)/Applications/AEdit
-	install -s $(EXE) $(IMAGE)/Applications/AEdit/AEdit
-	ln -sf /Applications/AEdit/AEdit $(IMAGE)/system/bin/$(EXE)
-
-clean: catalog-clean
-	-rm $(OBJS)
-	-rm $(EXE)
 
 $(OBJSDIR)main.o: main.cpp main.h
 	$(CXX) $(COPTS) main.cpp -o $@
@@ -121,9 +94,53 @@ $(OBJSDIR)icons.o: icons.cpp icons.h
 $(OBJSDIR)dialog.o: dialog.cpp dialog.h
 	$(CXX) $(COPTS) dialog.cpp -o $@
 
-catalog-clean:
-	-rm resources/$(EXE).catalog resources/$(EXE).h; \
-	for CATALOG in $(CATALOGS);do \
-		rm resources/$$CATALOG/$(EXE).catalog; \
-	done;
+# ----- ----- ----- ----- ----- ----- ----- ----- ----- -----
 
+dist: catalogs all inst web clean
+
+catalogs:
+	cd resources; \
+	catcomp -c $(EXE).cd; \
+	for CATALOG in `ls -1`;do \
+		if [ -d "$$CATALOG" ] ; then \
+			echo $$CATALOG; \
+			cd $$CATALOG; \
+			catcomp -t $(EXE).cd; \
+			cd ..; \
+		fi \
+	done;
+	sync
+
+inst:
+	strip --strip-all $(EXE)
+	mkdir -p $(PYRO_BINARY_DESTINATION)/System/binary
+	mkdir -p $(PYRO_BINARY_DESTINATION)/Applications/$(EXE)
+	cp -pf $(EXE) $(PYRO_BINARY_DESTINATION)/Applications/$(EXE)/
+	ln -sf /boot/Applications/$(EXE)/$(EXE) $(PYRO_BINARY_DESTINATION)/System/binary/aedit
+	addattrib $(PYRO_BINARY_DESTINATION)/Applications/$(EXE)/$(EXE) "CheckSum::MD5" `md5sum $(PYRO_BINARY_DESTINATION)/Applications/$(EXE)/$(EXE) | cut -c1-32`
+	sync
+
+web:
+	mkdir -p $(PYRO_BINARY_DESTINATION)Web/Languages/LIST
+	mkdir -p $(PYRO_BINARY_DESTINATION)Web/Languages/Applications/$(EXE)
+	cd resources; \
+	for CATALOG in `ls -1`;do \
+		if [ -d "$$CATALOG" ] ; then \
+			touch $(PYRO_BINARY_DESTINATION)Web/Languages/LIST/$$CATALOG; \
+			touch $(PYRO_BINARY_DESTINATION)Web/Languages/Applications/$(EXE)/int; \
+			touch $(PYRO_BINARY_DESTINATION)Web/Languages/Applications/$(EXE)/$$CATALOG; \
+		fi \
+	done;
+	sync
+
+clean: catalog-clean
+	rm -f $(EXE)
+	rm -rf $(OBJSDIR)
+	sync
+
+catalog-clean:
+	rm -f resources/$(EXE).catalog resources/$(EXE).h
+	for CATALOG in `ls -1 resources`;do \
+		rm -f resources/$$CATALOG/$(EXE).catalog; \
+	done;
+	sync

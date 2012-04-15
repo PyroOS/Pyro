@@ -1,10 +1,8 @@
 COPTS   = -I$(TOP)/src $(shell freetype-config --cflags) -c
 
 OBJS =	vmware.o vmware_cursor.o vmware_fb.o vmware_fifo.o vmware_io.o
-
 OBJDIR	:= objs
 OBJS	:= $(addprefix $(OBJDIR)/,$(OBJS))
-
 DRIVER := $(OBJDIR)/vmware
 
 all :	objs $(OBJDIR)/vmware
@@ -30,13 +28,16 @@ $(OBJDIR)/vmware_fifo.o: vmware_fifo.cpp vmware.h
 $(OBJDIR)/vmware_io.o: vmware_io.cpp vmware.h
 	$(CXX) $(COPTS) vmware_io.cpp -o $@
 
-deps:
+# ----- ----- ----- ----- ----- ----- ----- ----- ----- -----
 
-install: $(DRIVER)
-	cp -f $(DRIVER) $(IMAGE)/system/drivers/appserver/video/
+dist: all inst clean
 
-dist: install
+inst:
+	mkdir -p $(PYRO_BINARY_DESTINATION)/System/drivers/appserver/video
+	cp -pf $(OBJDIR)/vmware $(PYRO_BINARY_DESTINATION)/System/drivers/appserver/video/
+	addattrib $(PYRO_BINARY_DESTINATION)/System/drivers/appserver/video/vmware "CheckSum::MD5" `md5sum $(PYRO_BINARY_DESTINATION)/System/drivers/appserver/video/vmware | cut -c1-32`
+	sync
 
 clean:
-	-rm $(OBJS) $(OBJDIR)/vmware
-
+	rm -rf $(OBJDIR)
+	sync

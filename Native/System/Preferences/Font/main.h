@@ -32,8 +32,3 @@ private:
 extern bool bRoot;
 
 #endif
-
-
-
-
-

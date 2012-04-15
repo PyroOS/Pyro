@@ -20,7 +20,7 @@
 #ifndef __ATHEOS_TIME_H_
 #define __ATHEOS_TIME_H_
 
-#include <atheos/types.h>
+#include <pyro/types.h>
 
 #ifdef __cplusplus
 extern "C" {

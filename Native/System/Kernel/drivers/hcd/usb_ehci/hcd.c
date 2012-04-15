@@ -16,15 +16,15 @@
  * Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  */
 
-#include <atheos/udelay.h>
-#include <atheos/isa_io.h>
-#include <atheos/pci.h>
-#include <atheos/usb.h>
-#include <atheos/kernel.h>
-#include <atheos/kdebug.h>
-#include <atheos/time.h>
-#include <atheos/bootmodules.h>
-#include <atheos/device.h>
+#include <pyro/udelay.h>
+#include <pyro/isa_io.h>
+#include <pyro/pci.h>
+#include <pyro/usb.h>
+#include <pyro/kernel.h>
+#include <pyro/kdebug.h>
+#include <pyro/time.h>
+#include <pyro/bootmodules.h>
+#include <pyro/device.h>
 #include <posix/errno.h>
 #include <posix/ioctls.h>
 #include <posix/fcntl.h>

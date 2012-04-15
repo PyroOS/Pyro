@@ -21,9 +21,9 @@
 #ifndef __ATHEOS_SYSTEMBASE_H__
 #define __ATHEOS_SYSTEMBASE_H__
 
-#include <atheos/kernel.h>
-#include <atheos/filesystem.h>
-#include <atheos/bootmodules.h>
+#include <pyro/kernel.h>
+#include <pyro/filesystem.h>
+#include <pyro/bootmodules.h>
 
 #include "intel.h"
 #include "mman.h"

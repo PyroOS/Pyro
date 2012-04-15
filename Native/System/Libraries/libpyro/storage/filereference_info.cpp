@@ -18,9 +18,9 @@
  *  MA 02111-1307, USA
  */
 
-#include <atheos/types.h>
-#include <atheos/kernel.h>
-#include <atheos/fs_attribs.h>
+#include <pyro/types.h>
+#include <pyro/kernel.h>
+#include <pyro/fs_attribs.h>
 #include <gui/window.h>
 #include <gui/layoutview.h>
 #include <gui/dropdownmenu.h>

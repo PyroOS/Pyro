@@ -29,22 +29,21 @@ shutdown_OBJS	:= $(addprefix $(OBJDIR)/,$(shutdown_OBJS))
 strace_OBJS	:= $(addprefix $(OBJDIR)/,$(strace_OBJS))
 sysinfo_OBJS	:= $(addprefix $(OBJDIR)/,$(sysinfo_OBJS))
 
-include $(ATHEOS_SRC)/makefile.rules
+include $(PYRO_COMMON)/makefile.rules
 
 all:  $(OBJDIR) $(EXES)
 
 $(OBJDIR):
 	-mkdir $(OBJDIR)
 
-
 $(OBJDIR)/init: $(init_OBJS)
 	$(CC) $(init_OBJS) -o $@
 $(OBJDIR)/ps: $(ps_OBJS)
 	$(CC) $(ps_OBJS) -o $@
 $(OBJDIR)/ls_ports: $(ls_ports_OBJS)
-	$(CXX) $(ls_ports_OBJS) -lsyllable -o $@
+	$(CXX) $(ls_ports_OBJS) -lpyro -o $@
 $(OBJDIR)/ls_sema: $(ls_sema_OBJS)
-	$(CXX) $(ls_sema_OBJS) -lsyllable -o $@
+	$(CXX) $(ls_sema_OBJS) -lpyro -o $@
 $(OBJDIR)/top: $(top_OBJS)
 	$(CC) $(top_OBJS) -o $@
 $(OBJDIR)/nice: $(nice_OBJS)
@@ -52,24 +51,34 @@ $(OBJDIR)/nice: $(nice_OBJS)
 $(OBJDIR)/semctl: $(semctl_OBJS)
 	$(CC) $(semctl_OBJS) -o $@
 $(OBJDIR)/shutdown: $(shutdown_OBJS)
-	$(CXX) $(shutdown_OBJS) -lsyllable -o $@
+	$(CXX) $(shutdown_OBJS) -lpyro -o $@
 $(OBJDIR)sysinfo: $(sysinfo_OBJS)
 	$(CC) $(sysinfo_OBJS) -o $@
 $(OBJDIR)/strace: $(strace_OBJS)
 	$(CC) $(strace_OBJS) -o $@
 
-deps:
+# ----- ----- ----- ----- ----- ----- ----- ----- ----- -----
 
-install:
-	cp -f $(EXES) /system/bin/
-	ln -s /system/bin/shutdown /system/bin/reboot
-	chmod +x /system/bin/$(EXES)
+dist: all checksum inst clean
 
-dist:
-	cp -f $(EXES) $(IMAGE)/system/bin/
-	ln -s /system/bin/shutdown $(IMAGE)/system/bin/reboot
-	chmod +x $(IMAGE)/system/bin/mkhome
+checksum:
+	for FILES in $(EXES); do \
+		if test -f $$FILES; then \
+			addattrib $$FILES "CheckSum::MD5" `md5sum $$FILES | cut -c1-32`; \
+		fi; \
+	done;
+	sync
+
+inst:
+	chmod +x $(EXES)
+	mkdir -p $(PYRO_BINARY_DESTINATION)/System/binary
+	cp -f $(EXES) $(PYRO_BINARY_DESTINATION)/System/binary/
+	ln -fs shutdown $(PYRO_BINARY_DESTINATION)/System/binary/reboot
+	chmod +x $(PYRO_BINARY_DESTINATION)/System/binary/reboot
+	sync
 
 clean:
-	-rm -Rv $(OBJDIR)
-
+	chmod -x mkhome
+	chmod -x kill_all
+	rm -rf $(OBJDIR)
+	sync

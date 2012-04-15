@@ -20,7 +20,7 @@
 #ifndef	GUI_ARRAY_HPP
 #define	GUI_ARRAY_HPP
 
-#include <atheos/types.h>
+#include <pyro/types.h>
 #include <sys/types.h>
 
 template<class T> class	Array

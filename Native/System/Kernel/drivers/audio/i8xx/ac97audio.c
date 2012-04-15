@@ -1,6 +1,6 @@
 #include <posix/errno.h>
-#include <atheos/kernel.h>
-#include <atheos/device.h>
+#include <pyro/kernel.h>
+#include <pyro/device.h>
 
 #include "ac97audio.h"
 

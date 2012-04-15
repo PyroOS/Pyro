@@ -140,13 +140,3 @@ void MainWindow::Authorize(const char* pzLoginName, const char* pzPassword )
 	cMsg.AddString( "password", pzPassword );
 	Application::GetInstance()->PostMessage( &cMsg, Application::GetInstance() );	
 }
-
-
-
-
-
-
-
-
-
-

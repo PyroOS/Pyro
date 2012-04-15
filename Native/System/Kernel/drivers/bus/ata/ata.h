@@ -33,18 +33,18 @@
 #include <posix/fcntl.h>
 #include <posix/dirent.h>
 
-#include <atheos/types.h>
-#include <atheos/kernel.h>
-#include <atheos/kdebug.h>
-#include <atheos/device.h>
-#include <atheos/timer.h>
-#include <atheos/semaphore.h>
-#include <atheos/irq.h>
-#include <atheos/isa_io.h>
-#include <atheos/bootmodules.h>
-#include <atheos/udelay.h>
-#include <atheos/pci.h>
-#include <atheos/cdrom.h>
+#include <pyro/types.h>
+#include <pyro/kernel.h>
+#include <pyro/kdebug.h>
+#include <pyro/device.h>
+#include <pyro/timer.h>
+#include <pyro/semaphore.h>
+#include <pyro/irq.h>
+#include <pyro/isa_io.h>
+#include <pyro/bootmodules.h>
+#include <pyro/udelay.h>
+#include <pyro/pci.h>
+#include <pyro/cdrom.h>
 
 #include <macros.h>
 

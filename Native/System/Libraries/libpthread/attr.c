@@ -16,7 +16,7 @@
 #include <stdlib.h>
 #include <string.h>
 #include <posix/errno.h>
-#include <atheos/threads.h>		/* Kernel threads interface */
+#include <pyro/threads.h>		/* Kernel threads interface */
 
 #include <bits.h>
 #include <debug.h>

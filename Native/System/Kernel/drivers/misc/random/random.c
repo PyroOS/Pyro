@@ -7,10 +7,10 @@
 // Modified, fixed and extended by Kristian Van Der Vliet
 // (vanders@users.sourceforge.net) for Syllable
 
-#include <atheos/types.h>
-#include <atheos/kernel.h>
-#include <atheos/device.h>
-#include <atheos/random.h>
+#include <pyro/types.h>
+#include <pyro/kernel.h>
+#include <pyro/device.h>
+#include <pyro/random.h>
 
 static int random_open( void* node, uint32 flags, void** cookie )
 {

@@ -1,9 +1,7 @@
 OBJS = tifftrans.o
 OBJDIR = objs
 
-TRANSDIR = /system/extensions/translators
-
-#include $(ATHEOS_SRC)/makefile.rules
+#include $(PYRO_COMMON)/makefile.rules
 
 all :	$(OBJDIR) $(OBJDIR)/tifftrans.so
 
@@ -11,15 +9,19 @@ $(OBJDIR):
 	mkdir $(OBJDIR)
 
 $(OBJDIR)/tifftrans.so: $(OBJS)
-	$(CXX) $(CXXFLAGS) -shared $(OBJS) -lsyllable -ltiff -ljpeg -lz -o $(OBJDIR)/tifftrans.so
+	$(CXX) $(CXXFLAGS) -shared $(OBJS) -lpyro -ltiff -ljpeg -lz -o $(OBJDIR)/tifftrans.so
+
+# ----- ----- ----- ----- ----- ----- ----- ----- ----- -----
+
+dist: all inst clean
+
+inst:
+	mkdir -p $(PYRO_BINARY_DESTINATION)/System/extensions/translators
+	cp -f $(OBJDIR)/tifftrans.so $(PYRO_BINARY_DESTINATION)/System/extensions/translators/
+	addattrib $(PYRO_BINARY_DESTINATION)/System/extensions/translators/tifftrans.so "CheckSum::MD5" `md5sum $(PYRO_BINARY_DESTINATION)/System/extensions/translators/tifftrans.so | cut -c1-32`
+	sync
 
 clean:
-	rm -f *.o $(OBJDIR)/*.d $(OBJDIR)/*.so
-
-install:
-	install $(OBJDIR)/tifftrans.so $(IMAGE)/$(TRANSDIR)/
-
-dist: install
-
--include $(OBJDIR)/*.d 
-
+	rm -f $(OBJS)
+	rm -rf $(OBJDIR)
+	sync

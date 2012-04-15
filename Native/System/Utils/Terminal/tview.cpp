@@ -32,7 +32,7 @@
 #include <gui/scrollbar.h>
 #include <util/message.h>
 #include <util/clipboard.h>
-#include <atheos/time.h>
+#include <pyro/time.h>
 
 #include <gui/requesters.h>
 
@@ -93,7 +93,7 @@ int g_nDefaultAttribs = 0x07;	/* These attributes will be replaced by custom col
 
 #define DEBUG( level, fmt, args... ) do { if ( level < g_nDebugLevel ) printf( fmt, ## args ); } while(0)
 
-const char *g_pzAboutText = "ATerm is a virtual terminal for Syllable.\n" "\n" "Version " VERSION "\n\n" "Copyright (C) 2004 Damien Daneels, Rick Caudill and Henrik Isaksson.\n" "Copyright (C) 1999 - 2001 Kurt Skauen\n\n" "This program is free software; you can redistribute it and/or modify\n" "it under the terms of the GNU General Public License as published by\n" "the Free Software Foundation; either version 2 of the License, or\n" "(at your option) any later version.\n" "\n" "This program is distributed in the hope that it will be useful,\n" "but WITHOUT ANY WARRANTY; without even the implied warranty of\n" "MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the\n" "GNU General Public License for more details.\n" "\n" "You should have received a copy of the GNU General Public License\n" "along with this program; if not, write to the Free Software\n" "Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA";
+const char *g_pzAboutText = "ATerm is a virtual terminal for Pyro.\n" "\n" "Version " VERSION "\n\n" "Copyright (C) 2004 Damien Daneels, Rick Caudill and Henrik Isaksson.\n" "Copyright (C) 1999 - 2001 Kurt Skauen\n\n" "This program is free software; you can redistribute it and/or modify\n" "it under the terms of the GNU General Public License as published by\n" "the Free Software Foundation; either version 2 of the License, or\n" "(at your option) any later version.\n" "\n" "This program is distributed in the hope that it will be useful,\n" "but WITHOUT ANY WARRANTY; without even the implied warranty of\n" "MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the\n" "GNU General Public License for more details.\n" "\n" "You should have received a copy of the GNU General Public License\n" "along with this program; if not, write to the Free Software\n" "Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA";
 
 
 /**

@@ -85,14 +85,3 @@ bool MainWindow::OkToQuit()
 	os::Application::GetInstance()->PostMessage( os::M_QUIT );
 	return( true );
 }
-
-
-
-
-
-
-
-
-
-
-

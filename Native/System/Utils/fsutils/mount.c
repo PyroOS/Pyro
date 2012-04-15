@@ -6,8 +6,8 @@
 #include <getopt.h>
 #include <limits.h>
 
-#include <atheos/kernel.h>
-#include <atheos/filesystem.h>
+#include <pyro/kernel.h>
+#include <pyro/filesystem.h>
 
 int g_nShowHelp    = 0;
 int g_nShowVersion = 0;
@@ -59,6 +59,8 @@ int main( int argc, char** argv )
     int	nCount;
 	int flags = 0;
   
+	mkdir( zDirPath, S_IRWXU | S_IRWXG | S_IRWXO );
+
     while( (c = getopt_long (argc, argv, "hvrwad:t:o:", long_opts, (int *) 0)) != EOF )
     {
 	switch (c)
@@ -93,7 +95,7 @@ int main( int argc, char** argv )
 	exit( 0 );
     }
     if ( g_nShowVersion ) {
-	printf( "Syllable mount V0.1.2 compiled %s\n", __DATE__ );
+	printf( "Pyro mount V0.1.3 compiled %s\n", __DATE__ );
 	exit( 0 );
     }
     nCount = argc - optind;
@@ -116,6 +118,7 @@ int main( int argc, char** argv )
 		(zDevPath[0]) ? zDevPath : "*nodev*", ((g_nReadOnly) ? "ro" : "rw"), zDirPath, pzFsType, (pzFsArgs) ? pzFsArgs : "" );
     }
     if ( mount( zDevPath, zDirPath, pzFsType, flags, pzFsArgs ) < 0 ) {
+	rmdir ( zDirPath );
 	fprintf( stderr, "Error: Failed to mount %s: %s\n", zDirPath, strerror( errno ) );
 	return( 1 );
     }

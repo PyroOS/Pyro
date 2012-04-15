@@ -31,12 +31,12 @@
  */
 
 #define __NO_VERSION__
-#include <atheos/kernel.h>
-#include <atheos/atomic.h>
-#include <atheos/isa_io.h>
-#include <atheos/spinlock.h>
+#include <pyro/kernel.h>
+#include <pyro/atomic.h>
+#include <pyro/isa_io.h>
+#include <pyro/spinlock.h>
 #include <posix/errno.h>
-#include <atheos/device.h>
+#include <pyro/device.h>
 
 #include "hwaccess.h"
 #include "cardwo.h"

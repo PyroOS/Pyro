@@ -19,7 +19,7 @@
 #ifndef _GRADIENT_H_
 #define _GRADIENT_H_
 
-#include <atheos/types.h>
+#include <pyro/types.h>
 #include "HSV.h"
 
 class Gradient

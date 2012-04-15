@@ -21,7 +21,7 @@
 #define __F_ATHEOS_POSIX_UIO_H__
 
 #ifdef __KERNEL__
-#include <atheos/types.h>
+#include <pyro/types.h>
 #include <posix/types.h>
 #else
 #include <sys/types.h>

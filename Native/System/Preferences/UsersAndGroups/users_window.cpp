@@ -290,7 +290,7 @@ void UsersView::HandleMessage( Message *pcMessage )
 
 			psPasswd->pw_name = "new";
 			psPasswd->pw_gecos = "New User";
-			psPasswd->pw_dir = "/home/new";
+			psPasswd->pw_dir = "/boot/Home/new";
 			psPasswd->pw_shell = "/bin/bash";
 
 			Message *pcChangeMsg = new Message( ID_USERS_POST_ADD );
@@ -537,7 +537,7 @@ status_t UsersView::SaveChanges( void )
 
 	/* Write the details currently held to a temp file, then move it over the current /etc/passwd */
 
-	char zTemp[] = { "/tmp/passwd.XXXXXX" };
+	char zTemp[] = { "/temp/passwd.XXXXXX" };
 	int nTemp;
 	if( ( nTemp = mkstemp( zTemp ) ) < 0 )
 		return EIO;
@@ -558,7 +558,7 @@ status_t UsersView::SaveChanges( void )
 
 #ifndef TEST
 	/* Copy the temporary passwd file over the real file, then remove the temporary file */
-	if( rename( zTemp, "/etc/passwd" ) < 0 )
+	if( rename( zTemp, "/boot/System/config/etc/passwd" ) < 0 )
 	{
 		/* Couldn't move it, so remove it */
 		unlink( zTemp );
@@ -906,7 +906,7 @@ status_t GroupsView::SaveChanges( void )
 
 	/* Write the details currently held to a temp file, then move it over the current /etc/group */
 
-	char zTemp[] = { "/tmp/group.XXXXXX" };
+	char zTemp[] = { "/temp/group.XXXXXX" };
 	int nTemp;
 	if( ( nTemp = mkstemp( zTemp ) ) < 0 )
 		return EIO;
@@ -927,7 +927,7 @@ status_t GroupsView::SaveChanges( void )
 
 #ifndef TEST
 	/* Copy the temporary group file over the real file, then remove the temporary file */
-	if( rename( zTemp, "/etc/group" ) < 0 )
+	if( rename( zTemp, "/boot/System/config/etc/group" ) < 0 )
 	{
 		/* Couldn't move it, so remove it */
 		unlink( zTemp );

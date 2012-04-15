@@ -20,7 +20,7 @@
 #ifndef __F_APPSERVER_KEYMAP_H__
 #define __F_APPSERVER_KEYMAP_H__
 
-#include <atheos/types.h>
+#include <pyro/types.h>
 
 #define CURRENT_KEYMAP_VERSION	2
 #define KEYMAP_MAGIC		0x4d7f98c5

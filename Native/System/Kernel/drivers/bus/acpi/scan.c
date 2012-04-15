@@ -2,16 +2,16 @@
  * scan.c - support for transforming the ACPI namespace into individual objects
  */
 
-#include <atheos/types.h>
-#include <atheos/atomic.h>
-#include <atheos/list.h>
-#include <atheos/kernel.h>
-#include <atheos/spinlock.h>
-#include <atheos/types.h>
-#include <atheos/semaphore.h>
-#include <atheos/acpi.h>
+#include <pyro/types.h>
+#include <pyro/atomic.h>
+#include <pyro/list.h>
+#include <pyro/kernel.h>
+#include <pyro/spinlock.h>
+#include <pyro/types.h>
+#include <pyro/semaphore.h>
+#include <pyro/acpi.h>
 #include <acpi/acinterp.h>	/* for acpi_ex_eisa_id_to_string() */
-#include <atheos/string.h>
+#include <pyro/string.h>
 #include <posix/errno.h>
 
 #define _COMPONENT		ACPI_BUS_COMPONENT

@@ -42,7 +42,7 @@ using namespace std;
 * Author: Rick Caudill
 * Date: Tue Mar 16 11:40:01 2004
 *************************************************************/
-MainWindow::MainWindow(AppSettings* pcSettings,const os::String& cString) : Window( os::Rect( 0, 0, 600, 600 ), "main_wnd",String((String)APP_NAME + (String)" v" + (String)APP_VERSION + (String)": "+ cString), 0/*os::WND_SINGLEBUFFER*/)
+MainWindow::MainWindow(AppSettings* pcSettings,const os::String& cString) : Window( os::Rect( 0, 0, 600, 500 ), "main_wnd",String((String)APP_NAME + (String)" v" + (String)APP_VERSION + (String)": "+ cString), 0/*os::WND_SINGLEBUFFER*/)
 {
 	pcMainSettings = pcSettings;
 
@@ -729,8 +729,8 @@ void MainWindow::HandleMessage( os::Message* pcMessage )
 				Directory* pcDir = new Directory(cDir);
 				if (pcDir->IsDir())
 				{
-					UpdateStatus("Opening diectory...",0);
-					Execute* pcExecute = new Execute("/system/bin/FileBrowser",cDir);
+					UpdateStatus("Opening directory...",0);
+					Execute* pcExecute = new Execute("FileBrowser",cDir);
 					
 					if (pcExecute->IsValid()) //just making sure that the FileBrowser is there
 						pcExecute->Run();
@@ -1637,10 +1637,14 @@ void MainWindow::Save(const String& cFile)
 		String cEditorString;
 		uint nLines=pcEditor->GetLineCount();
 
-		for (uint i=0;i<=nLines;i++)
+		for (uint i=0;i<nLines;i++)
 		{
-			cEditorString += pcEditor->GetLine(i); 
+			cEditorString += pcEditor->GetLine(i);
 			cEditorString += "\n";
+		}
+		if( nLines != 0 )
+		{
+			cEditorString += pcEditor->GetLine(nLines);
 		}
 		pcFile->Write(cEditorString.c_str(),cEditorString.size());
 		pcFile->Flush();
@@ -1799,7 +1803,7 @@ void MainWindow::LoadFormat()
 *************************************************************/
 void MainWindow::LaunchConvertor()
 {
-	String cPath = "^/bin/source-highlight";
+	String cPath = "^/programs/source-highlight";
 	
 	try
 	{
@@ -1826,7 +1830,7 @@ void MainWindow::LaunchConvertor()
 		delete pFile;  //don't forget to delete the file
 	}
 
-	catch(...) //source-highlight must not be in ^/bin
+	catch(...) //source-highlight must not be in ^/programs
 	{
 		ShowError(ERR_NO_HIGHLIGHTER);
 	}
@@ -2067,65 +2071,7 @@ bool MainWindow::Find(const String &pcString, bool bDown, bool bCaseSensitive, b
             }
         }
 	//not found
-	UpdateStatus("Search string not found!",0);
+	UpdateStatus("Search string not found.",0);
 	return false;
 	}
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

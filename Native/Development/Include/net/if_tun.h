@@ -22,10 +22,10 @@
 #ifndef SYLLABLE_IF_TUN_H
 #define SYLLABLE_IF_TUN_H
 
-#include <atheos/types.h>
-#include <atheos/device.h>
-#include <atheos/filesystem.h>
-#include <atheos/kernel.h>
+#include <pyro/types.h>
+#include <pyro/device.h>
+#include <pyro/filesystem.h>
+#include <pyro/kernel.h>
 
 #include <net/net.h>
 #include <net/packet.h>

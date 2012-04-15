@@ -20,7 +20,7 @@
 #ifndef	GRAPHICS_GFXTYPES_H
 #define	GRAPHICS_GFXTYPES_H
 
-#include <atheos/types.h>
+#include <pyro/types.h>
 
 namespace os
 {

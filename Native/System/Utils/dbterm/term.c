@@ -21,9 +21,9 @@
 #include <unistd.h>
 #include <stdlib.h>
 
-#include <atheos/kdebug.h>
-#include <atheos/threads.h>
-#include <atheos/kernel.h>
+#include <pyro/kdebug.h>
+#include <pyro/threads.h>
+#include <pyro/kernel.h>
 
 int g_nInPort;
 int g_nOutPort;

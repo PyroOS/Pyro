@@ -4,7 +4,7 @@
 //	Translated by: Daniel Eriksson
 //
 
-MSG_MAINWND_TITLE=0							Syllable Hanteraren
+MSG_MAINWND_TITLE=0							Pyro Hanteraren
 
 MSG_MAINWND_MENU_APPLICATION=100			Program
 MSG_MAINWND_MENU_APPLICATION_ABOUT			Om
@@ -18,15 +18,15 @@ MSG_MAINWND_MENU_OPTIONS_SPEED_MEDIUM		Mellan
 MSG_MAINWND_MENU_OPTIONS_SPEED_HIGH			Hög
 MSG_MAINWND_MENU_OPTIONS_SPEED_PAUSE		Paus
 
-MSG_ABOUTWND_TITLE=900						Om Syllable Hanteraren v.%s
-MSG_ABOUTWND_TEXT							System Information v.%s\n\nResurshanterare för Syllable\nJohn Hall, 2001\n
+MSG_ABOUTWND_TITLE=900						Om Pyro Hanteraren v.%s
+MSG_ABOUTWND_TEXT							System Information v.%s\n\nResurshanterare för Pyro\nJohn Hall, 2001\n
 MSG_ABOUTWND_OK								_Ok
 
 MSG_TAB_SYSINFO=1000						Systeminformation
 MSG_TAB_SYSINFO_VER_NAME					Namn
 MSG_TAB_SYSINFO_VER_VERSION					Version
 MSG_TAB_SYSINFO_VER_BUILDDATE				Versionsdatum
-MSG_TAB_SYSINFO_VER_SYLLABLE				Syllable
+MSG_TAB_SYSINFO_VER_SYLLABLE				Pyro
 MSG_TAB_SYSINFO_VER_SLBMGR					System Information
 MSG_TAB_SYSINFO_CPU_CPU						CPU
 MSG_TAB_SYSINFO_CPU_CORESPEED				Kärnhastighet

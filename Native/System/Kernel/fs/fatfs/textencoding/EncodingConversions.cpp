@@ -6,7 +6,7 @@
 #include "UnicodeMappings.h"
 #include "EncodingConversions.h"
 
-#include <atheos/types.h>
+#include <pyro/types.h>
 #include <posix/errno.h>
 
 extern "C" {

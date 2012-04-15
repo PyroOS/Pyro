@@ -20,9 +20,9 @@
 #ifndef __F_MEDIA_SOUNDPLAYER_H_
 #define __F_MEDIA_SOUNDPLAYER_H_
 
-#include <atheos/types.h>
-#include <atheos/kernel.h>
-#include <atheos/threads.h>
+#include <pyro/types.h>
+#include <pyro/kernel.h>
+#include <pyro/threads.h>
 #include <util/string.h>
 #include <media/packet.h>
 #include <media/format.h>

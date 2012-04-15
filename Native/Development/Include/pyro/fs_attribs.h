@@ -20,8 +20,8 @@
 #ifndef __F_FS_ATTRIBS_H__
 #define __F_FS_ATTRIBS_H__
 
-#include <atheos/kernel.h>
-#include <atheos/types.h>
+#include <pyro/kernel.h>
+#include <pyro/types.h>
 #ifdef __cplusplus
 extern "C" {
 #if 0  

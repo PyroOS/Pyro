@@ -4,7 +4,7 @@
 #include <errno.h>
 #include <dirent.h>
 
-#include <atheos/fs_attribs.h>
+#include <pyro/fs_attribs.h>
 
 void print_usage( const char* pzName )
 {

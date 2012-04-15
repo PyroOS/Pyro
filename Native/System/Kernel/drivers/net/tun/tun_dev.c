@@ -53,11 +53,11 @@
  *
  */
 
-#include <atheos/types.h>
-#include <atheos/kernel.h>
-#include <atheos/kdebug.h>
-#include <atheos/device.h>
-#include <atheos/semaphore.h>
+#include <pyro/types.h>
+#include <pyro/kernel.h>
+#include <pyro/kdebug.h>
+#include <pyro/device.h>
+#include <pyro/semaphore.h>
 
 #include <posix/errno.h>
 #include <posix/fcntl.h>

@@ -20,8 +20,8 @@
 #ifndef	__F_ATHEOS_TLD_H__
 #define	__F_ATHEOS_TLD_H__
 
-#include <atheos/types.h>
-#include <atheos/areas.h>
+#include <pyro/types.h>
+#include <pyro/areas.h>
 
 #ifdef __cplusplus
 extern "C" {

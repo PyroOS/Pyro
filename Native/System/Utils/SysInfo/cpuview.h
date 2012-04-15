@@ -20,7 +20,7 @@
 #ifndef __F_CPUVIEW_H__
 #define __F_CPUVIEW_H__
 
-#include <atheos/kernel.h>
+#include <pyro/kernel.h>
 #include <gui/view.h>
 
 namespace os {

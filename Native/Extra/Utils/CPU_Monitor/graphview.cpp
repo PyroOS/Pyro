@@ -26,7 +26,7 @@
 #include "graphview.h"
 #include "w8378x_driver.h"
 
-#include <atheos/time.h>
+#include <pyro/time.h>
 
 #include <gui/window.h>
 #include <gui/stringview.h>

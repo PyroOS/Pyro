@@ -1,4 +1,4 @@
-#include <atheos/kernel.h>
+#include <pyro/kernel.h>
 
 #include <util/application.h>
 #include <util/message.h>

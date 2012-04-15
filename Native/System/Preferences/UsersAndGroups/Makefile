@@ -1,48 +1,70 @@
 CXXFLAGS += -c -I.
 OBJS = main.o users_window.o user_propertiesdlg.o changepwddlg.o group_propertiesdlg.o
 EXE = Users
-TARGET_EXE = Users\ \&\ Groups
-
-CATALOGS = da de el es fr hu nl pt-br ru sv
+TARGET_EXE = UsersAndGroups
 
 #Define TEST if you're testing the Preferences; doesn't overwrite system files
 #CXXFLAGS += -DTEST
 
-$(EXE): catalogs $(OBJS)
-	$(CXX) $(OBJS) -lsyllable -lcrypt -o $(EXE)
+$(EXE): $(OBJS)
+	$(CXX) $(OBJS) -lpyro -lcrypt -o $(EXE)
 	strip --strip-all $(EXE)
 	rescopy $(EXE) -r *.png
 	rescopy -a $(EXE) resources/UsersAndGroups.catalog
-	for CATALOG in $(CATALOGS);do \
-		echo $$CATALOG; \
-		rescopy -a $(EXE) $$CATALOG/UsersAndGroups.catalog=resources/$$CATALOG/UsersAndGroups.catalog; \
-	done;
-
-catalogs:
-	cd resources; \
-	catcomp -c UsersAndGroups.cd; \
-	for CATALOG in $(CATALOGS);do \
-		echo $$CATALOG; \
-		cd $$CATALOG; \
-		catcomp -t UsersAndGroups.cd; \
-		cd ..; \
-	done;
-
-install: $(EXE)
-	install -s $(EXE) $(IMAGE)/Applications/Preferences/$(TARGET_EXE)
-
-dist: install
-
-clean: catalog-clean
-	-rm $(OBJS)
-	-rm $(EXE)
-
-catalog-clean:
-	-rm resources/UsersAndGroups.catalog resources/UsersAndGroups.h; \
-	for CATALOG in $(CATALOGS);do \
-		rm resources/$$CATALOG/UsersAndGroups.catalog; \
+	for CATALOG in `ls -1 resources`;do \
+		if [ -d "resources/$$CATALOG" ] ; then \
+			echo $$CATALOG; \
+			rescopy -a $(EXE) $$CATALOG/UsersAndGroups.catalog=resources/$$CATALOG/UsersAndGroups.catalog; \
+		fi \
 	done;
 
 .cpp.o:
 	$(CXX) $(CXXFLAGS) $< -o $@
 
+# ----- ----- ----- ----- ----- ----- ----- ----- ----- -----
+
+dist: catalogs $(EXE) inst web clean
+
+catalogs:
+	cd resources; \
+	catcomp -c UsersAndGroups.cd; \
+	for CATALOG in `ls -1`;do \
+		if [ -d "$$CATALOG" ] ; then \
+			echo $$CATALOG; \
+			cd $$CATALOG; \
+			catcomp -t UsersAndGroups.cd; \
+			cd ..; \
+		fi \
+	done;
+	sync
+
+inst:
+	mkdir -p $(PYRO_BINARY_DESTINATION)/Preferences
+	cp -pf $(EXE) $(PYRO_BINARY_DESTINATION)/Preferences/$(TARGET_EXE)
+	addattrib "$(PYRO_BINARY_DESTINATION)/Preferences/$(TARGET_EXE)" "CheckSum::MD5" `md5sum "$(PYRO_BINARY_DESTINATION)/Preferences/$(TARGET_EXE)" | cut -c1-32`
+	sync
+
+web:
+	mkdir -p $(PYRO_BINARY_DESTINATION)Web/Languages/LIST
+	mkdir -p $(PYRO_BINARY_DESTINATION)Web/Languages/Preferences/$(TARGET_EXE)
+	cd resources; \
+	for CATALOG in `ls -1`;do \
+		if [ -d "$$CATALOG" ] ; then \
+			touch $(PYRO_BINARY_DESTINATION)Web/Languages/LIST/$$CATALOG; \
+			touch $(PYRO_BINARY_DESTINATION)Web/Languages/Preferences/$(TARGET_EXE)/int; \
+			touch $(PYRO_BINARY_DESTINATION)Web/Languages/Preferences/$(TARGET_EXE)/$$CATALOG; \
+		fi \
+	done;
+	sync
+
+clean: catalog-clean
+	rm -f $(OBJS)
+	rm -f $(EXE)
+	sync
+
+catalog-clean:
+	rm -f resources/UsersAndGroups.catalog resources/UsersAndGroups.h
+	for CATALOG in `ls -1 resources`;do \
+		rm -f resources/$$CATALOG/UsersAndGroups.catalog; \
+	done;
+	sync

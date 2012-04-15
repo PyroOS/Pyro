@@ -1,0 +1,237 @@
+INCLUDES = -I../ -I../JavaScriptCore -I../JavaScriptCore/bindings -I../JavaScriptCore/ForwardingHeaders -I./ -Idom -Iplatform -Ipage -Iplatform/graphics -Iplatform/graphics/syllable -Iplatform/graphics/svg -Iediting -Ixml \
+			-Irendering -Istorage -Iloader -Iloader/icon -Iloader/syllable -Icss -Iplatform/network -Iplatform/syllable -Ibindings/js -I../JavaScriptCore/kjs -Ihtml \
+			-Ibridge -IDerivedSources/WebCore -Iplatform/text -Iplatform/sql -Iplatform/image-decoders -Iplatform/image-decoders/gif -Iplatform/image-decoders/bmp \
+			-Iplatform/image-decoders/ico -Iplatform/image-decoders/jpeg -Iplatform/image-decoders/png -IForwardingHeaders\
+			-Iplatform/image-decoders/xbm -Iplatform/network/syllable -Ihistory -I/usr/libxml/include/libxml2 -Ihistory -I../JavaScriptCore/wtf \
+			-Isvg/graphics
+
+CFLAGS   += -O2 -c -fexceptions $(INCLUDES) -DBUILDING_SYLLABLE__=1 -DHAVE_CONFIG_H=1
+CXXFLAGS += -O2 -c -fexceptions $(INCLUDES) -DBUILDING_SYLLABLE__=1 -DHAVE_CONFIG_H=1
+AOPTS    = -c
+
+LIBNAME = libwebcore.so.1
+
+VPATH = ./ DerivedSources/WebCore platform platform/text platform/sql platform/graphics platform/graphics/syllable platform/graphics/svg \
+		platform/graphics/svg/syllable platform/image-decoders/bmp platform/image-decoders/gif platform/image-decoders/png \
+		platform/image-decoders/jpeg platform/image-decoders/ico platform/image-decoders/xbm platform/syllable bindings/js \
+		platform/network platform/network/syllable css dom editing html loader loader/icon loader/syllable page page/syllable \
+		xml rendering history history/syllable editing/syllable svg/graphics svg/graphics/syllable storage platform/pthreads
+
+JS_OBJS = GCController.o JSAttr.o JSAttrCustom.o JSBarInfo.o JSCDATASection.o JSCSSCharsetRule.o JSCSSFontFaceRule.o JSCSSImportRule.o \
+	JSCSSMediaRule.o JSCSSPageRule.o JSCSSPrimitiveValue.o JSCSSRule.o JSCSSRuleList.o JSCSSStyleDeclaration.o \
+	JSCSSStyleRule.o JSCSSStyleSheet.o JSCSSValue.o JSCSSValueList.o  \
+	JSCanvasGradient.o JSCanvasPattern.o JSCanvasRenderingContext2D.o JSCharacterData.o JSComment.o JSCounter.o  \
+	JSDOMImplementation.o JSDOMParser.o JSDOMSelection.o JSDOMWindow.o JSDOMCoreException.o JSDocument.o JSLocation.o \
+	JSDocumentFragment.o JSDocumentType.o JSElement.o JSElementCustom.o JSEvent.o JSEventException.o JSEntity.o JSEntityReference.o JSHistory.o JSHistoryCustom.o JSHTMLAppletElement.o  \
+	JSHTMLAnchorElement.o JSHTMLAreaElement.o JSHTMLBaseElement.o JSHTMLBaseFontElement.o  \
+	JSHTMLBlockquoteElement.o JSHTMLBodyElement.o JSHTMLBRElement.o JSHTMLButtonElement.o  \
+	JSHTMLCanvasElement.o JSHTMLCollection.o JSHTMLDirectoryElement.o JSHTMLDivElement.o JSHTMLDListElement.o  \
+	JSHTMLDocument.o JSHTMLElement.o JSHTMLEmbedElement.o JSHTMLFieldSetElement.o JSHTMLFontElement.o JSHTMLFormElement.o  \
+	JSHTMLFrameElement.o JSHTMLFrameElementCustom.o JSHTMLFrameSetElement.o JSHTMLHeadElement.o JSHTMLHeadingElement.o JSHTMLHRElement.o JSHTMLImageElement.o  \
+	JSHTMLIsIndexElement.o JSHTMLHtmlElement.o JSHTMLInputElement.o JSHTMLIFrameElement.o JSHTMLIFrameElementCustom.o \
+	JSHTMLLabelElement.o JSHTMLLegendElement.o JSHTMLLIElement.o JSHTMLLinkElement.o  \
+	JSHTMLMenuElement.o JSHTMLOptionElement.o JSHTMLOptionsCollection.o JSHTMLOptGroupElement.o  \
+	JSHTMLQuoteElement.o JSHTMLMapElement.o JSHTMLMarqueeElement.o JSHTMLMetaElement.o JSHTMLModElement.o JSHTMLOListElement.o  \
+	JSHTMLObjectElement.o JSHTMLParagraphElement.o JSHTMLParamElement.o JSHTMLPreElement.o JSHTMLScriptElement.o  \
+	JSHTMLSelectElement.o JSHTMLStyleElement.o JSHTMLTableCaptionElement.o JSHTMLTableCellElement.o \
+	JSHTMLTableColElement.o JSHTMLTableElement.o JSHTMLTableRowElement.o JSHTMLTableSectionElement.o \
+	JSHTMLTextAreaElement.o JSHTMLTitleElement.o JSHTMLUListElement.o  \
+	JSKeyboardEvent.o JSMediaList.o JSMessageEvent.o JSMouseEvent.o JSMutationEvent.o JSNamedNodeMap.o JSNode.o JSNodeFilter.o JSNodeIterator.o  \
+	JSNodeList.o JSNotation.o JSOverflowEvent.o JSProcessingInstruction.o JSProgressEvent.o JSRange.o JSRangeException.o JSRect.o JSScreen.o JSStyleSheet.o JSStyleSheetList.o JSStyleSheetListCustom.o \
+	JSSVGZoomEvent.o JSSVGAElement.o JSSVGAngle.o JSSVGAnimatedAngle.o JSSVGAnimateColorElement.o  \
+	JSSVGAnimateElement.o JSSVGAnimateTransformElement.o JSSVGAnimatedBoolean.o  \
+	JSSVGAnimatedEnumeration.o JSSVGAnimatedInteger.o JSSVGAnimatedLength.o JSSVGAnimatedLengthList.o  \
+	JSSVGAnimatedNumber.o JSSVGAnimatedNumberList.o  \
+	JSSVGAnimatedPreserveAspectRatio.o JSSVGAnimatedRect.o JSSVGAnimatedString.o  \
+	JSSVGAnimatedTransformList.o JSSVGAnimationElement.o JSSVGColor.o JSSVGCircleElement.o  \
+	JSSVGClipPathElement.o JSSVGComponentTransferFunctionElement.o JSSVGCursorElement.o  \
+	JSSVGDefsElement.o JSSVGDescElement.o JSSVGDocument.o JSSVGLength.o JSSVGMatrix.o  \
+	JSSVGMetadataElement.o JSSVGPathElement.o JSSVGPathSeg.o JSSVGPathSegArcAbs.o JSSVGPathSegArcRel.o  \
+	JSSVGPathSegClosePath.o JSSVGPathSegCurvetoCubicAbs.o JSSVGPathSegCurvetoCubicRel.o  \
+	JSSVGPathSegCurvetoCubicSmoothAbs.o JSSVGPathSegCurvetoCubicSmoothRel.o  \
+	JSSVGPathSegCurvetoQuadraticAbs.o JSSVGPathSegCurvetoQuadraticRel.o  \
+	JSSVGPathSegCurvetoQuadraticSmoothAbs.o JSSVGPathSegCurvetoQuadraticSmoothRel.o  \
+	JSSVGPathSegLinetoAbs.o JSSVGPathSegLinetoHorizontalAbs.o JSSVGPathSegLinetoHorizontalRel.o  \
+	JSSVGPathSegLinetoRel.o JSSVGPathSegLinetoVerticalAbs.o JSSVGPathSegLinetoVerticalRel.o  \
+	JSSVGPathSegMovetoAbs.o JSSVGPathSegMovetoRel.o JSSVGNumberList.o JSSVGPaint.o JSSVGPathSegList.o  \
+	JSSVGPatternElement.o JSSVGPointList.o JSSVGPolygonElement.o JSSVGPolylineElement.o  \
+	JSSVGRadialGradientElement.o JSSVGRectElement.o JSSVGRenderingIntent.o JSSVGSetElement.o  \
+	JSSVGScriptElement.o JSSVGStyleElement.o JSSVGSwitchElement.o JSSVGStopElement.o JSSVGStringList.o  \
+	JSSVGSymbolElement.o JSSVGTRefElement.o JSSVGTSpanElement.o JSSVGTextElement.o  \
+	JSSVGTextContentElement.o JSSVGTextPositioningElement.o JSSVGTitleElement.o JSSVGTransform.o  \
+	JSSVGTransformList.o JSSVGUnitTypes.o JSSVGUseElement.o JSSVGViewElement.o  \
+	JSSVGPreserveAspectRatio.o JSSVGElement.o JSSVGSVGElement.o JSSVGEllipseElement.o  \
+	JSSVGFEBlendElement.o JSSVGFEColorMatrixElement.o JSSVGFEComponentTransferElement.o  \
+	JSSVGFECompositeElement.o JSSVGFEDiffuseLightingElement.o JSSVGFEDisplacementMapElement.o  \
+	JSSVGFEDistantLightElement.o JSSVGFEFloodElement.o JSSVGFEFuncAElement.o JSSVGFEFuncBElement.o  \
+	JSSVGFEFuncGElement.o JSSVGFEFuncRElement.o JSSVGFEGaussianBlurElement.o JSSVGFEImageElement.o  \
+	JSSVGFEMergeElement.o JSSVGFEMergeNodeElement.o JSSVGFEOffsetElement.o JSSVGFEPointLightElement.o  \
+	JSSVGFESpecularLightingElement.o JSSVGFESpotLightElement.o JSSVGFETileElement.o  \
+	JSSVGFETurbulenceElement.o JSSVGFilterElement.o JSSVGForeignObjectElement.o JSSVGGElement.o  \
+	JSSVGGradientElement.o JSSVGImageElement.o JSSVGLength.o JSSVGLengthList.o JSSVGLineElement.o  \
+	JSSVGLinearGradientElement.o JSSVGMaskElement.o JSSVGMarkerElement.o JSSVGTransform.o JSText.o JSTextEvent.o  \
+	JSTreeWalker.o JSUIEvent.o JSXPathEvaluator.o JSXPathExpression.o JSXPathNSResolver.o JSDatabase.o JSDatabaseCustom.o \
+	JSXPathResult.o JSWheelEvent.o JSXMLSerializer.o XMLNames.o XMLHttpRequest.o
+
+GENERATED_OBJS = CSSGrammar.o DocTypeStrings.o HTMLEntityNames.o HTMLNames.o ColorData.o UserAgentStyleSheetsData.o
+
+BINDINGS_OBJS	= kjs_binding.o kjs_css.o kjs_dom.o kjs_events.o kjs_html.o kjs_navigator.o kjs_proxy.o \
+	kjs_window.o JSCSSRuleCustom.o JSCSSStyleDeclarationCustom.o JSCSSValueCustom.o \
+	JSCanvasRenderingContext2DCustom.o JSCustomXPathNSResolver.o JSConsole.o \
+	JSDocumentCustom.o JSDOMWindowCustom.o JSEventCustom.o JSEventTargetBase.o JSEventTargetNode.o JSHTMLAppletElementCustom.o JSHTMLCollectionCustom.o \
+	JSHTMLDocumentCustom.o JSHTMLElementCustom.o JSHTMLElementWrapperFactory.o JSHTMLEmbedElementCustom.o \
+	JSHTMLFormElementCustom.o JSHTMLFrameSetElementCustom.o JSHTMLInputElementBase.o JSHTMLObjectElementCustom.o \
+	JSHTMLOptionElementConstructor.o JSHTMLOptionsCollectionCustom.o JSHTMLSelectElementCustom.o \
+	JSNamedNodeMapCustom.o JSNamedNodesCollection.o JSNodeCustom.o JSNodeFilterCondition.o JSNodeFilterCustom.o \
+	JSNodeIteratorCustom.o JSNodeListCustom.o JSStyleSheetCustom.o JSTreeWalkerCustom.o JSXMLHttpRequest.o  \
+	JSXMLHttpRequestException.o JSXSLTProcessor.o \
+	PausedTimeouts.o ScheduledAction.o JSCustomSQLTransactionCallback.o JSCustomSQLTransactionErrorCallback.o \
+	JSSQLResultSet.o JSSQLResultSetRowList.o JSSQLResultSetRowListCustom.o JSSQLTransaction.o JSSQLTransactionCustom.o \
+	JSCustomSQLStatementCallback.o JSCustomSQLStatementErrorCallback.o JSCustomVoidCallback.o JSSQLError.o
+
+CSS_OBJS = CSSBorderImageValue.o CSSCharsetRule.o CSSComputedStyleDeclaration.o \
+	CSSCursorImageValue.o CSSFontFace.o CSSFontFaceRule.o CSSFontFaceSource.o CSSFontFaceSrcValue.o \
+	CSSFontSelector.o CSSHelper.o CSSImageValue.o CSSImportRule.o CSSInheritedValue.o \
+	CSSInitialValue.o CSSMediaRule.o CSSMutableStyleDeclaration.o CSSPageRule.o CSSParser.o \
+	CSSPrimitiveValue.o CSSProperty.o CSSRule.o CSSRuleList.o CSSSegmentedFontFace.o CSSSelector.o \
+	CSSStyleDeclaration.o CSSStyleRule.o CSSStyleSelector.o CSSStyleSheet.o CSSTimingFunctionValue.o \
+	CSSTransformValue.o CSSUnicodeRangeValue.o CSSValueList.o FontFamilyValue.o FontValue.o \
+	MediaFeatureNames.o MediaList.o MediaQuery.o MediaQueryEvaluator.o MediaQueryExp.o \
+	SVGCSSComputedStyleDeclaration.o SVGCSSParser.o SVGCSSStyleSelector.o ShadowValue.o StyleBase.o \
+	StyleList.o StyleSheet.o StyleSheetList.o
+
+DOM_OBJS = Attr.o Attribute.o BeforeTextInsertedEvent.o BeforeUnloadEvent.o CDATASection.o CSSMappedAttributeDeclaration.o \
+	CharacterData.o ChildNodeList.o ClassNames.o ClassNodeList.o Clipboard.o ClipboardEvent.o \
+	Comment.o ContainerNode.o DOMImplementation.o Document.o DocumentFragment.o DocumentType.o \
+	DynamicNodeList.o EditingText.o Element.o Entity.o EntityReference.o Event.o EventNames.o \
+	EventTarget.o EventTargetNode.o ExceptionBase.o ExceptionCode.o KeyboardEvent.o MappedAttribute.o \
+	MessageEvent.o MouseEvent.o MouseRelatedEvent.o MutationEvent.o NameNodeList.o NamedAttrMap.o \
+	NamedMappedAttrMap.o Node.o NodeFilter.o NodeFilterCondition.o NodeIterator.o Notation.o \
+	OverflowEvent.o Position.o PositionIterator.o ProcessingInstruction.o ProgressEvent.o \
+	QualifiedName.o Range.o RegisteredEventListener.o SelectorNodeList.o StaticNodeList.o StyleElement.o \
+	StyledElement.o TagNodeList.o Text.o TextEvent.o Traversal.o TreeWalker.o UIEvent.o UIEventWithKeyState.o \
+	WheelEvent.o XMLTokenizer.o InspectorClientSyllable.o
+
+EDIT_OBJS =	AppendNodeCommand.o ApplyStyleCommand.o BreakBlockquoteCommand.o  \
+	CompositeEditCommand.o CreateLinkCommand.o DeleteButtonController.o DeleteButton.o  \
+	DeleteFromTextNodeCommand.o DeleteSelectionCommand.o EditCommand.o Editor.o EditorCommand.o FormatBlockCommand.o  \
+	htmlediting.o HTMLInterchange.o IndentOutdentCommand.o InsertIntoTextNodeCommand.o  \
+	InsertLineBreakCommand.o InsertListCommand.o InsertNodeBeforeCommand.o  \
+	InsertParagraphSeparatorCommand.o InsertTextCommand.o JoinTextNodesCommand.o markup.o  \
+	MergeIdenticalElementsCommand.o ModifySelectionListLevel.o MoveSelectionCommand.o  \
+	RemoveCSSPropertyCommand.o RemoveNodeAttributeCommand.o  \
+	RemoveNodeCommand.o RemoveFormatCommand.o RemoveNodePreservingChildrenCommand.o ReplaceSelectionCommand.o  \
+	SelectionController.o Selection.o SetNodeAttributeCommand.o SmartReplace.o SplitElementCommand.o  \
+	SplitTextNodeCommand.o SplitTextNodeContainingElementCommand.o TextIterator.o TypingCommand.o  \
+	UnlinkCommand.o VisiblePosition.o visible_units.o WrapContentsInDummySpanCommand.o EditorSyllable.o
+
+HISTORY_OBJS = BackForwardList.o CachedPage.o HistoryItem.o PageCache.o
+
+HTML_OBJS = CanvasGradient.o CanvasPattern.o CanvasRenderingContext2D.o CanvasStyle.o FormDataList.o HTMLAnchorElement.o  \
+	HTMLAppletElement.o HTMLAreaElement.o HTMLBaseElement.o HTMLBaseFontElement.o  \
+	HTMLBlockquoteElement.o HTMLBodyElement.o HTMLBRElement.o HTMLButtonElement.o HTMLCanvasElement.o  \
+	HTMLCollection.o HTMLDirectoryElement.o HTMLDivElement.o HTMLDListElement.o HTMLDocument.o  \
+	HTMLElement.o HTMLElementFactory.o HTMLEmbedElement.o HTMLFieldSetElement.o HTMLFontElement.o  \
+	HTMLFormCollection.o HTMLFormElement.o HTMLFrameElementBase.o HTMLFrameElement.o HTMLFrameOwnerElement.o \
+	HTMLFrameSetElement.o HTMLGenericFormElement.o HTMLHRElement.o HTMLHeadElement.o HTMLHeadingElement.o  \
+	HTMLHtmlElement.o HTMLIFrameElement.o HTMLImageElement.o HTMLImageLoader.o  \
+	HTMLInputElement.o HTMLIsIndexElement.o HTMLKeygenElement.o HTMLLIElement.o HTMLLabelElement.o HTMLLegendElement.o  \
+	HTMLLinkElement.o HTMLMapElement.o HTMLMarqueeElement.o HTMLMenuElement.o  \
+	HTMLMetaElement.o HTMLModElement.o HTMLNameCollection.o HTMLOListElement.o HTMLObjectElement.o  \
+	HTMLOptGroupElement.o HTMLOptionElement.o HTMLOptionsCollection.o HTMLParagraphElement.o  \
+	HTMLParamElement.o HTMLParser.o HTMLParserErrorCodes.o HTMLPlugInElement.o HTMLPreElement.o HTMLQuoteElement.o  \
+	HTMLScriptElement.o HTMLSelectElement.o HTMLStyleElement.o HTMLTableCaptionElement.o  \
+	HTMLTableCellElement.o HTMLTableColElement.o HTMLTableElement.o HTMLTablePartElement.o  \
+	HTMLTableRowElement.o HTMLTableSectionElement.o HTMLTableRowsCollection.o HTMLTextAreaElement.o HTMLTextFieldInnerElement.o  \
+	HTMLTitleElement.o HTMLTokenizer.o HTMLUListElement.o HTMLViewSourceDocument.o
+
+LOADER_OBJS = Cache.o  CachedCSSStyleSheet.o CachedFont.o CachedImage.o CachedResource.o CachedResourceClientWalker.o \
+	CachedScript.o CachedXBLDocument.o CachedXSLStyleSheet.o DocLoader.o DocumentLoader.o FormState.o \
+	FrameLoader.o FTPDirectoryParser.o FTPDirectoryDocument.o ImageDocument.o MainResourceLoader.o NavigationAction.o NetscapePlugInStreamLoader.o \
+	PluginDocument.o ProgressTracker.o Request.o ResourceLoader.o SubresourceLoader.o TextDocument.o TextResourceDecoder.o \
+	loader.o IconDatabase.o IconLoader.o IconRecord.o SQLValue.o SQLiteAuthorizer.o SQLiteDatabase.o SQLiteStatement.o SQLiteTransaction.o
+
+PAGE_OBJS = AnimationController.o BarInfo.o Chrome.o ContextMenuController.o DOMSelection.o DOMWindow.o DragController.o EventHandler.o FocusController.o Frame.o  \
+	FrameTree.o FrameView.o History.o InspectorController.o MouseEventWithHitTestResults.o Page.o Settings.o EventHandlerSyllable.o \
+	DragControllerSyllable.o FrameSyllable.o Screen.o WindowFeatures.o PageURLRecord.o Console.o
+
+PLATFORM_OBJS = Arena.o ArrayImpl.o AtomicString.o Base64.o CString.o ContextMenu.o DeprecatedCString.o  \
+	DeprecatedPtrListImpl.o DeprecatedString.o DeprecatedStringList.o DeprecatedValueListImpl.o  \
+	DragData.o DragImage.o FileChooser.o FileSystemSyllable.o Font.o FontCache.o FontData.o FontFallbackList.o FontFamily.o \
+	GlyphPageTreeNode.o GlyphWidthMap.o KURL.o Logging.o MIMETypeRegistry.o RegularExpression.o ScrollBar.o \
+	SegmentedString.o SegmentedFontData.o SharedBuffer.o String.o StringImpl.o StringTruncator.o TextBreakIteratorICU.o TextCodec.o \
+	TextCodecICU.o TextCodecLatin1.o TextCodecUTF16.o TextCodecUserDefined.o TextDecoder.o TextEncoding.o  \
+	TextEncodingRegistry.o TextStream.o Timer.o Widget.o \
+	ClipboardSyllable.o ContextMenuItemSyllable.o ContextMenuSyllable.o ContextMenuClientSyllable.o \
+	CookieJarSyllable.o CursorSyllable.o DragClientSyllable.o DragDataSyllable.o DragImageSyllable.o \
+	EditorClientSyllable.o FrameLoaderClientSyllable.o FileChooserSyllable.o \
+	FontCacheSyllable.o SimpleFontData.o SimpleFontDataSyllable.o FontPlatformDataSyllable.o FontSyllable.o GlyphPageTreeNodeSyllable.o \
+	MIMETypeRegistrySyllable.o PasteboardSyllable.o PlatformKeyboardEventSyllable.o PlatformMouseEventSyllable.o \
+	PlatformScrollBarSyllable.o PlatformWheelEventSyllable.o PopupMenuSyllable.o RenderThemeSyllable.o ScreenSyllable.o \
+	ScrollViewSyllable.o ScrollViewCanvasSyllable.o SearchPopupMenuSyllable.o SharedTimerSyllable.o SystemTimeSyllable.o \
+	SoundSyllable.o StringSyllable.o TemporaryLinkStubs.o TextBoundaries.o TextBreakIteratorInternalICUSyllable.o \
+	WidgetSyllable.o ThreadingPthreads.o SecurityOrigin.o LocalizedStringsSyllable.o BidiContext.o
+
+GFX_OBJS = AffineTransform.o BitmapImage.o Color.o FloatPoint.o FloatPoint3D.o \
+	FloatRect.o FloatSize.o GraphicsContext.o GraphicsTypes.o Image.o IntRect.o Path.o \
+	PathTraversalState.o Pen.o  \
+	AffineTransformSyllable.o ColorSyllable.o FloatPointSyllable.o FloatRectSyllable.o IconSyllable.o  \
+	ImageSyllable.o ImageSourceSyllable.o IntPointSyllable.o IntRectSyllable.o IntSizeSyllable.o  \
+	PathSyllable.o GraphicsContextSyllable.o
+
+DECODER_OBJS = SVGResource.o SVGResourceClipper.o SVGResourceMarker.o SVGResourceMasker.o  \
+	SVGResourceClipperSyllable.o SVGResourceImageSyllable.o SVGResourceMaskerSyllable.o  \
+	BMPImageDecoder.o GIFImageDecoder.o GIFImageReader.o ICOImageDecoder.o JPEGImageDecoder.o \
+	PNGImageDecoder.o XBMImageDecoder.o 
+
+NETWORK_OBJS = AuthenticationChallenge.o Credential.o FormData.o HTTPParsers.o ProtectionSpace.o \
+	ResourceError.o ResourceHandle.o ResourceResponseBase.o ResourceRequestBase.o ResourceHandleManager.o 	ResourceHandleSyllable.o
+
+XML_OBJS = DOMParser.o XMLSerializer.o XPathEvaluator.o XPathExpression.o  \
+	XPathExpressionNode.o XPathFunctions.o XPathNSResolver.o XPathNamespace.o XPathNodeSet.o XPathParser.o \
+	XPathPath.o XPathPredicate.o XPathResult.o XPathStep.o XPathUtil.o XPathValue.o XPathVariableReference.o \
+	XSLImportRule.o XSLStyleSheet.o XSLTProcessor.o
+
+RENDER_OBJS = AutoTableLayout.o bidi.o break_lines.o CounterNode.o EllipsisBox.o FixedTableLayout.o \
+	HitTestResult.o InlineBox.o InlineFlowBox.o InlineTextBox.o LayoutState.o ListMarkerBox.o RenderApplet.o \
+	RenderArena.o RenderBR.o RenderBlock.o RenderBox.o RenderButton.o RenderContainer.o RenderCounter.o RenderFieldset.o \
+	RenderFileUploadControl.o RenderFlexibleBox.o RenderFlow.o RenderForeignObject.o RenderFrame.o  \
+	RenderFrameSet.o RenderHTMLCanvas.o RenderImage.o RenderInline.o RenderLayer.o  \
+	RenderLegend.o RenderListBox.o RenderListItem.o RenderListMarker.o  \
+	RenderMenuList.o RenderObject.o RenderPart.o RenderPartObject.o RenderPath.o RenderReplaced.o RenderSlider.o  \
+	RenderStyle.o RenderTable.o RenderTableCell.o RenderTableCol.o RenderTableRow.o  \
+	RenderTableSection.o RenderText.o RenderTextControl.o RenderTextFragment.o RenderTheme.o  \
+	RenderTreeAsText.o RenderView.o RenderWidget.o RenderWordBreak.o RootInlineBox.o SVGRenderTreeAsText.o  \
+	SVGRenderTreeAsText.o 
+
+STORAGE_OBJS = ChangeVersionWrapper.o Database.o DatabaseAuthorizer.o DatabaseTask.o DatabaseThread.o DatabaseTracker.o \
+	SQLResultSet.o SQLResultSetRowList.o SQLStatement.o SQLTransaction.o
+
+OBJS = $(GENERATED_OBJS) $(JS_OBJS) $(BINDINGS_OBJS) $(CSS_OBJS) $(DOM_OBJS) $(EDIT_OBJS) $(HISTORY_OBJS) $(HTML_OBJS) \
+		$(LOADER_OBJS) $(PAGE_OBJS) $(PLATFORM_OBJS) $(GFX_OBJS) $(DECODER_OBJS) $(NETWORK_OBJS) $(XML_OBJS) $(RENDER_OBJS) \
+		$(STORAGE_OBJS)
+
+OBJDIR	:= objs
+
+include $(PYRO_COMMON)/makefile.rules
+
+all: $(OBJDIR) gensources $(OBJDIR)/$(LIBNAME)
+
+$(OBJDIR):
+	mkdir $(OBJDIR)
+
+$(OBJDIR)/$(LIBNAME): $(OBJS)
+	$(CXX) -shared -Xlinker "-soname=$(LIBNAME)" $(OBJS) -L../JavaScriptCore/objs/ -lm -ljavascriptcore \
+	-lz -lsqlite3 -lsicuuc -lxml2 -lpyro -lcurl -ldl -lpthread -lssl -lcrypto -lpng -ljpeg -o $(OBJDIR)/$(LIBNAME)
+	cd $(OBJDIR) &&	ln -sf $(LIBNAME) libwebcore.so
+
+gensources:
+	if [ ! -e DerivedSources ]; then \
+		sh make-generated-sources.sh; \
+		mv DerivedSources/WebCore/DocTypeStrings.cpp DerivedSources/WebCore/DocTypeStrings.temp; \
+		echo '#include <string.h>' > DerivedSources/WebCore/string.temp; \
+		cat DerivedSources/WebCore/string.temp DerivedSources/WebCore/DocTypeStrings.temp > DerivedSources/WebCore/DocTypeStrings.cpp; \
+	fi;
+
+clean:
+	rm -rf $(OBJS) $(OBJDIR) DerivedSources

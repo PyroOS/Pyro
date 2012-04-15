@@ -33,13 +33,13 @@
 #define _HWACCESS_H
 
 #include "emu_wrapper.h"
-#include <atheos/soundcard.h>
+#include <pyro/soundcard.h>
 #include "ac97_codec.h"
-#include <atheos/kernel.h>
-#include <atheos/pci.h>
-#include <atheos/isa_io.h>
-#include <atheos/semaphore.h>
-#include <atheos/spinlock.h>
+#include <pyro/kernel.h>
+#include <pyro/pci.h>
+#include <pyro/isa_io.h>
+#include <pyro/semaphore.h>
+#include <pyro/spinlock.h>
 
 #include "emu_wrapper.h"
 #include "efxmgr.h"

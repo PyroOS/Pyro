@@ -13,7 +13,7 @@
  * the i486 routines for now as they may be broken..
  */
 
-#include <atheos/types.h>
+#include <pyro/types.h>
 #if FIXED_486_STRING && (CPU == 486 || CPU == 586)
 #include <asm/string-486.h>
 #else

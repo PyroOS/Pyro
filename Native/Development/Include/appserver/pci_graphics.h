@@ -23,8 +23,8 @@
 #ifndef __F_APPSERVER_PCI_GRAPHICS_H__
 #define __F_APPSERVER_PCI_GRAPHICS_H__
 
-#include <atheos/types.h>
-#include <atheos/device.h>
+#include <pyro/types.h>
+#include <pyro/device.h>
 #ifndef __KERNEL__
 #include <sys/ioctl.h>
 #endif

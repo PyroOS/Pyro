@@ -22,8 +22,6 @@ $(OBJDIR)/%.o : %.s
 $(OBJDIR)/%.o : %.S
 	$(CC) $(CFLAGS) -x assembler-with-cpp $< -o $@
 
-
-
 all :	objs $(OBJDIR)/tmpfs
 
 objs:
@@ -32,10 +30,16 @@ objs:
 $(OBJDIR)/tmpfs: $(OBJS) Makefile
 	$(CC) -kernel $(OBJS) -o $(OBJDIR)/tmpfs
 
-install: all
-	cp -f $(OBJDIR)/tmpfs $(IMAGE)/system/drivers/fs/tmpfs
+# ----- ----- ----- ----- ----- ----- ----- ----- ----- -----
 
-dist: install
+dist: all inst clean
+
+inst:
+	mkdir -p $(PYRO_BINARY_DESTINATION)/System/drivers/fs
+	cp -f $(OBJDIR)/tmpfs $(PYRO_BINARY_DESTINATION)/System/drivers/fs/$(FS)
+	addattrib $(PYRO_BINARY_DESTINATION)/System/drivers/fs/tmpfs "CheckSum::MD5" `md5sum $(PYRO_BINARY_DESTINATION)/System/drivers/fs/tmpfs | cut -c1-32`
+	sync
 
 clean:
-	-rm -f $(OBJS) $(OBJDIR)/tmpfs
+	rm -rf $(OBJDIR)
+	sync

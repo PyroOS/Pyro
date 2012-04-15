@@ -1,0 +1,19 @@
+--- x264-original/configure	2011-11-30 21:54:52.000000000 +0000
++++ x264-current/configure	2011-11-30 21:56:17.000000000 +0000
+@@ -467,6 +467,11 @@
+         LDFLAGS="$LDFLAGS -lm"
+         HAVE_GETOPT_LONG=0
+         ;;
++    syllable*)
++        SYS="SYLLABLE"
++        CFLAGS="$CFLAGS -DHAVE_MALLOC_H"
++        LDFLAGS="$LDFLAGS -lm"
++        ;;
++    pyro*)
++        SYS="PYRO"
++        CFLAGS="$CFLAGS -DHAVE_MALLOC_H"
++        LDFLAGS="$LDFLAGS -lm"
++        ;;
+     *)
+         die "Unknown system $host, edit the configure"
+         ;;

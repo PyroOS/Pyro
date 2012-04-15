@@ -84,7 +84,7 @@ void UpdateLoginConfig(const String& cName)
 	try
 	{
 		/*try to add the attribute "highlight" to dlogin*/
-		File* pcFile = new File("/system/bin/dlogin",O_RDONLY);
+		File* pcFile = new File("/boot/System/binary/dlogin",O_RDONLY);
 		pcFile->RemoveAttr("highlight");
 		if (pcFile->IsValid())
 		{
@@ -104,7 +104,7 @@ String GetHighlightName()
 		char pzName[1024]="";
 
 		/*try loading the highlight attribute from dlogin, then delete the file and return it*/
-		File* pcFile = new File("/system/bin/dlogin",O_RDONLY);
+		File* pcFile = new File("/boot/System/binary/dlogin",O_RDONLY);
 		pcFile->ReadAttr("highlight", ATTR_TYPE_STRING,pzName,0,sizeof(pzName));
 		delete pcFile;
 		return pzName;
@@ -120,7 +120,7 @@ String GetHighlightName()
 BitmapImage* GetImageFromIcon(const String& cFile)
 {
 	/*user image file name*/
-	String cIconFile = String("/system/icons/users/") + cFile + String(".png");
+	String cIconFile = String("/boot/System/icons/users/") + cFile + String(".png");
 	
 	/*returned image*/
 	BitmapImage* pcReturnImage;
@@ -164,7 +164,7 @@ int BecomeUser( struct passwd *psPwd )
         setenv( "SHELL", psPwd->pw_shell,true );
         UpdateLoginConfig(psPwd->pw_name);
 //		Application::GetInstance()->PopCursor();
-        execl( "/system/bin/desktop", "desktop", NULL );
+        execl( "/boot/System/binary/desktop", "desktop", NULL );
         break;
 
 

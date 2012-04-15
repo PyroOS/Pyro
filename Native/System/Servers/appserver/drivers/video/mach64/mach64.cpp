@@ -22,7 +22,7 @@
 
 #include "mach64.h"
 #include <gui/bitmap.h>
-#include <atheos/kdebug.h>
+#include <pyro/kdebug.h>
 #include <appserver/pci_graphics.h>
 
 static const char m64n_ct[]  = "mach64CT (ATI264CT)";

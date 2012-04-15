@@ -22,10 +22,10 @@
 
 #include <signal.h>
 
-#include <atheos/areas.h>
-#include <atheos/kernel.h>
-#include <atheos/pci.h>
-#include <atheos/types.h>
+#include <pyro/areas.h>
+#include <pyro/kernel.h>
+#include <pyro/pci.h>
+#include <pyro/types.h>
 
 #include <gui/rect.h>
 
@@ -112,14 +112,3 @@ private:
 };
 
 #endif // __F_SYLVNCDRV_H__
-
-
-
-
-
-
-
-
-
-
-

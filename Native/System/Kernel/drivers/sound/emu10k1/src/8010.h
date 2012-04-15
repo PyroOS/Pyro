@@ -39,7 +39,7 @@
 #ifndef _8010_H
 #define _8010_H
 
-#include <atheos/types.h>
+#include <pyro/types.h>
 
 // Driver version:
 #define MAJOR_VER 0

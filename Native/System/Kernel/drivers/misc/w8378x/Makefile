@@ -1,14 +1,11 @@
 CFLAGS   += -kernel -fno-PIC -c
 AFLAGS   = -c
 
-C_INCLUDE_PATH=$(ATHEOS_INCLUDE_PATH)
+C_INCLUDE_PATH=$(PYRO_INCLUDE)
 
 OBJS := driver.o
-
-
 OBJDIR	:= objs
 OBJS	:= $(addprefix $(OBJDIR)/,$(OBJS))
-
 
 #
 #	rules
@@ -26,9 +23,6 @@ $(OBJDIR)/%.o : %.s
 $(OBJDIR)/%.o : %.S
 	$(CC) $(CFLAGS) -x assembler-with-cpp $< -o $@
 
-
-
-
 all :	objs $(OBJDIR)/w8378x
 
 objs:
@@ -37,11 +31,16 @@ objs:
 $(OBJDIR)/w8378x: $(OBJS) Makefile
 	$(CC) -kernel $(OBJS) -o $(OBJDIR)/w8378x
 
-install: all
-	cp -f $(OBJDIR)/w8378x $(IMAGE)/system/drivers/dev/misc/w8378x
+# ----- ----- ----- ----- ----- ----- ----- ----- ----- -----
 
-dist: install
+dist: all inst clean
+
+inst:
+	mkdir -p $(PYRO_BINARY_DESTINATION)/System/drivers/dev/misc
+	cp -f $(OBJDIR)/w8378x $(PYRO_BINARY_DESTINATION)/System/drivers/dev/misc/
+	addattrib $(PYRO_BINARY_DESTINATION)/System/drivers/dev/misc/w8378x "CheckSum::MD5" `md5sum $(PYRO_BINARY_DESTINATION)/System/drivers/dev/misc/w8378x | cut -c1-32`
+	sync
 
 clean:
-	-rm -f $(OBJS) $(OBJDIR)/w8378x
-
+	rm -rf $(OBJDIR)
+	sync

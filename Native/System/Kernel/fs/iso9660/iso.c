@@ -17,11 +17,11 @@
 #include "rock.h"
 #include "iso.h"
 
-#include <atheos/bcache.h>
-#include <atheos/device.h>
-#include <atheos/kdebug.h>
-#include <atheos/kernel.h>
-#include <atheos/nls.h>
+#include <pyro/bcache.h>
+#include <pyro/device.h>
+#include <pyro/kdebug.h>
+#include <pyro/kernel.h>
+#include <pyro/nls.h>
 #include <macros.h>
 
 // Size of primary volume descriptor for ISO9660

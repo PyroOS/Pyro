@@ -258,12 +258,12 @@ void PrefsDockWin::UpdatePluginsList()
 	m_pcEnable->SetLabel( MSG_MAINWND_PLUGINS_BUTTON_ENABLE );
 	m_pcEnable->SetEnable( false );
 	
-	/* Fill list with entries from /system/extensions/dock/ */
+	/* Fill list with entries from /boot/System/extensions/dock/ */
 	os::Directory* pcDir = NULL;
 	
 	try
 	{
-		pcDir = new os::Directory( "/boot/system/extensions/dock" );
+		pcDir = new os::Directory( "/boot/System/extensions/dock" );
 	} catch( ... )
 	{
 		return;
@@ -279,7 +279,7 @@ void PrefsDockWin::UpdatePluginsList()
 			continue;
 			
 		/* Construct path */
-		os::Path cFilePath( "/boot/system/extensions/dock" );
+		os::Path cFilePath( "/boot/System/extensions/dock" );
 		cFilePath.Append( zFile.c_str() );
 		
 		/* Validate entry */

@@ -22,7 +22,7 @@
 #define __MGA_TVP3026_H_
 
 #include "mga_dac.h"
-#include <atheos/types.h>
+#include <pyro/types.h>
 
 #define TVP_MIN_N				40
 #define TVP_MIN_M				1

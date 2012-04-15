@@ -20,7 +20,7 @@
 #ifndef __F_ATHEOS_BOOTMODULE__
 #define __F_ATHEOS_BOOTMODULE__
 
-#include <atheos/types.h>
+#include <pyro/types.h>
 
 typedef struct
 {

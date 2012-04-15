@@ -21,7 +21,7 @@
 #ifndef	__F_GUI_IMAGE_H__
 #define	__F_GUI_IMAGE_H__
 
-#include <atheos/types.h>
+#include <pyro/types.h>
 #include <gui/guidefines.h>
 #include <gui/region.h>
 #include <gui/bitmap.h>

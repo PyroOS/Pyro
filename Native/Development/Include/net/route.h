@@ -21,7 +21,7 @@
 #ifndef _NET_ROUTE_H
 #define _NET_ROUTE_H	1
 
-#include <atheos/types.h>
+#include <pyro/types.h>
 #include <net/net.h>
 
 /* This structure gets passed by the SIOCADDRT and SIOCDELRT ioctl calls. */

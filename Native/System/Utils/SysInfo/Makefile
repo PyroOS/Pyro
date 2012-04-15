@@ -1,45 +1,20 @@
 COPTS	= -c
 
-CATALOGS = da de es fr hu nl ru sv
-
 OBJS = main.o sysinfopanel.o drivespanel.o processpanel.o memview.o cpuview.o performancepanel.o devicespanel.o
-EXE	= "System Information"
+EXE	= "SystemInformation"
 
-$(EXE) : catalogs $(OBJS)
-	$(CXX) $(OBJS) -lsyllable -o "System Information"
+$(EXE) : $(OBJS)
+	$(CXX) $(OBJS) -lpyro -o "SystemInformation"
 	strip --strip-all $(EXE)
 	rescopy -r $(EXE) icons/*.png
 	rescopy -a $(EXE) resources/SysInfo.catalog
-	for CATALOG in $(CATALOGS);do \
-		echo $$CATALOG; \
-		rescopy -a $(EXE) $$CATALOG/SysInfo.catalog=resources/$$CATALOG/SysInfo.catalog; \
+	for CATALOG in `ls -1 resources`;do \
+		if [ -d "resources/$$CATALOG" ] ; then \
+			echo $$CATALOG; \
+			rescopy -a $(EXE) $$CATALOG/SysInfo.catalog=resources/$$CATALOG/SysInfo.catalog; \
+		fi \
 	done;
-	addattrib $(EXE) os::Category "System Tools"
-
-catalogs:
-	cd resources; \
-	catcomp -c SysInfo.cd; \
-	for CATALOG in $(CATALOGS);do \
-		echo $$CATALOG; \
-		cd $$CATALOG; \
-		catcomp -t SysInfo.cd; \
-		cd ..; \
-	done;
-
-install: $(EXE)
-	mkdir -p "$(IMAGE)/Applications/System Tools/System Information"
-	cp -f $(EXE) "$(IMAGE)/Applications/System Tools/System Information/"
-	ln -sf "/Applications/System Tools/System Information" $(IMAGE)/system/bin/SlbMgr
-
-dist: install
-
-clean:  
-	-rm -f $(OBJS)
-	-rm -f $(EXE)
-	-rm resources/SysInfo.catalog resources/SysInfo.h; \
-	for CATALOG in $(CATALOGS);do \
-		rm resources/$$CATALOG/SysInfo.catalog; \
-	done;
+	addattrib $(EXE) "os::Category" "System Tools"
 
 .cpp.o:
 	$(CXX) $(COPTS) $< -o $@
@@ -65,3 +40,51 @@ cpuview.o : cpuview.cpp
 devicespanel.o : devicespanel.cpp
 	$(CXX) $(COPTS) $< -o $@
 
+# ----- ----- ----- ----- ----- ----- ----- ----- ----- -----
+
+dist: catalogs $(EXE) inst web clean
+
+catalogs:
+	cd resources; \
+	catcomp -c SysInfo.cd; \
+	for CATALOG in `ls -1`;do \
+		if [ -d "$$CATALOG" ] ; then \
+			echo $$CATALOG; \
+			cd $$CATALOG; \
+			catcomp -t SysInfo.cd; \
+			cd ..; \
+		fi \
+	done;
+	sync
+
+inst:
+	mkdir -p $(PYRO_BINARY_DESTINATION)/System/binary
+	cp -f $(EXE) $(PYRO_BINARY_DESTINATION)/System/binary/
+	addattrib $(PYRO_BINARY_DESTINATION)/System/binary/$(EXE) "CheckSum::MD5" `md5sum $(PYRO_BINARY_DESTINATION)/System/binary/$(EXE) | cut -c1-32`
+	sync
+
+web:
+	mkdir -p $(PYRO_BINARY_DESTINATION)Web/Languages/LIST
+	mkdir -p $(PYRO_BINARY_DESTINATION)Web/Languages/Utils/SysInfo
+	cd resources; \
+	for CATALOG in `ls -1`;do \
+		if [ -d "$$CATALOG" ] ; then \
+			touch $(PYRO_BINARY_DESTINATION)Web/Languages/LIST/$$CATALOG; \
+			touch $(PYRO_BINARY_DESTINATION)Web/Languages/Utils/SysInfo/int; \
+			touch $(PYRO_BINARY_DESTINATION)Web/Languages/Utils/SysInfo/$$CATALOG; \
+		fi \
+	done;
+	sync
+
+clean: catalog-clean
+	rm -f $(OBJS)
+	rm -rf $(OBJDIR)
+	rm -f $(EXE)
+	sync
+
+catalog-clean:
+	rm -f resources/SysInfo.catalog resources/SysInfo.h
+	for CATALOG in `ls -1 resources`;do \
+		rm -f resources/$$CATALOG/SysInfo.catalog; \
+	done;
+	sync

@@ -13,18 +13,18 @@
  *
  */
 
-#include <atheos/kernel.h>
-#include <atheos/kdebug.h>
-#include <atheos/types.h>
-#include <atheos/device.h>
-#include <atheos/pci.h>
-#include <atheos/udelay.h>
+#include <pyro/kernel.h>
+#include <pyro/kdebug.h>
+#include <pyro/types.h>
+#include <pyro/device.h>
+#include <pyro/pci.h>
+#include <pyro/udelay.h>
 #include <posix/signal.h>
 #include <posix/errno.h>
 #include <net/sockios.h>
 
 #define NO_DEBUG_STUBS 1
-#include <atheos/linux_compat.h>
+#include <pyro/linux_compat.h>
 
 #include "dl2k.h"
 

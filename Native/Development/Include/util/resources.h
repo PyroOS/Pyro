@@ -21,7 +21,7 @@
 #define __F_UTIL_RESOURCES_H__
 
 #include <storage/file.h>
-#include <atheos/image.h>
+#include <pyro/image.h>
 
 namespace os {
 #if 0

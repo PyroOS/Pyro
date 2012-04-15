@@ -1,0 +1,2 @@
+pyro/libraries	= Native libraries.
+pyro/server		= Native system-servers.

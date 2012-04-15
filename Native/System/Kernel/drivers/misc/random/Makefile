@@ -1,14 +1,11 @@
 CFLAGS   += -kernel -fno-PIC -c
 AFLAGS   = -c
 
-C_INCLUDE_PATH=$(ATHEOS_INCLUDE_PATH)
+C_INCLUDE_PATH=$(PYRO_INCLUDE)
 
 OBJS := random.o
-
-
 OBJDIR	:= objs
 OBJS	:= $(addprefix $(OBJDIR)/,$(OBJS))
-
 
 #
 #	rules
@@ -26,9 +23,6 @@ $(OBJDIR)/%.o : %.s
 $(OBJDIR)/%.o : %.S
 	$(CC) $(CFLAGS) -x assembler-with-cpp $< -o $@
 
-
-
-
 all :	objs $(OBJDIR)/random
 
 objs:
@@ -37,10 +31,16 @@ objs:
 $(OBJDIR)/random: $(OBJS) Makefile
 	$(CC) -kernel $(OBJS) -o $(OBJDIR)/random
 
-install: all
-	cp -f $(OBJDIR)/random $(IMAGE)/system/drivers/dev/random
+# ----- ----- ----- ----- ----- ----- ----- ----- ----- -----
 
-dist: install
+dist: all inst clean
+
+inst:
+	mkdir -p $(PYRO_BINARY_DESTINATION)/System/drivers/dev
+	cp -f $(OBJDIR)/random $(PYRO_BINARY_DESTINATION)/System/drivers/dev/
+	addattrib $(PYRO_BINARY_DESTINATION)/System/drivers/dev/random "CheckSum::MD5" `md5sum $(PYRO_BINARY_DESTINATION)/System/drivers/dev/random | cut -c1-32`
+	sync
 
 clean:
-	-rm -f $(OBJS) $(OBJDIR)/random
+	rm -rf $(OBJDIR)
+	sync

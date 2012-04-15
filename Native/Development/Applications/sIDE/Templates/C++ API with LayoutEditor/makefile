@@ -1,26 +1,28 @@
-#Makefile for App
-COPTS = -Wall -c -O2 -fexceptions
+# Makefile for App
 
-APPBIN = /Applications/App
-OBJS = main.o application.o mainwindow.o
+COPTS	= -Wall -c -O2 -fexceptions
 
-OBJDIR := objs
+APPBIN	= /boot/Applications/App
+OBJS	= main.o application.o mainwindow.o
+
+OBJDIR	:= objs
 OBJS	:= $(addprefix $(OBJDIR)/,$(OBJS))
 
 # Rules
+
 $(OBJDIR)/%.o : %.c
 	@echo Compiling : $<
 	@$(CC) $(COPTS) $< -o $@
 
 $(OBJDIR)/%.o : %.cpp
 	@echo Compiling : $<
-	@$(CC) $(COPTS) $< -o $@
+	@$(CXX) $(COPTS) $< -o $@
 
 $(OBJDIR)/%.o : %.s
 	@echo Assembling : $<
 	@$(CC) $(COPTS) -x assembler-with-cpp $< -o $@
 
-all : translations objs "App"
+all: translations objs "App"
 
 $(OBJDIR)/mainwindow.o: mainwindowLayout.cpp
 
@@ -31,7 +33,8 @@ objs:
 
 "App": $(OBJS)
 	@echo Linking...
-	@gcc $(OBJS) -o "App"  -lstdc++ -lsyllable
+	@$(CXX) $(OBJS) -o "App" -lpyro
+	@strip --strip-all "App"
 	@echo Adding resources...
 	@rescopy "App" -r icon48x48.png 
 	@addattrib "App" os::Category Other
@@ -43,13 +46,9 @@ clean:
 
 deps:
 
-dist: all
-	@echo Distribution...
-	@mkdir -p $(DIST_DIR)/Applications/App
-	@cp "App" "$(DIST_DIR)/Applications/App/App"
-
 install: all
-	@echo Installing...
-	@mkdir -p /Applications/App
-	@cp "App" "/Applications/App/App"
+	@echo Installation...
+	@mkdir -p $(IMAGE)$(APPBIN)
+	@cp "App" $(IMAGE)$(APPBIN)/"App"
 
+dist: install

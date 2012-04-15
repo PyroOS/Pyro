@@ -26,11 +26,11 @@
 #include <posix/uio.h>
 #include <posix/fcntl.h>
 
-#include <atheos/kernel.h>
-#include <atheos/kdebug.h>
-#include <atheos/filesystem.h>
-#include <atheos/socket.h>
-#include <atheos/semaphore.h>
+#include <pyro/kernel.h>
+#include <pyro/kdebug.h>
+#include <pyro/filesystem.h>
+#include <pyro/socket.h>
+#include <pyro/semaphore.h>
 
 #include <macros.h>
 

@@ -18,7 +18,7 @@
  */
 
 #include "mywindow.h"
-#include "resources/aclock.h"
+#include "resources/AClock.h"
 #include <gui/imagebutton.h>
 
 // ---------------------------------------------------------------------------
@@ -174,7 +174,7 @@ MyApp::MyApp() : Application( "application/x-vnd-RGC-" APP_NAME )
     settings = new Settings();
     LoadSettings();
 
-	SetCatalog("aclock.catalog");
+	SetCatalog("AClock.catalog");
 
     m_pcMainWindow = new MyWindow( Rect(150,150,270,270));
     m_pcMainWindow->CenterInScreen();
@@ -238,4 +238,3 @@ int main( int argc, char** argv )
 }
 
 // ---------------------------------------------------------------------------
-

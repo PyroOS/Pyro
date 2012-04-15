@@ -47,7 +47,7 @@ MainWindow::MainWindow() : os::Window( os::Rect( 0, 0, 350, 300 ), "main_wnd", M
 	m_pcKeyboardLayoutList->InsertColumn( "", 1000 );
 
 	// Set NodeMonitor
-	m_pcMonitor = new NodeMonitor( "/system/keymaps",NWATCH_ALL,this );
+	m_pcMonitor = new NodeMonitor( "/boot/System/keymaps",NWATCH_ALL,this );
 
 	// We want to know the users primary language
 	try {
@@ -159,7 +159,7 @@ void MainWindow::ShowData()
 	/* TODO: Should use os::Keymap methods here whenever possible */
 
 	// Open up keymaps directory and check it actually contains something
-	DIR *pDir = opendir("/system/keymaps");
+	DIR *pDir = opendir("/boot/System/keymaps");
 	if (pDir == NULL) {
 		return;
 	}
@@ -179,7 +179,7 @@ void MainWindow::ShowData()
 		}
 
 		// If it's a valid file, open it
-		FILE *hFile = fopen( (std::string("/system/keymaps/")+psEntry->d_name).c_str(), "r" );
+		FILE *hFile = fopen( (std::string("/boot/System/keymaps/")+psEntry->d_name).c_str(), "r" );
 		if (hFile == NULL) {
 			continue;
 		}
@@ -236,7 +236,7 @@ void MainWindow::ShowData()
 			char delims[] = ",";
 			char *result = NULL;
 			os::FSNode cFileNode;
-			cFileNode.SetTo( (std::string("/system/keymaps/")+psEntry->d_name).c_str() );
+			cFileNode.SetTo( (std::string("/boot/System/keymaps/")+psEntry->d_name).c_str() );
 			char zBuffer[PATH_MAX];
 			memset( zBuffer, 0, PATH_MAX );
 			cFileNode.ReadAttr( "Keymap::Language", ATTR_TYPE_STRING, zBuffer, 0, PATH_MAX );

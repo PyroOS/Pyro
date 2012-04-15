@@ -29,8 +29,8 @@ extern "C"
 }				/* Make emacs auto-indent work. */
 #endif
 
-//#include <atheos/swap.h>
-#include <atheos/multiboot.h>
+//#include <pyro/swap.h>
+#include <pyro/multiboot.h>
 #include "typedefs.h"
 
 typedef struct MemChunk MemChunk_s;

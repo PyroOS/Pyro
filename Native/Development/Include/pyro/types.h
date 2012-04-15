@@ -22,7 +22,7 @@
 
 #include <stddef.h>
 #ifdef __KERNEL__
-#include <atheos/stdint.h>		// kernel C99 integer types
+#include <pyro/stdint.h>		// kernel C99 integer types
 #else
 #include <stdint.h>			// C99 standard integer types
 #endif
@@ -31,7 +31,7 @@
 #include <stdbool.h>			// C99 boolean type
 #endif
 
-#include <atheos/tunables.h>		// values which may be changed
+#include <pyro/tunables.h>		// values which may be changed
 
 #ifdef __cplusplus
 extern "C" {
@@ -101,7 +101,7 @@ typedef void (*sighandler_t)(int);
 #endif
 
 #ifndef __KERNEL__
-#include <atheos/pthreadtypes.h>
+#include <pyro/pthreadtypes.h>
 #endif
 
 #ifdef __cplusplus

@@ -23,14 +23,14 @@
 #include <posix/stat.h>
 #include <macros.h>
 
-#include <atheos/string.h>
-#include <atheos/types.h>
-#include <atheos/time.h>
-#include <atheos/kernel.h>
+#include <pyro/string.h>
+#include <pyro/types.h>
+#include <pyro/time.h>
+#include <pyro/kernel.h>
 
 #include "afs.h"
 #include "btree.h"
-#include "atheos/bcache.h"
+#include "pyro/bcache.h"
 
 /** Get the number of blocks referenced by an AFS Inode
  * \par Description:

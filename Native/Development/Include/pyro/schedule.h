@@ -20,10 +20,10 @@
 #ifndef __F_ATHEOS_SCHEDULE_H__
 #define __F_ATHEOS_SCHEDULE_H__
 
-#include <atheos/timer.h>
+#include <pyro/timer.h>
 #include <posix/types.h>
 #include <posix/resource.h>
-#include <atheos/types.h>
+#include <pyro/types.h>
 
 #ifdef __cplusplus
 extern "C" {

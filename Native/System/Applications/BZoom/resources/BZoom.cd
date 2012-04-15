@@ -16,6 +16,6 @@ MSG_MAINWND_MENU_HELP=300					Help
 MSG_MAINWND_MENU_HELP_ABOUT					About
 
 MSG_ABOUTWND_TITLE=1000						About BZoom
-MSG_ABOUTWND_TEXT							BZoom V1.0\n\nA simple pixel zoomer for AtheOS.\nBased on AZoom by Chir.\nBZoom is released under the\nGNU GPL
+MSG_ABOUTWND_TEXT							BZoom V1.0\n\nA simple pixel zoomer for Pyro.\nBased on AZoom by Chir.\nBZoom is released under the\nGNU GPL
 MSG_ABOUTWND_OK								Ok
 

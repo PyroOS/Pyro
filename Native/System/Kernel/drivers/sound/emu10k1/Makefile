@@ -1,11 +1,9 @@
 DRIVER	:= emu10k1
 OBJDIR	:= objs
 
-C_INCLUDE_PATH=$(ATHEOS_INCLUDE_PATH)
+C_INCLUDE_PATH=$(PYRO_INCLUDE)
 
 all: $(OBJDIR) $(DRIVER)
-
-deps:
 
 $(OBJDIR):
 	mkdir $(OBJDIR)
@@ -16,8 +14,13 @@ $(DRIVER):
 clean:
 	@cd src/ && $(MAKE) clean
 
-install: all
-	cp -f $(DRIVER) $(IMAGE)/system/drivers/dev/audio/$(DRIVER)
 
-dist: install
+# ----- ----- ----- ----- ----- ----- ----- ----- ----- -----
 
+dist: all inst clean
+
+inst:
+	mkdir -p $(PYRO_BINARY_DESTINATION)/System/drivers/dev/audio
+	cp -f $(DRIVER) $(PYRO_BINARY_DESTINATION)/System/drivers/dev/audio/
+	addattrib $(PYRO_BINARY_DESTINATION)/System/drivers/dev/audio/$(DRIVER) "CheckSum::MD5" `md5sum $(PYRO_BINARY_DESTINATION)/System/drivers/dev/audio/$(DRIVER) | cut -c1-32`
+	sync

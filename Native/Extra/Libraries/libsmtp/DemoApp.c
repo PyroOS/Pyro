@@ -12,7 +12,7 @@ int main( int argc, char *argv[] )
 
 	if( argc < 4 )
 	{
-		printf("smtptest [server] [from] [to]\n");
+		printf("DemoApp [server] [from] [to]\n");
 		return EXIT_FAILURE;
 	}
 

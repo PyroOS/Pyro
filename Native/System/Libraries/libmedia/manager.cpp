@@ -23,8 +23,8 @@
 #include <storage/directory.h>
 #include <util/message.h>
 #include <util/resources.h>
-#include <atheos/msgport.h>
-#include <atheos/device.h>
+#include <pyro/msgport.h>
+#include <pyro/device.h>
 #include <iostream>
 #include <cassert>
 #include <unistd.h>
@@ -53,7 +53,7 @@ public:
 			
 		
 		String zFileName;
-		String zPath = String( "/system/extensions/media" );
+		String zPath = String( "/boot/System/extensions/media" );
 
 		/* Open all media plugins in /system/media */
 		Directory *pcDirectory = new Directory();
@@ -134,7 +134,7 @@ public:
 			
 		
 			/* Construct plugin path */
-			zPath = String( "/system/extensions/media" );
+			zPath = String( "/boot/System/extensions/media" );
 			zFileName = zPath + String( "/" ) + zDriverPath;
 			
 			image_id nID = load_library( zFileName.c_str(), 0 );

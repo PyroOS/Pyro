@@ -1,14 +1,12 @@
 CFLAGS   += -kernel -fno-PIC -c
 AFLAGS   = -c
 
-C_INCLUDE_PATH=$(ATHEOS_INCLUDE_PATH)
+C_INCLUDE_PATH=$(PYRO_INCLUDE)
 
 OBJS := sbpro.o
 DRIVER := sbpro
-
 OBJDIR	:= objs
 OBJS	:= $(addprefix $(OBJDIR)/,$(OBJS))
-
 
 #
 #	rules
@@ -26,12 +24,7 @@ $(OBJDIR)/%.o : %.s
 $(OBJDIR)/%.o : %.S
 	$(CC) $(CFLAGS) -x assembler-with-cpp $< -o $@
 
-
-
-
 all :	objs $(OBJDIR)/sbpro
-
-deps:
 
 objs:
 	mkdir objs
@@ -39,12 +32,16 @@ objs:
 $(OBJDIR)/sbpro: $(OBJS) Makefile
 	$(CC) -kernel $(OBJS) -o $(OBJDIR)/sbpro
 
-install: all
-	cp -f $(OBJDIR)/sbpro $(IMAGE)/system/drivers/dev/audio/sbpro
+# ----- ----- ----- ----- ----- ----- ----- ----- ----- -----
 
-dist: install
+dist: all inst clean
+
+inst:
+	mkdir -p $(PYRO_BINARY_DESTINATION)/System/drivers/dev/audio
+	cp -f $(OBJDIR)/$(DRIVER) $(PYRO_BINARY_DESTINATION)/System/drivers/dev/audio/
+	addattrib $(PYRO_BINARY_DESTINATION)/System/drivers/dev/audio/$(DRIVER) "CheckSum::MD5" `md5sum $(PYRO_BINARY_DESTINATION)/System/drivers/dev/audio/$(DRIVER) | cut -c1-32`
+	sync
 
 clean:
-	-rm -f $(OBJS)
-	-rm -f $(OBJDIR)/$(DRIVER)
-
+	rm -rf $(OBJDIR)
+	sync

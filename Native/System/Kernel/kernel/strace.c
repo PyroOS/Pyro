@@ -18,12 +18,12 @@
  *  Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  */
 
-#include <atheos/kernel.h>
-#include <atheos/spinlock.h>
-#include <atheos/types.h>
-#include <atheos/strace.h>
-#include <atheos/syscall.h>
-#include <atheos/syscalltable.h>
+#include <pyro/kernel.h>
+#include <pyro/spinlock.h>
+#include <pyro/types.h>
+#include <pyro/strace.h>
+#include <pyro/syscall.h>
+#include <pyro/syscalltable.h>
 #include <posix/errno.h>
 
 #include <inc/scheduler.h>

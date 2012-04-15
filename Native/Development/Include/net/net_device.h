@@ -1,7 +1,7 @@
 #ifndef __F_SYLLABLE_NET_DEVICE_H__
 #define __F_SYLLABLE_NET_DEVICE_H__
 
-#include <atheos/types.h>
+#include <pyro/types.h>
 #include <net/net.h>
 #include <net/if.h>
 

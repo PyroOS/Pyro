@@ -27,7 +27,7 @@ extern "C" {
 } /* Make emacs indention work */
 #endif
 
-#include <atheos/types.h>
+#include <pyro/types.h>
 
 typedef int image_entry( char** argv, char** envv );
 typedef int image_init( int nImageID );

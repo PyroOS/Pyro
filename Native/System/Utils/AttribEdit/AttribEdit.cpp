@@ -35,8 +35,8 @@
 #include <gui/checkbox.h>
 #include <gui/dropdownmenu.h>
 #include <gui/imagebutton.h>
-#include <atheos/filesystem.h>
-#include <atheos/fs_attribs.h>
+#include <pyro/filesystem.h>
+#include <pyro/fs_attribs.h>
 #include <errno.h>
 #include <fcntl.h>
 #include <unistd.h>

@@ -25,7 +25,7 @@ using namespace std;
 #include "editview.h"
 #include "version.h"
 #include "appwindow.h"
-#include "resources/aedit.h"
+#include "resources/AEdit.h"
 
 // Declare some static variables
 int Buffer::iEmptyBufferCounter=0;

@@ -27,12 +27,12 @@
 #include <signal.h>
 #include <stdexcept>
 
-#include <atheos/types.h>
-#include <atheos/threads.h>
-#include <atheos/kernel.h>
-#include <atheos/time.h>
-#include <atheos/image.h>
-#include <atheos/msgport.h>
+#include <pyro/types.h>
+#include <pyro/threads.h>
+#include <pyro/kernel.h>
+#include <pyro/time.h>
+#include <pyro/image.h>
+#include <pyro/msgport.h>
 
 
 #include <gui/guidefines.h>
@@ -41,7 +41,7 @@
 #include <util/locker.h>
 #include <util/messenger.h>
 #include <appserver/protocol.h>
-#include <atheos/filesystem.h>
+#include <pyro/filesystem.h>
 #include <util/shortcutkey.h>
 
 #include "ddriver.h"
@@ -362,7 +362,7 @@ void AppServer::SendKeyCode( int nKeyCode, int nQual )
 			FILE *hFile;
 
 			dbprintf( "Load configuration\n" );
-			hFile = fopen( "/system/config/appserver", "r" );
+			hFile = fopen( "/boot/System/config/appserver", "r" );
 
 			if( hFile != NULL )
 			{
@@ -371,7 +371,7 @@ void AppServer::SendKeyCode( int nKeyCode, int nQual )
 			}
 			else
 			{
-				dbprintf( "Error: failed to open appserver configuration file: /system/config/appserver" );
+				dbprintf( "Error: failed to open appserver configuration file: /boot/System/config/appserver" );
 			}
 			return;
 		}
@@ -546,7 +546,7 @@ void AppServer::DispatchMessage( Message * pcReq )
 		{
 			Message cReply;
 
-			FontServer::GetInstance()->ScanDirectory( "/system/fonts/" );
+			FontServer::GetInstance()->ScanDirectory( "/boot/System/fonts/" );
 			cReply.AddBool( "changed", true );
 			pcReq->SendReply( &cReply );
 			break;
@@ -865,7 +865,7 @@ void AppServer::Run( void )
 
 	set_app_server_port( m_hRequestPort );
 
-	int nFile = open( "/system/fonts/", O_RDONLY | O_NOTRAVERSE );
+	int nFile = open( "/boot/System/fonts/", O_RDONLY | O_NOTRAVERSE );
 
 	if( nFile > -1 )
 	{
@@ -1001,7 +1001,7 @@ void AppServer::Run( void )
 			case M_NODE_MONITOR:
 				{
 					dbprintf( "Font directory has changed, scanning font directory!\n" );
-					FontServer::GetInstance()->ScanDirectory( "/system/fonts/" );
+					FontServer::GetInstance()->ScanDirectory( "/boot/System/fonts/" );
 					break;
 				}
 			
@@ -1160,7 +1160,7 @@ int main( int argc, char **argv )
 	FILE *hFile;
 
 	dbprintf( "Load configuration\n" );
-	hFile = fopen( "/system/config/appserver", "r" );
+	hFile = fopen( "/boot/System/config/appserver", "r" );
 
 	if( hFile != NULL )
 	{
@@ -1169,7 +1169,7 @@ int main( int argc, char **argv )
 	}
 	else
 	{
-		dbprintf( "Error: failed to open appserver configuration file: /system/config/appserver" );
+		dbprintf( "Error: failed to open appserver configuration file: /boot/System/config/appserver" );
 	}
 	dbprintf( "Start keyboard thread\n" );
 

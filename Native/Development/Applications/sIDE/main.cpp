@@ -15,7 +15,7 @@
 // Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
 //
 //
-#include <atheos/threads.h>
+#include <pyro/threads.h>
 #include <gui/window.h>
 #include <gui/menu.h>
 #include <gui/listview.h>

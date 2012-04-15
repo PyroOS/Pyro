@@ -1,14 +1,12 @@
 CFLAGS   = -kernel -fno-PIC -c -O3 -Wall
 AFLAGS   = -c
 
-C_INCLUDE_PATH=$(ATHEOS_INCLUDE_PATH)
+C_INCLUDE_PATH=$(PYRO_INCLUDE)
 
 OBJS := kbd.o
 
-
 OBJDIR	:= objs
 OBJS	:= $(addprefix $(OBJDIR)/,$(OBJS))
-
 
 #
 #	rules
@@ -26,9 +24,6 @@ $(OBJDIR)/%.o : %.s
 $(OBJDIR)/%.o : %.S
 	$(CC) $(CFLAGS) -x assembler-with-cpp $< -o $@
 
-
-
-
 all :	objs $(OBJDIR)/keybd
 
 objs:
@@ -37,12 +32,16 @@ objs:
 $(OBJDIR)/keybd: $(OBJS) Makefile
 	$(CC) -kernel $(OBJS) -o $(OBJDIR)/keybd
 
-install: all
-	cp -f $(OBJDIR)/keybd /system/drivers/dev/keybd
+# ----- ----- ----- ----- ----- ----- ----- ----- ----- -----
 
-dist: all
-	cp -f $(OBJDIR)/keybd $(DIST_DIR)/atheos/sys/drivers/dev/keybd
+dist: all inst clean
+
+inst:
+	mkdir -p $(PYRO_BINARY_DESTINATION)Native/Extra/System/SylVNC/System/drivers/dev
+	cp -pf $(OBJDIR)/keybd $(PYRO_BINARY_DESTINATION)Native/Extra/System/SylVNC/System/drivers/dev/sylvnc_keyboard
+	addattrib $(PYRO_BINARY_DESTINATION)Native/Extra/System/SylVNC/System/drivers/dev/sylvnc_keyboard "CheckSum::MD5" `md5sum $(PYRO_BINARY_DESTINATION)Native/Extra/System/SylVNC/System/drivers/dev/sylvnc_keyboard | cut -c1-32`
+	sync
 
 clean:
-	-rm -f $(OBJS) $(OBJDIR)/keybd
-
+	rm -rf $(OBJDIR)
+	sync

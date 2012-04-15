@@ -21,7 +21,7 @@
 #ifndef __F_SYLLABLE_PTRACE_H__
 #define __F_SYLLABLE_PTRACE_H__
 
-#include <atheos/types.h>
+#include <pyro/types.h>
 
 
 #define EBX			0

@@ -41,7 +41,7 @@ MSG_MAINWND_JOBSIZE_MB							%d Mo
 MSG_MAINWND_JOBSIZE_GB							%d Go
 
 MSG_ABOUTWND_TITLE=1000							File d'impression
-MSG_ABOUTWND_TEXT1								Gestionnaire de file d'impression de Syllable
+MSG_ABOUTWND_TEXT1								Gestionnaire de file d'impression de Pyro
 MSG_ABOUTWND_TEXT2								Utilise CUPS version %d.%d.%d\n
 MSG_ABOUTWND_CLOSE								_Fermer
 

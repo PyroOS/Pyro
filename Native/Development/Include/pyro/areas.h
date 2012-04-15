@@ -20,7 +20,7 @@
 #ifndef __ATHEOS_AREA_H__
 #define __ATHEOS_AREA_H__
 
-#include <atheos/types.h>
+#include <pyro/types.h>
 
 #ifdef __cplusplus
 extern "C" {
@@ -107,7 +107,7 @@ typedef struct
 #define	AREA_GROWSDOWN	0x0080
 #endif
 
-//  Moved to <atheos/tunables.h>
+//  Moved to <pyro/tunables.h>
 //#define	AREA_FIRST_KERNEL_ADDRESS	0x00100000
 //#define	AREA_LAST_KERNEL_ADDRESS	0x7fffffff
 //#define	AREA_FIRST_USER_ADDRESS		0x80000000

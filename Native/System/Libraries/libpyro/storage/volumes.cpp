@@ -18,10 +18,10 @@
  *  MA 02111-1307, USA
  */
  
-#include <atheos/types.h>
-#include <atheos/kernel.h>
-#include <atheos/image.h>
-#include <atheos/cdrom.h>
+#include <pyro/types.h>
+#include <pyro/kernel.h>
+#include <pyro/image.h>
+#include <pyro/cdrom.h>
 #include <gui/requesters.h>
 #include <gui/layoutview.h>
 #include <gui/textview.h>

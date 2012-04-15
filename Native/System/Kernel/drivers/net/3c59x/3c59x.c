@@ -211,21 +211,21 @@ static int vortex_debug = 0;
 #endif
 
 
-#include <atheos/kernel.h>
-#include <atheos/schedule.h>
-#include <atheos/string.h>
-#include <atheos/device.h>
-#include <atheos/pci.h>
-#include <atheos/irq.h>
-#include <atheos/time.h>
-#include <atheos/timer.h>
-#include <atheos/udelay.h>
-#include <atheos/semaphore.h>
-#include <atheos/spinlock.h>
-#include <atheos/isa_io.h>
-#include <atheos/bitops.h>
+#include <pyro/kernel.h>
+#include <pyro/schedule.h>
+#include <pyro/string.h>
+#include <pyro/device.h>
+#include <pyro/pci.h>
+#include <pyro/irq.h>
+#include <pyro/time.h>
+#include <pyro/timer.h>
+#include <pyro/udelay.h>
+#include <pyro/semaphore.h>
+#include <pyro/spinlock.h>
+#include <pyro/isa_io.h>
+#include <pyro/bitops.h>
 #define NO_DEBUG_STUBS 1
-#include <atheos/linux_compat.h>
+#include <pyro/linux_compat.h>
 
 #include <net/net.h>
 

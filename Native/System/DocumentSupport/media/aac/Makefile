@@ -2,15 +2,11 @@ CFLAGS   += -c -fexceptions -ffast-math
 CXXFLAGS += -c -fexceptions -ffast-math -DUSE_FFMPEG
 AOPTS    = -c
 
-DRIVERBIN = /system/extensions/media
-
 VPATH = ./
-
 OBJS	= aac_codec.o
-
 OBJDIR	:= objs
 
-include $(ATHEOS_SRC)/makefile.rules
+include $(PYRO_COMMON)/makefile.rules
 
 all :	$(OBJDIR) $(OBJS) $(OBJDIR)/aac.so
 
@@ -18,19 +14,20 @@ $(OBJDIR):
 	mkdir $(OBJDIR)
 
 $(OBJDIR)/aac.so: $(OBJS)
-	$(CXX) -shared -Xlinker "-soname=aac.so" $(OBJS) -lsyllable -lmedia -lfaad -o $(OBJDIR)/aac.so
-
-
-deps:
-
-install: $(OBJDIR)/aac.so
-	install -s $(OBJDIR)/aac.so $(IMAGE)/$(DRIVERBIN)/aac.so
-
-dist: install
+	$(CXX) -shared -Xlinker "-soname=aac.so" $(OBJS) -lpyro -lmedia -lfaad -o $(OBJDIR)/aac.so
 
 deps: $(OBJDIR) $(DEPS)
 
-clean:
-	rm -f $(OBJS) $(OBJDIR)/*
+# ----- ----- ----- ----- ----- ----- ----- ----- ----- -----
 
--include $(OBJDIR)/*.d
+dist: all inst clean
+
+inst:
+	mkdir -p $(PYRO_BINARY_DESTINATION)/System/extensions/media
+	cp -f $(OBJDIR)/aac.so $(PYRO_BINARY_DESTINATION)/System/extensions/media/
+	addattrib $(PYRO_BINARY_DESTINATION)/System/extensions/media/aac.so "CheckSum::MD5" `md5sum $(PYRO_BINARY_DESTINATION)/System/extensions/media/aac.so | cut -c1-32`
+	sync
+
+clean:
+	rm -rf $(OBJDIR)
+	sync

@@ -25,9 +25,9 @@
 #include <sys/ioctl.h>
 #include <getopt.h>
 
-#include <atheos/types.h>
-#include <atheos/time.h>
-#include <atheos/kernel.h>
+#include <pyro/types.h>
+#include <pyro/time.h>
+#include <pyro/kernel.h>
 
 #include <util/application.h>
 #include <util/resources.h>

@@ -32,7 +32,7 @@
 
 #include <appserver/protocol.h>
 #include <util/message.h>
-#include <atheos/kernel.h>
+#include <pyro/kernel.h>
 
 using namespace os;
 

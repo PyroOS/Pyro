@@ -38,7 +38,7 @@ class WhisperApplication : public Application
 		WhisperWindow *m_pcWindow;
 };
 
-WhisperApplication::WhisperApplication() : Application( "application/x-VND.syllable-Whisper" )
+WhisperApplication::WhisperApplication() : Application( "application/x-VND.pyro-Whisper" )
 {
 	SetCatalog("Whisper.catalog");
 

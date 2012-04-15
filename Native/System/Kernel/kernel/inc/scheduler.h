@@ -21,15 +21,15 @@
 #ifndef	__F_SCHEDULER_H__
 #define	__F_SCHEDULER_H__
 
-#include <atheos/types.h>
-#include <atheos/tld.h>
-#include <atheos/filesystem.h>
-#include <atheos/strace.h>
+#include <pyro/types.h>
+#include <pyro/tld.h>
+#include <pyro/filesystem.h>
+#include <pyro/strace.h>
 
 #include <posix/param.h>
 #include <posix/signal.h>
-#include <atheos/types.h>
-#include <atheos/dlist.h>
+#include <pyro/types.h>
+#include <pyro/dlist.h>
 
 #include "typedefs.h"
 #include "semaphore.h"

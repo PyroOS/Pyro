@@ -20,7 +20,7 @@
 #include "main.h"
 #include "icons.h"
 #include "messages.h"
-#include "resources/aedit.h"
+#include "resources/AEdit.h"
 
 using namespace os;
 

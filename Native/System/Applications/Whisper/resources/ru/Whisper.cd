@@ -217,7 +217,7 @@ MSG_STATUS_FAILEDTOSENDMESSAGE							Не удалось отправить пи
 MSG_STATUS_MESSAGESENT									Письмо %3i отправлено.
 
 MSG_ABOUTWND_TITLE=10000								О программе Whisper
-MSG_ABOUTWND_TEXT_LINEONE								Whisper, почтовый клиент для Syllable
+MSG_ABOUTWND_TEXT_LINEONE								Whisper, почтовый клиент для Pyro
 MSG_ABOUTWND_TEXT_VERSION								Версия
 MSG_ABOUTWND_TEXT_WEBSITEONE							Обращайтесь к
 MSG_ABOUTWND_TEXT_WEBSITETWO							для получения новостей и информации.

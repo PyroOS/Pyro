@@ -45,7 +45,7 @@
  * 675 Mass Ave, Cambridge, MA 02139, USA.
  */
 
-#include <atheos/types.h>
+#include <pyro/types.h>
 #include <posix/errno.h>
 #include "transport.h"
 #include "protocol.h"

@@ -35,9 +35,9 @@
 #include <fcntl.h>
 #include <stropts.h>
 
-#include <atheos/types.h>
-#include <atheos/pci.h>
-#include <atheos/kernel.h>
+#include <pyro/types.h>
+#include <pyro/pci.h>
+#include <pyro/kernel.h>
 #include <appserver/pci_graphics.h>
 
 #include "../../../server/bitmap.h"

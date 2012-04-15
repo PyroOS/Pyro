@@ -33,7 +33,7 @@
 #include <gui/button.h>
 #include <util/string.h>
 #include <util/message.h>
-#include <atheos/time.h>
+#include <pyro/time.h>
 
 #include <mail.h>
 #include <icon.h>

@@ -41,7 +41,7 @@ MSG_MAINWND_JOBSIZE_MB							%d МБ
 MSG_MAINWND_JOBSIZE_GB							%d ГБ
 
 MSG_ABOUTWND_TITLE=1000							Опашка за отпечатване
-MSG_ABOUTWND_TEXT1								Syllable мениджур на опашката за печат
+MSG_ABOUTWND_TEXT1								Pyro мениджур на опашката за печат
 MSG_ABOUTWND_TEXT2								Използва CUPS версия %d.%d.%d\n
 MSG_ABOUTWND_CLOSE								_Затвори
 

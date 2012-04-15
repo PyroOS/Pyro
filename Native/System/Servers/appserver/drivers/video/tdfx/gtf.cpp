@@ -29,7 +29,7 @@
  *
  */
 
-#include <atheos/types.h>
+#include <pyro/types.h>
 #include <string.h>
 #include "gtf.h"
 

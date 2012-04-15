@@ -21,7 +21,7 @@
 #include "mga_gx00.h"
 #include "mga_regs.h"
 
-#include <atheos/kernel.h>
+#include <pyro/kernel.h>
 
 DacGx00::DacGx00( vuint8 *pRegisterBase )
 {

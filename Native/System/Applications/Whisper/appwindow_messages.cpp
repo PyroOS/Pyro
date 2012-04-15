@@ -1220,7 +1220,7 @@ void WhisperWindow::HandleAppAbout( Message *pcMessage )
 
 	cAbout  = String( MSG_ABOUTWND_TEXT_LINEONE + "\n" );
 	cAbout += String( MSG_ABOUTWND_TEXT_VERSION + " " ) + g_cVersion + String( "\n\n" );
-	cAbout += String( MSG_ABOUTWND_TEXT_WEBSITEONE + " http://www.syllable.org " + MSG_ABOUTWND_TEXT_WEBSITETWO + "\n\n" );
+	cAbout += String( MSG_ABOUTWND_TEXT_WEBSITEONE + " http://www.pyro-os.org " + MSG_ABOUTWND_TEXT_WEBSITETWO + "\n\n" );
 	cAbout += String( MSG_ABOUTWND_TEXT_COPYRIGHTONE );
 	cAbout += String( " http://www.gnu.org/licenses/licenses.html\n" );
 	cAbout += String( MSG_ABOUTWND_TEXT_COPYRIGHTTWO );

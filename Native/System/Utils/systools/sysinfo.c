@@ -1,7 +1,7 @@
 #include <stdio.h>
-#include <atheos/types.h>
-#include <atheos/time.h>
-#include <atheos/kernel.h>
+#include <pyro/types.h>
+#include <pyro/time.h>
+#include <pyro/kernel.h>
 
 int main( int argc, char** argv )
 {

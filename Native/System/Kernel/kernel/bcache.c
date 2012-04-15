@@ -18,16 +18,16 @@
  *  Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  */
 
-#include <atheos/types.h>
+#include <pyro/types.h>
 #include <posix/unistd.h>
 #include <posix/errno.h>
 
-#include <atheos/kernel.h>
-#include <atheos/bcache.h>
-#include <atheos/time.h>
-#include <atheos/semaphore.h>
-#include <atheos/pci.h>
-#include <atheos/kdebug.h>
+#include <pyro/kernel.h>
+#include <pyro/bcache.h>
+#include <pyro/time.h>
+#include <pyro/semaphore.h>
+#include <pyro/pci.h>
+#include <pyro/kdebug.h>
 
 #include <macros.h>
 

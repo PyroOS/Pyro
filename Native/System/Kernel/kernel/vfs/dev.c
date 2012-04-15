@@ -23,14 +23,14 @@
 #include <posix/fcntl.h>
 #include <posix/dirent.h>
 
-#include <atheos/types.h>
-#include <atheos/time.h>
-#include <atheos/filesystem.h>
-#include <atheos/kernel.h>
-#include <atheos/device.h>
-#include <atheos/image.h>
-#include <atheos/semaphore.h>
-#include <atheos/config.h>
+#include <pyro/types.h>
+#include <pyro/time.h>
+#include <pyro/filesystem.h>
+#include <pyro/kernel.h>
+#include <pyro/device.h>
+#include <pyro/image.h>
+#include <pyro/semaphore.h>
+#include <pyro/config.h>
 
 #include <macros.h>
 
@@ -791,7 +791,7 @@ static int dfs_lookup( void *pVolume, void *pParent, const char *pzName, int nNa
 	      checked:
 		if ( bScan )
 		{
-			strcat( zPath, "system/drivers/dev/" );
+			strcat( zPath, "System/drivers/dev/" );
 			get_node_path( psParentNode, zPath );
 			scan_driver_dir( psParentNode, zPath, strlen( zPath ) );
 		}
@@ -1164,7 +1164,7 @@ static int dfs_read_inode( void *pVolume, ino_t nInodeNum, void **ppNode )
 				zPath[nPathLen + 1] = '\0';
 			}
 			
-			strcat( zPath, "system/drivers/dev/" );
+			strcat( zPath, "System/drivers/dev/" );
 			get_node_path( psNode, zPath );
 			/* Check if already loaded */
 			if ( psNode->fn_psDevice )

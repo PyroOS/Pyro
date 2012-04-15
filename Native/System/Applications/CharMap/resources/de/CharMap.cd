@@ -19,6 +19,6 @@ MSG_HELPWND_TEXT								Wenn Sie auf ein Zeichen klicken,\nwird es in die Zwisch
 MSG_HELPWND_OK									Ok
 
 MSG_ABOUTWND_TITLE=2000							CharMap
-MSG_ABOUTWND_TEXT								CharMap V1.1\nCharacter map viewer for Syllable.
+MSG_ABOUTWND_TEXT								CharMap V1.1\nCharacter map viewer for Pyro.
 MSG_ABOUTWND_OK									Ok
 

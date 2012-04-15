@@ -1,14 +1,12 @@
 CFLAGS   += -kernel -fno-PIC -c -D__ENABLE_DEBUG__
 AFLAGS   = -c
 
-C_INCLUDE_PATH=$(ATHEOS_INCLUDE_PATH)
+C_INCLUDE_PATH=$(PYRO_INCLUDE)
 
 OBJS := usb_hub.o usb.o libusb.o
 
-
 OBJDIR	:= objs
 OBJS	:= $(addprefix $(OBJDIR)/,$(OBJS))
-
 
 #
 #	rules
@@ -26,9 +24,6 @@ $(OBJDIR)/%.o : %.s
 $(OBJDIR)/%.o : %.S
 	$(CC) $(CFLAGS) -x assembler-with-cpp $< -o $@
 
-
-
-
 all :	objs $(OBJDIR)/usb
 
 objs:
@@ -37,11 +32,16 @@ objs:
 $(OBJDIR)/usb: $(OBJS) Makefile
 	$(CC) -kernel $(OBJS) -o $(OBJDIR)/usb
 
-install: all
-	cp -f $(OBJDIR)/usb $(IMAGE)/system/drivers/dev/bus/usb
+# ----- ----- ----- ----- ----- ----- ----- ----- ----- -----
 
-dist: install
+dist: all inst clean
+
+inst:
+	mkdir -p $(PYRO_BINARY_DESTINATION)/System/drivers/dev/bus
+	cp -f $(OBJDIR)/usb $(PYRO_BINARY_DESTINATION)/System/drivers/dev/bus/
+	addattrib $(PYRO_BINARY_DESTINATION)/System/drivers/dev/bus/usb "CheckSum::MD5" `md5sum $(PYRO_BINARY_DESTINATION)/System/drivers/dev/bus/usb | cut -c1-32`
+	sync
 
 clean:
-	-rm -f $(OBJS) $(OBJDIR)/usb
-
+	rm -rf $(OBJDIR)
+	sync

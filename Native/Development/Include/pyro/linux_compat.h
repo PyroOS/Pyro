@@ -20,9 +20,9 @@
 #ifndef	__F_SYLLABLE_LINUX_COMPAT_H__
 #define	__F_SYLLABLE_LINUX_COMPAT_H__
 
-#include <atheos/types.h>
-#include <atheos/kernel.h>
-#include <atheos/bitops.h>
+#include <pyro/types.h>
+#include <pyro/kernel.h>
+#include <pyro/bitops.h>
 #include <posix/errno.h>
 #include <net/net.h>
 #include <macros.h>

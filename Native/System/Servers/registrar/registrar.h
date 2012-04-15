@@ -31,11 +31,11 @@
 #include <util/settings.h>
 #include <util/resources.h>
 #include <util/event.h>
-#include <atheos/msgport.h>
-#include <atheos/threads.h>
-#include <atheos/image.h>
-#include <atheos/areas.h>
-#include <atheos/time.h>
+#include <pyro/msgport.h>
+#include <pyro/threads.h>
+#include <pyro/image.h>
+#include <pyro/areas.h>
+#include <pyro/time.h>
 #include <storage/directory.h>
 #include <storage/file.h>
 #include <storage/symlink.h>
@@ -141,6 +141,3 @@ private:
 };
 
 #endif
-
-
-

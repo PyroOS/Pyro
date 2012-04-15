@@ -42,8 +42,8 @@
 #ifndef _TRANSPORT_H_
 #define _TRANSPORT_H_
 
-#include <atheos/types.h>
-#include <atheos/usb.h>
+#include <pyro/types.h>
+#include <pyro/usb.h>
 #include "usb_disk.h"
 
 /* Protocols */

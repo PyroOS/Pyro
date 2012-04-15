@@ -1,23 +1,28 @@
-# Blank Makefile for non-compilable items (I.E Fonts, Icons etc.)
-# Just set DIST_TARGET_PATH below & copy this into
-# the directory you are adding.
-# REMEMBER: Add the new directory to the Makefile in the parent
-# directory!
+# Makefile for non-compilable items.
 
-DIST_TARGET_PATH := $(IMAGE)/system/icons/
+dist: inst mimetypes checksum
 
-all:
+inst:
+	mkdir -p $(PYRO_BINARY_DESTINATION)/System/icons
+	cp -r * $(PYRO_BINARY_DESTINATION)/System/icons/
+	rm $(PYRO_BINARY_DESTINATION)/System/icons/Makefile
+	sync
 
-deps:
+mimetypes:
+	for FILES in `find $(PYRO_BINARY_DESTINATION)/System/icons/ -name *.png`; do \
+		if test -f $$FILES; then \
+			addattrib $$FILES "os::MimeType" "image/png"; \
+		fi; \
+	done;
+	sync
 
-install:
-
-doc:
-
-install-doc:
-
-dist:
-	cp -r * $(DIST_TARGET_PATH)
+checksum:
+	for FILES in `find $(PYRO_BINARY_DESTINATION)/System/icons/`; do \
+		if test -f $$FILES; then \
+			addattrib $$FILES "CheckSum::MD5" `md5sum $$FILES | cut -c1-32`; \
+		fi; \
+	done;
+	sync
 
 clean:
-
+	sync

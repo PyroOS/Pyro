@@ -16,7 +16,7 @@
 # The PROJECT_NAME tag is a single word (or a sequence of words surrounded 
 # by quotes) that should identify the project. 
 
-PROJECT_NAME           = "Syllable Private Functions"
+PROJECT_NAME           = "Pyro Private Functions"
 
 # The PROJECT_NUMBER tag can be used to enter a project or revision number. 
 # This could be handy for archiving the generated documentation or 
@@ -289,9 +289,9 @@ INPUT                  = ./ \
                          vfs \
                          net \
                          inc \
-                         /system/development/headers/atheos \
-                         /system/development/headers/net \
-                         /system/development/headers/posix
+                         /boot/Include/pyro \
+                         /boot/Include/net \
+                         /boot/Include/posix
 
 # If the value of the INPUT tag contains directories, you can use the 
 # FILE_PATTERNS tag to specify one or more wildcard pattern (like *.cpp 
@@ -605,7 +605,7 @@ SEARCH_INCLUDES        = YES
 # contain include files that are not input files but should be processed by 
 # the preprocessor. 
 
-INCLUDE_PATH           = /system/development/headers/
+INCLUDE_PATH           = /boot/Include/
 
 # You can use the INCLUDE_FILE_PATTERNS tag to specify one or more wildcard 
 # patterns (like *.h and *.hpp) to filter out the header-files in the 

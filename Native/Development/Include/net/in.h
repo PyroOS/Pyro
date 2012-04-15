@@ -1,7 +1,7 @@
 #ifndef __H_NET_IN_H__
 #define __H_NET_IN_H__
 
-#include <atheos/types.h>
+#include <pyro/types.h>
 
 
 #define IP_TOS		1

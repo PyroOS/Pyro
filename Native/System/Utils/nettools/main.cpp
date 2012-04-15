@@ -1,7 +1,7 @@
 #include <string.h>
 
 #include <exec/types.h>
-#include <atheos/time.h>
+#include <pyro/time.h>
 
 #include <gui/app.hpp>
 #include <gui/message.hpp>

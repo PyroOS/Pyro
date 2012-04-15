@@ -28,12 +28,11 @@ $(OBJDIR)/%.o : %.c
 	@$(CC) $(CFLAGS) $< -o $@
 
 clean:
-	@if test -e libpop3.a;then rm libpop3.a;fi
-	@if test -e libpop3.so;then rm libpop3.so;fi
-	@if test -e pop3test;then rm pop3test;fi
-	@-rm $(OBJDIR)/*
+	@if test -e libpop3.a;then rm -f libpop3.a;fi
+	@if test -e libpop3.so;then rm -f libpop3.so;fi
+	@if test -e pop3test;then rm -f pop3test;fi
+	@rm -rf $(OBJDIR)
 
 test: test/pop3test.c libpop3.a
 	@if test -e pop3test;then rm pop3test;fi
 	@$(CC) test/pop3test.c -O2 -Wall -I. -L. -lpop3 -o pop3test
-

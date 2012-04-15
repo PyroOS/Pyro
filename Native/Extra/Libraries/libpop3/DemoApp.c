@@ -12,7 +12,7 @@ int main( int argc, char *argv[] )
 
 	if( argc < 4 )
 	{
-		printf("pop3test [server] [username] [password]\n");
+		printf("DemoApp [server] [username] [password]\n");
 		return EXIT_FAILURE;
 	}
 

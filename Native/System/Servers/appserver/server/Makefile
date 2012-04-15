@@ -3,7 +3,7 @@ SCREENSHOT = n
 CFLAGS   += -c -fexceptions -ffast-math $(shell freetype-config --cflags)
 CXXFLAGS += -c -fexceptions -ffast-math $(shell freetype-config --cflags)
 AOPTS    = -c
-LIBS     = -lsyllable
+LIBS     = -lpyro
 
 OBJS =  ddriver.o ddline.o ddmemory.o event.o vesadrv.o server.o input.o			\
 	config.o keyboard.o keymap.o defaultkeymap.o			\
@@ -22,7 +22,7 @@ endif
 
 OBJDIR	:= objs
 
-include $(ATHEOS_SRC)/makefile.rules
+include $(PYRO_COMMON)/makefile.rules
 
 all :	$(OBJDIR) $(OBJDIR)/appserver
 
@@ -36,15 +36,18 @@ $(OBJDIR)/appserver: $(OBJS)
 $(OBJDIR)/mini_appserver: $(OBJS)
 	$(CXX) $(OBJS) -o $(OBJDIR)/appserver $(shell freetype-config --libs) $(LIBS) -lm
 
-install: $(OBJDIR)/appserver
-	cp -f $(OBJDIR)/appserver $(IMAGE)/system/appserver
+# ----- ----- ----- ----- ----- ----- ----- ----- ----- -----
 
-dist: install
+dist: all inst clean
 
-deps:
+inst:
+	mkdir -p $(PYRO_BINARY_DESTINATION)/System/servers
+	cp -pf $(OBJDIR)/appserver $(PYRO_BINARY_DESTINATION)/System/servers/
+	addattrib $(PYRO_BINARY_DESTINATION)/System/servers/appserver "CheckSum::MD5" `md5sum $(PYRO_BINARY_DESTINATION)/System/servers/appserver | cut -c1-32`
+	addattrib $(PYRO_BINARY_DESTINATION)/System/servers/appserver "os::Icon" "/System/icons/logo.png"
+	addattrib $(PYRO_BINARY_DESTINATION)/System/servers/appserver "os::MimeType" "pyro/server"
+	sync
 
 clean:
-	rm -f $(OBJS) $(OBJDIR)/*.d $(OBJDIR)/appserver
-
--include $(OBJDIR)/*.d
-
+	rm -rf $(OBJS) $(OBJDIR) $(OBJDIR)/appserver
+	sync

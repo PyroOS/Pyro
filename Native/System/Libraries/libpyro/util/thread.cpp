@@ -1,5 +1,5 @@
 //#include <sys/time.h>
-#include <atheos/kernel.h>
+#include <pyro/kernel.h>
 #include <signal.h>
 #include <errno.h>
 

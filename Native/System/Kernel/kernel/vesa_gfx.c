@@ -20,8 +20,8 @@
 
 
 #include <posix/errno.h>
-#include <atheos/kernel.h>
-#include <atheos/vesa_gfx.h>
+#include <pyro/kernel.h>
+#include <pyro/vesa_gfx.h>
 
 int sys_get_vesa_mode_info( VESA_Mode_Info_s * psVesaModeInfo, uint32 nModeNr )
 {

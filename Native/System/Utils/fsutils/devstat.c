@@ -6,7 +6,7 @@
 
 #include <sys/stat.h>
 
-#include <atheos/device.h>
+#include <pyro/device.h>
 
 
 

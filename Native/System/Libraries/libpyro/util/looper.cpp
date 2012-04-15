@@ -24,13 +24,13 @@
 #include <string.h>
 #include <malloc.h>
 #include <cassert>
-#include <atheos/types.h>
 
-#include <atheos/semaphore.h>
-#include <atheos/kernel.h>
-#include <atheos/time.h>
-#include <atheos/filesystem.h>
-#include <atheos/msgport.h>
+#include <pyro/types.h>
+#include <pyro/semaphore.h>
+#include <pyro/kernel.h>
+#include <pyro/time.h>
+#include <pyro/filesystem.h>
+#include <pyro/msgport.h>
 #include <gui/guidefines.h>
 #include <util/looper.h>
 #include <util/message.h>

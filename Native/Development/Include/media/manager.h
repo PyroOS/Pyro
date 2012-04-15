@@ -21,8 +21,8 @@
 #define __F_MEDIA_MANAGER_H_
 
 #include <gui/rect.h>
-#include <atheos/types.h>
-#include <atheos/image.h>
+#include <pyro/types.h>
+#include <pyro/image.h>
 #include <util/string.h>
 #include <util/messenger.h>
 #include <media/packet.h>

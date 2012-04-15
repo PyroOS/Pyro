@@ -21,7 +21,7 @@
 #ifndef	__F_GUI_HANDLER_H__
 #define	__F_GUI_HANDLER_H__
 
-#include <atheos/types.h>
+#include <pyro/types.h>
 #include <util/string.h>
 #include <list>
 

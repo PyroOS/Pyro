@@ -3,7 +3,7 @@ OBJSDIR := ../objs/
 EMU10K1_MOD := ../emu10k1
 
 CFLAGS += -Wstrict-prototypes -Wno-trigraphs -fno-strict-aliasing -fno-common -mpreferred-stack-boundary=2
-CFLAGS += -kernel -fno-PIC -ffreestanding
+CFLAGS += -kernel -fno-PIC -ffreestanding -O
 
 LFLAGS := -kernel
 
@@ -31,7 +31,7 @@ $(EMU10K1_MOD): $(OBJS)
 	$(CC) $(LFLAGS) $(OBJS) -o $@
 
 clean:
-	@rm -rf $(OBJSDIR)*
+	@rm -rf $(OBJSDIR)
 	@rm -f $(EMU10K1_MOD)
 	@rm -f $(AC97_MOD)
 
@@ -68,4 +68,3 @@ $(OBJSDIR)mixer.o: mixer.c
 
 $(OBJSDIR)ac97_codec.o: ac97_codec.c
 	$(CC) $(CFLAGS) $^ -c -o $@
-

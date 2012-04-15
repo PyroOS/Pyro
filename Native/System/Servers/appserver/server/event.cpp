@@ -19,7 +19,7 @@
  */
  
 #include <util/messenger.h>
-#include <atheos/kernel.h>
+#include <pyro/kernel.h>
 #include <appserver/protocol.h>
 #include "event.h"
 

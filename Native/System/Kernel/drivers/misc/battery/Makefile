@@ -1,14 +1,11 @@
 CFLAGS   += -kernel -fno-PIC -c -I../../bus/acpi/include
 AFLAGS   = -c
 
-C_INCLUDE_PATH=$(ATHEOS_INCLUDE_PATH)
+C_INCLUDE_PATH=$(PYRO_INCLUDE)
 
 OBJS := battery.o
-
-
 OBJDIR	:= objs
 OBJS	:= $(addprefix $(OBJDIR)/,$(OBJS))
-
 
 #
 #	rules
@@ -26,9 +23,6 @@ $(OBJDIR)/%.o : %.s
 $(OBJDIR)/%.o : %.S
 	$(CC) $(CFLAGS) -x assembler-with-cpp $< -o $@
 
-
-
-
 all :	objs $(OBJDIR)/battery
 
 objs:
@@ -37,11 +31,16 @@ objs:
 $(OBJDIR)/battery: $(OBJS) Makefile
 	$(CC) -kernel $(OBJS) -o $(OBJDIR)/battery
 
-install: all
-	cp -f $(OBJDIR)/battery $(IMAGE)/system/drivers/dev/battery
+# ----- ----- ----- ----- ----- ----- ----- ----- ----- -----
 
-dist: install
+dist: all inst clean
+
+inst:
+	mkdir -p $(PYRO_BINARY_DESTINATION)/System/drivers/dev
+	cp -f $(OBJDIR)/battery $(PYRO_BINARY_DESTINATION)/System/drivers/dev/
+	addattrib $(PYRO_BINARY_DESTINATION)/System/drivers/dev/battery "CheckSum::MD5" `md5sum $(PYRO_BINARY_DESTINATION)/System/drivers/dev/battery | cut -c1-32`
+	sync
 
 clean:
-	-rm -f $(OBJS) $(OBJDIR)/battery
-
+	rm -rf $(OBJDIR)
+	sync

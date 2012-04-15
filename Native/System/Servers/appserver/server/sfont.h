@@ -20,7 +20,7 @@
 #ifndef	__F_SFONT_H__
 #define	__F_SFONT_H__
 
-#include <atheos/types.h>
+#include <pyro/types.h>
 
 #include <gui/font.h>
 #include <gui/rect.h>

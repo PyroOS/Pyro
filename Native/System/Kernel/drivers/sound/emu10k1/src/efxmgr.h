@@ -33,7 +33,7 @@
 #define _EFXMGR_H
 
 #include "emu_wrapper.h"
-#include <atheos/spinlock.h>
+#include <pyro/spinlock.h>
 
 struct emu_efx_info_t{
 	int opcode_shift;

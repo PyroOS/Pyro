@@ -20,7 +20,7 @@
 #ifndef _MEDIACONTROLS_H_
 #define _MEDIACONTROLS_H_
 
-#include <atheos/soundcard.h>
+#include <pyro/soundcard.h>
 #include "barview.h"
 
 namespace os

@@ -30,12 +30,12 @@
 #include <stdlib.h>
 #include <stdio.h>
 
-#include <atheos/types.h>
-#include <atheos/pci.h>
-#include <atheos/kernel.h>
-#include <atheos/vesa_gfx.h>
-#include <atheos/udelay.h>
-#include <atheos/areas.h>
+#include <pyro/types.h>
+#include <pyro/pci.h>
+#include <pyro/kernel.h>
+#include <pyro/vesa_gfx.h>
+#include <pyro/udelay.h>
+#include <pyro/areas.h>
 
 #include "../../../server/bitmap.h"
 #include "../../../server/sprite.h"

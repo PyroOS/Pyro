@@ -1,7 +1,7 @@
 #ifndef __F_ATHEOS_MULTIBOOT_H__
 #define __F_ATHEOS_MULTIBOOT_H__
 
-#include <atheos/types.h>
+#include <pyro/types.h>
 
 typedef struct
 {

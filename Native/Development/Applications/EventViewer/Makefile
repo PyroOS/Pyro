@@ -1,7 +1,6 @@
 #Makefile for Event Viewer
 COPTS = -Wall -c -O2 -fexceptions
 
-APPBIN = /Applications/sIDE
 OBJS = main.o application.o mainwindow.o
 
 OBJDIR := objs
@@ -20,35 +19,34 @@ $(OBJDIR)/%.o : %.s
 	@echo Assembling : $<
 	@$(CC) $(COPTS) -x assembler-with-cpp $< -o $@
 
-all : translations objs "Event Viewer"
-
-
-translations:
+all : objs "Event Viewer"
 
 objs:
 	@mkdir -p objs
 
 "Event Viewer": $(OBJS)
 	@echo Linking...
-	@gcc $(OBJS) -o "Event Viewer"  -lsyllable -lstdc++
+	@gcc $(OBJS) -o "Event Viewer" -lpyro -lstdc++
 	@echo Adding resources...
 	@rescopy "Event Viewer" -r icon48x48.png 
 	@addattrib "Event Viewer" os::Category Development
 
+# ----- ----- ----- ----- ----- ----- ----- ----- ----- -----
+
+dist: all inst web clean
+
+inst:
+	mkdir -p $(PYRO_BINARY_DESTINATION)Native/Development/Applications/Development
+	cp -f "Event Viewer" $(PYRO_BINARY_DESTINATION)Native/Development/Applications/Development/
+	addattrib "$(PYRO_BINARY_DESTINATION)Native/Development/Applications/Development/Event Viewer" "CheckSum::MD5" `md5sum "$(PYRO_BINARY_DESTINATION)Native/Development/Applications/Development/Event Viewer" | cut -c1-32`
+	sync
+
+web:
+	mkdir -p $(PYRO_BINARY_DESTINATION)Web/Languages/LIST
+	mkdir -p $(PYRO_BINARY_DESTINATION)Web/Languages/Development/EventViewer
+	sync
+
 clean:
-	@echo Cleaning...
-	@rm -f $(OBJDIR)/*
-	@rm -f "Event Viewer"
-
-deps:
-
-dist: all
-	@echo Distribution...
-	@mkdir -p $(DIST_DIR)/Applications/sIDE
-	@cp "Event Viewer" "$(DIST_DIR)/Applications/sIDE/Event Viewer"
-
-install: all
-	@echo Installing...
-	@mkdir -p /Applications/sIDE
-	@cp "Event Viewer" "/Applications/sIDE/Event Viewer"
-
+	rm -rf $(OBJDIR)
+	rm -f "Event Viewer"
+	sync

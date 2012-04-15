@@ -25,12 +25,14 @@
 #include <errno.h>
 #include <string.h>
 
-#include <atheos/kernel.h>
+#include <pyro/kernel.h>
 
 #include <inputnode.h>
 
 #include <appserver/protocol.h>
 #include <util/message.h>
+
+using namespace os;
 
 #define SYLVNC_MOUSE_EVENT_SIG 0x564E434D /* VNCM */
 

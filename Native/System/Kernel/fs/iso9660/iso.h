@@ -18,10 +18,10 @@
 #define __ENABLE_DEBUG__
 //#define DEBUG_LIMIT KERN_WARNING
 
-#include <atheos/types.h>	// uints
+#include <pyro/types.h>	// uints
 #include <posix/stat.h>		// stat
 #include <posix/errno.h>
-#include <atheos/filesystem.h>	//kdev_t
+#include <pyro/filesystem.h>	//kdev_t
 
 // This should be long enough for rock ridge and joliet extensions
 #define ISO_MAX_FILENAME_LENGTH 256

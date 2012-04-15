@@ -43,7 +43,7 @@ MediaServer::MediaServer()
 	/* Load Settings */
 	try
 	{
-		Settings* pcSettings = new Settings( new File( "/system/config/mediaserver" ) );
+		Settings* pcSettings = new Settings( new File( "/boot/System/config/mediaserver" ) );
 	//cout<<Application::GetInstance()->GetName().c_str()<<endl;
 		if( pcSettings->Load() == 0 )
 		{
@@ -118,7 +118,7 @@ MediaServer::~MediaServer()
 void MediaServer::SaveSettings()
 {
 	/* Save */
-	Settings* pcSettings = new Settings( new File( "/system/config/mediaserver", O_RDWR | O_CREAT ) );
+	Settings* pcSettings = new Settings( new File( "/boot/System/config/mediaserver", O_RDWR | O_CREAT ) );
 	pcSettings->SetString( "default_input", m_zDefaultInput );
 	pcSettings->SetString( "default_audio_output", m_zDefaultAudioOutput );
 	pcSettings->SetString( "default_video_output", m_zDefaultVideoOutput );
@@ -161,7 +161,7 @@ int MediaServer::LoadAudioPlugins()
 		close( nFd );
 			
 		/* Construct plugin path */
-		zPath = String( "/system/extensions/media" );
+		zPath = String( "/boot/System/extensions/media" );
 		zFileName = zPath + String( "/" ) + zDriverPath;
 			
 		image_id nID = load_library( zFileName.c_str(), 0 );

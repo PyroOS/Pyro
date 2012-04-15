@@ -1,11 +1,8 @@
 COPTS   = -I../../../server $(shell freetype-config --cflags) -c
 
-DEVBIN = /system/drivers/appserver/decorators
 OBJS =	drowdecorator.o
-
 OBJDIR	:= objs
 OBJS	:= $(addprefix $(OBJDIR)/,$(OBJS))
-
 
 #
 #	rules
@@ -17,10 +14,7 @@ $(OBJDIR)/%.o : %.c
 $(OBJDIR)/%.o : %.cpp
 	$(CXX) $(COPTS) $< -o $@
 
-
 all :	objs $(OBJDIR)/Drow
-
-deps:
 
 objs:
 	mkdir objs
@@ -28,11 +22,16 @@ objs:
 $(OBJDIR)/Drow: $(OBJS)
 	$(CXX) -plugin -Xlinker -Bsymbolic $(OBJS) -nodefaultlibs -o $(OBJDIR)/Drow
 
-install: $(OBJDIR)/Drow
-	cp -f $(OBJDIR)/Drow $(IMAGE)/$(DEVBIN)/Drow
+# ----- ----- ----- ----- ----- ----- ----- ----- ----- -----
 
-dist: install
+dist: all inst clean
+
+inst:
+	mkdir -p $(PYRO_BINARY_DESTINATION)/System/drivers/appserver/decorators
+	cp -pf $(OBJDIR)/Drow $(PYRO_BINARY_DESTINATION)/System/drivers/appserver/decorators/
+	addattrib $(PYRO_BINARY_DESTINATION)/System/drivers/appserver/decorators/Drow "CheckSum::MD5" `md5sum $(PYRO_BINARY_DESTINATION)/System/drivers/appserver/decorators/Drow | cut -c1-32`
+	sync
 
 clean:
-	-rm $(OBJS) $(OBJDIR)/Drow
-
+	rm -rf $(OBJDIR)
+	sync

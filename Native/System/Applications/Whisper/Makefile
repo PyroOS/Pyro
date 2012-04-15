@@ -6,11 +6,6 @@ CXXFLAGS += -I. -Iinclude -Ilibpop3/ -Ilibsmtp/
 
 all: libs $(EXE) plugins
 
-catalogs: resources/Whisper.catalog $(CATALOGS)
-
-resources/Whisper.catalog: resources/Whisper.cd
-	catcomp -c resources/Whisper.cd
-
 settings: resources/Whisper.catalog $(OBJDIR)
 	make all -C $(SETTINGS)
 
@@ -26,40 +21,23 @@ plugins:
 
 .PHONY: install clean catalog-clean subdir-clean
 
-install:
-	mkdir -p /Applications/Whisper
-	cp -pf $(EXE) /Applications/Whisper/
-	addattrib /Applications/Whisper/$(EXE) "os::Category" "Internet"
-	for DIR in $(PLUGINS);do \
-		make install -C $$DIR; \
-	done;
-	chmod -R -x /Applications/Whisper/*
-	chmod +x /Applications/Whisper/$(EXE)
-
-clean: catalog-clean subdir-clean
-	-rm $(OBJS)
-	-rm $(EXE)
-
-catalog-clean:
-	-rm resources/Whisper.catalog resources/Whisper.h; \
-	for CATALOG in $(LANGS);do \
-		rm resources/$$CATALOG/Whisper.catalog; \
-	done;
-
 subdir-clean:
 	for DIR in $(SETTINGS) $(LIBS) $(PLUGINS);do \
 		make clean -C $$DIR; \
 	done;
 
 $(EXE) whisper: resources/Whisper.catalog $(OBJDIR) $(OBJS) settings catalogs
-	g++ $(OBJS) $(SETTINGS_OBJS) -Llibpop3/ -Llibsmtp/ -lpop3 -lsmtp -lsyllable -o $(EXE)
+	g++ $(OBJS) $(SETTINGS_OBJS) -Llibpop3/ -Llibsmtp/ -lpop3 -lsmtp -lpyro -o $(EXE)
 	strip --strip-all $(EXE)
 	rescopy -r $(EXE) icons/*.png
-	rescopy -a $(EXE) resources/Whisper.catalog
-	@for CATALOG in $(LANGS);do \
-		echo Adding catalog $$CATALOG; \
-		rescopy -a $(EXE) $$CATALOG/Whisper.catalog=resources/$$CATALOG/Whisper.catalog; \
+	rescopy -a $(EXE) resources/$(EXE).catalog
+	for CATALOG in `ls -1 resources`;do \
+		if [ -d "resources/$$CATALOG" ] ; then \
+			echo $$CATALOG; \
+			rescopy -a $(EXE) $$CATALOG/$(EXE).catalog=resources/$$CATALOG/$(EXE).catalog; \
+		fi \
 	done;
+	addattrib $(EXE) "os::Category" "Internet"
 
 $(OBJDIR):
 	mkdir -p $(OBJDIR)
@@ -68,6 +46,61 @@ $(OBJDIR)/%.o : %.cpp
 	@echo Compiling : $<
 	@g++ $(CXXFLAGS) $< -o $@
 
-resources/%/Whisper.catalog : resources/%/Whisper.cd
-	@echo Compiling catalog : $<
-	@catcomp -t $< > $@
+# ----- ----- ----- ----- ----- ----- ----- ----- ----- -----
+
+dist: catalogs all inst checksum web clean
+
+catalogs:
+	cd resources; \
+	catcomp -c $(EXE).cd; \
+	for CATALOG in `ls -1`;do \
+		if [ -d "$$CATALOG" ] ; then \
+			echo $$CATALOG; \
+			cd $$CATALOG; \
+			catcomp -t $(EXE).cd; \
+			cd ..; \
+		fi \
+	done;
+	sync
+
+inst:
+	mkdir -p $(PYRO_BINARY_DESTINATION)/Applications/Whisper/plugins/ixport
+	cp -pf $(EXE) $(PYRO_BINARY_DESTINATION)/Applications/Whisper/
+	cp -pf ixport/dbx/dbx $(PYRO_BINARY_DESTINATION)/Applications/Whisper/plugins/ixport/
+	cp -pf ixport/mbox/mbox $(PYRO_BINARY_DESTINATION)/Applications/Whisper/plugins/ixport/
+	cp -pf ixport/pst/pst $(PYRO_BINARY_DESTINATION)/Applications/Whisper/plugins/ixport/
+	sync
+
+checksum:
+	addattrib $(PYRO_BINARY_DESTINATION)/Applications/$(EXE)/$(EXE) "CheckSum::MD5" `md5sum $(PYRO_BINARY_DESTINATION)/Applications/$(EXE)/$(EXE) | cut -c1-32`
+	for FILES in `find $(PYRO_BINARY_DESTINATION)/Applications/Whisper/plugins/ixport/`; do \
+		if test -f $$FILES; then \
+			addattrib $$FILES "CheckSum::MD5" `md5sum $$FILES | cut -c1-32`; \
+		fi; \
+	done;
+	sync
+
+web:
+	mkdir -p $(PYRO_BINARY_DESTINATION)Web/Languages/LIST
+	mkdir -p $(PYRO_BINARY_DESTINATION)Web/Languages/Applications/Whisper
+	cd resources; \
+	for CATALOG in `ls -1`;do \
+		if [ -d "$$CATALOG" ] ; then \
+			touch $(PYRO_BINARY_DESTINATION)Web/Languages/LIST/$$CATALOG; \
+			touch $(PYRO_BINARY_DESTINATION)Web/Languages/Applications/Whisper/int; \
+			touch $(PYRO_BINARY_DESTINATION)Web/Languages/Applications/Whisper/$$CATALOG; \
+		fi \
+	done;
+	sync
+
+clean: catalog-clean subdir-clean
+	rm -f $(EXE)
+	rm -rf $(OBJDIR)
+	sync
+
+catalog-clean:
+	rm -f resources/$(EXE).catalog resources/$(EXE).h
+	for CATALOG in `ls -1 resources`;do \
+		rm -f resources/$$CATALOG/$(EXE).catalog; \
+	done;
+	sync

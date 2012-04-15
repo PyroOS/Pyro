@@ -1,0 +1,19 @@
+//
+//	ImageView String Catalog
+//
+//	Translated by: Maximo Pech Jaramillo
+//
+
+ID_TITLE=0							ImageViewer
+ID_FILE_NOT_FOUND					Error: File not found!
+ID_NO_VIEW							Unable to view image
+
+MSG_MIMETYPE_IMAGE_PNG=10000		Imagen PNG
+MSG_MIMETYPE_IMAGE_JPEG				Imagen JPEG
+MSG_MIMETYPE_IMAGE_GIF				Imagen GIF
+MSG_MIMETYPE_IMAGE_BMP				Imagen BMP
+MSG_MIMETYPE_IMAGE_TIFF				Imagen TIFF
+MSG_MIMETYPE_IMAGE_XBM				Imagen XBM
+MSG_MIMETYPE_IMAGE_XPM				Imagen XPM
+MSG_MIMETYPE_IMAGE_TGA				Imagen TGA
+MSG_MIMETYPE_IMAGE_PCX				Imagen PCX

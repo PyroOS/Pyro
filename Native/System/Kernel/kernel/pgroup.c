@@ -19,10 +19,10 @@
  */
 
 #include <posix/errno.h>
-#include <atheos/types.h>
-#include <atheos/kernel.h>
-#include <atheos/smp.h>
-#include <atheos/irq.h>
+#include <pyro/types.h>
+#include <pyro/kernel.h>
+#include <pyro/smp.h>
+#include <pyro/irq.h>
 
 #include "inc/scheduler.h"
 #include "inc/sysbase.h"

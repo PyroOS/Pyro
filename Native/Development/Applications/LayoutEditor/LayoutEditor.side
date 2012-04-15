@@ -3,7 +3,7 @@
 <LinkerFlags>
 <Target>LayoutEditor
 <Category>Development
-<InstallPath>/Applications/sIDE
+<InstallPath>/applications/sIDE
 <RunInTerminal>false
 <Group>Sources
 <FileName>AppWindow.cpp
@@ -68,8 +68,6 @@
 <Group>Libraries
 <FileName>syllable
 <FileType>
-<FileName>stdc++
-<FileType>
 <Group>Resources
 <FileName>images/breaker.png
 <FileType>
@@ -83,3 +81,4 @@
 <FileType>
 <FileName>application_interface.png
 <FileType>
+

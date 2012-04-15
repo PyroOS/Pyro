@@ -30,7 +30,7 @@ extern "C" {
 }
 #endif
 
-#include <atheos/types.h>
+#include <pyro/types.h>
 #include <posix/ioctl.h>
 
 struct usb_ctl_request

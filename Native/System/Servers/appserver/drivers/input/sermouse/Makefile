@@ -1,11 +1,8 @@
 COPTS   = -I../../../server -c
 
-DEVBIN = /system/drivers/appserver/input
 OBJS =	sermouse.o
-
 OBJDIR	:= objs
 OBJS	:= $(addprefix $(OBJDIR)/,$(OBJS))
-
 
 #
 #	rules
@@ -17,22 +14,24 @@ $(OBJDIR)/%.o : %.c
 $(OBJDIR)/%.o : %.cpp
 	$(CXX) $(COPTS) $< -o $@
 
-
 all :	objs $(OBJDIR)/sermouse
 
 objs:
 	mkdir objs
 
 $(OBJDIR)/sermouse: $(OBJS)
-	$(CXX) -plugin -Xlinker -Bsymbolic -nodefaultlibs $(OBJS) -o $(OBJDIR)/sermouse -lsyllable
+	$(CXX) -plugin -Xlinker -Bsymbolic -nodefaultlibs $(OBJS) -o $(OBJDIR)/sermouse -lpyro
 
-deps:
+# ----- ----- ----- ----- ----- ----- ----- ----- ----- -----
 
-install: $(OBJDIR)/sermouse
-	cp -f $(OBJDIR)/sermouse $(IMAGE)/$(DEVBIN)/sermouse
+dist: all inst clean
 
-dist: install
+inst:
+	mkdir -p $(PYRO_BINARY_DESTINATION)/System/drivers/appserver/input
+	cp -pf $(OBJDIR)/sermouse $(PYRO_BINARY_DESTINATION)/System/drivers/appserver/input/
+	addattrib $(PYRO_BINARY_DESTINATION)/System/drivers/appserver/input/sermouse "CheckSum::MD5" `md5sum $(PYRO_BINARY_DESTINATION)/System/drivers/appserver/input/sermouse | cut -c1-32`
+	sync
 
 clean:
-	-rm $(OBJS) $(OBJDIR)/sermouse
-
+	rm -rf $(OBJDIR)
+	sync

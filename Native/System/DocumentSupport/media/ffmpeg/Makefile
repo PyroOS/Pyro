@@ -2,14 +2,9 @@ CFLAGS   += -c -fexceptions -ffast-math
 CXXFLAGS += -c -fexceptions -ffast-math -D__STDC_CONSTANT_MACROS
 AOPTS    = -c
 
-DRIVERBIN = /system/extensions/media
-
 VPATH = ./
-
 OBJS	= ffmpeg_demux.o ffmpeg_output.o ffmpeg_codec.o ffmpeg_addon.o
 OBJDIR	:= objs
-
-include $(ATHEOS_SRC)/makefile.rules
 
 all :	$(OBJDIR) $(OBJS) $(OBJDIR)/ffmpeg.so
 
@@ -17,19 +12,21 @@ $(OBJDIR):
 	mkdir $(OBJDIR)
 
 $(OBJDIR)/ffmpeg.so: $(OBJS)
-	$(CXX) -shared -Xlinker "-soname=ffmpeg.so" $(OBJS) -lsyllable -lmedia -lm -lz -lpthread -lavformat -lavcodec -lavutil -ltheora -logg -o $(OBJDIR)/ffmpeg.so
+	$(CXX) -shared -Xlinker "-soname=ffmpeg.so" $(OBJS) -lpyro -lmedia -lm -lz -lpthread -lavformat -lavcodec -lavutil -ltheora -logg -o $(OBJDIR)/ffmpeg.so
 
+deps: $(LIBS) $(OBJDIR) $(DEPS)
 
-deps: $(LIBS)
+# ----- ----- ----- ----- ----- ----- ----- ----- ----- -----
 
-install: $(OBJDIR)/ffmpeg.so
-	install -s $(OBJDIR)/ffmpeg.so $(IMAGE)/$(DRIVERBIN)/ffmpeg.so
+dist: all inst clean
 
-dist: install
-
-deps: $(OBJDIR) $(DEPS)
+inst:
+	mkdir -p $(PYRO_BINARY_DESTINATION)/System/extensions/media
+	cp -f $(OBJDIR)/ffmpeg.so $(PYRO_BINARY_DESTINATION)/System/extensions/media/
+	addattrib $(PYRO_BINARY_DESTINATION)/System/extensions/media/ffmpeg.so "CheckSum::MD5" `md5sum $(PYRO_BINARY_DESTINATION)/System/extensions/media/ffmpeg.so | cut -c1-32`
+	sync
 
 clean:
-	rm -f $(OBJS) $(OBJDIR)/*
-
--include $(OBJDIR)/*.d
+	rm -f $(OBJS)
+	rm -rf $(OBJDIR)
+	sync

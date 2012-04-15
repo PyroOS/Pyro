@@ -29,10 +29,10 @@
 #include <gui/stringview.h>
 #include <gui/desktop.h>
 
-#include <atheos/types.h>
-#include <atheos/threads.h>
-#include <atheos/semaphore.h>
-#include <atheos/kernel.h>
+#include <pyro/types.h>
+#include <pyro/threads.h>
+#include <pyro/semaphore.h>
+#include <pyro/kernel.h>
 
 #include <signal.h>
 

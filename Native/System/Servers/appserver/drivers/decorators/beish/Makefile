@@ -1,11 +1,8 @@
 COPTS   = -I../../../server $(shell freetype-config --cflags) -c
 
-DEVBIN = /system/drivers/appserver/decorators
 OBJS =	beishdecorator.o gradient.o
-
 OBJDIR	:= objs
 OBJS	:= $(addprefix $(OBJDIR)/,$(OBJS))
-
 
 #
 #	rules
@@ -17,10 +14,7 @@ $(OBJDIR)/%.o : %.c
 $(OBJDIR)/%.o : %.cpp
 	$(CXX) $(COPTS) $< -o $@
 
-
 all :	objs $(OBJDIR)/Beish
-
-deps:
 
 objs:
 	mkdir objs
@@ -28,11 +22,16 @@ objs:
 $(OBJDIR)/Beish: $(OBJS)
 	$(CXX) -plugin -Xlinker -Bsymbolic $(OBJS) -nodefaultlibs -o $(OBJDIR)/Beish
 
-install: $(OBJDIR)/Beish
-	cp -f $(OBJDIR)/Beish $(IMAGE)/$(DEVBIN)/Beish
+# ----- ----- ----- ----- ----- ----- ----- ----- ----- -----
 
-dist: install
+dist: all inst clean
+
+inst:
+	mkdir -p $(PYRO_BINARY_DESTINATION)/System/drivers/appserver/decorators
+	cp -pf $(OBJDIR)/Beish $(PYRO_BINARY_DESTINATION)/System/drivers/appserver/decorators/
+	addattrib $(PYRO_BINARY_DESTINATION)/System/drivers/appserver/decorators/Beish "CheckSum::MD5" `md5sum $(PYRO_BINARY_DESTINATION)/System/drivers/appserver/decorators/Beish | cut -c1-32`
+	sync
 
 clean:
-	-rm $(OBJS) $(OBJDIR)/Beish
-
+	rm -rf $(OBJDIR)
+	sync

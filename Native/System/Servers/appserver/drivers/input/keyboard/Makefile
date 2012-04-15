@@ -1,11 +1,8 @@
 COPTS   = -I../../../server -c
 
-DEVBIN = /system/drivers/appserver/input
 OBJS =	keyboard.o
-
 OBJDIR	:= objs
 OBJS	:= $(addprefix $(OBJDIR)/,$(OBJS))
-
 
 #
 #	rules
@@ -17,22 +14,24 @@ $(OBJDIR)/%.o : %.c
 $(OBJDIR)/%.o : %.cpp
 	$(CXX) $(COPTS) $< -o $@
 
-
 all :	objs $(OBJDIR)/keyboard
 
 objs:
 	mkdir objs
 
 $(OBJDIR)/keyboard: $(OBJS)
-	$(CXX) -plugin -Xlinker -Bsymbolic -nodefaultlibs $(OBJS) -o $(OBJDIR)/keyboard -lsyllable
+	$(CXX) -plugin -Xlinker -Bsymbolic -nodefaultlibs $(OBJS) -o $(OBJDIR)/keyboard -lpyro
 
-deps:
+# ----- ----- ----- ----- ----- ----- ----- ----- ----- -----
 
-install: $(OBJDIR)/keyboard
-	cp -f $(OBJDIR)/keyboard $(IMAGE)/$(DEVBIN)/keyboard
+dist: all inst clean
 
-dist: install
+inst:
+	mkdir -p $(PYRO_BINARY_DESTINATION)/System/drivers/appserver/input
+	cp -pf $(OBJDIR)/keyboard $(PYRO_BINARY_DESTINATION)/System/drivers/appserver/input/
+	addattrib $(PYRO_BINARY_DESTINATION)/System/drivers/appserver/input/keyboard "CheckSum::MD5" `md5sum $(PYRO_BINARY_DESTINATION)/System/drivers/appserver/input/keyboard | cut -c1-32`
+	sync
 
 clean:
-	-rm $(OBJS) $(OBJDIR)/keyboard
-
+	rm -rf $(OBJDIR)
+	sync

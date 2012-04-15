@@ -38,10 +38,8 @@ UTILITIES := utilities/utalloc.o utilities/utcache.o utilities/utcopy.o utilitie
 OBJS := acpi.o bus.o button.o ec.o fan.o memset.o osl.o power.o scan.o simple_pci.o thermal.o utils.o wakeup.o video.o $(DISPATCHER) $(EVENTS) $(EXECUTER) $(HARDWARE) $(NAMESPACE) $(PARSER) $(RESOURCES) \
 				$(TABLES) $(UTILITIES)
 
-
 OBJDIR	:= objs
 OBJS	:= $(addprefix $(OBJDIR)/,$(OBJS))
-
 
 #
 #	rules
@@ -58,9 +56,6 @@ $(OBJDIR)/%.o : %.s
 
 $(OBJDIR)/%.o : %.S
 	$(CC) $(CFLAGS) -x assembler-with-cpp $< -o $@
-
-
-
 
 all :	objs $(OBJDIR)/acpi
 
@@ -80,10 +75,16 @@ $(OBJDIR)/acpi: $(OBJS) Makefile
 	gcc -kernel $(OBJS) -o $(OBJDIR)/acpi
 	strip --strip-all $(OBJDIR)/acpi
 
-install: all
-	cp -f $(OBJDIR)/acpi $(IMAGE)/system/drivers/dev/bus/acpi
+# ----- ----- ----- ----- ----- ----- ----- ----- ----- -----
 
-dist: install
+dist: all inst clean
+
+inst:
+	mkdir -p $(PYRO_BINARY_DESTINATION)/System/drivers/dev/bus
+	cp -f $(OBJDIR)/acpi $(PYRO_BINARY_DESTINATION)/System/drivers/dev/bus/
+	addattrib $(PYRO_BINARY_DESTINATION)/System/drivers/dev/bus/acpi "CheckSum::MD5" `md5sum $(PYRO_BINARY_DESTINATION)/System/drivers/dev/bus/acpi | cut -c1-32`
+	sync
 
 clean:
-	-rm -f $(OBJS) $(OBJDIR)/acpi
+	rm -rf $(OBJDIR)
+	sync

@@ -21,7 +21,7 @@
 #include "main.h"
 #include "buffer.h"
 #include "messages.h"
-#include "resources/aedit.h"
+#include "resources/AEdit.h"
 #include "version.h"
 
 using namespace os;

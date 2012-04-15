@@ -19,8 +19,8 @@
  */
 
 #include <stdio.h>
-#include <atheos/kernel.h>
-#include <atheos/areas.h>
+#include <pyro/kernel.h>
+#include <pyro/areas.h>
 
 #include <appserver/protocol.h>
 #include <gui/desktop.h>

@@ -29,8 +29,8 @@
  ********************************************************************** 
  */
 
-#include <atheos/atomic.h>
-#include <atheos/bitops.h>
+#include <pyro/atomic.h>
+#include <pyro/bitops.h>
 #include "hwaccess.h"
 #include "efxmgr.h"
 

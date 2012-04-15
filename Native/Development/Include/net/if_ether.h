@@ -21,7 +21,7 @@
 #ifndef __F_NET_IF_ETHER_H__
 #define __F_NET_IF_ETHER_H__
 
-#include <atheos/types.h>
+#include <pyro/types.h>
 #include <net/nettypes.h>
 
 #ifdef __KERNEL__

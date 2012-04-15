@@ -3,13 +3,13 @@
  * Copyright (C) 2004 Li Shaohua <shaohua.li@intel.com>
  */
 
-#include <atheos/kernel.h>
-#include <atheos/irq.h>
-#include <atheos/types.h>
-#include <atheos/list.h>
-#include <atheos/msgport.h>
-#include <atheos/spinlock.h>
-#include <atheos/acpi.h>
+#include <pyro/kernel.h>
+#include <pyro/irq.h>
+#include <pyro/types.h>
+#include <pyro/list.h>
+#include <pyro/msgport.h>
+#include <pyro/spinlock.h>
+#include <pyro/acpi.h>
 #include <posix/errno.h>
 #include <macros.h>
 

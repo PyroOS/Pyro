@@ -20,7 +20,7 @@
 #ifndef	__F_UTIL_MESSENGER_H__
 #define	__F_UTIL_MESSENGER_H__
 
-#include <atheos/types.h>
+#include <pyro/types.h>
 
 // The messenger has some friends in the application server
 class	SrvWindow;

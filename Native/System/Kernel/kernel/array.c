@@ -18,11 +18,11 @@
  *  Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  */
 
-#include <atheos/types.h>
-#include <atheos/kernel.h>
-#include <atheos/smp.h>
-#include <atheos/kdebug.h>
-#include <atheos/atomic.h>
+#include <pyro/types.h>
+#include <pyro/kernel.h>
+#include <pyro/smp.h>
+#include <pyro/kdebug.h>
+#include <pyro/atomic.h>
 #include <posix/errno.h>
 
 #include <macros.h>

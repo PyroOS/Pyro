@@ -1,14 +1,12 @@
 CFLAGS   += -kernel -fno-PIC -c -I../
 AFLAGS   = -c
 
-C_INCLUDE_PATH=$(ATHEOS_INCLUDE_PATH)
+C_INCLUDE_PATH=$(PYRO_INCLUDE)
 
 OBJS := audio.o hda_codec.o hda.o
 
-
 OBJDIR	:= objs
 OBJS	:= $(addprefix $(OBJDIR)/,$(OBJS))
-
 
 #
 #	rules
@@ -26,9 +24,6 @@ $(OBJDIR)/%.o : %.s
 $(OBJDIR)/%.o : %.S
 	$(CC) $(CFLAGS) -x assembler-with-cpp $< -o $@
 
-
-
-
 all :	objs $(OBJDIR)/hda
 
 objs:
@@ -37,11 +32,16 @@ objs:
 $(OBJDIR)/hda: $(OBJS) Makefile
 	$(CC) -kernel $(OBJS) -o $(OBJDIR)/hda
 
-install: all
-	cp -f $(OBJDIR)/hda $(IMAGE)/system/drivers/dev/audio/
+# ----- ----- ----- ----- ----- ----- ----- ----- ----- -----
 
-dist: install
+dist: all inst clean
+
+inst:
+	mkdir -p $(PYRO_BINARY_DESTINATION)/System/drivers/dev/audio
+	cp -f $(OBJDIR)/hda $(PYRO_BINARY_DESTINATION)/System/drivers/dev/audio/
+	addattrib $(PYRO_BINARY_DESTINATION)/System/drivers/dev/audio/hda "CheckSum::MD5" `md5sum $(PYRO_BINARY_DESTINATION)/System/drivers/dev/audio/hda | cut -c1-32`
+	sync
 
 clean:
-	-rm -f $(OBJS) $(OBJDIR)/hda
-
+	rm -rf $(OBJDIR)
+	sync

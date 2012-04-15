@@ -1,10 +1,6 @@
 CFLAGS := -fPIC -O2 -Wall -c -I.
 LIBVER := 1
 
-INSTALL_PATH := /usr/local
-INSTALL_LIB_PATH := $(INSTALL_PATH)/lib
-INSTALL_H_PATH := $(INSTALL_PATH)/include
-
 all: libsmtp.so.$(LIBVER) libsmtp.a
 
 libsmtp.so.$(LIBVER): libsmtp.o smtp_timer.o smtp_util.o
@@ -23,35 +19,50 @@ smtp_timer.o: smtp_timer.c smtp_timer.h
 smtp_util.o: smtp_util.c libsmtp.h
 	$(CC) $(CFLAGS) smtp_util.c
 
-install: all
-	if test -e libsmtp.a; \
-		then cp libsmtp.a $(INSTALL_LIB_PATH)/libsmtp_s.a; \
-	fi
-	if test -e libsmtp.so.$(LIBVER); \
-		then cp libsmtp.so.$(LIBVER) $(INSTALL_LIB_PATH)/; \
-		if test -e $(INSTALL_LIB_PATH)/libsmtp.so; \
-			then rm $(INSTALL_LIB_PATH)/libsmtp.so; \
-		fi; \
-		ln -s $(INSTALL_LIB_PATH)/libsmtp.so.$(LIBVER) $(INSTALL_LIB_PATH)/libsmtp.so; \
-		if test `uname -s` = "Linux"; \
-			then /sbin/ldconfig; \
-		fi; \
-	fi
-	cp libsmtp.h $(INSTALL_H_PATH)/
+demoapp: libsmtp.a
+	$(CC) DemoApp.c -Wall -O2 -I. -L. -lsmtp -o DemoApp
 
-uninstall:
-	-rm -f $(INSTALL_LIB_PATH)/libsmtp.so
-	-rm -f $(INSTALL_LIB_PATH)/libsmtp.so.$(LIBVER)
-	-rm -f $(INSTALL_LIB_PATH)/libsmtp_s.a
-	-rm -f $(INSTALL_H_PATH)/libsmtp.h
+# ----- ----- ----- ----- ----- ----- ----- ----- ----- -----
+
+BACK=`pwd`
+DESC = libsmtp 0.3 - Unfinished.
+
+dist: all inst headers package checksum clean
+
+inst:
+	mkdir -p $(PYRO_BINARY_DESTINATION)Native/Extra/Libraries/libsmtp/System/libraries
+	cp -f libsmtp.a $(PYRO_BINARY_DESTINATION)Native/Extra/Libraries/libsmtp/System/libraries/
+	cp -f libsmtp.so.$(LIBVER) $(PYRO_BINARY_DESTINATION)Native/Extra/Libraries/libsmtp/System/libraries/
+	ln -sf libsmtp.so$(LIBVER) $(PYRO_BINARY_DESTINATION)Native/Extra/Libraries/libsmtp/System/libraries/libsmtp.so
+	addattrib $(PYRO_BINARY_DESTINATION)Native/Extra/Libraries/libsmtp/System/libraries/libsmtp.so.$(LIBVER) "os::Icon" "/System/icons/logo.png"
+	addattrib $(PYRO_BINARY_DESTINATION)Native/Extra/Libraries/libsmtp/System/libraries/libsmtp.so.$(LIBVER) "os::MimeType" "pyro/library"
+	sync
+
+headers:
+	mkdir -p $(PYRO_BINARY_DESTINATION)Native/Extra/Libraries/libsmtp/Include/libnet
+	cp -f libsmtp.h $(PYRO_BINARY_DESTINATION)Native/Extra/Libraries/libsmtp/Include/libnet/
+	addattrib $(PYRO_BINARY_DESTINATION)Native/Extra/Libraries/libsmtp/Include/libnet/libsmtp.h "os::MimeType" "text/x-h"; \
+	sync
+
+checksum:
+	for FILES in `find $(PYRO_BINARY_DESTINATION)Native/Extra/Libraries/libsmtp/`; do \
+		if test -f $$FILES; then \
+			addattrib $$FILES "CheckSum::MD5" `md5sum $$FILES | cut -c1-32`; \
+		fi; \
+	done;
+	sync
+
+package:
+	echo $(DESC) > $(TEMP)/zip_comment && \
+	cd $(PYRO_BINARY_DESTINATION)Native/Extra/Libraries/libsmtp/ && \
+	zip -z < "$(TEMP)/zip_comment" -ry9 $(PYRO_BINARY_DESTINATION)Native/Extra/Libraries/libsmtp.zip ./* && \
+	cd $(BACK) && \
+	rm -rf $(PYRO_BINARY_DESTINATION)Native/Extra/Libraries/libsmtp/ && \
+	sync
 
 clean:
-	if test -e libsmtp.a;then rm libsmtp.a;fi
-	if test -e libsmtp.so.*;then rm libsmtp.so.*;fi
-	if test -e libsmtp.o;then rm *.o;fi
-	if test -e smtptest;then rm smtptest;fi
-
-test: smtptest.c libsmtp.a
-	if test -e smtptest;then rm smtptest;fi
-	$(CC) smtptest.c -Wall -O2 -I. -L. -lsmtp -o smtptest
-
+	rm -f *.a
+	rm -f *.o
+	rm -f *.so.$(LIBVER)
+	rm -f DemoApp
+	sync

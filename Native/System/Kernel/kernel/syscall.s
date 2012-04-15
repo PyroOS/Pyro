@@ -85,7 +85,7 @@ VM_MASK		= 0x00020000
 
 
 #include	<posix/errno.h>
-#include	<atheos/syscall.h>
+#include	<pyro/syscall.h>
 
 		
 /*

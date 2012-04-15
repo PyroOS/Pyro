@@ -20,17 +20,17 @@
 
 #include <posix/resource.h>
 #include <posix/errno.h>
-#include <atheos/types.h>
-#include <atheos/isa_io.h>
+#include <pyro/types.h>
+#include <pyro/isa_io.h>
 
-#include <atheos/kernel.h>
-#include <atheos/bcache.h>
-#include <atheos/spinlock.h>
-#include <atheos/time.h>
-#include <atheos/config.h>
-#include <atheos/device.h>
+#include <pyro/kernel.h>
+#include <pyro/bcache.h>
+#include <pyro/spinlock.h>
+#include <pyro/time.h>
+#include <pyro/config.h>
+#include <pyro/device.h>
 
-#include <atheos/syscall.h>
+#include <pyro/syscall.h>
 
 
 #include "version.h"
@@ -137,7 +137,7 @@ status_t do_get_system_info( system_info * psInfo, int nVersion, bool bFromKerne
 			strcpy( sInfo.zKernelBuildDate, g_pzBuildData );	/* Date of kernel built            */
 			strcpy( sInfo.zKernelBuildTime, g_pzBuildTime );	/* Time of kernel built            */
 			strcpy( sInfo.zKernelCpuArch, g_pzCpuArch );	/* CPU this kernel is running on   */
-			strcpy( sInfo.zKernelSystem, g_pzSystem );	/* OS name (E.g. "Syllable")       */
+			strcpy( sInfo.zKernelSystem, g_pzSystem );	/* OS name (E.g. "AtheOS")       */
 
 			for ( i = 0; i < g_nActiveCPUCount; ++i )
 			{
@@ -193,7 +193,7 @@ status_t do_get_system_info( system_info * psInfo, int nVersion, bool bFromKerne
 			strcpy( sInfo.zKernelBuildDate, g_pzBuildData );	/* Date of kernel built            */
 			strcpy( sInfo.zKernelBuildTime, g_pzBuildTime );	/* Time of kernel built            */
 			strcpy( sInfo.zKernelCpuArch, g_pzCpuArch );	/* CPU this kernel is running on   */
-			strcpy( sInfo.zKernelSystem, g_pzSystem );	/* OS name (E.g. "Syllable")       */
+			strcpy( sInfo.zKernelSystem, g_pzSystem );	/* OS name (E.g. "AtheOS")       */
 			/* Kernel boot parameters */
 			get_kernel_arguments( &nArgc, &apzArgv );
 			pzPos = sInfo.zKernelBootParams;
@@ -611,7 +611,7 @@ int sys_reboot( void )
 
 	shutdown_ap_processors();
 
-	printk( "Rebooting Syllable...\n" );
+	printk( "Rebooting Pyro...\n" );
 
 	// Just to be sure :)
 	snooze( 1000000 );

@@ -30,7 +30,7 @@
 #include <savage_bci.h>
 #include <savage_streams.h>
 
-#include <atheos/areas.h>
+#include <pyro/areas.h>
 #include <appserver/pci_graphics.h>
 
 #include <unistd.h>

@@ -24,7 +24,7 @@
 #include <limits.h>
 #include <values.h>
 
-#include <atheos/types.h>
+#include <pyro/types.h>
 #include <gui/control.h>
 
 namespace os

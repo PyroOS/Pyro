@@ -1,14 +1,11 @@
-CFLAGS   += -kernel -fno-PIC -c
+CFLAGS   += -kernel -fno-PIC -c -O
 AFLAGS   = -c
 
-C_INCLUDE_PATH=$(ATHEOS_INCLUDE_PATH)
+C_INCLUDE_PATH=$(PYRO_INCLUDE)
 
 OBJS := lp.o
-
-
 OBJDIR	:= objs
 OBJS	:= $(addprefix $(OBJDIR)/,$(OBJS))
-
 
 #
 #	rules
@@ -26,9 +23,6 @@ $(OBJDIR)/%.o : %.s
 $(OBJDIR)/%.o : %.S
 	$(CC) $(CFLAGS) -x assembler-with-cpp $< -o $@
 
-
-
-
 all :	objs $(OBJDIR)/lp      
 
 objs:
@@ -37,11 +31,16 @@ objs:
 $(OBJDIR)/lp: $(OBJS) Makefile
 	$(CC) -kernel $(OBJS) -o $(OBJDIR)/lp      
 
-install: all
-	cp -f $(OBJDIR)/lp $(IMAGE)/system/drivers/dev/printer/lp
+# ----- ----- ----- ----- ----- ----- ----- ----- ----- -----
 
-dist: install
+dist: all inst clean
+
+inst:
+	mkdir -p $(PYRO_BINARY_DESTINATION)/System/drivers/dev/printer
+	cp -f $(OBJDIR)/lp $(PYRO_BINARY_DESTINATION)/System/drivers/dev/printer/
+	addattrib $(PYRO_BINARY_DESTINATION)/System/drivers/dev/printer/lp "CheckSum::MD5" `md5sum $(PYRO_BINARY_DESTINATION)/System/drivers/dev/printer/lp | cut -c1-32`
+	sync
 
 clean:
-	-rm -f $(OBJS) $(OBJDIR)/lp      
-
+	rm -rf $(OBJDIR)
+	sync

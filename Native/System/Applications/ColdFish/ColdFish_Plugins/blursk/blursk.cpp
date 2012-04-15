@@ -30,7 +30,7 @@
 //#include "logo.xpm"
 #include "blursk.h"
 
-#include "../../coldfish/CFPlugin.h"
+#include "../../ColdFish/CFPlugin.h"
 
 #define DUMPCORE
 #ifdef DUMPCORE

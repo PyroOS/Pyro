@@ -12,7 +12,7 @@
 # Global variables.  These can be changed if you know what you're
 # doing.
 
-SKELETON_DIR=/home/.template
+SKELETON_DIR=/boot/System/resources/HomeTemplate
 
 # function print_usage
 #
@@ -111,4 +111,3 @@ fi
 create_home_dir $1 $2
 
 exit 0
-

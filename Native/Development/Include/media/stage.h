@@ -20,8 +20,8 @@
 #ifndef __F_MEDIA_STAGE_H_
 #define __F_MEDIA_STAGE_H_
 
-#include <atheos/types.h>
-#include <atheos/time.h>
+#include <pyro/types.h>
+#include <pyro/time.h>
 #include <gui/view.h>
 #include <util/string.h>
 #include <util/resource.h>

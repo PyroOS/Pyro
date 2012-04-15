@@ -27,8 +27,8 @@ extern "C" {
 }
 #endif
 
-#include <atheos/pci_vendors.h>
-#include <atheos/device.h>
+#include <pyro/pci_vendors.h>
+#include <pyro/device.h>
 
 typedef struct
 {

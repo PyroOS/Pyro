@@ -1,14 +1,11 @@
 CFLAGS   += -kernel -fno-PIC -c
 AFLAGS   = -c
 
-C_INCLUDE_PATH=$(ATHEOS_INCLUDE_PATH)
+C_INCLUDE_PATH=$(PYRO_INCLUDE)
 
 OBJS := driver.o
-
-
 OBJDIR	:= objs
 OBJS	:= $(addprefix $(OBJDIR)/,$(OBJS))
-
 
 #
 #	rules
@@ -26,9 +23,6 @@ $(OBJDIR)/%.o : %.s
 $(OBJDIR)/%.o : %.S
 	$(CC) $(CFLAGS) -x assembler-with-cpp $< -o $@
 
-
-
-
 all :	objs $(OBJDIR)/riva
 
 objs:
@@ -37,11 +31,16 @@ objs:
 $(OBJDIR)/riva: $(OBJS) Makefile
 	$(CC) -kernel $(OBJS) -o $(OBJDIR)/riva
 
-install: all
-	cp -f $(OBJDIR)/riva $(IMAGE)/system/drivers/dev/graphics/
+# ----- ----- ----- ----- ----- ----- ----- ----- ----- -----
 
-dist: install
+dist: all inst clean
+
+inst:
+	mkdir -p $(PYRO_BINARY_DESTINATION)/System/drivers/dev/graphics
+	cp -f $(OBJDIR)/riva $(PYRO_BINARY_DESTINATION)/System/drivers/dev/graphics/
+	addattrib $(PYRO_BINARY_DESTINATION)/System/drivers/dev/graphics/riva "CheckSum::MD5" `md5sum $(PYRO_BINARY_DESTINATION)/System/drivers/dev/graphics/riva | cut -c1-32`
+	sync
 
 clean:
-	-rm -f -R $(OBJS) $(OBJDIR)
-
+	rm -rf $(OBJDIR)
+	sync

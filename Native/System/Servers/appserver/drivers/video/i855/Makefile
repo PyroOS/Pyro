@@ -1,11 +1,8 @@
 COPTS   = -I$(TOP)/src $(shell freetype-config --cflags) -c
 
-DEVBIN = /system/drivers/appserver/video
 OBJS =	i855.o i855_video.o
-
 OBJDIR	:= objs
 OBJS	:= $(addprefix $(OBJDIR)/,$(OBJS))
-
 
 #
 #	rules
@@ -17,7 +14,6 @@ $(OBJDIR)/%.o : %.c
 $(OBJDIR)/%.o : %.cpp
 	$(CXX) $(COPTS) $< -o $@
 
-
 all :	objs $(OBJDIR)/i855
 
 objs:
@@ -26,13 +22,16 @@ objs:
 $(OBJDIR)/i855: $(OBJS)
 	$(CXX) -plugin -Xlinker -Bsymbolic -nodefaultlibs $(OBJS) -o $(OBJDIR)/i855
 
-deps:
+# ----- ----- ----- ----- ----- ----- ----- ----- ----- -----
 
-install: $(OBJDIR)/i855
-	cp -f $(OBJDIR)/i855 $(IMAGE)/$(DEVBIN)/i855
+dist: all inst clean
 
-dist: install
+inst:
+	mkdir -p $(PYRO_BINARY_DESTINATION)/System/drivers/appserver/video
+	cp -pf $(OBJDIR)/i855 $(PYRO_BINARY_DESTINATION)/System/drivers/appserver/video/
+	addattrib $(PYRO_BINARY_DESTINATION)/System/drivers/appserver/video/i855 "CheckSum::MD5" `md5sum $(PYRO_BINARY_DESTINATION)/System/drivers/appserver/video/i855 | cut -c1-32`
+	sync
 
 clean:
-	-rm $(OBJS) $(OBJDIR)/i855
-
+	rm -rf $(OBJDIR)
+	sync

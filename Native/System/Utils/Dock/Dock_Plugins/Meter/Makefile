@@ -2,9 +2,7 @@
 
 COPTS = -c -fexceptions -ffast-math
 
-APPBIN = /system/extensions/dock
 OBJS = meter.o
-
 OBJDIR := objs
 OBJS	:= $(addprefix $(OBJDIR)/,$(OBJS))
 
@@ -28,22 +26,21 @@ objs:
 
 Meter.so: $(OBJS)
 	@echo Linking...
-	@$(CXX) -shared -Xlinker -soname=Meter.so $(OBJS) -o Meter.so -lsyllable
+	@$(CXX) -shared -Xlinker -soname=Meter.so $(OBJS) -o Meter.so -lpyro
 	@echo Adding resources...
 	@rescopy Meter.so -r images/*.png 
 
+# ----- ----- ----- ----- ----- ----- ----- ----- ----- -----
+
+dist: all inst clean
+
+inst:
+	mkdir -p $(PYRO_BINARY_DESTINATION)/System/extensions/dock
+	cp -f Meter.so $(PYRO_BINARY_DESTINATION)/System/extensions/dock/
+	addattrib $(PYRO_BINARY_DESTINATION)/System/extensions/dock/Meter.so "CheckSum::MD5" `md5sum $(PYRO_BINARY_DESTINATION)/System/extensions/dock/Meter.so | cut -c1-32`
+	sync
+
 clean:
-	@echo Cleaning...
-	@rm -f $(OBJDIR)/*
-	@rm -f Meter.so
-
-deps:
-
-install: all
-	@echo Installing...
-	@cp Meter.so $(APPBIN)/Meter.so
-
-dist: all
-	@echo Distribution...
-	@cp Meter.so $(IMAGE)/$(APPBIN)/Meter.so
-
+	rm -rf $(OBJDIR)
+	rm -f Meter.so
+	sync

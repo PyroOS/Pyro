@@ -19,7 +19,7 @@
  */
 
 #include <errno.h>
-#include <atheos/elf.h>
+#include <pyro/elf.h>
 #include <util/resources.h>
 
 #include <vector>

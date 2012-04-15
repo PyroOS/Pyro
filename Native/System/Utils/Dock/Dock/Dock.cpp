@@ -18,7 +18,7 @@
  */
  
 
-#include <atheos/image.h>
+#include <pyro/image.h>
 #include <appserver/protocol.h>
 #include <gui/requesters.h>
 #include <util/settings.h>
@@ -425,7 +425,7 @@ DockWin::DockWin() :
 	if( !( m_pcDefaultWindowIcon->GetSize() == os::Point( 24, 24 ) ) )
 		m_pcDefaultWindowIcon->SetSize( os::Point( 24, 24 ) );
 	
-	pcStream = cCol.GetResourceStream( "Syllable.png" );
+	pcStream = cCol.GetResourceStream( "logo.png" );
 	os::BitmapImage* pcLogo = new os::BitmapImage( pcStream );
 	delete( pcStream );
 	
@@ -435,14 +435,14 @@ DockWin::DockWin() :
 		m_pcLogoutIcon->SetSize( os::Point( 24, 24 ) );
 	delete( pcStream );
 	
-	pcStream = cCol.GetResourceStream( "Syllable.png" );
+	pcStream = cCol.GetResourceStream( "logo.png" );
 	m_pcAboutIcon = new os::BitmapImage( pcStream );
 	if( !( m_pcAboutIcon->GetSize() == os::Point( 24, 24 ) ) )
 		m_pcAboutIcon->SetSize( os::Point( 24, 24 ) );
 	delete( pcStream );
 	
 	/* Create Syllable icon */
-	m_pcSyllableIcon = new DockIcon( ICON_SYLLABLE, "Syllable" );
+	m_pcSyllableIcon = new DockIcon( ICON_SYLLABLE, "Pyro" );
 	m_pcSyllableIcon->SetDesktopMask( 0xffffffff );
 	m_pcSyllableIcon->GetBitmap()->SetBitmapData( pcLogo->LockBitmap()->LockRaster(), 
 			os::IPoint( pcLogo->GetSize() ), pcLogo->GetColorSpace() );
@@ -574,7 +574,7 @@ void DockWin::HandleMessage( os::Message* pcMessage )
 					if( fork() == 0 )
 					{
 						set_thread_priority( -1, 0 );
-						execlp( "/Applications/System Tools/System Information/System Information", "/Applications/System Tools/System Information/System Information", NULL );
+						execlp( "/boot/System/binary/System Information", "/boot/System/binary/System Information", NULL );
 					}
 				}
 			break;
@@ -620,9 +620,9 @@ void DockWin::HandleMessage( os::Message* pcMessage )
 
 			/* Build information text */
 			
-			zWWWInfo = os::String( MSG_MENU_ABOUT_TEXTONE + " http://www.syllable.org " + MSG_MENU_ABOUT_TEXTTWO );
-			zBuildDateA = os::String( zBuildDateWorkaround + "Syllable %d.%d.%d%c\n\n" + MSG_MENU_ABOUT_BUILDDATE + " %s\n\n%s" );
-			zBuildDateB = os::String( zBuildDateWorkaround + "Syllable %d.%d.%d\n\n" + MSG_MENU_ABOUT_BUILDDATE + " %s\n\n%s" );
+			zWWWInfo = os::String( MSG_MENU_ABOUT_TEXTONE + " http://www.pyro-oss.org " + MSG_MENU_ABOUT_TEXTTWO );
+			zBuildDateA = os::String( zBuildDateWorkaround + "Pyro %d.%d.%d%c\n\n" + MSG_MENU_ABOUT_BUILDDATE + " %s\n\n%s" );
+			zBuildDateB = os::String( zBuildDateWorkaround + "Pyro %d.%d.%d\n\n" + MSG_MENU_ABOUT_BUILDDATE + " %s\n\n%s" );
 			
 			if( sSysInfo.nKernelVersion & 0xffff000000000000LL )
 			{
@@ -767,10 +767,9 @@ void DockWin::AddPlugin( os::String zPath )
 			return;		
 	}
 	
-	/* Check if the plugin path is in "/system/extensions/dock" */
+	/* Check if the plugin path is in "/boot/System/extensions/dock" */
 	os::Path cPath( zPath.c_str() );
-	if( !( os::String( cPath.GetDir().GetPath() ) == "/system/extensions/dock" ||
-		   os::String( cPath.GetDir().GetPath() ) == "/boot/system/extensions/dock" ) )
+	if( !( os::String( cPath.GetDir().GetPath() ) == "/boot/System/extensions/dock" ) )
 	{
 		os::Alert* pcAlert = new os::Alert( "Dock", MSG_PLUGIN_ALERT_TEXT,
 													os::Alert::ALERT_INFO,
@@ -1254,7 +1253,7 @@ void DockApp::HandleMessage( os::Message* pcMessage )
 int main( int argc, char *argv[] )
 {
 	
-	DockApp* pcApp = new DockApp( "application/syllable-Dock" );
+	DockApp* pcApp = new DockApp( "application/pyro-Dock" );
 	pcApp->Run();
 	return ( 0 );
 }

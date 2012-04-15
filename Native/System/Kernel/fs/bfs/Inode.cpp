@@ -12,11 +12,11 @@
 #include "Stream.h"
 #include "Index.h"
 
-#include <atheos/bcache.h>
+#include <pyro/bcache.h>
 #include "kernel_cpp.h"
 
-#include <atheos/string.h>
-#include <atheos/time.h>
+#include <pyro/string.h>
+#include <pyro/time.h>
 
 class InodeAllocator {
 	public:

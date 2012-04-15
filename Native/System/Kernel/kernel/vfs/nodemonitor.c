@@ -27,11 +27,11 @@
 #include <posix/time.h>
 #include <posix/limits.h>
 
-#include <atheos/types.h>
-#include <atheos/kernel.h>
-#include <atheos/smp.h>
-#include <atheos/msgport.h>
-#include <atheos/semaphore.h>
+#include <pyro/types.h>
+#include <pyro/kernel.h>
+#include <pyro/smp.h>
+#include <pyro/msgport.h>
+#include <pyro/semaphore.h>
 
 #include <gui/guidefines.h>
 

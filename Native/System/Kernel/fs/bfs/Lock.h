@@ -9,10 +9,10 @@
 */
 
 
-#include <atheos/kernel.h>
-#include <atheos/semaphore.h>
-#include <atheos/atomic.h>
-#include <atheos/threads.h>
+#include <pyro/kernel.h>
+#include <pyro/semaphore.h>
+#include <pyro/atomic.h>
+#include <pyro/threads.h>
 #include "Utility.h"
 #include "Debug.h"
 

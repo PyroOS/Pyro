@@ -23,9 +23,9 @@
 #include <unistd.h>
 #include <dirent.h>
 
-#include <atheos/time.h>
-#include <atheos/kernel.h>
-#include <atheos/image.h>
+#include <pyro/time.h>
+#include <pyro/kernel.h>
+#include <pyro/image.h>
 
 #include "inputnode.h"
 #include "server.h"
@@ -278,7 +278,7 @@ int32 InputNode::EventLoopEntry( void *pData )
 
 void InitInputSystem()
 {
-	char zInputDrvPath[1024] = "/system/drivers/appserver/input/";
+	char zInputDrvPath[1024] = "/boot/System/drivers/appserver/input/";
 	int nPathLen = strlen( zInputDrvPath );
 	DIR *pDir = opendir( zInputDrvPath );
 	bool bMouseFound = false;

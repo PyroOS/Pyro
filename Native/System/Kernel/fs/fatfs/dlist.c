@@ -22,11 +22,11 @@ TODO:
 
 #define DPRINTF(a,b) if (debug_dlist > (a)) printk b
 
-#include <atheos/kernel.h>
-#include <atheos/filesystem.h>
-#include <atheos/kdebug.h>
+#include <pyro/kernel.h>
+#include <pyro/filesystem.h>
+#include <pyro/kdebug.h>
 
-#include <atheos/string.h>
+#include <pyro/string.h>
 #include <posix/errno.h>
 
 #include <macros.h>

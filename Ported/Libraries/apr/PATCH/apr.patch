@@ -1,0 +1,89 @@
+diff -r -u apr-1.4.5-old/configure apr-1.4.5-new/configure
+--- apr-1.4.5-old/configure	2011-05-20 00:09:22.000000000 +0000
++++ apr-1.4.5-new/configure	2011-11-11 09:32:35.000000000 +0000
+@@ -27650,7 +27650,7 @@
+ fi
+ 
+ ac_rc=yes
+-for ac_spec in header:kernel/OS.h func:create_area; do
++for ac_spec in func:create_area; do
+     ac_type=`echo "$ac_spec" | sed -e 's/:.*$//'`
+     ac_item=`echo "$ac_spec" | sed -e 's/^.*://'`
+     case $ac_type in
+@@ -27924,7 +27924,7 @@
+ fi
+ 
+ ac_rc=yes
+-for ac_spec in header:kernel/OS.h func:create_area; do
++for ac_spec in func:create_area; do
+     ac_type=`echo "$ac_spec" | sed -e 's/:.*$//'`
+     ac_item=`echo "$ac_spec" | sed -e 's/^.*://'`
+     case $ac_type in
+diff -r -u apr-1.4.5-old/shmem/beos/shm.c apr-1.4.5-new/shmem/beos/shm.c
+--- apr-1.4.5-old/shmem/beos/shm.c	2006-08-03 10:55:31.000000000 +0000
++++ apr-1.4.5-new/shmem/beos/shm.c	2011-11-11 09:36:32.000000000 +0000
+@@ -21,9 +21,17 @@
+ #include "apr_strings.h"
+ #include <stdio.h>
+ #include <stdlib.h>
+-#include <kernel/OS.h>
++
++#ifdef __SYLLABLE__
++  #include <atheos/areas.h>
++  #define B_PAGE_SIZE PAGE_SIZE
++#else
++  #include <kernel/OS.h>
++#endif
++
+ #include "apr_portable.h"
+ 
++
+ struct apr_shm_t {
+     apr_pool_t *pool;
+     void *memblock;
+@@ -42,6 +50,11 @@
+     area_id newid;
+     char *addr;
+     char shname[B_OS_NAME_LENGTH];
++
++#ifdef __SYLLABLE__
++    if (file != NULL)
++      return APR_ENOTIMPL;
++#endif
+     
+     (*m) = (apr_shm_t *)apr_pcalloc(p, sizeof(apr_shm_t));
+     /* we MUST allocate in pages, so calculate how big an area we need... */
+@@ -54,9 +67,15 @@
+             snprintf(shname, B_OS_NAME_LENGTH, "apr_shmem_%ld_%d",
+                      find_thread(NULL), num++);
+     }
++#ifdef __SYLLABLE__
++    newid = create_area(filename ? filename : shname, 
++                        (void*)&addr, pagesize,
++                        AREA_ANY_ADDRESS, AREA_READ | AREA_WRITE, AREA_CONTIGUOUS );
++#else     
+     newid = create_area(filename ? filename : shname, 
+                         (void*)&addr, B_ANY_ADDRESS,
+                         pagesize, B_LAZY_LOCK, B_READ_AREA|B_WRITE_AREA);
++#endif
+ 
+     if (newid < 0)
+         return errno;
+@@ -95,6 +114,9 @@
+                                          const char *filename,
+                                          apr_pool_t *pool)
+ {
++#ifdef __SYLLABLE__
++    return APR_ENOTIMPL;
++#else
+     area_info ai;
+     thread_info ti;
+     apr_shm_t *new_m;
+@@ -131,6 +153,7 @@
+     (*m) = new_m;
+     
+     return APR_SUCCESS;
++#endif
+ }
+ 
+ APR_DECLARE(apr_status_t) apr_shm_detach(apr_shm_t *m)

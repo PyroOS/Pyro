@@ -16,16 +16,18 @@ ftp:	ftp.o
 .c.o :
 	$(CC) $(COPTS) $< -o $@
 
-install:
-	cp -f $(EXE) /system/bin/$(EXE)
-
-dist:
-	cp -f $(EXE) $(IMAGE)/system/bin/$(EXE)
-
-deps:
-
 term.o : term.c
 
-clean:
-	-rm $(OBJS) dbterm rfs
+# ----- ----- ----- ----- ----- ----- ----- ----- ----- -----
 
+dist: all inst clean
+
+inst:
+	mkdir -p $(PYRO_BINARY_DESTINATION)/System/binary
+	cp -f $(EXE) $(PYRO_BINARY_DESTINATION)/System/binary/
+	addattrib $(PYRO_BINARY_DESTINATION)/System/binary/$(EXE) "CheckSum::MD5" `md5sum $(PYRO_BINARY_DESTINATION)/System/binary/$(EXE) | cut -c1-32`
+	sync
+
+clean:
+	rm -f $(OBJS) dbterm rfs
+	sync

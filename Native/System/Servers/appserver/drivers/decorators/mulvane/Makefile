@@ -1,11 +1,8 @@
 COPTS   = -I../../../server $(shell freetype-config --cflags) -c
 
-DEVBIN = /system/drivers/appserver/decorators
 OBJS =	MulvaneDecorator.o
-
 OBJDIR	:= objs
 OBJS	:= $(addprefix $(OBJDIR)/,$(OBJS))
-
 
 #
 #	rules
@@ -17,10 +14,7 @@ $(OBJDIR)/%.o : %.c
 $(OBJDIR)/%.o : %.cpp
 	$(CXX) $(COPTS) $< -o $@
 
-
 all :	objs $(OBJDIR)/Mulvane
-
-deps:
 
 objs:
 	mkdir objs
@@ -28,14 +22,16 @@ objs:
 $(OBJDIR)/Mulvane: $(OBJS)
 	$(CXX) -plugin -Xlinker -Bsymbolic $(OBJS) -nodefaultlibs -o $(OBJDIR)/Mulvane
 
-#	$(CXX) $(OBJS) -o $(OBJDIR)/Mulvane ../../../server/objs/appserver -lsyllable -lz
-#	$(CXX) -plugin $(OBJS) -o $(OBJDIR)/Mulvane -lsyllable
+# ----- ----- ----- ----- ----- ----- ----- ----- ----- -----
 
-install: $(OBJDIR)/Mulvane
-	cp -f $(OBJDIR)/Mulvane $(IMAGE)/$(DEVBIN)/Mulvane
+dist: all inst clean
 
-dist: install
+inst:
+	mkdir -p $(PYRO_BINARY_DESTINATION)/System/drivers/appserver/decorators
+	cp -pf $(OBJDIR)/Mulvane $(PYRO_BINARY_DESTINATION)/System/drivers/appserver/decorators/
+	addattrib $(PYRO_BINARY_DESTINATION)/System/drivers/appserver/decorators/Mulvane "CheckSum::MD5" `md5sum $(PYRO_BINARY_DESTINATION)/System/drivers/appserver/decorators/Mulvane | cut -c1-32`
+	sync
 
 clean:
-	-rm $(OBJS) $(OBJDIR)/Mulvane
-
+	rm -rf $(OBJDIR)
+	sync

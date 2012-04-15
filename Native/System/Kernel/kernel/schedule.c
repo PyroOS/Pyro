@@ -22,9 +22,9 @@
 #include <posix/wait.h>
 #include <posix/resource.h>
 
-#include <atheos/kernel.h>
-#include <atheos/spinlock.h>
-#include <atheos/time.h>
+#include <pyro/kernel.h>
+#include <pyro/spinlock.h>
+#include <pyro/time.h>
 
 #include <macros.h>
 

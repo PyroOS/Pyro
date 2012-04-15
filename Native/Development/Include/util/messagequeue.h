@@ -20,7 +20,7 @@
 #ifndef	GUI_MESSAGEQUEUE_HPP
 #define	GUI_MESSAGEQUEUE_HPP
 
-#include <atheos/types.h>
+#include <pyro/types.h>
 #include <util/locker.h>
 
 namespace os

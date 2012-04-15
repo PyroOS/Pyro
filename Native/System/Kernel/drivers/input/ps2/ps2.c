@@ -21,13 +21,13 @@
  */
  
 #include <posix/errno.h>
-#include <atheos/kernel.h>
-#include <atheos/device.h>
-#include <atheos/semaphore.h>
-#include <atheos/spinlock.h>
-#include <atheos/irq.h>
-#include <atheos/udelay.h>
-#include <atheos/isa_io.h>
+#include <pyro/kernel.h>
+#include <pyro/device.h>
+#include <pyro/semaphore.h>
+#include <pyro/spinlock.h>
+#include <pyro/irq.h>
+#include <pyro/udelay.h>
+#include <pyro/isa_io.h>
 
 #include "ps2.h"
 

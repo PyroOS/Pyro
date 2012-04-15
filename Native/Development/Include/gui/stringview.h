@@ -21,7 +21,7 @@
 #ifndef	__F_GUI_STRINGVIEW_H__
 #define	__F_GUI_STRINGVIEW_H__
 
-#include <atheos/types.h>
+#include <pyro/types.h>
 #include <gui/view.h>
 
 namespace os

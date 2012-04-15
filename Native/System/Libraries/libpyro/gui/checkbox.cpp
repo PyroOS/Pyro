@@ -18,7 +18,7 @@
  *  MA 02111-1307, USA
  */
 
-#include <atheos/types.h>
+#include <pyro/types.h>
 
 #include <gui/checkbox.h>
 #include <util/shortcutkey.h>

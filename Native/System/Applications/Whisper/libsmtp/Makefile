@@ -28,12 +28,11 @@ $(OBJDIR)/%.o : %.c
 	@$(CC) $(CFLAGS) $< -o $@
 
 clean:
-	@if test -e libsmtp.a;then rm libsmtp.a;fi
-	@if test -e libsmtp.so;then rm libsmtp.so;fi
-	@if test -e smtptest;then rm smtptest;fi
-	@-rm $(OBJDIR)/*
+	@if test -e libsmtp.a;then rm -f libsmtp.a;fi
+	@if test -e libsmtp.so;then rm -f libsmtp.so;fi
+	@if test -e smtptest;then rm -f smtptest;fi
+	@rm -rf $(OBJDIR)
 
 test: test/smtptest.c libsmtp.a
 	@if test -e smtptest;then rm smtptest;fi
 	@$(CC) test/smtptest.c -O2 -Wall -I. -L. -lsmtp -o smtptest
-

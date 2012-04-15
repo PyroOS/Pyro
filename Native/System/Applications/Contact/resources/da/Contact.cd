@@ -115,7 +115,7 @@ MSG_ABOUTALERT_TITLE=1000									Om Kontakt
 MSG_ABOUTALERT_VERSION										Version:
 MSG_ABOUTALERT_AUTHOR										Forfatter:
 MSG_ABOUTALERT_DESC											Beskrivelse:
-MSG_ABOUTALERT_DESCTEXT										Adressebog for Syllable
+MSG_ABOUTALERT_DESCTEXT										Adressebog for Pyro
 MSG_ABOUTALERT_OK											_Ok
 
 MSG_DELCONTACTALERT_TITLE=1100								Kontakt - Slet Kontakt

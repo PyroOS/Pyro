@@ -78,7 +78,7 @@ void AboutBoxView::Paint(const Rect& cUpdateRect)
 
 	SetFgColor(0,0,0,0);
 
-	String cInfo=(String)"Code Editor for Syllable\nCopyright 2003-2004 Rick Caudill\n\nSourcery is released under the GNU General\nPublic License. Please see the file COPYING,\ndistrubuted with Sourcery, or http:://gnu.org\nfor more information.";
+	String cInfo=(String)"Code Editor for Pyro\nCopyright 2003-2004 Rick Caudill\n\nSourcery is released under the GNU General\nPublic License. Please see the file COPYING,\ndistrubuted with Sourcery, or http:://gnu.org\nfor more information.";
 	SetDrawingMode( DM_OVER );
 	DrawText(Rect(vWidth,10,GetBounds().Width(), GetBounds().Height()),cInfo,DTF_ALIGN_LEFT);
 }

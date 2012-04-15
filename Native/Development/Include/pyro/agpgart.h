@@ -61,12 +61,12 @@ extern "C" {
 }
 #endif
 
-#include <atheos/pci.h>
-#include <atheos/device.h>
-#include <atheos/areas.h>
-#include <atheos/semaphore.h>
-#include <atheos/dlist.h>
-#include <atheos/kdebug.h>
+#include <pyro/pci.h>
+#include <pyro/device.h>
+#include <pyro/areas.h>
+#include <pyro/semaphore.h>
+#include <pyro/dlist.h>
+#include <pyro/kdebug.h>
 
 #ifdef __ENABLE_DEBUG__
 #define DEBUG_LIMIT	KERN_DEBUG
@@ -194,4 +194,3 @@ int	generic_unbind_memory(AGP_Memory_s *);
 }
 #endif
 #endif /* _SYLLABLE_AGPGART_H_ */
-

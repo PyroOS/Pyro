@@ -14,7 +14,7 @@
 
 #include <dlfcn.h>
 
-#include <atheos/image.h>
+#include <pyro/image.h>
 
 #include <posix/errno.h>
 #include <malloc.h>

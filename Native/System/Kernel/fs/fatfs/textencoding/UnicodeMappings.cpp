@@ -3,7 +3,7 @@
 	This file may be used under the terms of the Be Sample Code License.
 */
 
-#include <atheos/types.h>
+#include <pyro/types.h>
 #include <UnicodeMappings.h>
 
 #include "mswin1251.cpp"

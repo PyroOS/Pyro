@@ -21,7 +21,7 @@
 #ifndef	__F_GUI_RECT_H__
 #define	__F_GUI_RECT_H__
 
-#include <atheos/types.h>
+#include <pyro/types.h>
 #include "point.h"
 #include <math.h>
 

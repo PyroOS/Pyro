@@ -31,14 +31,14 @@ Desktop 29 =  640  480 80.00 50.00 70.00 80.00 60.00  RGB16 ""
 Desktop 30 =  640  480 80.00 50.00 70.00 80.00 60.00  RGB16 ""
 Desktop 31 =  640  480 80.00 50.00 70.00 80.00 60.00  RGB16 ""
 
-DefaultFont: "System/Bold" "Bitstream Vera Sans" "Bold" 80000002 8.00 0.00 0.00
-DefaultFont: "System/Fixed" "Bitstream Vera Sans Mono" "Roman" 80000002 8.50 0.00 0.00
-DefaultFont: "System/Regular" "Bitstream Vera Sans" "Roman" 80000002 8.50 0.00 0.00
-DefaultFont: "System/ToolWindow" "Bitstream Vera Sans" "Roman" 80000002 7.00 0.00 0.00
-DefaultFont: "System/Window" "Bitstream Vera Sans" "Roman" 80000002 8.00 0.00 0.00
+DefaultFont: "System/Bold" "DejaVu Sans" "Bold" 80000002 8.00 0.00 0.00
+DefaultFont: "System/Fixed" "DejaVu Sans Mono" "Book" 80000002 8.50 0.00 0.00
+DefaultFont: "System/Regular" "DejaVu Sans" "Book" 80000002 8.50 0.00 0.00
+DefaultFont: "System/ToolWindow" "DejaVu Sans" "Condensed" 80000002 7.00 0.00 0.00
+DefaultFont: "System/Window" "DejaVu Sans" "Condensed" 80000002 8.00 0.00 0.00
 
-WndDecorator     = /system/drivers/appserver/decorators/Photon
-Keymap           = /system/keymaps/American
+WndDecorator     = /boot/System/drivers/appserver/decorators/Photon
+Keymap           = /boot/System/keymaps/American
 PopupSelWin      = true
 DoubleClickDelay = 500000
 KeyDelay         = 300
@@ -57,3 +57,7 @@ Color 09 = 120 120 120 255
 Color 10 = 211 211 211 255
 Color 11 = 211 211 215 255
 Color 12 = 000 000 000 255
+Color 13 = 000 000 000 255
+Color 14 = 186 199 227 255
+Color 15 = 255 255 255 255
+Color 16 = 000 204 000 255

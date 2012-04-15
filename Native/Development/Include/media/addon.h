@@ -21,7 +21,7 @@
 #define __F_MEDIA_ADDON_H_
 
 #include <gui/view.h>
-#include <atheos/types.h>
+#include <pyro/types.h>
 #include <util/string.h>
 #include <media/packet.h>
 #include <media/format.h>

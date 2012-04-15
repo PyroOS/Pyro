@@ -21,21 +21,19 @@
 #include "version.h"
 
 #define MAJOR	0LL
-#define MINOR	6LL
-#define RELEASE	6LL
+#define MINOR	7LL
+#define RELEASE	0LL
 
 const int64 g_nKernelVersion = ( MAJOR << 32 ) | ( MINOR << 16 ) | ( RELEASE );
 const char *g_pzKernelName = "kernel.so";
 const char *g_pzBuildData = __DATE__;
 const char *g_pzBuildTime = __TIME__;
 const char *g_pzCpuArch = "i586";
-const char *g_pzSystem = "syllable";
+const char *g_pzSystem = "pyro";
 
 /* Anyone checking a kernel revision into CVS must remember to bump this
  * build number.  For private branches or patches backported to older versions
  * of Syllable, add a letter and revision number; for example a patch to
  * Build 1023 becomes Build 1023r1.
  */
-const char *g_pzBuildVersion = "0001";
-
-
+const char *g_pzBuildVersion = "0003";

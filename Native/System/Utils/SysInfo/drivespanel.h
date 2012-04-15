@@ -24,7 +24,7 @@
 #include <gui/textview.h>
 #include <gui/listview.h>
 
-#include <atheos/types.h>
+#include <pyro/types.h>
 
 #include <map>
 

@@ -1,7 +1,6 @@
 CFLAGS   += -c -fexceptions -ffast-math
 CXXFLAGS += -c -fexceptions -ffast-math
 AOPTS   = -c
-APPBIN = /system/extensions/dock
 VPATH = ./
 OBJDIR	:= objs
 OBJS = CpuSpeed.o 
@@ -12,18 +11,23 @@ $(OBJDIR):
 	mkdir $(OBJDIR)
 
 $(OBJDIR)/CpuSpeed.so: $(OBJS)
-	$(CXX) -shared -Xlinker "-soname=CpuSpeed.so" $(OBJS) -lsyllable -o $(OBJDIR)/CpuSpeed.so
-
-install:  $(OBJDIR)/CpuSpeed.so
-	install -s $(OBJDIR)/CpuSpeed.so $(APPBIN)/CpuSpeed.so
-
-dist:  $(OBJDIR)/CpuSpeed.so
-	install -s $(OBJDIR)/CpuSpeed.so $(IMAGE)/$(APPBIN)/CpuSpeed.so
+	$(CXX) -shared -Xlinker "-soname=CpuSpeed.so" $(OBJS) -lpyro -o $(OBJDIR)/CpuSpeed.so
 
 deps: $(OBJDIR)
 
-clean:
-	rm -f $(OBJS) $(OBJDIR)/CpuSpeed.so
-
 -include $(OBJDIR)/*.d
 
+# ----- ----- ----- ----- ----- ----- ----- ----- ----- -----
+
+dist: all inst clean
+
+inst:
+	mkdir -p $(PYRO_BINARY_DESTINATION)/System/extensions/dock
+	cp -f $(OBJDIR)/CpuSpeed.so $(PYRO_BINARY_DESTINATION)/System/extensions/dock/
+	addattrib $(PYRO_BINARY_DESTINATION)/System/extensions/dock/CpuSpeed.so "CheckSum::MD5" `md5sum $(PYRO_BINARY_DESTINATION)/System/extensions/dock/CpuSpeed.so | cut -c1-32`
+	sync
+
+clean:
+	rm -rf $(OBJDIR)
+	rm -f $(OBJS)
+	sync

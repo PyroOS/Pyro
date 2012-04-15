@@ -26,8 +26,8 @@
  */
 
 #include "ata.h"
-#include <atheos/pci.h>
-#include <atheos/time.h>
+#include <pyro/pci.h>
+#include <pyro/time.h>
 #include <posix/signal.h>
 
 typedef void init_ata_controller( PCI_Info_s sDevice, ATA_controller_s* psCtrl );

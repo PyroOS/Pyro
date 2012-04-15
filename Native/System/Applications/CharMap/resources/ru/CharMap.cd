@@ -19,6 +19,6 @@ MSG_HELPWND_TEXT								Выберите символ,\nи он будет ск�
 MSG_HELPWND_OK									Ок
 
 MSG_ABOUTWND_TITLE=2000							CharMap
-MSG_ABOUTWND_TEXT								CharMap V1.1\nПрограмма просмотра таблицы символов для Syllable.
+MSG_ABOUTWND_TEXT								CharMap V1.1\nПрограмма просмотра таблицы символов для Pyro.
 MSG_ABOUTWND_OK									Ок
 

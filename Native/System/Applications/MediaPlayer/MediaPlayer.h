@@ -20,7 +20,7 @@
 #ifndef _MEDIAPLAYER_H_
 #define _MEDIAPLAYER_H_ 
 
-#include <atheos/time.h>
+#include <pyro/time.h>
 #include <gui/view.h>
 #include <gui/window.h>
 #include <gui/imagebutton.h>
@@ -30,7 +30,7 @@
 #include <gui/filerequester.h>
 #include <util/application.h>
 #include <util/locale.h>
-#include <atheos/threads.h>
+#include <pyro/threads.h>
 #include <storage/path.h>
 #include <media/manager.h>
 #include <media/input.h>

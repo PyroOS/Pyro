@@ -217,7 +217,7 @@ MSG_STATUS_FAILEDTOSENDMESSAGE							Échec de l'envoi du message %3i.
 MSG_STATUS_MESSAGESENT									Message %3i envoyé.
 
 MSG_ABOUTWND_TITLE=10000								À propos de Whisper
-MSG_ABOUTWND_TEXT_LINEONE								Whisper, un client courriel pour Syllable
+MSG_ABOUTWND_TEXT_LINEONE								Whisper, un client courriel pour Pyro
 MSG_ABOUTWND_TEXT_VERSION								Version
 MSG_ABOUTWND_TEXT_WEBSITEONE							Voir
 MSG_ABOUTWND_TEXT_WEBSITETWO							pour des nouvelles et des informations.

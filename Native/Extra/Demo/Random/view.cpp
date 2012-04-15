@@ -86,15 +86,3 @@ uint RandView::GetStringType()
 {
 	return m_nStringType;
 }
-
-
-
-
-
-
-
-
-
-
-
-

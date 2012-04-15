@@ -7,25 +7,33 @@ OBJS = rescopy.o
 
 OBJDIR	:= objs
 
-include $(ATHEOS_SRC)/makefile.rules
+include $(PYRO_COMMON)/makefile.rules
 
-all :	$(OBJDIR)/$(EXE) $(OBJDIR)
+all :	$(OBJDIR) $(OBJDIR)/$(EXE)
 
 $(OBJDIR):
 	mkdir $(OBJDIR)
 
 $(OBJDIR)/$(EXE): $(OBJS) Makefile
-	$(CXX) $(OBJS) -o $(OBJDIR)/$(EXE) -lsyllable
-
-install: $(OBJDIR)/$(EXE)
-	cp -af $(OBJDIR)/$(EXE) $(IMAGE)/system/bin/$(EXE)
-
-dist: install
+	$(CXX) $(OBJS) -o $(OBJDIR)/$(EXE) -lpyro
 
 deps: $(OBJDIR) $(DEPS)
 
+# ----- ----- ----- ----- ----- ----- ----- ----- ----- -----
+
+dist: all inst web clean
+
+inst:
+	mkdir -p $(PYRO_BINARY_DESTINATION)Native/Development/System/binary
+	cp -f $(OBJDIR)/$(EXE) $(PYRO_BINARY_DESTINATION)Native/Development/System/binary/
+	addattrib $(PYRO_BINARY_DESTINATION)Native/Development/System/binary/$(EXE) "CheckSum::MD5" `md5sum $(PYRO_BINARY_DESTINATION)Native/Development/System/binary/$(EXE) | cut -c1-32`
+	sync
+
+web:
+	mkdir -p $(PYRO_BINARY_DESTINATION)Web/Languages/LIST
+	mkdir -p $(PYRO_BINARY_DESTINATION)Web/Languages/Development/$(EXE)
+	sync
+
 clean:
-	rm -f $(OBJS) $(OBJDIR)/*.d $(OBJDIR)/$(EXE)
-
--include $(OBJDIR)/*.d
-
+	rm -rf $(OBJDIR)
+	sync

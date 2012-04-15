@@ -21,7 +21,7 @@
 #ifndef __F_WINDOWDECORATOR_H__
 #define __F_WINDOWDECORATOR_H__
 
-#include <atheos/types.h>
+#include <pyro/types.h>
 #include <gui/region.h>
 
 class Layer;

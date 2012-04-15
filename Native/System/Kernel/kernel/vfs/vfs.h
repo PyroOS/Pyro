@@ -21,10 +21,10 @@
 #ifndef	__F_VFS_H__
 #define	__F_VFS_H__
 
-#include <atheos/types.h>
-#include <atheos/atomic.h>
-#include <atheos/semaphore.h>
-#include <atheos/filesystem.h>
+#include <pyro/types.h>
+#include <pyro/atomic.h>
+#include <pyro/semaphore.h>
+#include <pyro/filesystem.h>
 
 #include <posix/types.h>
 #include <posix/stat.h>

@@ -36,14 +36,14 @@
 #include <gui/view.h>
 #include <gui/listview.h>
 
-#include <atheos/kernel.h>
-#include <atheos/time.h>
-#include <atheos/types.h>
-#include <atheos/filesystem.h>
-#include <atheos/udelay.h>
-#include <atheos/irq.h>
-#include <atheos/areas.h>
-#include <atheos/smp.h>
+#include <pyro/kernel.h>
+#include <pyro/time.h>
+#include <pyro/types.h>
+#include <pyro/filesystem.h>
+#include <pyro/udelay.h>
+#include <pyro/irq.h>
+#include <pyro/areas.h>
+#include <pyro/smp.h>
 
 #include <util/application.h>
 #include <util/message.h>

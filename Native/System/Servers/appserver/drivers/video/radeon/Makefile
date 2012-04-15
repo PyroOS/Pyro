@@ -1,12 +1,9 @@
 COPTS   = -I$(TOP)/src $(shell freetype-config --cflags) -c
 
-DEVBIN = /system/drivers/appserver/video
-CFGDIR = /system/config/drivers/appserver/video
+CFGDIR = $(PYRO_BINARY_DESTINATION)/system/config/drivers/appserver/video
 OBJS = radeon.o radeon_accel.o radeon_misc.o radeon_monitor.o radeon_pll.o radeon_rom.o radeon_video.o
-
 OBJDIR	:= objs
 OBJS	:= $(addprefix $(OBJDIR)/,$(OBJS))
-
 
 #
 #	rules
@@ -18,10 +15,7 @@ $(OBJDIR)/%.o : %.c
 $(OBJDIR)/%.o : %.cpp
 	$(CXX) $(COPTS) $< -o $@
 
-
 all :	objs $(OBJDIR)/radeon
-
-deps:
 
 objs:
 	mkdir objs
@@ -29,12 +23,16 @@ objs:
 $(OBJDIR)/radeon: $(OBJS)
 	$(CXX) -plugin -Xlinker -Bsymbolic -nodefaultlibs $(OBJS) -o $(OBJDIR)/radeon
 
-install: $(OBJDIR)/radeon radeon.cfg
-	cp -f $(OBJDIR)/radeon $(IMAGE)/$(DEVBIN)/radeon
-	cp -f radeon.cfg $(IMAGE)/$(CFGDIR)/radeon.cfg
+# ----- ----- ----- ----- ----- ----- ----- ----- ----- -----
 
-dist: install
+dist: all inst clean
+
+inst:
+	mkdir -p $(PYRO_BINARY_DESTINATION)/System/drivers/appserver/video
+	cp -pf $(OBJDIR)/radeon $(PYRO_BINARY_DESTINATION)/System/drivers/appserver/video/
+	addattrib $(PYRO_BINARY_DESTINATION)/System/drivers/appserver/video/radeon "CheckSum::MD5" `md5sum $(PYRO_BINARY_DESTINATION)/System/drivers/appserver/video/radeon | cut -c1-32`
+	sync
 
 clean:
-	-rm $(OBJDIR)/*
-
+	rm -rf $(OBJDIR)
+	sync

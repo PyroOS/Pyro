@@ -19,8 +19,8 @@
  */
 
 
-#include <atheos/types.h>
-#include <atheos/time.h>
+#include <pyro/types.h>
+#include <pyro/time.h>
 
 
 #include <macros.h>

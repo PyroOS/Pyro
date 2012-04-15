@@ -21,8 +21,8 @@
 #ifndef __F_SYLLABLE_STRACE_H__
 #define __F_SYLLABLE_STRACE_H__
 
-#include <atheos/types.h>
-#include <atheos/syscall.h>
+#include <pyro/types.h>
+#include <pyro/syscall.h>
 #include <posix/errno.h>
 
 /* Syscall groups.  These are bitfield values used in tr_nSysTraceMask */

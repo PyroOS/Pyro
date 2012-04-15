@@ -1,0 +1,256 @@
+--- JavaScriptCore-old/bindings/npapi.h	2012-04-09 09:54:56.000000000 +0000
++++ JavaScriptCore-new/bindings/npapi.h	2012-04-05 09:26:17.000000000 +0000
+@@ -123,10 +123,15 @@
+ #ifdef __LP64__
+ typedef unsigned int uint32;
+ #else /* __LP64__ */
++#ifdef __SYLLABLE__
++typedef unsigned int uint32;
++#else
+ typedef unsigned long uint32;
++#endif
+ #endif /* __LP64__ */
+ #endif
+ 
++
+ #ifndef _INT16
+ #define _INT16
+ typedef short int16;
+@@ -137,10 +142,15 @@
+ #ifdef __LP64__
+ typedef int int32;
+ #else /* __LP64__ */
++#ifdef __SYLLABLE__
++typedef int int32;
++#else
+ typedef long int32;
++#endif
+ #endif /* __LP64__ */
+ #endif
+ 
++
+ #ifndef FALSE
+ #define FALSE (0)
+ #endif
+--- JavaScriptCore-old/kjs/collector.cpp	2012-04-09 09:54:48.000000000 +0000
++++ JavaScriptCore-new/kjs/collector.cpp	2012-04-05 09:26:36.000000000 +0000
+@@ -34,6 +34,11 @@
+ #include <wtf/HashCountedSet.h>
+ #include <wtf/UnusedParam.h>
+ 
++#if PLATFORM(SYLLABLE)
++#include <pyro/threads.h>
++
++#else
++
+ #if USE(MULTIPLE_THREADS)
+ #include <pthread.h>
+ #endif
+@@ -67,6 +72,7 @@
+ #else
+ #include <pthread.h>
+ #endif
++#endif
+ 
+ #endif
+ 
+@@ -121,6 +127,7 @@
+     posix_memalign(&address, BLOCK_SIZE, BLOCK_SIZE);
+     memset(address, 0, BLOCK_SIZE);
+ #else
++#error Here
+     static size_t pagesize = getpagesize();
+     
+     size_t extra = 0;
+@@ -343,6 +350,12 @@
+     stack_t s;
+     thr_stksegment(&s);
+     return s.ss_sp;
++#elif PLATFORM(SYLLABLE)
++	thread_info sInfo;
++
++	get_thread_info( get_thread_id( NULL ), &sInfo );
++	void *stackBase = (void *)( (uint8*)sInfo.ti_stack + sInfo.ti_stack_size );
++	return( stackBase );
+ #elif PLATFORM(UNIX)
+     static void* stackBase = 0;
+     static size_t stackSize = 0;
+@@ -365,11 +378,27 @@
+         stackThread = thread;
+     }
+     return static_cast<char*>(stackBase) + stackSize;
++#elif PLATFORM(DARWIN)
++
+ #else
+ #error Need a way to get the stack base on this platform
+ #endif
+ }
+ 
++#if PLATFORM(SYLLABLE)
++
++void Collector::registerAsMainThread()
++{
++}
++
++static inline bool onMainThread()
++{
++	return( true );
++}
++
++#else
++
++
+ #if USE(MULTIPLE_THREADS)
+ static pthread_t mainThread;
+ #endif
+@@ -393,6 +422,7 @@
+     return true;
+ #endif
+ }
++#endif
+ 
+ #if USE(MULTIPLE_THREADS)
+ 
+--- JavaScriptCore-old/kjs/interpreter.cpp	2012-04-09 09:54:48.000000000 +0000
++++ JavaScriptCore-new/kjs/interpreter.cpp	2012-04-05 09:26:37.000000000 +0000
+@@ -53,6 +53,15 @@
+ #include <stdio.h>
+ #include <wtf/Assertions.h>
+ 
++#if PLATFORM(SYLLABLE)
++#include <unistd.h>
++#endif
++
++
++#if PLATFORM(WIN_OS)
++#include <windows.h>
++#endif
++
+ namespace KJS {
+ 
+ Completion Interpreter::checkSyntax(ExecState* exec, const UString& sourceURL, int startingLineNumber, const UString& code)
+--- JavaScriptCore-old/wtf/FastMalloc.cpp	2012-04-09 09:54:58.000000000 +0000
++++ JavaScriptCore-new/wtf/FastMalloc.cpp	2012-04-05 09:31:26.000000000 +0000
+@@ -124,6 +124,43 @@
+ 
+ #else
+ 
++#if PLATFORM(SYLLABLE)
++
++#include <pyro/tld.h>
++#include <stdio.h>
++
++static bool isForbiddenInitialized = false;
++static int isForbiddenTLD;
++
++static inline void initializeIsForbiddenTLD()
++{
++	if( !isForbiddenInitialized )
++	{
++		isForbiddenTLD = alloc_tld( NULL );
++		printf( "Allocated TLD %i\n", isForbiddenTLD );
++		isForbiddenInitialized = true;
++	}
++}
++
++static bool isForbidden()
++{
++	initializeIsForbiddenTLD();
++	return( (bool)get_tld( isForbiddenTLD ) );
++}
++
++void fastMallocForbid()
++{
++	initializeIsForbiddenTLD();
++	set_tld( isForbiddenTLD, (void*)(1) );
++}
++void fastMallocAllow()
++{
++	initializeIsForbiddenTLD();
++	set_tld( isForbiddenTLD, (void*)(0) );
++}
++
++#else
++
+ static bool staticIsForbidden;
+ static bool isForbidden()
+ {
+@@ -139,6 +176,7 @@
+ {
+     staticIsForbidden = false;
+ }
++#endif
+ #endif // USE(MULTIPLE_THREADS)
+ 
+ } // namespace WTF
+@@ -164,7 +202,7 @@
+ #if FORCE_SYSTEM_MALLOC
+ 
+ #include <stdlib.h>
+-#if !PLATFORM(WIN_OS)
++#if !PLATFORM(WIN_OS) && !PLATFORM(SYLLABLE)
+     #include <pthread.h>
+ #endif
+ 
+--- JavaScriptCore-old/wtf/HashTable.h	2012-04-09 09:54:56.000000000 +0000
++++ JavaScriptCore-new/wtf/HashTable.h	2012-04-05 09:31:27.000000000 +0000
+@@ -717,8 +717,13 @@
+     inline void HashTable<Key, Value, Extractor, HashFunctions, Traits, KeyTraits>::reinsert(ValueType& entry)
+     {
+         ASSERT(m_table);
++/* XXXKV: This is a hack, obviously. Somehow we're inserting invalid data into the FontCache hash-table
++   which trips these ASSERTs, but Webster will happilly run with this data in the table if we don't
++   ASSERT on it. So...*/
++#ifndef __SYLLABLE__
+         ASSERT(!lookupForWriting(Extractor::extract(entry)).second);
+         ASSERT(!isDeletedBucket(*(lookupForWriting(Extractor::extract(entry)).first)));
++#endif
+ #if DUMP_HASHTABLE_STATS
+         ++HashTableStats::numReinserts;
+ #endif
+--- JavaScriptCore-old/wtf/Platform.h	2012-04-09 09:54:58.000000000 +0000
++++ JavaScriptCore-new/wtf/Platform.h	2012-04-05 09:31:27.000000000 +0000
+@@ -73,7 +73,8 @@
+    || defined(__unix)      \
+    || defined(__unix__)    \
+    || defined (__NetBSD__) \
+-   || defined(_AIX)
++   || defined(_AIX) \
++   || defined(__SYLLABLE__) 
+ #define WTF_PLATFORM_UNIX 1
+ #endif
+ 
+@@ -101,6 +102,11 @@
+ #define WTF_PLATFORM_WIN 1
+ #endif
+ 
++#if defined(BUILDING_SYLLABLE__)
++#define WTF_PLATFORM_SYLLABLE 1
++#endif
++
++
+ /* Graphics engines */
+ 
+ /* PLATFORM(CG) */
+@@ -108,7 +114,7 @@
+ #if PLATFORM(MAC)
+ #define WTF_PLATFORM_CG 1
+ #define WTF_PLATFORM_CI 1
+-#elif !PLATFORM(QT) && !PLATFORM(WX)
++#elif !PLATFORM(QT) && !PLATFORM(WX) && !PLATFORM(SYLLABLE)
+ #define WTF_PLATFORM_CAIRO 1
+ #endif
+ 
+@@ -231,6 +237,12 @@
+ #define USE_SYSTEM_MALLOC 1
+ #endif
+ 
++#if PLATFORM(SYLLABLE)
++#define USE_SYSTEM_MALLOC 1
++#define WTF_USE_CURL 1
++#define WTF_USE_PTHREADS 1
++#endif
++
+ #if !defined(ENABLE_ICONDATABASE)
+ #define ENABLE_ICONDATABASE 1
+ #endif

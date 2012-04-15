@@ -29,11 +29,11 @@
 #include <stdlib.h>
 #include <stdio.h>
 
-#include <atheos/types.h>
-#include <atheos/isa_io.h>
-#include <atheos/pci.h>
-#include <atheos/kernel.h>
-#include <atheos/kdebug.h>
+#include <pyro/types.h>
+#include <pyro/isa_io.h>
+#include <pyro/pci.h>
+#include <pyro/kernel.h>
+#include <pyro/kdebug.h>
 #include <util/locker.h>
 
 #include <gui/bitmap.h>

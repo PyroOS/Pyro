@@ -25,8 +25,8 @@
 
 #define VERSION "0.1a"
 
-#include <atheos/types.h>
-#include <atheos/pci.h>
+#include <pyro/types.h>
+#include <pyro/pci.h>
 #include <gui/guidefines.h>
 
 #include "../../../server/ddriver.h"

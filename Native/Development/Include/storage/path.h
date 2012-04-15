@@ -22,7 +22,7 @@
 #define __F_STORAGE_PATH_H__
 
 #include <sys/types.h>
-#include <atheos/types.h>
+#include <pyro/types.h>
 
 #include <util/string.h>
 

@@ -18,6 +18,7 @@
 #include <iostream>
 #include <util/settings.h>
 #include "main.h"
+#include "resources/ImageViewer.h"
 
 using namespace os;
 using namespace std;
@@ -35,7 +36,7 @@ AppWindow* NView :: m_AppWindow = NULL;
 NView :: NView( int argc, char* argv[] ) : Application( "application/x-ImageViewer" )
 {
 	try {
-		SetCatalog( "lang.catalog" );
+		SetCatalog( "ImageViewer.catalog" );
 	} catch( ... ) {
 	}
 
@@ -45,13 +46,13 @@ NView :: NView( int argc, char* argv[] ) : Application( "application/x-ImageView
 		RegistrarManager *pcRegistrar = RegistrarManager::Get();
 
 		/* PNG */
-		pcRegistrar->RegisterType( "image/png", "PNG Image" );
+		pcRegistrar->RegisterType( "image/png", MSG_MIMETYPE_IMAGE_PNG );
 		pcRegistrar->RegisterTypeExtension( "image/png", "png" );
-		pcRegistrar->RegisterTypeIcon( "image/png", Path( "/system/icons/filetypes/image_png.png" ) );
+		pcRegistrar->RegisterTypeIcon( "image/png", Path( "/boot/System/icons/filetypes/image_png.png" ) );
 		pcRegistrar->RegisterAsTypeHandler( "image/png" );
 
 		/* JPEG */
-		pcRegistrar->RegisterType( "image/jpeg", "JPEG Image" );
+		pcRegistrar->RegisterType( "image/jpeg", MSG_MIMETYPE_IMAGE_JPEG );
 		pcRegistrar->RegisterTypeExtension( "image/jpeg", "jpeg" );
 		pcRegistrar->RegisterTypeExtension( "image/jpeg", "jpg" );
 		pcRegistrar->RegisterTypeExtension( "image/jpeg", "jpe" );
@@ -62,54 +63,54 @@ NView :: NView( int argc, char* argv[] ) : Application( "application/x-ImageView
 		pcRegistrar->RegisterTypeExtension( "image/jpeg", "pjpeg" );
 		pcRegistrar->RegisterTypeExtension( "image/jpeg", "jls" );
 		pcRegistrar->RegisterTypeExtension( "image/jpeg", "jmh" );
-		pcRegistrar->RegisterTypeIcon( "image/jpeg", Path( "/system/icons/filetypes/image_jpeg.png" ) );
+		pcRegistrar->RegisterTypeIcon( "image/jpeg", Path( "/boot/System/icons/filetypes/image_jpeg.png" ) );
 		pcRegistrar->RegisterAsTypeHandler( "image/jpeg" );
 
 		/* GIF */
-		pcRegistrar->RegisterType( "image/gif", "GIF Image" );
+		pcRegistrar->RegisterType( "image/gif", MSG_MIMETYPE_IMAGE_GIF );
 		pcRegistrar->RegisterTypeExtension( "image/gif", "gif" );
-		pcRegistrar->RegisterTypeIcon( "image/gif", Path( "/system/icons/filetypes/image_gif.png" ) );
+		pcRegistrar->RegisterTypeIcon( "image/gif", Path( "/boot/System/icons/filetypes/image_gif.png" ) );
 		pcRegistrar->RegisterAsTypeHandler( "image/gif" );
 
 		/* BMP */
-		pcRegistrar->RegisterType( "image/bmp", "BMP Image" );
+		pcRegistrar->RegisterType( "image/bmp", MSG_MIMETYPE_IMAGE_BMP );
 		pcRegistrar->RegisterTypeExtension( "image/bmp", "bmp" );
-		pcRegistrar->RegisterTypeIcon( "image/bmp", Path( "/system/icons/filetypes/image_bmp.png" ) );
+		pcRegistrar->RegisterTypeIcon( "image/bmp", Path( "/boot/System/icons/filetypes/image_bmp.png" ) );
 		pcRegistrar->RegisterAsTypeHandler( "image/bmp" );
 
 		/* TIFF */
-		pcRegistrar->RegisterType( "image/tiff", "TIFF Image" );
+		pcRegistrar->RegisterType( "image/tiff", MSG_MIMETYPE_IMAGE_TIFF );
 		pcRegistrar->RegisterTypeExtension( "image/tiff", "tif" );
 		pcRegistrar->RegisterTypeExtension( "image/tiff", "tiff" );
-		pcRegistrar->RegisterTypeIcon( "image/tiff", Path( "/system/icons/filetypes/image_tiff.png" ) );
+		pcRegistrar->RegisterTypeIcon( "image/tiff", Path( "/boot/System/icons/filetypes/image_tiff.png" ) );
 		pcRegistrar->RegisterAsTypeHandler( "image/tiff" );
 
 		/* XBM */
-		pcRegistrar->RegisterType( "image/x-bitmap", "XBM Image" );
+		pcRegistrar->RegisterType( "image/x-bitmap", MSG_MIMETYPE_IMAGE_XBM );
 		pcRegistrar->RegisterTypeExtension( "image/x-bitmap", "xbm" );
-		pcRegistrar->RegisterTypeIcon( "image/x-bitmap", Path( "/system/icons/filetypes/image_xbm.png" ) );
+		pcRegistrar->RegisterTypeIcon( "image/x-bitmap", Path( "/boot/System/icons/filetypes/image_xbm.png" ) );
 		pcRegistrar->RegisterAsTypeHandler( "image/x-bitmap" );
 
 		/* XPM */
-		pcRegistrar->RegisterType( "image/x-pixmap", "XPM Image" );
+		pcRegistrar->RegisterType( "image/x-pixmap", MSG_MIMETYPE_IMAGE_XPM );
 		pcRegistrar->RegisterTypeExtension( "image/x-pixmap", "xpm" );
-		pcRegistrar->RegisterTypeIcon( "image/x-pixmap", Path( "/system/icons/filetypes/image_xpm.png" ) );
+		pcRegistrar->RegisterTypeIcon( "image/x-pixmap", Path( "/boot/System/icons/filetypes/image_xpm.png" ) );
 		pcRegistrar->RegisterAsTypeHandler( "image/x-pixmap" );
 
 		/* TGA */
-		pcRegistrar->RegisterType( "image/x-tga", "TGA Image" );
+		pcRegistrar->RegisterType( "image/x-tga", MSG_MIMETYPE_IMAGE_TGA );
 		pcRegistrar->RegisterTypeExtension( "image/x-tga", "tga" );
 		pcRegistrar->RegisterTypeExtension( "image/x-tga", "icb" );
 		pcRegistrar->RegisterTypeExtension( "image/x-tga", "tpic" );
 		pcRegistrar->RegisterTypeExtension( "image/x-tga", "vda" );
 		pcRegistrar->RegisterTypeExtension( "image/x-tga", "vst" );
-		pcRegistrar->RegisterTypeIcon( "image/x-tga", Path( "/system/icons/filetypes/image_tga.png" ) );
+		pcRegistrar->RegisterTypeIcon( "image/x-tga", Path( "/boot/System/icons/filetypes/image_tga.png" ) );
 		pcRegistrar->RegisterAsTypeHandler( "image/x-tga" );
 
 		/* PCX */
-		pcRegistrar->RegisterType( "image/x-pcx", "PCX Image" );
+		pcRegistrar->RegisterType( "image/x-pcx", MSG_MIMETYPE_IMAGE_PCX );
 		pcRegistrar->RegisterTypeExtension( "image/x-pcx", "pcx" );
-		pcRegistrar->RegisterTypeIcon( "image/x-pcx", Path( "/system/icons/filetypes/image_pcx.png" ) );
+		pcRegistrar->RegisterTypeIcon( "image/x-pcx", Path( "/boot/System/icons/filetypes/image_pcx.png" ) );
 		pcRegistrar->RegisterAsTypeHandler( "image/x-pcx" );
 
 		pcRegistrar->Put();
@@ -125,7 +126,7 @@ NView :: NView( int argc, char* argv[] ) : Application( "application/x-ImageView
 		Settings cSettings;
 		cSettings.Load();
 
-		Rect cBounds = cSettings.GetRect( "window_position", Rect( 100,100,400,275 ) );
+		Rect cBounds = cSettings.GetRect( "window_position", Rect( 100,100,700,675 ) );
 		m_AppWindow = new AppWindow( argc, argv, cBounds );
 		m_AppWindow->Show();
 		m_AppWindow->MakeFocus();
@@ -136,6 +137,3 @@ NView :: NView( int argc, char* argv[] ) : Application( "application/x-ImageView
 		Application::GetInstance()->PostMessage( M_QUIT );
 	}
 }
-
-
-

@@ -2,8 +2,8 @@
 #include <unistd.h>
 #include <sys/ioctl.h>
 #include <termios.h>
-#include <atheos/msgport.h>
-#include <atheos/threads.h>
+#include <pyro/msgport.h>
+#include <pyro/threads.h>
 #include <util/optionparser.h>
 #include <util/string.h>
 

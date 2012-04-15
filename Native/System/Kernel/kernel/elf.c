@@ -23,13 +23,13 @@
 #include <posix/limits.h>
 #include <posix/unistd.h>
 
-#include <atheos/types.h>
-#include <atheos/kernel.h>
-#include <atheos/smp.h>
-#include <atheos/elf.h>
-#include <atheos/semaphore.h>
-#include <atheos/ctype.h>
-#include <atheos/device.h>
+#include <pyro/types.h>
+#include <pyro/kernel.h>
+#include <pyro/smp.h>
+#include <pyro/elf.h>
+#include <pyro/semaphore.h>
+#include <pyro/ctype.h>
+#include <pyro/device.h>
 
 #include <macros.h>
 
@@ -222,7 +222,7 @@ static int open_library_file( const char *pzName, const char *pzSearchPath, char
 			zSysLibPath[nPathLen + 1] = '\0';
 		}
 
-		strcat( zSysLibPath, "system/libraries/:/system/indexes/lib/" );
+		strcat( zSysLibPath, "System/libraries/:System/nix/lib/" );
 		pzSearchPath = zSysLibPath;
 	}
 
@@ -2589,7 +2589,7 @@ static void init_boot_modules( void )
 		{
 			continue;
 		}
-		strcpy( zFullPath, "/boot/system" );
+		strcpy( zFullPath, "/boot/System" );
 		j = strlen( zFullPath );
 		while ( *pzPath != '\0' && isspace( *pzPath ) == false )
 		{

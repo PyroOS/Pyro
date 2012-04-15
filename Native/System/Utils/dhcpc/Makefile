@@ -22,15 +22,6 @@ CFLAGS += -DENABLE_DEBUG -DDEBUG_LEVEL=0
 all: $(OBJDIR) $(OBJS)
 	$(CC) $(OBJS) -o $(EXE)
 
-install: all
-	install -s $(EXE) $(IMAGE)/system/bin/$(EXE)
-
-dist: install
-
-clean:
-	-rm $(EXE)
-	-rm $(OBJS)
-
 $(OBJDIR):
 	-mkdir $(OBJDIR)
 
@@ -38,3 +29,17 @@ $(OBJDIR)/%.o : %.c
 	@echo Compiling : $<
 	@$(CC) $(CFLAGS) $< -o $@
 
+# ----- ----- ----- ----- ----- ----- ----- ----- ----- -----
+
+dist: all inst clean
+
+inst:
+	mkdir -p $(PYRO_BINARY_DESTINATION)/System/binary
+	cp -f $(EXE) $(PYRO_BINARY_DESTINATION)/System/binary/
+	addattrib $(PYRO_BINARY_DESTINATION)/System/binary/$(EXE) "CheckSum::MD5" `md5sum $(PYRO_BINARY_DESTINATION)/System/binary/$(EXE) | cut -c1-32`
+	sync
+
+clean:
+	rm -rf $(OBJDIR)
+	rm -f $(EXE)
+	sync

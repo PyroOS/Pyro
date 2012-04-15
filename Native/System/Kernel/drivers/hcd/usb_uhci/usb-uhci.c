@@ -21,9 +21,9 @@
  
 
 
-#include <atheos/udelay.h>
-#include <atheos/isa_io.h>
-#include <atheos/bitops.h>
+#include <pyro/udelay.h>
+#include <pyro/isa_io.h>
+#include <pyro/bitops.h>
 #include <posix/errno.h>
 #include <posix/ioctls.h>
 #include <posix/fcntl.h>

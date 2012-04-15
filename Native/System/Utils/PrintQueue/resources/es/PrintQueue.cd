@@ -41,7 +41,7 @@ MSG_MAINWND_JOBSIZE_MB							%d MB
 MSG_MAINWND_JOBSIZE_GB							%d GB
 
 MSG_ABOUTWND_TITLE=1000							Cola de impresiÃ³n
-MSG_ABOUTWND_TEXT1								Administrador Syllable Cola de impresión
+MSG_ABOUTWND_TEXT1								Administrador Pyro Cola de impresión
 MSG_ABOUTWND_TEXT2								Utilizando CUPS versiÃ³n %d.%d.%d\n
 MSG_ABOUTWND_CLOSE								_Cerrar
 

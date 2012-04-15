@@ -32,8 +32,8 @@
 #include <util/settings.h>
 #include <util/resources.h>
 
-#include <atheos/time.h>
-#include <atheos/kernel.h>
+#include <pyro/time.h>
+#include <pyro/kernel.h>
 
 #include "processpanel.h"
 #include "sysinfopanel.h"

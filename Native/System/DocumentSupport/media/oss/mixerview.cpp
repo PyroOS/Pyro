@@ -24,7 +24,7 @@
 #include <fcntl.h>
 #include <stropts.h>
 #include <unistd.h>
-#include <atheos/soundcard.h>
+#include <pyro/soundcard.h>
 #include <gui/view.h>
 #include <gui/checkbox.h>
 #include <gui/frameview.h>

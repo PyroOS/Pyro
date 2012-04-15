@@ -23,8 +23,8 @@
 
 #include "mga_dac.h"
 
-#include <atheos/types.h>
-#include <atheos/kernel.h>	// For dbprintf()
+#include <pyro/types.h>
+#include <pyro/kernel.h>	// For dbprintf()
 
 struct CRTCModeData
 {

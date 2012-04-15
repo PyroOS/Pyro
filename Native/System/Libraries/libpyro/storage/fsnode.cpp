@@ -904,7 +904,7 @@ status_t FSNode::RewindAttrdir()
  *	in 0 you can update parts of or extend an existing attribute.
  * \param nType
  *	The data-type of the attribute. This should be one of the ATTR_TYPE_*
- *	types defined in <atheos/filesystem.h>.
+ *	types defined in <pyro/filesystem.h>.
  *
  *	- \b ATTR_TYPE_NONE,	Untyped "raw" data of any size.
  *	- \b ATTR_TYPE_INT32,	32-bit integer value (the size must be exactly 4 bytes).

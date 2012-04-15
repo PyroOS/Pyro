@@ -19,11 +19,11 @@
  *  along with this program; if not, write to the Free Software
  *  Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  */
-#include <atheos/kernel.h>
-#include <atheos/device.h>
-#include <atheos/kdebug.h>
-#include <atheos/image.h>
-#include <atheos/fs_attribs.h>
+#include <pyro/kernel.h>
+#include <pyro/device.h>
+#include <pyro/kdebug.h>
+#include <pyro/image.h>
+#include <pyro/fs_attribs.h>
 #include <macros.h>
 
 

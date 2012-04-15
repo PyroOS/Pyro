@@ -1,13 +1,13 @@
 #include "mainwindow.h"
 #include "messages.h"
 
-MainWindow::MainWindow() : os::Window( os::Rect( 0, 0, 300, 300 ), "main_wnd", "Your Title here" )
+MainWindow::MainWindow() : os::Window( os::Rect( 0, 0, 300, 300 ), "main_wnd", "Your title here" )
 {
 	os::LayoutView* pcView = new os::LayoutView( GetBounds(), "layout_view" );
 	#include "mainwindowLayout.cpp"
 	pcView->SetRoot( m_pcRoot );
 	AddChild( pcView );
-	
+
 	/* Set Icon */
 	os::Resources cCol( get_image_id() );
 	os::ResStream *pcStream = cCol.GetResourceStream( "icon48x48.png" );
@@ -27,12 +27,9 @@ void MainWindow::HandleMessage( os::Message* pcMessage )
 		break;
 	}
 }
-bool MainWindow::OkToQuit()
+bool MainWindow::OkToQuit()  // Obsolete?
 {
 	os::Application::GetInstance()->PostMessage( os::M_QUIT );
 	return( true );
 }
-
-
-
 

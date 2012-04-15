@@ -11,7 +11,3 @@ App::App() : os::Application( "application/x-vnd.syllable-application" )
 	m_pcMainWindow->Show();
 	m_pcMainWindow->MakeFocus();
 }
-
-
-
-

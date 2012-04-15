@@ -24,7 +24,7 @@
 #include <malloc.h>
 #include <string.h>
 
-#include <atheos/kernel.h>
+#include <pyro/kernel.h>
 
 #include <appserver/keymap.h>
 

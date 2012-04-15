@@ -61,9 +61,9 @@ extern "C" {
 }
 #endif
 
-#include <atheos/types.h>
-#include <atheos/pci.h>
-#include <atheos/agpgart.h>
+#include <pyro/types.h>
+#include <pyro/pci.h>
+#include <pyro/agpgart.h>
 
 /*
  * The AGP gatt uses 4k pages irrespective of the host page size.

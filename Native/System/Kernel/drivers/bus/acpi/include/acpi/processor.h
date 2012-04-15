@@ -1,7 +1,7 @@
 #ifndef __ACPI_PROCESSOR_H
 #define __ACPI_PROCESSOR_H
 
-#include <atheos/kernel.h>
+#include <pyro/kernel.h>
 
 #define ACPI_PROCESSOR_BUSY_METRIC	10
 

@@ -14,7 +14,7 @@
 #include <util/settings.h>
 #include <util/resources.h>
 #include <gui/image.h>
-#include <atheos/image.h>
+#include <pyro/image.h>
 
 #include <iostream>
 #include <stdio.h>

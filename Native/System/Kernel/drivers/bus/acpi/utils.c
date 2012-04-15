@@ -23,11 +23,11 @@
  * ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
  */
 
-#include <atheos/types.h>
-#include <atheos/atomic.h>
-#include <atheos/list.h>
-#include <atheos/kernel.h>
-#include <atheos/acpi.h>
+#include <pyro/types.h>
+#include <pyro/atomic.h>
+#include <pyro/list.h>
+#include <pyro/kernel.h>
+#include <pyro/acpi.h>
 #include <macros.h>
 
 

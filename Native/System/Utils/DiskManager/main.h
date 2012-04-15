@@ -1,7 +1,7 @@
 #ifndef __F_DISKMANAGER_MAIN_H__
 #define __F_DISKMANAGER_MAIN_H__
 
-#include <atheos/device.h>
+#include <pyro/device.h>
 
 #include <string>
 #include <vector>

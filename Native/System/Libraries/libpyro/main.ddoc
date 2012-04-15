@@ -2,7 +2,7 @@
 
 
 
-\ref gui "The Syllable GUI API"
+\ref gui "The Pyro GUI API"
 
 \ref storage "The higlevel filesystem API"
 

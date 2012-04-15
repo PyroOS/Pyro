@@ -20,7 +20,7 @@
 
 #include <malloc.h>
 
-#include <atheos/kernel.h>
+#include <pyro/kernel.h>
 
 #include <gui/bitmap.h>
 

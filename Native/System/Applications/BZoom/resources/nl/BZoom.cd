@@ -16,6 +16,6 @@ MSG_MAINWND_MENU_HELP=300					Hulp
 MSG_MAINWND_MENU_HELP_ABOUT					Over BZoom...
 
 MSG_ABOUTWND_TITLE=1000						Over BZoom
-MSG_ABOUTWND_TEXT							BZoom V1.0\n\nEen simpel vergrootglas voor Syllable.\nGebaseerd op AZoom door Chir.\nBZoom is vrijgegeven onder de GNU GPL.\n\nNederlandse vertaling door Ruud Kuin en Kaj de Vos.
+MSG_ABOUTWND_TEXT							BZoom V1.0\n\nEen simpel vergrootglas voor Pyro.\nGebaseerd op AZoom door Chir.\nBZoom is vrijgegeven onder de GNU GPL.\n\nNederlandse vertaling door Ruud Kuin en Kaj de Vos.
 MSG_ABOUTWND_OK								OK
 

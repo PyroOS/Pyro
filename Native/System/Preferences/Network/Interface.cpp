@@ -27,9 +27,9 @@
 #include <netinet/in.h>
 #include <storage/file.h>
 
-#define CONFIG_FILE "/system/config/net.cfg"
-#define NETINIT_FILE "/system/network-init.sh"
-#define APPLY_CMD "/bin/bash /system/network-init.sh"
+#define CONFIG_FILE "/boot/System/config/net.cfg"
+#define NETINIT_FILE "/boot/System/scripts/network-init.sh"
+#define APPLY_CMD "/bin/sh /boot/System/scripts/network-init.sh"
 
 bool ParseIPAddress( const String &cSrc, IPAddress_t * pnDest )
 {

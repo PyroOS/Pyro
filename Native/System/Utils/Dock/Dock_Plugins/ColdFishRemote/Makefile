@@ -1,12 +1,9 @@
 CFLAGS   += -c -fexceptions -ffast-math
 CXXFLAGS += -c -fexceptions -ffast-math
 AOPTS   = -c
-APPBIN = /system/extensions/dock
 VPATH = ./
 OBJDIR	:= objs
 OBJS = ColdFishRemote.o
-
-CATALOGS = da de el es fr hu nl pl pt-br ru sv
 
 all :	$(OBJDIR) catalogs $(OBJS) $(OBJDIR)/ColdFishRemote.so
 
@@ -14,42 +11,51 @@ $(OBJDIR):
 	mkdir $(OBJDIR)
 
 $(OBJDIR)/ColdFishRemote.so: $(OBJS)
-	$(CXX) -shared -Xlinker "-soname=ColdFishRemote.so" $(OBJS) -lsyllable -o $(OBJDIR)/ColdFishRemote.so
+	$(CXX) -shared -Xlinker "-soname=ColdFishRemote.so" $(OBJS) -lpyro -o $(OBJDIR)/ColdFishRemote.so
 	rescopy -r $(OBJDIR)/ColdFishRemote.so images/*.png
-	rescopy -a $(OBJDIR)/ColdFishRemote.so resources/ColdFishRemote.catalog
-	for CATALOG in $(CATALOGS);do \
-		echo $$CATALOG; \
-		rescopy -a $(OBJDIR)/ColdFishRemote.so $$CATALOG/ColdFishRemote.catalog=resources/$$CATALOG/ColdFishRemote.catalog; \
+	rescopy -a ColdFishRemote.so resources/ColdFishRemote.catalog
+	for CATALOG in `ls -1 resources`;do \
+		if [ -d "resources/$$CATALOG" ] ; then \
+			echo $$CATALOG; \
+			rescopy -a ColdFishRemote.so $$CATALOG/ColdFishRemote.catalog=resources/$$CATALOG/ColdFishRemote.catalog; \
+		fi \
 	done;
 
+deps: $(OBJDIR)
+
+-include $(OBJDIR)/*.d
+
+# ----- ----- ----- ----- ----- ----- ----- ----- ----- -----
+
+dist: catalogs all inst clean
 
 catalogs:
 	cd resources; \
 	catcomp -c ColdFishRemote.cd; \
-	for CATALOG in $(CATALOGS);do \
-		echo $$CATALOG; \
-		cd $$CATALOG; \
-		catcomp -t ColdFishRemote.cd; \
-		cd ..; \
+	for CATALOG in `ls -1`;do \
+		if [ -d "$$CATALOG" ] ; then \
+			echo $$CATALOG; \
+			cd $$CATALOG; \
+			catcomp -t ColdFishRemote.cd; \
+			cd ..; \
+		fi \
 	done;
+	sync
 
-install:  $(OBJDIR)/ColdFishRemote.so
-	install -s $(OBJDIR)/ColdFishRemote.so $(APPBIN)/ColdFishRemote.so
-
-dist:  $(OBJDIR)/ColdFishRemote.so
-	install -s $(OBJDIR)/ColdFishRemote.so $(IMAGE)/$(APPBIN)/ColdFishRemote.so
-
-deps: $(OBJDIR)
+inst:
+	mkdir -p $(PYRO_BINARY_DESTINATION)/System/extensions/dock
+	cp -f $(OBJDIR)/ColdFishRemote.so $(PYRO_BINARY_DESTINATION)/System/extensions/dock/
+	addattrib $(PYRO_BINARY_DESTINATION)/System/extensions/dock/ColdFishRemote.so "CheckSum::MD5" `md5sum $(PYRO_BINARY_DESTINATION)/System/extensions/dock/ColdFishRemote.so | cut -c1-32`
+	sync
 
 clean: catalog-clean
-	rm -f $(OBJS) $(OBJDIR)/*.d $(OBJDIR)/ColdFishRemote.so
+	rm -rf $(OBJDIR)
+	rm -f $(OBJS)
+	sync
 
 catalog-clean:
-	-rm resources/ColdFishRemote.catalog resources/ColdFishRemote.h; \
-	for CATALOG in $(CATALOGS);do \
-		rm resources/$$CATALOG/ColdFishRemote.catalog; \
+	rm -f resources/ColdFishRemote.catalog resources/ColdFishRemote.h
+	for CATALOG in `ls -1 resources`;do \
+		rm -f resources/$$CATALOG/ColdFishRemote.catalog; \
 	done;
-
-
--include $(OBJDIR)/*.d
-
+	sync

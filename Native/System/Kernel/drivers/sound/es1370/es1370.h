@@ -4,20 +4,20 @@
 #include <posix/termios.h>
 #include <posix/signal.h>
 
-#include <atheos/kernel.h>
-#include <atheos/kdebug.h>
-#include <atheos/areas.h>
-#include <atheos/pci.h>
-#include <atheos/device.h>
-#include <atheos/semaphore.h>
-#include <atheos/irq.h>
-#include <atheos/isa_io.h>
-#include <atheos/dma.h>
-#include <atheos/udelay.h>
-#include <atheos/areas.h>
-#include <atheos/soundcard.h>
-#include <atheos/spinlock.h>
-#include <atheos/linux_compat.h>
+#include <pyro/kernel.h>
+#include <pyro/kdebug.h>
+#include <pyro/areas.h>
+#include <pyro/pci.h>
+#include <pyro/device.h>
+#include <pyro/semaphore.h>
+#include <pyro/irq.h>
+#include <pyro/isa_io.h>
+#include <pyro/dma.h>
+#include <pyro/udelay.h>
+#include <pyro/areas.h>
+#include <pyro/soundcard.h>
+#include <pyro/spinlock.h>
+#include <pyro/linux_compat.h>
 #include <macros.h>
 
 #ifndef PCI_VENDOR_ID_ENSONIQ

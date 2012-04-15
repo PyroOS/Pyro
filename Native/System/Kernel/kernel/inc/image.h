@@ -21,10 +21,10 @@
 #ifndef __F_ELF_H__
 #define __F_ELF_H__
 
-#include <atheos/filesystem.h>
-#include <atheos/elf.h>
-#include <atheos/image.h>
-#include <atheos/bootmodules.h>
+#include <pyro/filesystem.h>
+#include <pyro/elf.h>
+#include <pyro/image.h>
+#include <pyro/bootmodules.h>
 
 #include "typedefs.h"
 #include "../vfs/vfs.h"

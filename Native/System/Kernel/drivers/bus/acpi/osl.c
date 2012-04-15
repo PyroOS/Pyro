@@ -25,19 +25,19 @@
  *
  */
 
-#include <atheos/kernel.h>
-#include <atheos/semaphore.h>
-#include <atheos/kdebug.h>
-#include <atheos/irq.h>
-#include <atheos/isa_io.h>
-#include <atheos/device.h>
-#include <atheos/pci.h>
-#include <atheos/threads.h>
-#include <atheos/udelay.h>
-#include <atheos/spinlock.h>
-#include <atheos/list.h>
-#include <atheos/ctype.h>
-#include <atheos/acpi.h>
+#include <pyro/kernel.h>
+#include <pyro/semaphore.h>
+#include <pyro/kdebug.h>
+#include <pyro/irq.h>
+#include <pyro/isa_io.h>
+#include <pyro/device.h>
+#include <pyro/pci.h>
+#include <pyro/threads.h>
+#include <pyro/udelay.h>
+#include <pyro/spinlock.h>
+#include <pyro/list.h>
+#include <pyro/ctype.h>
+#include <pyro/acpi.h>
 #include <posix/signal.h>
 
 

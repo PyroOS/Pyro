@@ -27,7 +27,7 @@
  * by Keith Owens and Andrea Arcangeli
  */
 
-#include <atheos/spinlock.h>
+#include <pyro/spinlock.h>
 
 /*
  * SMP memory barriers.  Force strict CPU ordering of reads.  No write

@@ -1,4 +1,4 @@
-#include <atheos/ctype.h>
+#include <pyro/ctype.h>
 
 unsigned short __ctype_flags[] = {
 	0,			/* CTRL+?, 0xffff */

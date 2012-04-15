@@ -20,12 +20,12 @@
 #ifndef __ATHEOS_KERNEL_H__
 #define __ATHEOS_KERNEL_H__
 
-#include <atheos/kdebug.h>
-#include <atheos/stdlib.h>
-#include <atheos/schedule.h>
-#include <atheos/v86.h>
-#include <atheos/areas.h>
-#include <atheos/isa_io.h>
+#include <pyro/kdebug.h>
+#include <pyro/stdlib.h>
+#include <pyro/schedule.h>
+#include <pyro/v86.h>
+#include <pyro/areas.h>
+#include <pyro/isa_io.h>
 
 #ifdef __cplusplus
 extern "C" {

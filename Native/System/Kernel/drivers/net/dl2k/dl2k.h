@@ -13,12 +13,12 @@
 #ifndef __DL2K_H__
 #define __DL2K_H__
 
-#include <atheos/kernel.h>
-#include <atheos/bitops.h>
-#include <atheos/irq.h>
-#include <atheos/pci.h>
-#include <atheos/spinlock.h>
-#include <atheos/isa_io.h>
+#include <pyro/kernel.h>
+#include <pyro/bitops.h>
+#include <pyro/irq.h>
+#include <pyro/pci.h>
+#include <pyro/spinlock.h>
+#include <pyro/isa_io.h>
 #include <net/net_device.h>
 #include <net/if_ether.h>
 #include <net/packet.h>

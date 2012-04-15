@@ -14,7 +14,7 @@
 /* GNU Library General Public License for more details.                      */
 
 #if !defined __F_ATHEOS_TYPES_H__ && !defined __F_SYLLABLE_PTHREAD_H_
-	#error "Never include <atheos/pthreadtypes.h> directly; use <atheos/types.h> instead."
+	#error "Never include <pyro/pthreadtypes.h> directly; use <pyro/types.h> instead."
 #endif
 
 #ifndef __F_SYLLABLE_PTHREADTYPES_H_
@@ -24,7 +24,7 @@
 extern "C"{
 #endif
 
-#include <atheos/semaphore.h>	/* Semaphores and mutexes */
+#include <pyro/semaphore.h>	/* Semaphores and mutexes */
 #include <sched.h>				/* struct sched_param */
 
 /* Keep track of the all the data regarding the threads cancellation status */

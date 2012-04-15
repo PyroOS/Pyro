@@ -20,7 +20,7 @@
  */
 
 #include <gui/separator.h>
-#include <atheos/kernel.h>
+#include <pyro/kernel.h>
 #include <util/settings.h>
 #include <media/server.h>
 #include <media/format.h>

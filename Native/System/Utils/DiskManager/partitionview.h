@@ -1,7 +1,7 @@
 #ifndef __F_PARTITIONVIEW_H__
 #define __F_PARTITIONVIEW_H__
 
-#include <atheos/device.h>
+#include <pyro/device.h>
 
 #include <gui/window.h>
 #include <gui/frameview.h>

@@ -18,7 +18,7 @@
  */
 
 #include <stdio.h>
-#include <atheos/time.h>
+#include <pyro/time.h>
 #include <gui/window.h>
 
 #include "main.h"

@@ -16,7 +16,7 @@
 
 #include <stdio.h>
 #include <fstream>
-#include <atheos/image.h>
+#include <pyro/image.h>
 #include <util/resources.h>
 #include <util/application.h>
 #include <util/message.h>
@@ -278,7 +278,7 @@ void CMainWindow::Apply()
     	nTimeZone = 0;
 
   // Find out current file
-  std::string strFile = std::string("ln /system/indexes/share/zoneinfo");
+  std::string strFile = std::string("ln /boot/System/nix/share/zoneinfo");
   strFile += *m_pcstrFile[nTimeZone];
   strFile += std::string(" /etc/localtime -s");
   system(strFile.c_str());

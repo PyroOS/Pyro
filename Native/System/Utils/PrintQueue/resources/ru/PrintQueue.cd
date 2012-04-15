@@ -41,7 +41,7 @@ MSG_MAINWND_JOBSIZE_MB							%d МБ
 MSG_MAINWND_JOBSIZE_GB							%d ГБ
 
 MSG_ABOUTWND_TITLE=1000							Очередь печати
-MSG_ABOUTWND_TEXT1								Управление очередью печати в Syllable 
+MSG_ABOUTWND_TEXT1								Управление очередью печати в Pyro 
 MSG_ABOUTWND_TEXT2								Используется CUPS версии %d.%d.%d\n
 MSG_ABOUTWND_CLOSE								_Закрыть
 

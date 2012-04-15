@@ -25,8 +25,8 @@
 #include <media/manager.h>
 #include <util/messenger.h>
 #include <util/message.h>
-#include <atheos/msgport.h>
-#include <atheos/areas.h>
+#include <pyro/msgport.h>
+#include <pyro/areas.h>
 #include <iostream>
 
 #include "prefs.h"

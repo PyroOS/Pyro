@@ -26,7 +26,7 @@
 #include <util/handler.h>
 #include <util/messenger.h>
 #include <gui/guidefines.h>
-#include <atheos/semaphore.h>
+#include <pyro/semaphore.h>
 
 #define P_O_DEBUG		1
 

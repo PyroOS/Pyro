@@ -20,8 +20,8 @@
 #ifndef _DOCK_H_
 #define _DOCK_H_
 
-#include <atheos/areas.h>
-#include <atheos/kernel.h>
+#include <pyro/areas.h>
+#include <pyro/kernel.h>
 #include <gui/window.h>
 #include <gui/view.h>
 #include <gui/desktop.h>
@@ -195,67 +195,3 @@ private:
 };
 
 #endif
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

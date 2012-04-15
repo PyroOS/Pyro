@@ -7,7 +7,7 @@
 int main( int argc, char **argv )
 {
 	char *pzProgram;
-	char *pzAppserver = "/system/appserver", *pzASName;
+	char *pzAppserver = "/boot/System/servers/appserver", *pzASName;
 	char *pzBootMode = "normal";
 	int c;
 
@@ -43,21 +43,21 @@ int main( int argc, char **argv )
 	else
 		pzASName = pzAppserver;
 	
-	symlink( "boot", "/atheos" );
-	symlink( "boot/system", "/system" );
-	symlink( "boot/bin", "/bin" );
-	symlink( "boot/usr", "/usr" );
-	symlink( "boot/etc", "/etc" );
-	symlink( "boot/home", "/home" );
-	symlink( "boot/var", "/var" );
-	symlink( "boot/tmp", "/tmp" );
+	symlink( "boot/Home", "/home" );
+	symlink( "boot/System", "/System" );
+	symlink( "boot/System/config/etc", "/etc" );
+	symlink( "boot/System/temp", "/tmp" );
+	symlink( "boot/System/log", "/log" );
+	symlink( "boot/System/nix", "/usr" );
+	symlink( "boot/System/nix/var", "/var" );
+	symlink( "boot/System/nix/bin", "/bin" );
 
 	if( fork() == 0 ) {
 		execl( pzAppserver, pzASName, NULL );
 		exit( EXIT_FAILURE );
 	}
 	
-	execl( "/system/init.sh", "init.sh", pzBootMode, NULL );
+	execl( "/boot/System/scripts/init.sh", "init.sh", pzBootMode, NULL );
 	printf( "Failed to run init script!\n" );
 	
 	return( EXIT_FAILURE );

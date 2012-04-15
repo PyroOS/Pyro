@@ -34,7 +34,7 @@
 
 #include <appserver/protocol.h>
 #include <util/message.h>
-#include <atheos/kernel.h>
+#include <pyro/kernel.h>
 #include <sys/ioctl.h>
 
 using namespace os;

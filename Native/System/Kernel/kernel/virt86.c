@@ -20,11 +20,11 @@
 
 
 #include <posix/errno.h>
-#include <atheos/types.h>
-#include <atheos/kernel.h>
-#include <atheos/syscall.h>
-#include <atheos/irq.h>
-#include <atheos/smp.h>
+#include <pyro/types.h>
+#include <pyro/kernel.h>
+#include <pyro/syscall.h>
+#include <pyro/irq.h>
+#include <pyro/smp.h>
 
 #include <macros.h>
 

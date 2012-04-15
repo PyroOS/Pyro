@@ -9,7 +9,7 @@ App::App():os::Application( "application/x-vnd.syllable-login_application" )
 {
 	SetCatalog("dlogin.catalog");
 
-	mkdir("/system/icons/users",S_IRWXU | S_IRWXG | S_IRWXO);
+	mkdir("/boot/System/icons/users",S_IRWXU | S_IRWXG | S_IRWXO);
 	SetPublic(true);
 
 	IPoint cPoint = GetResolution();
@@ -100,17 +100,3 @@ void App::Authorize(const char* pzLoginName, const char* pzPassword )
         pzLoginName = NULL;
     }
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-

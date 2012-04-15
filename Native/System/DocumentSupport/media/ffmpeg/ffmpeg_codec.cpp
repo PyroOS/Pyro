@@ -18,7 +18,7 @@
  */
 
 #include <media/codec.h>
-#include <atheos/kernel.h>
+#include <pyro/kernel.h>
 #include <iostream>
 
 #define FFMPEG_CACHE_SIZE 256 * 1024

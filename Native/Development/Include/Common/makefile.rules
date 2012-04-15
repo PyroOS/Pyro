@@ -14,6 +14,9 @@
 # initiated with all the elements from $(OBJS) with all ".o" prefixes
 # replaced with ".d".
 
+# This is a hack to disable debug output
+CFLAGS += -DNDEBUG
+CXXFLAGS += -DNDEBUG
 
 OBJS	:= $(addprefix $(OBJDIR)/,$(OBJS))
 DEPS	:= $(addsuffix .d, $(foreach name, $(OBJS), $(basename $(name))))

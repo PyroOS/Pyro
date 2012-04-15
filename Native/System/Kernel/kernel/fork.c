@@ -21,11 +21,11 @@
 #include <posix/errno.h>
 #include <posix/select.h>
 
-#include <atheos/kernel.h>
-#include <atheos/semaphore.h>
-#include <atheos/msgport.h>
-#include <atheos/spinlock.h>
-#include <atheos/areas.h>
+#include <pyro/kernel.h>
+#include <pyro/semaphore.h>
+#include <pyro/msgport.h>
+#include <pyro/spinlock.h>
+#include <pyro/areas.h>
 
 #include <macros.h>
 

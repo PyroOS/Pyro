@@ -40,13 +40,13 @@ extern "C" {
 }
 #endif
 
-#include <atheos/types.h>
-#include <atheos/kernel.h>
-#include <atheos/usb_defs.h>
-#include <atheos/atomic.h>
-#include <atheos/semaphore.h>
-#include <atheos/spinlock.h>
-#include <atheos/list.h>
+#include <pyro/types.h>
+#include <pyro/kernel.h>
+#include <pyro/usb_defs.h>
+#include <pyro/atomic.h>
+#include <pyro/semaphore.h>
+#include <pyro/spinlock.h>
+#include <pyro/list.h>
 
 /* One USB packet */
 

@@ -32,11 +32,11 @@ extern "C" {
 }
 #endif
 
-#include <atheos/types.h>
-#include <atheos/kernel.h>
-#include <atheos/semaphore.h>
-#include <atheos/atomic.h>
-#include <atheos/cdrom.h>
+#include <pyro/types.h>
+#include <pyro/kernel.h>
+#include <pyro/semaphore.h>
+#include <pyro/atomic.h>
+#include <pyro/cdrom.h>
 
 /*
  *  SCSI command sets

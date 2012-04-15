@@ -2,9 +2,8 @@
 
 COPTS = -c -fexceptions -ffast-math
 
-CATALOGS = da de el es fr hu nl ru sl sv
+EXE = desktop
 
-APPBIN = /system/bin
 OBJS = main.o application.o desktop.o
 
 OBJDIR	:= objs
@@ -23,47 +22,68 @@ $(OBJDIR)/%.o : %.s
 	@echo Assembling : $<
 	@$(CC) $(COPTS) -x assembler-with-cpp $< -o $@
 
-all : objs catalogs desktop
+all : objs desktop
 
 objs:
 	@mkdir -p objs
 
 desktop: $(OBJS)
 	@echo Linking...
-	@$(CXX) $(OBJS) -o desktop -lsyllable
+	@$(CXX) $(OBJS) -o desktop -lpyro
 	@echo Adding resources...
 	@rescopy desktop -r icon48x48.png
-	@rescopy -a desktop resources/desktop.catalog
-	for CATALOG in $(CATALOGS);do \
-		echo $$CATALOG; \
-		rescopy -a desktop $$CATALOG/desktop.catalog=resources/$$CATALOG/desktop.catalog; \
+	rescopy -a $(EXE) resources/$(EXE).catalog
+	for CATALOG in `ls -1 resources`;do \
+		if [ -d "resources/$$CATALOG" ] ; then \
+			echo $$CATALOG; \
+			rescopy -a $(EXE) $$CATALOG/$(EXE).catalog=resources/$$CATALOG/$(EXE).catalog; \
+		fi \
 	done;
+
+# ----- ----- ----- ----- ----- ----- ----- ----- ----- -----
+
+dist: catalogs all inst web clean
 
 catalogs:
 	cd resources; \
-	catcomp -c desktop.cd; \
-	for CATALOG in $(CATALOGS);do \
-		echo $$CATALOG; \
-		cd $$CATALOG; \
-		catcomp -t desktop.cd; \
-		cd ..; \
+	catcomp -c $(EXE).cd; \
+	for CATALOG in `ls -1`;do \
+		if [ -d "$$CATALOG" ] ; then \
+			echo $$CATALOG; \
+			cd $$CATALOG; \
+			catcomp -t $(EXE).cd; \
+			cd ..; \
+		fi \
 	done;
+	sync
 
-clean:
-	@echo Cleaning...
-	@rm -f $(OBJDIR)/*
-	@rm -f desktop
-	@rm resources/desktop.catalog resources/desktop.h; \
-	for CATALOG in $(CATALOGS);do \
-		rm resources/$$CATALOG/desktop.catalog; \
+inst:
+	mkdir -p $(PYRO_BINARY_DESTINATION)/System/binary
+	cp -f $(EXE) $(PYRO_BINARY_DESTINATION)/System/binary/
+	addattrib $(PYRO_BINARY_DESTINATION)/System/binary/$(EXE) "CheckSum::MD5" `md5sum $(PYRO_BINARY_DESTINATION)/System/binary/$(EXE) | cut -c1-32`
+	sync
+
+web:
+	mkdir -p $(PYRO_BINARY_DESTINATION)Web/Languages/LIST
+	mkdir -p $(PYRO_BINARY_DESTINATION)Web/Languages/Utils/$(EXE)
+	cd resources; \
+	for CATALOG in `ls -1`;do \
+		if [ -d "$$CATALOG" ] ; then \
+			touch $(PYRO_BINARY_DESTINATION)Web/Languages/LIST/$$CATALOG; \
+			touch $(PYRO_BINARY_DESTINATION)Web/Languages/Utils/$(EXE)/int; \
+			touch $(PYRO_BINARY_DESTINATION)Web/Languages/Utils/$(EXE)/$$CATALOG; \
+		fi \
 	done;
+	sync
 
-deps:
+clean: catalog-clean
+	rm -rf $(OBJDIR)
+	rm -f $(EXE)
+	sync
 
-dist: all
-	@echo Distribution...
-	@cp desktop $(IMAGE)/system/bin/desktop
-
-install: all
-	@echo Installing...
-	@cp desktop /system/bin/desktop
+catalog-clean:
+	rm -f resources/$(EXE).catalog resources/$(EXE).h
+	for CATALOG in `ls -1 resources`;do \
+		rm -f resources/$$CATALOG/$(EXE).catalog; \
+	done;
+	sync

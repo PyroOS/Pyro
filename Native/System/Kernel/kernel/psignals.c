@@ -22,15 +22,15 @@
 #include <posix/wait.h>
 #include <posix/time.h>
 
-#include <atheos/types.h>
-#include <atheos/sigcontext.h>
-#include <atheos/kernel.h>
-#include <atheos/threads.h>
-#include <atheos/syscall.h>
-#include <atheos/spinlock.h>
-#include <atheos/kdebug.h>
-#include <atheos/time.h>
-#include <atheos/strace.h>
+#include <pyro/types.h>
+#include <pyro/sigcontext.h>
+#include <pyro/kernel.h>
+#include <pyro/threads.h>
+#include <pyro/syscall.h>
+#include <pyro/spinlock.h>
+#include <pyro/kdebug.h>
+#include <pyro/time.h>
+#include <pyro/strace.h>
 
 #include <macros.h>
 

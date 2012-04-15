@@ -1,4 +1,4 @@
-COPTS   = -I$(TOP)/src $(shell freetype-config --cflags) -O2 -c -Wall
+COPTS   = -I$(TOP)/src $(shell freetype-config --cflags) -c
 
 DRIVERNAME=sylvnc
 
@@ -15,23 +15,21 @@ objs:
 	mkdir objs
 
 $(OBJDIR)/$(DRIVERNAME): $(OBJS)
-	$(CXX) -plugin $(OBJS) -o $(OBJDIR)/$(DRIVERNAME) -lvncserver -ljpeg -lsyllable 
+	$(CXX) -plugin $(OBJS) -o $(OBJDIR)/$(DRIVERNAME) -lvncserver -ljpeg -lpyro
 
 $(OBJDIR)/$(DRIVERNAME).o: $(DRIVERNAME).cpp $(DRIVERNAME).h
 	$(CC) $(COPTS) $(DRIVERNAME).cpp -o $@
 
+# ----- ----- ----- ----- ----- ----- ----- ----- ----- -----
 
-deps:
+dist: $(DRIVER) inst clean
 
-install: $(DRIVER)
-	cp -f $(DRIVER) /system/drivers/appserver/video/
-
-dist: $(DRIVER)
-	cp -f $(DRIVER) $(DIST_DIR)/atheos/sys/drivers/appserver/video/
+inst:
+	mkdir -p $(PYRO_BINARY_DESTINATION)Native/Extra/System/SylVNC/System/drivers/appserver/video
+	cp -pf $(OBJDIR)/$(DRIVERNAME) $(PYRO_BINARY_DESTINATION)Native/Extra/System/SylVNC/System/drivers/appserver/video/sylvnc_video
+	addattrib $(PYRO_BINARY_DESTINATION)Native/Extra/System/SylVNC/System/drivers/appserver/video/sylvnc_video "CheckSum::MD5" `md5sum $(PYRO_BINARY_DESTINATION)Native/Extra/System/SylVNC/System/drivers/appserver/video/sylvnc_video | cut -c1-32`
+	sync
 
 clean:
-	-rm $(OBJS) $(OBJDIR)/$(DRIVERNAME)
-
-#install:
-#	cp -f $(OBJDIR)/$(DRIVERNAME) /system/drivers/appserver/video/
-
+	rm -rf $(OBJDIR)
+	sync

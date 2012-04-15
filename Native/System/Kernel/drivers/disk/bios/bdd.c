@@ -22,12 +22,12 @@
 #include <posix/fcntl.h>
 #include <posix/dirent.h>
 
-#include <atheos/kernel.h>
-#include <atheos/device.h>
-#include <atheos/timer.h>
-#include <atheos/semaphore.h>
-#include <atheos/isa_io.h>
-#include <atheos/bootmodules.h>
+#include <pyro/kernel.h>
+#include <pyro/device.h>
+#include <pyro/timer.h>
+#include <pyro/semaphore.h>
+#include <pyro/isa_io.h>
+#include <pyro/bootmodules.h>
 
 
 #include <macros.h>

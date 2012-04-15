@@ -108,7 +108,7 @@ Registrar::~Registrar()
 void Registrar::SaveDatabase( os::String zUser )
 {
 	
-	String zPath = "/home/";
+	String zPath = "/boot/Home/";
 	zPath += zUser + String( "/Settings" );
 	struct stat sStat;
 	if( lstat( zPath.c_str(), &sStat ) < 0 )
@@ -187,7 +187,7 @@ void Registrar::LoadTypes( os::String zUser, port_id hPort, int64 nProcess )
 	
 	m_cUsers.push_back( cUser );
 	
-	String zPath = "/home/";
+	String zPath = "/boot/Home/";
 	zPath += zUser + String( "/Settings/registrar" );
 	File* pcFile = new File();
 	if( pcFile->SetTo( zPath ) < 0 )
@@ -930,7 +930,7 @@ void Registrar::GetTypeAndIcon( Message* pcMessage )
 		/* Defaults */
 		zName = "Invalid link";
 		zMimeType = "application/x-broken-link";
-		zIcon = "/system/icons/file.png";
+		zIcon = "/boot/System/icons/file.png";
 		
 		try
 		{
@@ -948,7 +948,7 @@ void Registrar::GetTypeAndIcon( Message* pcMessage )
 					{
 						/* Link to the root directory */
 						zName = "Mounted disks";
-						zIcon = "/system/icons/disk.png";
+						zIcon = "/boot/System/icons/disk.png";
 						zMimeType = "application/x-disks";
 						cReply.AddString( "mimetype", zMimeType );
 						cReply.AddString( "identifier", zName );
@@ -989,7 +989,7 @@ void Registrar::GetTypeAndIcon( Message* pcMessage )
 		if( !bLink )
 			zName = "Directory";
 		zMimeType = "application/x-directory";
-		zIcon = "/system/icons/folder.png";
+		zIcon = "/boot/System/icons/folder.png";
 		goto no_database;
 	} else if( !bBrokenLink && ( ( ( cNode.GetMode() & ( S_IXUSR|S_IXGRP|S_IXOTH ) && zAttributeMimeType == "" ) ) 
 		|| zAttributeMimeType == "application/x-executable" ) )
@@ -999,14 +999,14 @@ void Registrar::GetTypeAndIcon( Message* pcMessage )
 		if( !bLink )
 			zName = "Executable";
 		zMimeType = "application/x-executable";
-		zIcon = "/system/icons/executable.png";
+		zIcon = "/boot/System/icons/executable.png";
 		goto no_database;
 	} else if( !bBrokenLink )
 	{
 		if( !bLink )
 			zName = "Unknown file";
 		zMimeType = "application/x-file";
-		zIcon = "/system/icons/file.png";
+		zIcon = "/boot/System/icons/file.png";
 		if( !( zAttributeMimeType == "" ) )
 		{
 			/* Use attribute */
@@ -1355,7 +1355,7 @@ void Registrar::UpdateAppList( RegistrarUser* psUser, bool bForce )
 	/* We would like to know the users primary language, so we can get the application-names */
 	os::String cPrimaryLanguage;
 	try {
-		os::Settings* pcSettings = new os::Settings( new os::File( os::String( "/home/" ) + psUser->m_zUser + os::String( "/Settings/System/Locale" ) ) );
+		os::Settings* pcSettings = new os::Settings( new os::File( os::String( "/boot/Home/" ) + psUser->m_zUser + os::String( "/Settings/System/Locale" ) ) );
 		pcSettings->Load();
 		cPrimaryLanguage = pcSettings->GetString("LANG","",0);
 		delete( pcSettings );
@@ -1539,6 +1539,3 @@ int main()
 		pcServer->Start();
 	}
 }
-
-
-

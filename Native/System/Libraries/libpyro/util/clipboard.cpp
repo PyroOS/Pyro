@@ -19,8 +19,8 @@
  *  MA 02111-1307, USA
  */
 
-#include <atheos/kernel.h>
-#include <atheos/msgport.h>
+#include <pyro/kernel.h>
+#include <pyro/msgport.h>
 
 #include <appserver/protocol.h>
 

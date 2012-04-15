@@ -10,11 +10,11 @@
 #include <string.h>
 #include <stdlib.h>
 #include <netinet/in.h>
-#include <atheos/kernel.h>
-#include <atheos/time.h>
+#include <pyro/kernel.h>
+#include <pyro/time.h>
 #include <sys/uio.h>
 
-#include "../../sys/kernel/fs/nfs/nfs.h"
+#include "../../Kernel/fs/anfs/anfs.h"
 
 #define MAX_PACKET_SIZE 1518
 

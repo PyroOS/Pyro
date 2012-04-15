@@ -44,7 +44,7 @@ MSG_PROTOCOL_UNKNOWN							Неизвестно
 MSG_PROTOCOL_HPJETDIRECT						HP JetDirect
 
 MSG_ABOUTWND_TITLE=1000							Принтеры
-MSG_ABOUTWND_TEXT1								Менеджер принтеров Syllable
+MSG_ABOUTWND_TEXT1								Менеджер принтеров Pyro
 MSG_ABOUTWND_TEXT2								Использ. CUPS версии %d.%d.%d\n
 MSG_ABOUTWND_CLOSE								_Закрыть
 
@@ -58,7 +58,7 @@ MSG_ALRTWND_SAVE_TEXT							Настройка CUPS не удалась.  Ваш
 MSG_ALRTWND_SAVE_CLOSE							_Закрыть
 
 MSG_ALRTWND_INSERTCD_TITLE=1300					Вставить CD
-MSG_ALRTWND_INSERTCD_TEXT						Пожалуйста, вставьте и смонтируйте установочный диск Syllable.
+MSG_ALRTWND_INSERTCD_TEXT						Пожалуйста, вставьте и смонтируйте установочный диск Pyro.
 MSG_ALRTWND_INSERTCD_OK							ОК
 MSG_ALRTWND_INSERTCD_CANCEL						Отмена
 

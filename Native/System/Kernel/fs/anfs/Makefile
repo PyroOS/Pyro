@@ -1,14 +1,13 @@
 CFLAGS   += -kernel -fno-PIC -c -Wno-multichar
 AFLAGS   = -c
 
-C_INCLUDE_PATH=$(ATHEOS_INCLUDE_PATH)
+C_INCLUDE_PATH=$(PYRO_INCLUDE)
 
-FS		:= network-fs
-OBJS	:= nfs.o gcc34_memcpy.o
+FS		:= anfs
+OBJS	:= anfs.o gcc34_memcpy.o
 
 OBJDIR	:= objs
 OBJS	:= $(addprefix $(OBJDIR)/,$(OBJS))
-
 
 #
 #	rules
@@ -26,8 +25,6 @@ $(OBJDIR)/%.o : %.s
 $(OBJDIR)/%.o : %.S
 	$(CC) $(CFLAGS) -x assembler-with-cpp $< -o $@
 
-
-
 all :	objs $(OBJDIR)/$(FS)
 
 objs:
@@ -36,10 +33,16 @@ objs:
 $(OBJDIR)/$(FS): $(OBJS) Makefile
 	$(CC) -kernel $(OBJS) -o $(OBJDIR)/$(FS)
 
-install: all
-	cp -f $(OBJDIR)/$(FS) $(IMAGE)/system/drivers/fs/
+# ----- ----- ----- ----- ----- ----- ----- ----- ----- -----
 
-dist: install
+dist: all inst clean
+
+inst:
+	mkdir -p $(PYRO_BINARY_DESTINATION)/System/drivers/fs
+	cp -f $(OBJDIR)/$(FS) $(PYRO_BINARY_DESTINATION)/System/drivers/fs/$(FS)
+	addattrib $(PYRO_BINARY_DESTINATION)/System/drivers/fs/$(FS) "CheckSum::MD5" `md5sum $(PYRO_BINARY_DESTINATION)/System/drivers/fs/$(FS) | cut -c1-32`
+	sync
 
 clean:
-	rm -f $(OBJS) $(OBJDIR)/$(FS)
+	rm -rf $(OBJDIR)
+	sync

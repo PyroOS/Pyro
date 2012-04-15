@@ -17,17 +17,17 @@
 
 static const char *version = "pcnet32.c:v1.25kf 26.9.1999 tsbogend@alpha.franken.de\n";
 
-#include <atheos/kernel.h>
-#include <atheos/irq.h>
-#include <atheos/isa_io.h>
-#include <atheos/time.h>
-#include <atheos/pci.h>
-#include <atheos/semaphore.h>
-#include <atheos/spinlock.h>
-#include <atheos/ctype.h>
-#include <atheos/device.h>
-#include <atheos/bitops.h>
-#include <atheos/linux_compat.h>
+#include <pyro/kernel.h>
+#include <pyro/irq.h>
+#include <pyro/isa_io.h>
+#include <pyro/time.h>
+#include <pyro/pci.h>
+#include <pyro/semaphore.h>
+#include <pyro/spinlock.h>
+#include <pyro/ctype.h>
+#include <pyro/device.h>
+#include <pyro/bitops.h>
+#include <pyro/linux_compat.h>
 
 #include <posix/unistd.h>
 #include <posix/errno.h>

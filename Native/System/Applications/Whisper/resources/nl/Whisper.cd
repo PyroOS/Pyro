@@ -217,7 +217,7 @@ MSG_STATUS_FAILEDTOSENDMESSAGE							Bericht %3i versturen mislukt.
 MSG_STATUS_MESSAGESENT									Bericht %3i verstuurd.
 
 MSG_ABOUTWND_TITLE=10000								Over Whisper
-MSG_ABOUTWND_TEXT_LINEONE								Whisper, een elektronische-postprogramma voor Syllable
+MSG_ABOUTWND_TEXT_LINEONE								Whisper, een elektronische-postprogramma voor Pyro
 MSG_ABOUTWND_TEXT_VERSION								Versie
 MSG_ABOUTWND_TEXT_WEBSITEONE							Zie
 MSG_ABOUTWND_TEXT_WEBSITETWO							voor nieuws en informatie.

@@ -26,7 +26,7 @@
 #include "messages.h"
 #include "version.h"
 #include "icons.h"
-#include "resources/aedit.h"
+#include "resources/AEdit.h"
 #include "buffer.h"
 #include "editview.h"
 #include <fstream.h>

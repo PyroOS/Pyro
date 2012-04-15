@@ -8,7 +8,7 @@ $(OBJDIR):
 	mkdir -p $(OBJDIR)
 
 clean:
-	-rm $(SETTINGS_OBJS)
+	-rm -f $(SETTINGS_OBJS)
 
 $(OBJDIR)/%.o : %.cpp
 	@echo Compiling : $<

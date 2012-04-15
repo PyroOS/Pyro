@@ -37,7 +37,7 @@ AppserverConfig::AppserverConfig()
 {
 	s_pcInstance = this;
 
-	m_cKeymapPath = "/system/keymaps/American";
+	m_cKeymapPath = "/boot/System/keymaps/American";
 	m_nKeyDelay = 300LL;
 	m_nKeyRepeat = 30LL;
 	m_nDoubleClickDelay = 500000LL;
@@ -720,7 +720,7 @@ int AppserverConfig::LoadConfig( FILE *hFile, bool bActivateConfig )
 
 int AppserverConfig::SaveConfig()
 {
-	FILE *hFile = fopen( "/system/config/appserver.new", "w" );
+	FILE *hFile = fopen( "/boot/System/config/appserver.new", "w" );
 
 	for( int i = 0; i < 32; ++i )
 	{
@@ -813,7 +813,7 @@ int AppserverConfig::SaveConfig()
 
 	fclose( hFile );
 
-	rename( "/system/config/appserver.new", "/system/config/appserver" );
+	rename( "/boot/System/config/appserver.new", "/boot/System/config/appserver" );
 	m_bDirty = false;
 	return ( 0 );
 }

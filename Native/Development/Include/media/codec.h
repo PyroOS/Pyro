@@ -22,7 +22,7 @@
 
 #include <gui/view.h>
 #include <util/resource.h>
-#include <atheos/types.h>
+#include <pyro/types.h>
 #include <util/string.h>
 #include <media/packet.h>
 #include <media/format.h>

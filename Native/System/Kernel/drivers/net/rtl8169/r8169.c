@@ -51,18 +51,18 @@ VERSION 2.2LK	<2005/01/25>
 	- Merge of Realtek's version 2.2 (new phy)
  */
 
-#include <atheos/kernel.h>
-#include <atheos/kdebug.h>
-#include <atheos/irq.h>
-#include <atheos/udelay.h>
-#include <atheos/timer.h>
-#include <atheos/pci.h>
-#include <atheos/semaphore.h>
-#include <atheos/spinlock.h>
-#include <atheos/ctype.h>
-#include <atheos/device.h>
-#include <atheos/time.h>
-#include <atheos/bitops.h>
+#include <pyro/kernel.h>
+#include <pyro/kdebug.h>
+#include <pyro/irq.h>
+#include <pyro/udelay.h>
+#include <pyro/timer.h>
+#include <pyro/pci.h>
+#include <pyro/semaphore.h>
+#include <pyro/spinlock.h>
+#include <pyro/ctype.h>
+#include <pyro/device.h>
+#include <pyro/time.h>
+#include <pyro/bitops.h>
 
 #include <posix/unistd.h>
 #include <posix/errno.h>
@@ -74,7 +74,7 @@ VERSION 2.2LK	<2005/01/25>
 #include <net/sockios.h>
 
 #define NO_DEBUG_STUBS 1
-#include <atheos/linux_compat.h>
+#include <pyro/linux_compat.h>
 
 #if 0
  #undef kerndbg

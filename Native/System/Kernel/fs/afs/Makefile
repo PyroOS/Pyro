@@ -1,10 +1,9 @@
 CFLAGS   += -kernel -D__LOADABLE__ -fno-PIC -c -fno-strict-aliasing
 AFLAGS   = -c
 
-C_INCLUDE_PATH=$(ATHEOS_INCLUDE_PATH)
+C_INCLUDE_PATH=$(PYRO_INCLUDE)
 
 OBJS := afs.o balloc.o afs_inode.o attribs.o index.o journal.o stream.o btree.o bt_delete.o
-
 
 OBJDIR	:= objs
 OBJS	:= $(addprefix $(OBJDIR)/,$(OBJS))
@@ -26,9 +25,6 @@ $(OBJDIR)/%.o : %.s
 $(OBJDIR)/%.o : %.S
 	$(CC) $(CFLAGS) -x assembler-with-cpp $< -o $@
 
-
-
-
 all : objs $(OBJDIR)/$(FS)
 
 objs:
@@ -37,13 +33,16 @@ objs:
 $(OBJDIR)/$(FS): $(OBJS) Makefile
 	$(CC) -kernel $(OBJS) -o $(OBJDIR)/$(FS)
 
-deps:
+# ----- ----- ----- ----- ----- ----- ----- ----- ----- -----
 
-install: all
-	cp -f $(OBJDIR)/$(FS) $(IMAGE)/system/drivers/fs/$(FS)
+dist: all inst clean
 
-dist: install
+inst:
+	mkdir -p $(PYRO_BINARY_DESTINATION)/System/drivers/fs
+	cp -f $(OBJDIR)/$(FS) $(PYRO_BINARY_DESTINATION)/System/drivers/fs/$(FS)
+	addattrib $(PYRO_BINARY_DESTINATION)/System/drivers/fs/$(FS) "CheckSum::MD5" `md5sum $(PYRO_BINARY_DESTINATION)/System/drivers/fs/$(FS) | cut -c1-32`
+	sync
 
 clean:
-	rm -f $(OBJS)
-
+	rm -rf $(OBJDIR)
+	sync

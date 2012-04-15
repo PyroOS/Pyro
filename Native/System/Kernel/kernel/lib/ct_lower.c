@@ -1,4 +1,4 @@
-#include <atheos/ctype.h>
+#include <pyro/ctype.h>
 
 unsigned char __ctype_tolower[] = {
 	0x00,

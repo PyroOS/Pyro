@@ -19,9 +19,9 @@
  */
 
 #include <posix/errno.h>
-#include <atheos/types.h>
-#include <atheos/kernel.h>
-#include <atheos/semaphore.h>
+#include <pyro/types.h>
+#include <pyro/kernel.h>
+#include <pyro/semaphore.h>
 
 #include <macros.h>
 

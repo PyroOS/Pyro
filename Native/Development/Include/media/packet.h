@@ -20,7 +20,7 @@
 #ifndef __F_MEDIA_PACKET_H_
 #define __F_MEDIA_PACKET_H_
 
-#include <atheos/types.h>
+#include <pyro/types.h>
 
 namespace os
 {

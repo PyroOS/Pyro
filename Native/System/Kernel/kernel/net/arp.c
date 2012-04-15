@@ -21,11 +21,11 @@
 #include <posix/errno.h>
 #include <posix/unistd.h>
 
-#include <atheos/kernel.h>
-#include <atheos/time.h>
-#include <atheos/semaphore.h>
+#include <pyro/kernel.h>
+#include <pyro/time.h>
+#include <pyro/semaphore.h>
 
-#include <atheos/socket.h>
+#include <pyro/socket.h>
 #include <net/net.h>
 #include <net/ip.h>
 #include <net/if_ether.h>

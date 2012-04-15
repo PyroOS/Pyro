@@ -17,11 +17,11 @@
  *  Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  */
 
-#include <atheos/types.h>
-#include <atheos/kernel.h>
-#include <atheos/areas.h>
-#include <atheos/irq.h>
-#include <atheos/ptrace.h>
+#include <pyro/types.h>
+#include <pyro/kernel.h>
+#include <pyro/areas.h>
+#include <pyro/irq.h>
+#include <pyro/ptrace.h>
 #include <posix/errno.h>
 #include <posix/signal.h>
 #include <macros.h>

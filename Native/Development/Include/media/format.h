@@ -20,7 +20,7 @@
 #ifndef __F_MEDIA_FORMAT_H_
 #define __F_MEDIA_FORMAT_H_
 
-#include <atheos/types.h>
+#include <pyro/types.h>
 #include <gui/guidefines.h>
 #include <util/string.h>
 

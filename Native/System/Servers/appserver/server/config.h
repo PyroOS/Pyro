@@ -24,7 +24,7 @@
 #include <string>
 #include <map>
 
-#include <atheos/types.h>
+#include <pyro/types.h>
 #include <gui/view.h>
 #include <gui/font.h>
 #include <util/message.h>

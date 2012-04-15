@@ -23,7 +23,7 @@
 
 #include "typecodes.h"
 #include <sys/types.h>
-#include <atheos/types.h>
+#include <pyro/types.h>
 
 namespace os
 {

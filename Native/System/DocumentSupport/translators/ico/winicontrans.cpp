@@ -2,8 +2,8 @@
 #include <unistd.h>
 #include <setjmp.h>
 
-#include <atheos/types.h>
-#include <atheos/kdebug.h>
+#include <pyro/types.h>
+#include <pyro/kdebug.h>
 
 #include <gui/bitmap.h>		// BitsPerPixel
 #include <util/circularbuffer.h>

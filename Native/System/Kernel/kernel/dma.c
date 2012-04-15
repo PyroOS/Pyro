@@ -24,11 +24,11 @@
  *				AtheOS coding style	<kurt@atheos.cx>
  */
 
-#include <atheos/types.h>
+#include <pyro/types.h>
 #include <posix/errno.h>
-#include <atheos/atomic.h>
-#include <atheos/kernel.h>
-#include <atheos/dma.h>
+#include <pyro/atomic.h>
+#include <pyro/kernel.h>
+#include <pyro/dma.h>
 
 /* Macros for port I/O. */
 #define dma_out( reg, val )     isa_writeb( (reg), (val) )

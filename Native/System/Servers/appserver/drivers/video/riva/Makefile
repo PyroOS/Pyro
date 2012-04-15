@@ -1,11 +1,8 @@
 COPTS   = -I$(TOP)/src $(shell freetype-config --cflags) -c
 
-DEVBIN = /system/drivers/appserver/video
 OBJS =	riva.o riva_hw.o
-
 OBJDIR	:= objs
 OBJS	:= $(addprefix $(OBJDIR)/,$(OBJS))
-
 
 #
 #	rules
@@ -17,7 +14,6 @@ $(OBJDIR)/%.o : %.c
 $(OBJDIR)/%.o : %.cpp
 	$(CXX) $(COPTS) $< -o $@
 
-
 all :	objs $(OBJDIR)/riva
 
 objs:
@@ -26,13 +22,16 @@ objs:
 $(OBJDIR)/riva: $(OBJS)
 	$(CXX) -plugin -Xlinker -Bsymbolic -nodefaultlibs $(OBJS) -o $(OBJDIR)/riva
 
-deps:
+# ----- ----- ----- ----- ----- ----- ----- ----- ----- -----
 
-install: $(OBJDIR)/riva
-	cp -f $(OBJDIR)/riva $(IMAGE)/$(DEVBIN)/riva
+dist: all inst clean
 
-dist: install
+inst:
+	mkdir -p $(PYRO_BINARY_DESTINATION)/System/drivers/appserver/video
+	cp -pf $(OBJDIR)/riva $(PYRO_BINARY_DESTINATION)/System/drivers/appserver/video/
+	addattrib $(PYRO_BINARY_DESTINATION)/System/drivers/appserver/video/riva "CheckSum::MD5" `md5sum $(PYRO_BINARY_DESTINATION)/System/drivers/appserver/video/riva | cut -c1-32`
+	sync
 
 clean:
-	-rm $(OBJS) $(OBJDIR)/riva
-
+	rm -rf $(OBJDIR)
+	sync

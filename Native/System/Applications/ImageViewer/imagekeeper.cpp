@@ -20,7 +20,7 @@
 #include <storage/directory.h>
 #include <storage/registrar.h>
 #include "imagekeeper.h"
-#include "resources/lang.h"
+#include "resources/ImageViewer.h"
 
 using namespace os;
 using namespace std;

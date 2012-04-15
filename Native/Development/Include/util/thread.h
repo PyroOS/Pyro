@@ -21,7 +21,7 @@
 #define __F_UTIL_THREAD_H__
 
 #include <string>
-#include <atheos/threads.h>
+#include <pyro/threads.h>
 #include <util/exceptions.h>
 
 namespace os {

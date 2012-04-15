@@ -17,12 +17,12 @@
 #ifndef COMMON_FUNCS_H
 #define COMMON_FUNCS_H
 
-//libsyllable
+//libpyro
 #include <util/string.h>
 #include <util/datetime.h>
 #include <gui/image.h>
 #include <util/resources.h>
-#include <atheos/image.h>
+#include <pyro/image.h>
 #include <gui/desktop.h>
 #include <gui/point.h>
 #include <gui/window.h>

@@ -1,11 +1,8 @@
 COPTS   = -I../../../server -c
 
-DEVBIN = /system/drivers/appserver/input
 OBJS =	ps2mouse.o
-
 OBJDIR	:= objs
 OBJS	:= $(addprefix $(OBJDIR)/,$(OBJS))
-
 
 #
 #	rules
@@ -17,22 +14,24 @@ $(OBJDIR)/%.o : %.c
 $(OBJDIR)/%.o : %.cpp
 	$(CXX) $(COPTS) $< -o $@
 
-
 all :	objs $(OBJDIR)/ps2mouse
 
 objs:
 	mkdir objs
 
 $(OBJDIR)/ps2mouse: $(OBJS)
-	$(CXX) -plugin -Xlinker -Bsymbolic -nodefaultlibs $(OBJS) -o $(OBJDIR)/ps2mouse -lsyllable
+	$(CXX) -plugin -Xlinker -Bsymbolic -nodefaultlibs $(OBJS) -o $(OBJDIR)/ps2mouse -lpyro
 
-deps:
+# ----- ----- ----- ----- ----- ----- ----- ----- ----- -----
 
-install: $(OBJDIR)/ps2mouse
-	cp -f $(OBJDIR)/ps2mouse $(IMAGE)/$(DEVBIN)/ps2mouse
+dist: all inst clean
 
-dist: install
+inst:
+	mkdir -p $(PYRO_BINARY_DESTINATION)/System/drivers/appserver/input
+	cp -pf $(OBJDIR)/ps2mouse $(PYRO_BINARY_DESTINATION)/System/drivers/appserver/input/
+	addattrib $(PYRO_BINARY_DESTINATION)/System/drivers/appserver/input/ps2mouse "CheckSum::MD5" `md5sum $(PYRO_BINARY_DESTINATION)/System/drivers/appserver/input/ps2mouse | cut -c1-32`
+	sync
 
 clean:
-	-rm $(OBJS) $(OBJDIR)/ps2mouse
-
+	rm -rf $(OBJDIR)
+	sync

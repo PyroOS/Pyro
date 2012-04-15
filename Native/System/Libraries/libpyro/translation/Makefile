@@ -1,2 +1,3 @@
 SUBDIRS = ..
-include $(ATHEOS_SRC)/recurse.rules
+
+include $(PYRO_COMMON)/recurse.rules

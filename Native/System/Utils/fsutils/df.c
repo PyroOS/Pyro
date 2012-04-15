@@ -6,8 +6,8 @@
 #include <string.h>
 #include <unistd.h>
 #include <sys/stat.h>
-#include <atheos/filesystem.h>
-#include <atheos/types.h>
+#include <pyro/filesystem.h>
+#include <pyro/types.h>
 
 /* Display the banner at the top of the listing */
 void print_banner( void )

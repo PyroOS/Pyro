@@ -1,8 +1,8 @@
 #ifndef __SIS3XX_H__
 #define __SIS3XX_H__
 
-#include <atheos/kernel.h>
-#include <atheos/pci.h>
+#include <pyro/kernel.h>
+#include <pyro/pci.h>
 
 #include "../../../server/ddriver.h"
 

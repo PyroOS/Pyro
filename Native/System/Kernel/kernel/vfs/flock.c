@@ -18,10 +18,10 @@
  *  Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  */
 
-#include <atheos/types.h>
-#include <atheos/kernel.h>
-#include <atheos/semaphore.h>
-#include <atheos/filesystem.h>
+#include <pyro/types.h>
+#include <pyro/kernel.h>
+#include <pyro/semaphore.h>
+#include <pyro/filesystem.h>
 #include <posix/fcntl.h>
 #include <posix/unistd.h>
 #include <posix/errno.h>

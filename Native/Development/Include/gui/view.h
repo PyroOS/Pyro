@@ -28,7 +28,7 @@
  *****************************************************************************/
 
 
-#include <atheos/types.h>
+#include <pyro/types.h>
 #include <util/string.h>
 #include <util/handler.h>
 #include <util/shortcutkey.h>

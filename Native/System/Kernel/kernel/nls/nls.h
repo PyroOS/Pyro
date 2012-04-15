@@ -1,10 +1,10 @@
-#include <atheos/types.h>
-#include <atheos/kernel.h>
-#include <atheos/smp.h>
-#include <atheos/kdebug.h>
-#include <atheos/atomic.h>
-#include <atheos/nls.h>
-#include <atheos/list.h>
+#include <pyro/types.h>
+#include <pyro/kernel.h>
+#include <pyro/smp.h>
+#include <pyro/kdebug.h>
+#include <pyro/atomic.h>
+#include <pyro/nls.h>
+#include <pyro/list.h>
 #include <posix/errno.h>
 #include <macros.h>
 

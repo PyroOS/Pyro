@@ -21,8 +21,8 @@
 #define __F_ATHEOS_SOCKET_H__
 
 #ifdef __KERNEL__
-#include <atheos/types.h>
-#include <atheos/filesystem.h>
+#include <pyro/types.h>
+#include <pyro/filesystem.h>
 #include <net/nettypes.h>
 #endif
 

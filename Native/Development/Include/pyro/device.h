@@ -23,7 +23,7 @@
 #ifndef __KERNEL__
 #include <sys/types.h>
 #endif
-#include <atheos/types.h>
+#include <pyro/types.h>
 #include <posix/ioctl.h>
 #include <posix/limits.h>
 
@@ -140,7 +140,7 @@ int decode_disk_partitions( device_geometry* psDiskGeom, Partition_s* pasPartiti
 
 #ifdef __KERNEL__
 
-#include <atheos/filesystem.h>
+#include <pyro/filesystem.h>
 
 typedef status_t dop_open( void* pNode, uint32 nFlags, void **pCookie );
 typedef status_t dop_close( void* pNode, void* pCookie );

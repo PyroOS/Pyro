@@ -24,15 +24,15 @@
 #include <stdlib.h>
 #include <stdio.h>
 
-#include <atheos/types.h>
-#include <atheos/kernel.h>
-#include <atheos/isa_io.h>
+#include <pyro/types.h>
+#include <pyro/kernel.h>
+#include <pyro/isa_io.h>
 #include <appserver/pci_graphics.h>
 #include "../../../server/bitmap.h"
 #include "../../../server/sprite.h"
 
-#include <atheos/pci.h>
-// #include <atheos/pci_vendors.h>
+#include <pyro/pci.h>
+// #include <pyro/pci_vendors.h>
 #include <gui/bitmap.h>
 
 #include "trident.h"

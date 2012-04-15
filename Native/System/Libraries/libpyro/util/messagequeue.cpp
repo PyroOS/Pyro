@@ -21,8 +21,8 @@
 #include <util/messagequeue.h>
 #include <util/message.h>
 
-#include <atheos/kernel.h>
-#include <atheos/semaphore.h>
+#include <pyro/kernel.h>
+#include <pyro/semaphore.h>
 
 using namespace os;
 

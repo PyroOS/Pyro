@@ -22,7 +22,7 @@ struct __atomic_fool_gcc_struct { unsigned long a[100]; };
 #define LOCK_ ""
 #endif
 
-#include <atheos/types.h>
+#include <pyro/types.h>
 
 #define ATOMIC_INIT(i)	{ (i) }
 

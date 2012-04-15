@@ -18,7 +18,7 @@
  *  MA 02111-1307, USA
  */
  
-#include <atheos/time.h>
+#include <pyro/time.h>
 #include <gui/image.h>
 #include <gui/font.h>
 #include <gui/rect.h>

@@ -27,8 +27,8 @@
 
 #include <ntfs.h>
 
-#include <atheos/bitops.h>
-#include <atheos/semaphore.h>
+#include <pyro/bitops.h>
+#include <pyro/semaphore.h>
 #include <posix/fcntl.h>
 #include <posix/unistd.h>
 

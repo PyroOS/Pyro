@@ -1,6 +1,6 @@
 /*  ImageView - View class for images
  *  Copyright (C) 2002 Henrik Isaksson
- *  Copyright (C) 2003 - 3004 Syllable Team
+ *  Copyright (C) 2003 - 2004 Syllable Team
  *
  *  This library is free software; you can redistribute it and/or
  *  modify it under the terms of the GNU Library General Public

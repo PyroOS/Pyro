@@ -19,6 +19,6 @@ MSG_HELPWND_TEXT								Lorsque vous cliquez sur un caractère,\ncelui-ci est co
 MSG_HELPWND_OK									OK
 
 MSG_ABOUTWND_TITLE=2000							CharMap
-MSG_ABOUTWND_TEXT								CharMap V1.1\nVisionneuse de la table des caractères pour Syllable.
+MSG_ABOUTWND_TEXT								CharMap V1.1\nVisionneuse de la table des caractères pour Pyro.
 MSG_ABOUTWND_OK									OK
 

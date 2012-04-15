@@ -13,8 +13,8 @@
  *	Modified to fit into the AtheOS kernel by Kurt Skauen 08 Jan 2000
  */
 
-#include <atheos/udelay.h>
-#include <atheos/smp.h>
+#include <pyro/udelay.h>
+#include <pyro/smp.h>
 
 #include "inc/smp.h"
 #include "inc/pit_timer.h"

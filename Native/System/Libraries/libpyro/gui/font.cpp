@@ -22,7 +22,7 @@
 #include <assert.h>
 #include <stdexcept>
 
-#include <atheos/kernel.h>
+#include <pyro/kernel.h>
 
 #include <gui/font.h>
 #include <util/application.h>

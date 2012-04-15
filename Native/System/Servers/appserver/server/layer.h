@@ -20,7 +20,7 @@
 #ifndef	__F_LAYER_H__
 #define	__F_LAYER_H__
 
-#include <atheos/types.h>
+#include <pyro/types.h>
 
 #include <util/resource.h>
 #include <gui/region.h>

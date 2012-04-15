@@ -7,7 +7,7 @@
 */
 
 
-#include <atheos/kernel.h>
+#include <pyro/kernel.h>
 
 
 template<class T> class Stack {

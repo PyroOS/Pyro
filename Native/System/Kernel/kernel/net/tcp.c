@@ -24,10 +24,10 @@
 #include <posix/ioctls.h>
 #include <posix/signal.h>
 
-#include <atheos/kernel.h>
-#include <atheos/time.h>
-#include <atheos/socket.h>
-#include <atheos/semaphore.h>
+#include <pyro/kernel.h>
+#include <pyro/time.h>
+#include <pyro/socket.h>
+#include <pyro/semaphore.h>
 
 #include <macros.h>
 

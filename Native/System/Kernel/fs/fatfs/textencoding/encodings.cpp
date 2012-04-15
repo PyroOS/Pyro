@@ -11,9 +11,9 @@
 
 //#include <malloc.h>
 //#include <stdio.h>
-#include <atheos/kernel.h>
-#include <atheos/string.h>
-#include <atheos/time.h>
+#include <pyro/kernel.h>
+#include <pyro/string.h>
+#include <pyro/time.h>
 #include <posix/errno.h>
 
 #include "encodings.h"

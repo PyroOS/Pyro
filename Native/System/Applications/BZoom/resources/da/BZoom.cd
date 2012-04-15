@@ -16,6 +16,6 @@ MSG_MAINWND_MENU_HELP=300					Hjælp
 MSG_MAINWND_MENU_HELP_ABOUT					Om...
 
 MSG_ABOUTWND_TITLE=1000						Om BZoom
-MSG_ABOUTWND_TEXT							BZoom V1.0\n\nEn simpel pixel zoomer for Syllable.\nBaseret på AZoom fra Chir.\nBZoom er udgivet under GNU GPL
+MSG_ABOUTWND_TEXT							BZoom V1.0\n\nEn simpel pixel zoomer for Pyro.\nBaseret på AZoom fra Chir.\nBZoom er udgivet under GNU GPL
 MSG_ABOUTWND_OK								Ok
 

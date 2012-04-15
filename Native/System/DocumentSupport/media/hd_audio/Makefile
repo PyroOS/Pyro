@@ -2,15 +2,11 @@ CFLAGS   += -c -fexceptions -I../audio_shared
 CXXFLAGS += -c -fexceptions -I../audio_shared
 AOPTS    = -c
 
-DRIVERBIN = /system/extensions/media
-
 VPATH = ./ ../audio_shared
-
 OBJS	= hda_channel.o hda.o
-
 OBJDIR	:= objs
 
-include $(ATHEOS_SRC)/makefile.rules
+include $(PYRO_COMMON)/makefile.rules
 
 all :	$(OBJDIR) $(OBJS) $(OBJDIR)/hd_audio.so
 
@@ -18,20 +14,20 @@ $(OBJDIR):
 	mkdir $(OBJDIR)
 
 $(OBJDIR)/hd_audio.so: $(OBJS)
-	$(CXX) -shared -Xlinker "-soname=hd_audio.so" $(OBJS) -lsyllable -lmedia -o $(OBJDIR)/hd_audio.so
-	
-deps:
-
-install: $(OBJDIR)/hd_audio.so
-	install -s $(OBJDIR)/hd_audio.so $(IMAGE)/$(DRIVERBIN)/hd_audio.so
-	addattrib $(IMAGE)/$(DRIVERBIN)/hd_audio.so os::Category AudioDriver
-
-dist: install
+	$(CXX) -shared -Xlinker "-soname=hd_audio.so" $(OBJS) -lpyro -lmedia -o $(OBJDIR)/hd_audio.so
 
 deps: $(OBJDIR) $(DEPS)
 
+# ----- ----- ----- ----- ----- ----- ----- ----- ----- -----
+
+dist: all inst clean
+
+inst:
+	mkdir -p $(PYRO_BINARY_DESTINATION)/System/extensions/media
+	cp -f $(OBJDIR)/hd_audio.so $(PYRO_BINARY_DESTINATION)/System/extensions/media/
+	addattrib $(PYRO_BINARY_DESTINATION)/System/extensions/media/hd_audio.so "CheckSum::MD5" `md5sum $(PYRO_BINARY_DESTINATION)/System/extensions/media/hd_audio.so | cut -c1-32`
+	sync
+
 clean:
-	rm -f $(OBJS) $(OBJDIR)/*
-
--include $(OBJDIR)/*.d
-
+	rm -rf $(OBJDIR)
+	sync

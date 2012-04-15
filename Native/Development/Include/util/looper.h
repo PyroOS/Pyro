@@ -21,9 +21,9 @@
 #ifndef	__F_UTIL_LOOPER_H__
 #define	__F_UTIL_LOOPER_H__
 
-#include <atheos/types.h>
-#include <atheos/threads.h>
-#include <atheos/msgport.h>
+#include <pyro/types.h>
+#include <pyro/threads.h>
+#include <pyro/msgport.h>
 #include <util/handler.h>
 #include <util/messagequeue.h>
 #include <util/locker.h>

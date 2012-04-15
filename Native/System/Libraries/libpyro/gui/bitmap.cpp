@@ -24,7 +24,7 @@
 #include <gui/window.h>
 #include <gui/exceptions.h>
 
-#include <atheos/areas.h>
+#include <pyro/areas.h>
 
 using namespace os;
 

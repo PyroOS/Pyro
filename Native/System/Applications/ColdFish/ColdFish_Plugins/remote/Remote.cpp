@@ -20,7 +20,7 @@
  
 /* This plugins registers coldfish in the registrar server */
 
-#include "../../coldfish/CFPlugin.h"
+#include "../../ColdFish/CFPlugin.h"
 #include <util/event.h>
 
 class CFRemote : public ColdFishPlugin

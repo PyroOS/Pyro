@@ -25,8 +25,8 @@
 #include <unistd.h>
 #include <signal.h>
 
-#include <atheos/types.h>
-#include <atheos/kernel.h>
+#include <pyro/types.h>
+#include <pyro/kernel.h>
 
 #include <posix/ioctl.h>
 

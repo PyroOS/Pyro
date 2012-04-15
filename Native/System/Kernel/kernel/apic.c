@@ -24,9 +24,9 @@
 #include <inc/mpc.h>
 #include <inc/acpi.h>
 
-#include <atheos/kernel.h>
-#include <atheos/kdebug.h>
-#include <atheos/irq.h>
+#include <pyro/kernel.h>
+#include <pyro/kdebug.h>
+#include <pyro/irq.h>
 
 /* Ensure get_processor_id() works on non-smp machines.  Will be set to the virtual address of local APIC later
    if this is a SMP machine. */

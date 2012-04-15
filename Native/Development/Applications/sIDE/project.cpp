@@ -45,7 +45,7 @@ void project::New( os::Path cFilePath )
 	m_zTarget = os::String( "App" );
 	m_zCompilerFlags = os::String( "-Wall -c -O2 -fexceptions" );
 	m_zLinkerFlags = "";
-	m_zInstallPath = "/Applications/App";
+	m_zInstallPath = "/applications/App";
 	m_zCategory = "Other";
 	
 	m_bIsWorking = false;
@@ -343,7 +343,7 @@ void project::Clean()
 	
 	/* Write script */
 	out<<"#!/bin/sh"<<std::endl;
-	out<<"export PATH=$PATH:/usr/bin:/usr/indexes/bin"<<std::endl;
+	out<<"export PATH=$PATH:/resources/index/programs:/usr/bin"<<std::endl;
 	out<<"cd '"<<m_cFilePath.GetDir().GetPath().c_str()<<"'"<<std::endl;
 	out<<"make -s clean"<<std::endl;
 	out<<"echo Finished - Press return to close this window"<<std::endl;
@@ -355,7 +355,7 @@ void project::Clean()
 	if( fork() == 0 )
 	{
 		set_thread_priority( -1, 0 );
-		execlp( "/system/bin/aterm", "/system/bin/aterm", cPath.c_str(), (void*)NULL );
+		execlp( "aterm", "aterm", cPath.c_str(), (void*)NULL );
 		exit( 0 );
 	}
 	
@@ -379,7 +379,7 @@ void project::Compile()
 	
 	/* Write script */
 	out<<"#!/bin/sh"<<std::endl;
-	out<<"export PATH=$PATH:/usr/bin:/usr/indexes/bin"<<std::endl;
+	out<<"export PATH=$PATH:/resources/index/programs:/usr/bin"<<std::endl;
 	out<<"cd '"<<m_cFilePath.GetDir().GetPath().c_str()<<"'"<<std::endl;
 	out<<"make"<<std::endl;
 	out<<"echo Finished - Press return to close this window"<<std::endl;
@@ -391,7 +391,7 @@ void project::Compile()
 	if( fork() == 0 )
 	{
 		set_thread_priority( -1, 0 );
-		execlp( "/system/bin/aterm", "/system/bin/aterm", cPath.c_str(), (void*)NULL );
+		execlp( "aterm", "aterm", cPath.c_str(), (void*)NULL );
 		exit( 0 );
 	}
 	
@@ -427,7 +427,7 @@ void project::Run()
 	
 	/* Write script */
 	out<<"#!/bin/sh"<<std::endl;
-	out<<"export PATH=$PATH:/usr/bin:/usr/indexes/bin"<<std::endl;
+	out<<"export PATH=$PATH:/resources/index/programs:/usr/bin"<<std::endl;
 	out<<"cd '"<<m_cFilePath.GetDir().GetPath().c_str()<<"'"<<std::endl;
 	out<<"\""<<cAppPath.c_str()<<"\""<<std::endl;
 	out.close();
@@ -437,7 +437,7 @@ void project::Run()
 	if( fork() == 0 )
 	{
 		set_thread_priority( -1, 0 );
-		execlp( "/system/bin/aterm", "/system/bin/aterm", cScriptPath.c_str(), (void*)NULL );
+		execlp( "aterm", "aterm", cScriptPath.c_str(), (void*)NULL );
 		exit( 0 );
 	}
 	
@@ -511,7 +511,7 @@ void project::ExportMakefile()
 	out<<std::endl;
 	out<<"$(OBJDIR)/%.o : %.cpp"<<std::endl;
 	out<<"	@echo Compiling : $<"<<std::endl;
-	out<<"	@$(CC) $(COPTS) $< -o $@"<<std::endl;
+	out<<"	@$(CXX) $(COPTS) $< -o $@"<<std::endl;
 	out<<std::endl;
 	out<<"$(OBJDIR)/%.o : %.s"<<std::endl;
 	out<<"	@echo Assembling : $<"<<std::endl;
@@ -587,9 +587,9 @@ void project::ExportMakefile()
 	out<<"\""<<m_zTarget.c_str()<<"\": $(OBJS)"<<std::endl;
 	out<<"	@echo Linking..."<<std::endl;
 	if( bLib )
-		out<<"	@gcc -shared -Xlinker -soname=\""<<m_zTarget.c_str()<<"\" $(OBJS) -o \""<<m_zTarget.c_str()<<"\" "<<zLinkerFlags.c_str()<<std::endl;
+		out<<"	@$(CXX) -shared -Xlinker -soname=\""<<m_zTarget.c_str()<<"\" $(OBJS) -o \""<<m_zTarget.c_str()<<"\" "<<zLinkerFlags.c_str()<<std::endl;
 	else
-		out<<"	@gcc $(OBJS) -o \""<<m_zTarget.c_str()<<"\" "<<zLinkerFlags.c_str()<<std::endl;
+		out<<"	@$(CXX) $(OBJS) -o \""<<m_zTarget.c_str()<<"\" "<<zLinkerFlags.c_str()<<std::endl;
 	
 	/* Add resource entries */
 	os::String zResources = os::String( "	@rescopy \"" ) + m_zTarget + os::String( "\" -r " );
@@ -650,15 +650,12 @@ void project::ExportMakefile()
 	out<<std::endl;
 	out<<"deps:"<<std::endl;
 	out<<std::endl;
-	out<<"dist: all"<<std::endl;
-	out<<"	@echo Distribution..."<<std::endl;
-	out<<"	@mkdir -p $(DIST_DIR)"<<m_zInstallPath.c_str()<<std::endl;
-	out<<"	@cp \""<<m_zTarget.c_str()<<"\" \"$(DIST_DIR)"<<m_zInstallPath.c_str()<<"/"<<m_zTarget.c_str()<<"\""<<std::endl;
-	out<<std::endl;
 	out<<"install: all"<<std::endl;
 	out<<"	@echo Installing..."<<std::endl;
-	out<<"	@mkdir -p "<<m_zInstallPath.c_str()<<std::endl;
-	out<<"	@cp \""<<m_zTarget.c_str()<<"\" \""<<m_zInstallPath.c_str()<<"/"<<m_zTarget.c_str()<<"\""<<std::endl;
+	out<<"	@mkdir -p $(IMAGE)"<<m_zInstallPath.c_str()<<std::endl;
+	out<<"	@cp \""<<m_zTarget.c_str()<<"\" \"$(IMAGE)"<<m_zInstallPath.c_str()<<"/"<<m_zTarget.c_str()<<"\""<<std::endl;
+	out<<std::endl;
+	out<<"dist: install"<<std::endl;
 	out<<std::endl;
 	
 	out.close();
@@ -861,7 +858,7 @@ void project::OpenFile( uint nGroup, uint nNumber, os::Window *pcWindow )
 		if( fork() == 0 )
 		{
 			set_thread_priority( -1, 0 );
-			execlp( "/Applications/sIDE/Sourcery",  "/Applications/sIDE/Sourcery", cPath.c_str(), (void*)NULL );
+			execlp( "/applications/sIDE/Sourcery", "/applications/sIDE/Sourcery", cPath.c_str(), (void*)NULL );
 			exit( 0 );
 		}
 	} else if( pcFile->m_nType == TYPE_CATALOG || pcFile->m_nType == TYPE_RESOURCE || pcFile->m_nType == TYPE_OTHER ) {
@@ -886,27 +883,3 @@ bool project::IsWorking()
 {
 	return( m_bIsWorking );
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

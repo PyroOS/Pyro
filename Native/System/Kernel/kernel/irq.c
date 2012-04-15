@@ -18,14 +18,14 @@
  *  Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  */
 
-#include <atheos/types.h>
-#include <atheos/isa_io.h>
+#include <pyro/types.h>
+#include <pyro/isa_io.h>
 
 #include <posix/errno.h>
 
-#include <atheos/kernel.h>
-#include <atheos/irq.h>
-#include <atheos/smp.h>
+#include <pyro/kernel.h>
+#include <pyro/irq.h>
+#include <pyro/smp.h>
 
 #include <macros.h>
 

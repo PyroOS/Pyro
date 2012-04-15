@@ -22,8 +22,8 @@
 
 #ifdef __KERNEL__
 #include <stdarg.h>
-#include <atheos/types.h>
-#include <atheos/string.h>
+#include <pyro/types.h>
+#include <pyro/string.h>
 /* From string.c */
 #ifdef __cplusplus
 extern "C" {

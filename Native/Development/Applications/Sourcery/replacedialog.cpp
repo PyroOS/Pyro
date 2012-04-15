@@ -27,9 +27,9 @@ ReplaceDialog::ReplaceDialog( Window * pcParent, const String &str, bool down, b
 void ReplaceDialog::Layout()
 {
 
-	os::FrameView* dirFrame = new os::FrameView( os::Rect(), "dirFrame", "Direction" );
-	os::FrameView* caseFrame = new os::FrameView( os::Rect(), "caseFrame", "Case" );
-	os::FrameView* syntaxFrame = new os::FrameView( os::Rect(), "syntaxFrame", "Syntax" );
+	os::FrameView* dirFrame = new os::FrameView( os::Rect(), "dirFrame", "_Direction" );
+	os::FrameView* caseFrame = new os::FrameView( os::Rect(), "caseFrame", "C_ase" );
+	os::FrameView* syntaxFrame = new os::FrameView( os::Rect(), "syntaxFrame", "_Syntax" );
 
 	os::LayoutView* rootView = new os::LayoutView( os::Rect(), "" );
 
@@ -103,9 +103,9 @@ void ReplaceDialog::Layout()
 
 void ReplaceDialog::Init()
 {
-	pcReplaceButton = new os::Button( os::Rect(), "pcReplaceButton", "Replace", new os::Message( M_REPLACE_DO ) );
+	pcReplaceButton = new os::Button( os::Rect(), "pcReplaceButton", "_Replace", new os::Message( M_REPLACE_DO ) );
 	pcReplaceAllButton = new Button(os::Rect(), "pcReplaceAllButton", "Replace _All",new Message(M_REPLACE_ALL_DO));
-	pcCloseButton = new os::Button( os::Rect(), "pcCloseButton", "Close", new os::Message(M_FIND_QUIT ) );
+	pcCloseButton = new os::Button( os::Rect(), "pcCloseButton", "_Close", new os::Message(M_FIND_QUIT ) );
 
 	pcRadioUp = new os::RadioButton( os::Rect(), "pcRadioUp", "Up", NULL );
 	pcRadioDown = new os::RadioButton( os::Rect(), "pcRadioDown", "Down", NULL );
@@ -189,7 +189,6 @@ void ReplaceDialog::HandleMessage( os::Message * msg )
 			os::Window::HandleMessage( msg );
 	}
 }
-
 
 
 

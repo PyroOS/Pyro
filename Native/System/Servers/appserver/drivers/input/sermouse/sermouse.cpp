@@ -25,7 +25,7 @@
 #include <errno.h>
 #include <string.h>
 
-#include <atheos/kernel.h>
+#include <pyro/kernel.h>
 
 #include <inputnode.h>
 

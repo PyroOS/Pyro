@@ -20,12 +20,12 @@
 #ifndef __F_ATHEOS_SPINLOCK_H__
 #define __F_ATHEOS_SPINLOCK_H__
 
-#include <atheos/types.h>
-#include <atheos/atomic.h>
-#include <atheos/irq.h>
+#include <pyro/types.h>
+#include <pyro/atomic.h>
+#include <pyro/irq.h>
 #include <macros.h>
 
-#include <atheos/smp.h>
+#include <pyro/smp.h>
 
 #ifdef __BUILD_KERNEL__
 #include "inc/smp.h"		// pick up inline get_processor_id() function

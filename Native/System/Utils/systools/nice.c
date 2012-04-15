@@ -1,8 +1,8 @@
 #include <string.h>
 #include <stdio.h>
 
-#include <atheos/types.h>
-#include <atheos/threads.h>
+#include <pyro/types.h>
+#include <pyro/threads.h>
 
 int main( int argc, char** argv )
 {

@@ -28,7 +28,7 @@
 #include <media/input.h>
 #include <media/codec.h>
 #include <media/addon.h>
-#include <atheos/cdrom.h>
+#include <pyro/cdrom.h>
 
 #include <iostream>
 #include <vector>

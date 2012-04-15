@@ -31,7 +31,7 @@ extern "C"
 }				/* Make Emacs auto-indent work */
 #endif
 
-#include <atheos/types.h>
+#include <pyro/types.h>
 
 static const uint32_t EFLG_CARRY	= 0x00000001;
 static const uint32_t EFLG_PARITY	= 0x00000004;

@@ -24,7 +24,7 @@
 extern "C" {
 #endif
 
-#include <atheos/types.h>
+#include <pyro/types.h>
 
 #define	DEFAULT_PORT_SIZE		15
 

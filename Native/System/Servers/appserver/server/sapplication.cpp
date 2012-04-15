@@ -21,9 +21,9 @@
 #include <stdio.h>
 #include <errno.h>
 
-#include <atheos/threads.h>
-#include <atheos/kernel.h>
-#include <atheos/msgport.h>
+#include <pyro/threads.h>
+#include <pyro/kernel.h>
+#include <pyro/msgport.h>
 #include <appserver/protocol.h>
 #include <util/messenger.h>
 #include <signal.h>

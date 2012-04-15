@@ -4,7 +4,7 @@
 #include <stdlib.h>
 #include <string.h>
 #include <errno.h>
-#include <atheos/fs_attribs.h>
+#include <pyro/fs_attribs.h>
 
 int main(int argc, char *argv[])
 {

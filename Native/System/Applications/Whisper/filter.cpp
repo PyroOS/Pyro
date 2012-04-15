@@ -24,7 +24,7 @@
 
 #include <storage/file.h>
 #include <storage/directory.h>
-#include <atheos/image.h>
+#include <pyro/image.h>
 
 using namespace os;
 

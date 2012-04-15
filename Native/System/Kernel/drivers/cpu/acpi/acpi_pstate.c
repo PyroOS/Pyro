@@ -29,15 +29,15 @@
  * ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
  */
 
-#include <atheos/kernel.h>
-#include <atheos/irq.h>
-#include <atheos/types.h>
-#include <atheos/list.h>
-#include <atheos/device.h>
-#include <atheos/acpi.h>
-#include <atheos/tunables.h>
-#include <atheos/resource.h>
-#include <atheos/threads.h>
+#include <pyro/kernel.h>
+#include <pyro/irq.h>
+#include <pyro/types.h>
+#include <pyro/list.h>
+#include <pyro/device.h>
+#include <pyro/acpi.h>
+#include <pyro/tunables.h>
+#include <pyro/resource.h>
+#include <pyro/threads.h>
 #include <posix/errno.h>
 #include <macros.h>
 #include "acpi_processor.h"

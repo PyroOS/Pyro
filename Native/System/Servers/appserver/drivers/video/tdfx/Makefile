@@ -1,11 +1,8 @@
 COPTS   = -I$(TOP)/src $(shell freetype-config --cflags) -c
 
-DEVBIN = /system/drivers/appserver/video
 OBJS =	tdfx.o gtf.o
-
 OBJDIR	:= objs
 OBJS	:= $(addprefix $(OBJDIR)/,$(OBJS))
-
 
 #
 #	rules
@@ -17,22 +14,24 @@ $(OBJDIR)/%.o : %.c
 $(OBJDIR)/%.o : %.cpp
 	$(CXX) $(COPTS) $< -o $@
 
-
 all :	objs $(OBJDIR)/tdfx
 
 objs:
 	mkdir objs
 
 $(OBJDIR)/tdfx: $(OBJS)
-	$(CXX) -plugin $(OBJS) -o $(OBJDIR)/tdfx -lsyllable
+	$(CXX) -plugin $(OBJS) -o $(OBJDIR)/tdfx -lpyro
 
-deps:
+# ----- ----- ----- ----- ----- ----- ----- ----- ----- -----
 
-install: $(OBJDIR)/tdfx
-	cp -f $(OBJDIR)/tdfx $(IMAGE)/$(DEVBIN)/tdfx
+dist: all inst clean
 
-dist: install
+inst:
+	mkdir -p $(PYRO_BINARY_DESTINATION)/System/drivers/appserver/video
+	cp -pf $(OBJDIR)/tdfx $(PYRO_BINARY_DESTINATION)/System/drivers/appserver/video/
+	addattrib $(PYRO_BINARY_DESTINATION)/System/drivers/appserver/video/tdfx "CheckSum::MD5" `md5sum $(PYRO_BINARY_DESTINATION)/System/drivers/appserver/video/tdfx | cut -c1-32`
+	sync
 
 clean:
-	-rm $(OBJS) $(OBJDIR)/tdfx
-
+	rm -rf $(OBJDIR)
+	sync

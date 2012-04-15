@@ -7,7 +7,7 @@
 */
 
 
-#include <atheos/kernel.h>
+#include <pyro/kernel.h>
 
 #include "Index.h"
 #include "Stack.h"

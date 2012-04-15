@@ -21,8 +21,8 @@
 #ifndef __F_APPSERVER_DOCKPLUGIN_H__
 #define __F_APPSERVER_DOCKPLUGIN_H__
 
-#include <atheos/types.h>
-#include <atheos/filesystem.h>
+#include <pyro/types.h>
+#include <pyro/filesystem.h>
 #include <gui/view.h>
 #include <util/message.h>
 #include <util/string.h>

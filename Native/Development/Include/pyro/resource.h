@@ -13,7 +13,7 @@
 extern "C" {
 #endif
 
-#include <atheos/types.h>
+#include <pyro/types.h>
 
 #ifdef __KERNEL__
 

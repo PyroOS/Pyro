@@ -4,7 +4,7 @@
 #include <unistd.h>
 #include <sys/stat.h>
 #include <dirent.h>
-#include <atheos/filesystem.h>
+#include <pyro/filesystem.h>
 
 #include <gui/spinner.h>
 #include <gui/checkbox.h>
@@ -71,17 +71,17 @@ struct PartitionType
 PartitionType g_asPartitionTypes[] =
 {
 	{ 0x00, "Unused", "", COL_TO_RGB32( Color32_s( 225, 225, 225, 0 ) ) },
-	{ 0x2a, "Syllable", "AFS", COL_TO_RGB32( Color32_s( 150, 190, 255, 0 ) ) },
+	{ 0x05, "Extended", "", COL_TO_RGB32( Color32_s( 125, 125, 125, 0 ) ) },
+	{ 0x2a, "Pyro", "AFS", COL_TO_RGB32( Color32_s( 150, 190, 255, 0 ) ) },
 	{ 0xeb, "BeOS", "BeFS", COL_TO_RGB32( Color32_s( 255, 255, 0, 0 ) ) },
 	{ 0x83, "Linux", "", COL_TO_RGB32( Color32_s( 255, 0, 0, 0 ) ) },
 	{ 0x82, "Linux", "Swap", COL_TO_RGB32( Color32_s( 150, 0, 0, 0 ) ) },
-	{ 0x07, "Windows", "NTFS", COL_TO_RGB32( Color32_s( 0, 170, 0, 0 ) ) },
-	{ 0x0c, "Windows", "FAT32 (LBA)", COL_TO_RGB32( Color32_s( 0, 0, 255, 0 ) ) },
-	{ 0x05, "Extended", "", COL_TO_RGB32( Color32_s( 125, 125, 125, 0 ) ) },
 	{ 0x8e, "Linux", "LVM", COL_TO_RGB32( Color32_s( 200, 0, 0, 0 ) ) },
 	{ 0xa5, "FreeBSD", "", COL_TO_RGB32( Color32_s( 255, 0, 255, 0 ) ) },
 	{ 0xa6, "OpenBSD", "", COL_TO_RGB32( Color32_s( 0, 255, 255, 0 ) ) },
 	{ 0xa9, "NetBSD", "", COL_TO_RGB32( Color32_s( 255, 150, 0, 0 ) ) },
+	{ 0x07, "Windows", "NTFS", COL_TO_RGB32( Color32_s( 0, 170, 0, 0 ) ) },
+	{ 0x0c, "Windows", "FAT32 (LBA)", COL_TO_RGB32( Color32_s( 0, 0, 255, 0 ) ) },
 	{ 0x0b, "Windows", "FAT32", COL_TO_RGB32( Color32_s( 0, 0, 200, 0 ) ) },
 	{ 0x0e, "Windows", "FAT16 (LBA)", COL_TO_RGB32( Color32_s( 0, 255, 0, 0 ) ) },
 	{ 0x06, "Windows", "FAT16", COL_TO_RGB32( Color32_s( 0, 200, 0, 0 ) ) }

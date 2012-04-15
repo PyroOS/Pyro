@@ -10,7 +10,7 @@
 */
 
 
-#include <atheos/kernel.h>
+#include <pyro/kernel.h>
 
 #include "bfs_endian.h"
 

@@ -19,7 +19,7 @@
  *
  */
 
-#include <atheos/soundcard.h>
+#include <pyro/soundcard.h>
 #include <util/message.h>
 #include <gui/view.h>
 #include <gui/checkbox.h>

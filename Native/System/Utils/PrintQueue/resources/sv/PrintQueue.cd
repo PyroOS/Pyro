@@ -41,7 +41,7 @@ MSG_MAINWND_JOBSIZE_MB							%d MB
 MSG_MAINWND_JOBSIZE_GB							%d GB
 
 MSG_ABOUTWND_TITLE=1000							Skrivarkö
-MSG_ABOUTWND_TEXT1								Syllable Skrivarköhanterare
+MSG_ABOUTWND_TEXT1								Pyro Skrivarköhanterare
 MSG_ABOUTWND_TEXT2								Använder CUPS version %d.%d.%d\n
 MSG_ABOUTWND_CLOSE								_Stäng
 

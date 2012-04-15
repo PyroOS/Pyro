@@ -1,14 +1,11 @@
 CFLAGS   += -kernel -fno-PIC -c -D__ENABLE_DEBUG__
 AFLAGS   = -c
 
-C_INCLUDE_PATH=$(ATHEOS_INCLUDE_PATH)
+C_INCLUDE_PATH=$(PYRO_INCLUDE)
 
 OBJS := usb-uhci.o
-
-
 OBJDIR	:= objs
 OBJS	:= $(addprefix $(OBJDIR)/,$(OBJS))
-
 
 #
 #	rules
@@ -26,9 +23,6 @@ $(OBJDIR)/%.o : %.s
 $(OBJDIR)/%.o : %.S
 	$(CC) $(CFLAGS) -x assembler-with-cpp $< -o $@
 
-
-
-
 all :	objs $(OBJDIR)/usb_uhci
 
 objs:
@@ -37,11 +31,16 @@ objs:
 $(OBJDIR)/usb_uhci: $(OBJS) Makefile
 	$(CC) -kernel $(OBJS) -o $(OBJDIR)/usb_uhci
 
-install: all
-	cp -f $(OBJDIR)/usb_uhci $(IMAGE)/system/drivers/dev/hcd/usb_uhci
+# ----- ----- ----- ----- ----- ----- ----- ----- ----- -----
 
-dist: install
+dist: all inst clean
+
+inst:
+	mkdir -p $(PYRO_BINARY_DESTINATION)/System/drivers/dev/hcd
+	cp -f $(OBJDIR)/usb_uhci $(PYRO_BINARY_DESTINATION)/System/drivers/dev/hcd/
+	addattrib $(PYRO_BINARY_DESTINATION)/System/drivers/dev/hcd/usb_uhci "CheckSum::MD5" `md5sum $(PYRO_BINARY_DESTINATION)/System/drivers/dev/hcd/usb_uhci | cut -c1-32`
+	sync
 
 clean:
-	rm -f $(OBJS) $(OBJDIR)/usb_uhci
-
+	rm -rf $(OBJDIR)
+	sync

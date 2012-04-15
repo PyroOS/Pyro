@@ -55,7 +55,7 @@ MainWindow::MainWindow() : os::Window( os::Rect( 0, 0, 500, 450 ), "main_wnd", M
 	os::VLayoutNode* pcVGeneral = new os::VLayoutNode( "type_prefs_vgeneral" );
 	
 	/* Icon */
-	m_pcIconReq = new os::FileRequester( os::FileRequester::LOAD_REQ, new os::Messenger( this ), "/system/icons",
+	m_pcIconReq = new os::FileRequester( os::FileRequester::LOAD_REQ, new os::Messenger( this ), "/boot/System/icons",
 										os::FileRequester::NODE_FILE, false );
 	m_pcIconReq->Start();
 										
@@ -192,8 +192,8 @@ MainWindow::MainWindow() : os::Window( os::Rect( 0, 0, 500, 450 ), "main_wnd", M
 	
 	/* Register at least one type */
 	m_pcManager->RegisterType( "text/plain", MSG_MIMETYPE_TEXT_PLAIN );
-	m_pcManager->RegisterTypeIcon( "text/plain", os::Path( "/system/icons/file.png" ) );
-	m_pcManager->RegisterTypeHandler( "text/plain", os::Path( "/system/bin/aedit" ) );
+	m_pcManager->RegisterTypeIcon( "text/plain", os::Path( "/boot/System/icons/file.png" ) );
+	m_pcManager->RegisterTypeHandler( "text/plain", os::Path( "/boot/System/binary/aedit" ) );
 	
 	/* Set Icon */
 	os::File cFile( open_image_file( get_image_id() ) );
@@ -589,7 +589,7 @@ void MainWindow::HandleMessage( os::Message* pcMessage )
 			if( pcMessage->FindString( "mimetype", &zMimetype ) == 0 )
 			{
 				m_pcManager->RegisterType( zMimetype, MSG_MAINWND_NEWTYPE );
-				m_pcManager->RegisterTypeIcon( zMimetype, os::Path( "/system/icons/file.png" ) );
+				m_pcManager->RegisterTypeIcon( zMimetype, os::Path( "/boot/System/icons/file.png" ) );
 				UpdateList();
 			}
 		}

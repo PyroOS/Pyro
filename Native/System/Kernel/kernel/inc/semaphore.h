@@ -21,7 +21,7 @@
 #ifndef	__F_INC_SEMAPHORES_H__
 #define	__F_INC_SEMAPHORES_H__
 
-#include <atheos/types.h>
+#include <pyro/types.h>
 #include "typedefs.h"
 
 #ifdef __cplusplus

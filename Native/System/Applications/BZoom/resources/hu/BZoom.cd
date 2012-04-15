@@ -16,6 +16,6 @@ MSG_MAINWND_MENU_HELP=300					Súgó
 MSG_MAINWND_MENU_HELP_ABOUT					Névjegy
 
 MSG_ABOUTWND_TITLE=1000						A BZoom névjegye
-MSG_ABOUTWND_TEXT							BZoom V1.0\n\nNagyító alkalmazás AtheOS-hoz.\nAz eredeti AZoom Chir munkája.\nA BZoom-ot a következö licencek védik:\nGNU GPL
+MSG_ABOUTWND_TEXT							BZoom V1.0\n\nNagyító alkalmazás Pyro-hoz.\nAz eredeti AZoom Chir munkája.\nA BZoom-ot a következö licencek védik:\nGNU GPL
 MSG_ABOUTWND_OK								Ok
 

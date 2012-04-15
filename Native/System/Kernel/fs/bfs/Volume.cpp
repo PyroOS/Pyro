@@ -14,9 +14,9 @@
 #include "kernel_cpp.h"
 
 
-#include <atheos/stdlib.h>
-#include <atheos/string.h>
-#include <atheos/device.h>
+#include <pyro/stdlib.h>
+#include <pyro/string.h>
+#include <pyro/device.h>
 
 
 static const int32 kDesiredAllocationGroups = 56;

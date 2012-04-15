@@ -26,7 +26,7 @@ extern "C"{
 
   
 #ifdef __KERNEL__    
-#include <atheos/types.h>
+#include <pyro/types.h>
     
 int	open(const char *_path, int _oflag, ...);
 int	close( int nFile );

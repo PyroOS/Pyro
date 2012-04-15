@@ -35,12 +35,12 @@
  * may be shared by multiple devices.
  */
 
-#include <atheos/list.h>
-#include <atheos/kernel.h>
-#include <atheos/spinlock.h>
-#include <atheos/types.h>
-#include <atheos/semaphore.h>
-#include <atheos/acpi.h>
+#include <pyro/list.h>
+#include <pyro/kernel.h>
+#include <pyro/spinlock.h>
+#include <pyro/types.h>
+#include <pyro/semaphore.h>
+#include <pyro/acpi.h>
 #include <posix/errno.h>
 
 

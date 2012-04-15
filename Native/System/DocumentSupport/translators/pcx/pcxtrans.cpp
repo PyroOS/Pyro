@@ -52,7 +52,7 @@
 //
 ////////////////////////////////////////////////////////////////////////////////
 #include <stdio.h>
-#include <atheos/kdebug.h>
+#include <pyro/kdebug.h>
 #include <util/circularbuffer.h>
 #include <translation/translator.h>
 

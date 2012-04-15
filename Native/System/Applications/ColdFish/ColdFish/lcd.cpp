@@ -15,7 +15,7 @@
 // Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
 
 #include "lcd.h"
-#include "resources/coldfish.h"
+#include "resources/ColdFish.h"
 #include <time.h>
 #include <iostream>
 

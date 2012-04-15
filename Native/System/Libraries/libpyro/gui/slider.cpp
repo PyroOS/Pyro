@@ -21,7 +21,7 @@
 #include <assert.h>
 #include <stdio.h>
 
-#include <atheos/types.h>
+#include <pyro/types.h>
 
 #include <gui/slider.h>
 #include <gui/font.h>

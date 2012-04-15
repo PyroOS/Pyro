@@ -4,7 +4,7 @@
 //	Translated by: Maximo Pech Jaramillo
 //
 
-MSG_MAINWND_TITLE=0							Administrador de Syllable
+MSG_MAINWND_TITLE=0							Administrador de Pyro
 
 MSG_MAINWND_MENU_APPLICATION=100			Aplicación
 MSG_MAINWND_MENU_APPLICATION_ABOUT			Acerca de
@@ -18,15 +18,15 @@ MSG_MAINWND_MENU_OPTIONS_SPEED_MEDIUM		Media
 MSG_MAINWND_MENU_OPTIONS_SPEED_HIGH			Alta
 MSG_MAINWND_MENU_OPTIONS_SPEED_PAUSE		Pausa
 
-MSG_ABOUTWND_TITLE=900						Acerca del Administrador de Syllable v.%s
-MSG_ABOUTWND_TEXT							System Information v.%s\n\nAdministrador de recursos para Syllable\nJohn Hall, 2001\n
+MSG_ABOUTWND_TITLE=900						Acerca del Administrador de Pyro v.%s
+MSG_ABOUTWND_TEXT							System Information v.%s\n\nAdministrador de recursos para Pyro\nJohn Hall, 2001\n
 MSG_ABOUTWND_OK								_Ok
 
 MSG_TAB_SYSINFO=1000						InformaciÃ³n del sistema
 MSG_TAB_SYSINFO_VER_NAME					Nombre
 MSG_TAB_SYSINFO_VER_VERSION					Versión
 MSG_TAB_SYSINFO_VER_BUILDDATE				Fecha de compilación
-MSG_TAB_SYSINFO_VER_SYLLABLE				Syllable
+MSG_TAB_SYSINFO_VER_SYLLABLE				Pyro
 MSG_TAB_SYSINFO_VER_SLBMGR					System Information
 MSG_TAB_SYSINFO_CPU_CPU						CPU
 MSG_TAB_SYSINFO_CPU_CORESPEED				Velocidad del CPU

@@ -1,0 +1,12 @@
+--- original/configure	2011-12-02 11:02:21.000000000 +0000
++++ current/configure	2011-12-02 11:28:01.000000000 +0000
+@@ -1659,7 +1659,8 @@
+         ;;
+     gnu/kfreebsd)
+         ;;
+-
++    syllable)
++        ;;
+     *)
+         die "Unknown OS '$target_os'."
+         ;;

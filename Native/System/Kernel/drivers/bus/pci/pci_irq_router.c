@@ -23,16 +23,16 @@
  */
 
 #include <posix/errno.h>
-#include <atheos/device.h>
-#include <atheos/kernel.h>
-#include <atheos/isa_io.h>
-#include <atheos/types.h>
-#include <atheos/pci.h>
-#include <atheos/kernel.h>
-#include <atheos/spinlock.h>
-#include <atheos/pci.h>
-#include <atheos/bootmodules.h>
-#include <atheos/config.h>
+#include <pyro/device.h>
+#include <pyro/kernel.h>
+#include <pyro/isa_io.h>
+#include <pyro/types.h>
+#include <pyro/pci.h>
+#include <pyro/kernel.h>
+#include <pyro/spinlock.h>
+#include <pyro/pci.h>
+#include <pyro/bootmodules.h>
+#include <pyro/config.h>
 
 #include <macros.h>
 

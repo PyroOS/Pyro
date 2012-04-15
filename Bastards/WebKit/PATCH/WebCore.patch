@@ -1,0 +1,1096 @@
+--- WebCore-old/loader/ResourceLoader.cpp	2012-04-09 09:58:22.000000000 +0000
++++ WebCore-new/loader/ResourceLoader.cpp	2012-04-05 09:35:22.000000000 +0000
+@@ -92,9 +92,11 @@
+     m_identifier = 0;
+ 
+     if (m_handle) {
++#if !PLATFORM(SYLLABLE)
+         // Clear out the ResourceHandle's client so that it doesn't try to call
+         // us back after we release it.
+         m_handle->setClient(0);
++#endif
+         m_handle = 0;
+     }
+ 
+--- WebCore-old/loader/icon/IconDatabase.cpp	2012-04-09 09:58:22.000000000 +0000
++++ WebCore-new/loader/icon/IconDatabase.cpp	2012-04-05 09:35:29.000000000 +0000
+@@ -54,6 +54,10 @@
+ #include <pthread.h>
+ #endif
+ 
++#if PLATFORM(SYLLABLE)
++#include <unistd.h>
++#endif
++
+ #include <errno.h>
+ 
+ // For methods that are meant to support API from the main thread - should not be called internally
+--- WebCore-old/page/EventHandler.cpp	2012-04-09 09:58:36.000000000 +0000
++++ WebCore-new/page/EventHandler.cpp	2012-04-05 09:37:00.000000000 +0000
+@@ -59,6 +59,11 @@
+ #include "Settings.h"
+ #include "TextEvent.h"
+ 
++#if PLATFORM(SYLLABLE)
++#include "FrameLoadRequest.h"
++#include "WindowFeatures.h"
++#endif
++
+ #if ENABLE(SVG)
+ #include "SVGCursorElement.h"
+ #include "SVGDocument.h"
+@@ -1092,8 +1097,23 @@
+ 
+     // Don't ever dispatch click events for right clicks
+     bool swallowClickEvent = false;
++#if PLATFORM(SYLLABLE)
++    if (m_clickCount > 0 && mouseEvent.button() == LeftButton && mev.targetNode() == m_clickNode)
++        swallowClickEvent = dispatchMouseEvent(clickEvent, mev.targetNode(), true, m_clickCount, mouseEvent, true);
++    else if(m_clickCount > 0 && mouseEvent.button() == MiddleButton && mev.targetNode() == m_clickNode) {
++		KURL url = mev.hitTestResult().absoluteLinkURL();
++
++        if (Page* oldPage = m_frame->page()) {
++            WindowFeatures features;
++            features.setWindowFeature( "backgroundtab", "yes" );
++            oldPage->chrome()->createWindow(m_frame,
++                               FrameLoadRequest(ResourceRequest(url, m_frame->loader()->outgoingReferrer())), features);
++        }
++	}
++#else
+     if (m_clickCount > 0 && mouseEvent.button() != RightButton && mev.targetNode() == m_clickNode)
+         swallowClickEvent = dispatchMouseEvent(clickEvent, mev.targetNode(), true, m_clickCount, mouseEvent, true);
++#endif
+ 
+     if (m_resizeLayer) {
+         m_resizeLayer->setInResizeMode(false);
+@@ -1809,7 +1829,7 @@
+ }
+     
+     
+-#if !PLATFORM(MAC) && !PLATFORM(QT)
++#if !PLATFORM(MAC) && !PLATFORM(QT) && !PLATFORM(SYLLABLE)
+ bool EventHandler::invertSenseOfTabsToLinks(KeyboardEvent*) const
+ {
+     return false;
+--- WebCore-old/page/WindowFeatures.cpp	2012-04-09 09:58:24.000000000 +0000
++++ WebCore-new/page/WindowFeatures.cpp	2012-04-05 09:37:01.000000000 +0000
+@@ -44,6 +44,9 @@
+     , heightSet(false)
+     , fullscreen(false)
+     , dialog(false)
++#if PLATFORM(SYLLABLE)
++    , suggestBackgroundTab(false)
++#endif
+ {
+     /*
+      The IE rule is: all features except for channelmode and fullscreen default to YES, but
+@@ -155,6 +158,10 @@
+         fullscreen = value;
+     else if (keyString == "scrollbars")
+         scrollbarsVisible = value;
++#if PLATFORM(SYLLABLE)
++    else if (keyString == "backgroundtab")
++        suggestBackgroundTab = value;
++#endif
+ }
+ 
+ bool WindowFeatures::boolFeature(const HashMap<String, String>& features, const char* key, bool defaultValue)
+diff -abruN WebCore-old/page/WindowFeatures.h WebCore-new/page/WindowFeatures.h
+--- WebCore-old/page/WindowFeatures.h	2012-04-09 09:58:32.000000000 +0000
++++ WebCore-new/page/WindowFeatures.h	2012-04-05 09:37:01.000000000 +0000
+@@ -29,6 +29,8 @@
+ #ifndef WindowFeatures_h
+ #define WindowFeatures_h
+ 
++#include "config.h"
++
+ #include "PlatformString.h"
+ #include <wtf/HashMap.h>
+ 
+@@ -48,6 +50,9 @@
+             , resizable(true)
+             , fullscreen(false)
+             , dialog(false)
++#if PLATFORM(SYLLABLE)
++            , suggestBackgroundTab(false)
++#endif
+         {
+         }
+ 
+@@ -76,6 +81,11 @@
+ 
+         bool fullscreen;
+         bool dialog;
++
++#if PLATFORM(SYLLABLE)
++        bool suggestBackgroundTab;
++#endif
++
+     };
+ 
+ } // namespace WebCore
+--- WebCore-old/platform/ContextMenu.h	2012-04-09 09:56:38.000000000 +0000
++++ WebCore-new/platform/ContextMenu.h	2012-04-05 09:37:41.000000000 +0000
+@@ -36,6 +36,9 @@
+ #include <wtf/RetainPtr.h>
+ #elif PLATFORM(QT)
+ #include <QMenu>
++#elif PLATFORM(SYLLABLE)
++#include <gui/point.h>
++
+ #endif
+ 
+ namespace WebCore {
+@@ -78,6 +81,9 @@
+         RetainPtr<NSMutableArray> m_platformDescription;
+ #elif PLATFORM(QT)
+         QList<ContextMenuItem> m_items;
++#elif PLATFORM(SYLLABLE)
++        PlatformMenuDescription m_platformDescription;
++        os::Point m_point;
+ #else
+         PlatformMenuDescription m_platformDescription;
+ #endif
+--- WebCore-old/platform/ContextMenuItem.h	2012-04-09 09:56:52.000000000 +0000
++++ WebCore-new/platform/ContextMenuItem.h	2012-04-05 09:37:41.000000000 +0000
+@@ -46,12 +46,29 @@
+ #include <QAction>
+ #elif PLATFORM(WX)
+ class wxMenuItem;
++#elif PLATFORM(SYLLABLE)
++namespace os
++{
++	class MenuItem;
++}
+ #endif
+ 
+ namespace WebCore {
+ 
+     class ContextMenu;
+ 
++#if PLATFORM(MAC)
++    typedef NSMenuItem* PlatformMenuItemDescription;
++#elif PLATFORM(WIN)
++    typedef LPMENUITEMINFO PlatformMenuItemDescription;
++#elif PLATFORM(QT)
++    typedef void* PlatformMenuItemDescription;
++#elif PLATFORM(GDK)
++    typedef GtkMenuItem* PlatformMenuItemDescription;
++#elif PLATFORM(SYLLABLE)
++	typedef os::MenuItem* PlatformMenuItemDescription;    
++#endif
++
+     // This enum needs to be in sync with the WebMenuItemTag enum in WebUIDelegate.h and the
+     // extra values in WebUIDelegatePrivate.h
+     enum ContextMenuAction {
+--- WebCore-old/platform/DeprecatedString.h	2012-04-09 09:56:48.000000000 +0000
++++ WebCore-new/platform/DeprecatedString.h	2012-04-05 09:37:41.000000000 +0000
+@@ -58,6 +58,13 @@
+ class wxString;
+ #endif
+ 
++#if PLATFORM(SYLLABLE)
++namespace os
++{
++class String;
++}
++#endif
++
+ namespace KJS {
+     class Identifier;
+     class UString;
+@@ -287,6 +294,12 @@
+     operator QString() const;
+ #endif
+ 
++#if PLATFORM(SYLLABLE)
++    DeprecatedString(const os::String&);
++    operator os::String() const;
++#endif
++
++
+     static DeprecatedString fromLatin1(const char *);
+     static DeprecatedString fromLatin1(const char *, int len);
+     static DeprecatedString fromUtf8(const char *);
+--- WebCore-old/platform/DragData.h	2012-04-09 09:56:40.000000000 +0000
++++ WebCore-new/platform/DragData.h	2012-04-05 09:37:42.000000000 +0000
+@@ -52,6 +52,12 @@
+ #elif PLATFORM(GTK)
+ // FIXME: this should probably be something gdk-specific
+ typedef void* DragDataRef;
++#elif PLATFORM(SYLLABLE)
++namespace os
++{
++class Message;
++}
++typedef class os::Message* DragDataRef;
+ #endif
+ 
+ 
+--- WebCore-old/platform/DragImage.h	2012-04-09 09:56:52.000000000 +0000
++++ WebCore-new/platform/DragImage.h	2012-04-05 09:37:42.000000000 +0000
+@@ -38,6 +38,11 @@
+ #endif
+ #elif PLATFORM(QT)
+ class QPixmap;
++#elif PLATFORM(SYLLABLE)
++namespace os
++{
++class Bitmap;
++}
+ #elif PLATFORM(WIN)
+ typedef struct HBITMAP__* HBITMAP;
+ #elif PLATFORM(WX)
+@@ -66,6 +71,8 @@
+     typedef wxDragImage* DragImageRef;
+ #elif PLATFORM(GTK)
+     typedef void* DragImageRef;
++#elif PLATFORM(SYLLABLE)
++    typedef os::Bitmap* DragImageRef;       
+ #endif
+     
+     IntSize dragImageSize(DragImageRef);
+--- WebCore-old/platform/MIMETypeRegistry.cpp	2012-04-09 09:56:52.000000000 +0000
++++ WebCore-new/platform/MIMETypeRegistry.cpp	2012-04-05 09:37:42.000000000 +0000
+@@ -111,7 +111,15 @@
+       "image/gif",
+       "image/bmp",
+       "image/x-icon",    // ico
++#if PLATFORM(SYLLABLE)
++      "image/x-xbitmap",  // xbm
++      "image/x-jpeg",
++      "image/x-png",      
++      "image/x-gif",      
++      "image/x-bmp"
++#else
+       "image/x-xbitmap"  // xbm
++#endif
+     };
+     for (size_t i = 0; i < sizeof(types)/sizeof(types[0]); ++i) {
+       supportedImageMIMETypes->add(types[i]);
+--- WebCore-old/platform/NotImplemented.h	2012-04-09 09:56:38.000000000 +0000
++++ WebCore-new/platform/NotImplemented.h	2012-04-05 09:37:43.000000000 +0000
+@@ -49,7 +49,14 @@
+ 
+ #else
+ 
+-#define notImplemented() do { \
++#if PLATFORM(SYLLABLE)
++
++	#define notImplemented() \
++		fprintf(stderr, "FIXME: UNIMPLEMENTED: %s:%d (%s)\n", __FILE__, __LINE__, WTF_PRETTY_FUNCTION)
++
++#else
++
++	#define notImplemented() do { \
+         static bool havePrinted = false; \
+         if (!havePrinted && !supressNotImplementedWarning()) { \
+             WTFLogVerbose(__FILE__, __LINE__, WTF_PRETTY_FUNCTION, &LogNotYetImplemented, "UNIMPLEMENTED: "); \
+@@ -57,6 +64,10 @@
+         } \
+     } while (0)
+ 
++#endif
++
+ #endif // NDEBUG
+ 
+ #endif // NotImplemented_h
++
++
+--- WebCore-old/platform/PlatformKeyboardEvent.h	2012-04-09 09:56:50.000000000 +0000
++++ WebCore-new/platform/PlatformKeyboardEvent.h	2012-04-05 09:37:43.000000000 +0000
+@@ -56,6 +56,13 @@
+ class wxKeyEvent;
+ #endif
+ 
++#if PLATFORM(SYLLABLE)
++namespace os
++{
++	class String;
++}
++#endif
++
+ namespace WebCore {
+ 
+     class PlatformKeyboardEvent {
+@@ -124,6 +131,10 @@
+         PlatformKeyboardEvent(QKeyEvent*);
+ #endif
+ 
++#if PLATFORM(SYLLABLE)
++		PlatformKeyboardEvent(os::String string, os::String raw_tring, uint32 raw_Key, uint32 qual, bool is_key_up);
++#endif
++
+ #if PLATFORM(WX)
+         PlatformKeyboardEvent(wxKeyEvent&);
+ #endif
+--- WebCore-old/platform/PlatformMenuDescription.h	2012-04-09 09:56:48.000000000 +0000
++++ WebCore-new/platform/PlatformMenuDescription.h	2012-04-05 09:37:43.000000000 +0000
+@@ -40,6 +40,11 @@
+ typedef struct _GtkMenu GtkMenu;
+ #elif PLATFORM(WX)
+ class wxMenu;
++#elif PLATFORM(SYLLABLE)
++namespace os
++{
++	class Menu;
++}
+ #endif
+ 
+ namespace WebCore {
+@@ -55,8 +60,11 @@
+     typedef GtkMenu* PlatformMenuDescription;
+ #elif PLATFORM(WX)
+     typedef wxMenu* PlatformMenuDescription;
++#elif PLATFORM(SYLLABLE)
++    typedef os::Menu* PlatformMenuDescription;    
+ #endif
+ 
+ } // namespace
+ 
+ #endif // PlatformMenuDescription_h
++
+--- WebCore-old/platform/PlatformMouseEvent.h	2012-04-09 09:56:52.000000000 +0000
++++ WebCore-new/platform/PlatformMouseEvent.h	2012-04-05 09:37:43.000000000 +0000
+@@ -61,6 +61,10 @@
+ class wxMouseEvent;
+ #endif
+ 
++#if PLATFORM(SYLLABLE)
++#include <gui/view.h>
++#endif
++
+ namespace WebCore {
+     
+     // These button numbers match the ones used in the DOM API, 0 through 2, except for NoButton which isn't specified.
+@@ -129,6 +133,9 @@
+ #if PLATFORM(QT)
+         PlatformMouseEvent(QInputEvent*, int clickCount);
+ #endif
++#if PLATFORM(SYLLABLE)
++        PlatformMouseEvent(MouseEventType ev, float x, float y, float g_x, float g_y, uint32 buttons, int clickCount);
++#endif
+ 
+ #if PLATFORM(WX)
+         PlatformMouseEvent(const wxMouseEvent&, const wxPoint& globalPoint);
+--- WebCore-old/platform/PlatformWheelEvent.h	2012-04-09 09:56:52.000000000 +0000
++++ WebCore-new/platform/PlatformWheelEvent.h	2012-04-05 09:37:43.000000000 +0000
+@@ -55,6 +55,13 @@
+ class wxPoint;
+ #endif
+ 
++#if PLATFORM(SYLLABLE)
++namespace os
++{
++	class Point;
++}
++#endif
++
+ namespace WebCore {
+ 
+     class PlatformWheelEvent {
+@@ -98,6 +105,9 @@
+ #if PLATFORM(WX)
+         PlatformWheelEvent(const wxMouseEvent&, const wxPoint&);
+ #endif
++#if PLATFORM(SYLLABLE)
++        PlatformWheelEvent(os::Point, os::Point);
++#endif
+ 
+     private:
+         IntPoint m_position;
+--- WebCore-old/platform/PopupMenu.h	2012-04-09 09:56:52.000000000 +0000
++++ WebCore-new/platform/PopupMenu.h	2012-04-05 09:37:43.000000000 +0000
+@@ -50,6 +50,11 @@
+ typedef struct _GtkWidget GtkWidget;
+ #include <wtf/HashMap.h>
+ #include <glib.h>
++#elif PLATFORM(SYLLABLE)
++namespace os
++{
++	class Menu;
++}
+ #endif
+ 
+ namespace WebCore {
+@@ -161,6 +166,8 @@
+     static void menuUnmapped(GtkWidget*, PopupMenu*);
+     static void menuPositionFunction(GtkMenu*, gint*, gint*, gboolean*, PopupMenu*);
+     static void menuRemoveItem(GtkWidget*, PopupMenu*);
++#elif PLATFORM(SYLLABLE)
++	os::Menu* m_menu;    
+ #endif
+ 
+ };
+--- WebCore-old/platform/ScrollView.h	2012-04-09 09:56:52.000000000 +0000
++++ WebCore-new/platform/ScrollView.h	2012-04-05 09:37:43.000000000 +0000
+@@ -39,6 +39,14 @@
+ typedef struct HRGN__* HRGN;
+ #endif
+ 
++#if PLATFORM(SYLLABLE)
++namespace os
++{
++	class View;
++}
++class SyllableScrollView;
++#endif
++
+ namespace WebCore {
+ 
+     class FloatRect;
+@@ -225,8 +234,23 @@
+         class ScrollViewPrivate;
+         ScrollViewPrivate* m_data;
+ #endif
++
++#if PLATFORM(SYLLABLE)
++        ScrollView();
++        ~ScrollView();
++
++        virtual void setParentWidget(os::View*);
++        void setAllowsScrolling(bool);
++
++    private:
++        SyllableScrollView* m_area;
++#endif
++
+     };
+ 
+ } // namespace WebCore
+ 
+ #endif // ScrollView_h
++
++
++
+--- WebCore-old/platform/Widget.h	2012-04-09 09:56:54.000000000 +0000
++++ WebCore-new/platform/Widget.h	2012-04-05 09:37:44.000000000 +0000
+@@ -55,6 +55,13 @@
+ class wxScrolledWindow;
+ #endif
+ 
++#if PLATFORM(SYLLABLE)
++namespace os
++{
++class View;
++}
++#endif
++
+ namespace WebCore {
+ 
+     class Cursor;
+@@ -191,6 +198,15 @@
+         void setSuppressInvalidation(bool);
+ #endif
+ 
++#if PLATFORM(SYLLABLE)
++        os::View* parentWidget() const;
++        virtual void setParentWidget(os::View*);
++
++        os::View* syllableWidget();
++        void setSyllableWidget(os::View*);
++#endif
++
++
+ #if PLATFORM(MAC)
+         Widget(NSView*);
+ 
+--- WebCore-old/platform/graphics/BitmapImage.h	2012-04-09 09:56:48.000000000 +0000
++++ WebCore-new/platform/graphics/BitmapImage.h	2012-04-05 09:37:53.000000000 +0000
+@@ -44,6 +44,13 @@
+ typedef struct HBITMAP__ *HBITMAP;
+ #endif
+ 
++#if PLATFORM(SYLLABLE)
++namespace os
++{
++	class Bitmap;
++}
++#endif
++
+ namespace WebCore {
+     struct FrameData;
+ }
+@@ -122,6 +129,11 @@
+     virtual QPixmap* getPixmap() const;
+ #endif
+     
++#if PLATFORM(SYLLABLE)
++    virtual os::Bitmap* getPixmap() const;
++#endif
++
++    
+ #if PLATFORM(WIN)
+     virtual bool getHBITMAP(HBITMAP);
+     virtual bool getHBITMAPOfSize(HBITMAP, LPSIZE);
+--- WebCore-old/platform/graphics/Color.h	2012-04-09 09:56:46.000000000 +0000
++++ WebCore-new/platform/graphics/Color.h	2012-04-05 09:37:54.000000000 +0000
+@@ -44,6 +44,13 @@
+ class wxColour;
+ #endif
+ 
++#if PLATFORM(SYLLABLE)
++namespace os
++{
++struct Color32_s;
++}
++#endif
++
+ namespace WebCore {
+ 
+ class String;
+@@ -95,6 +102,11 @@
+     operator QColor() const;
+ #endif
+ 
++#if PLATFORM(SYLLABLE)
++    Color(const os::Color32_s&);
++    operator os::Color32_s() const;
++#endif
++
+ #if PLATFORM(GTK)
+     Color(const GdkColor&);
+     // We can't sensibly go back to GdkColor without losing the alpha value
+--- WebCore-old/platform/graphics/FloatPoint.h	2012-04-09 09:56:46.000000000 +0000
++++ WebCore-new/platform/graphics/FloatPoint.h	2012-04-05 09:37:54.000000000 +0000
+@@ -46,6 +46,14 @@
+ class QPointF;
+ #endif
+ 
++#if PLATFORM(SYLLABLE)
++namespace os
++{
++class Point;
++}
++#endif
++
++
+ #if PLATFORM(SYMBIAN)
+ class TPoint;
+ #endif
+@@ -84,6 +92,11 @@
+     FloatPoint(const QPointF&);
+     operator QPointF() const;
+ #endif
++#if PLATFORM(SYLLABLE)
++    FloatPoint(const os::Point&);
++    operator os::Point() const;
++#endif
++
+ 
+ #if PLATFORM(SYMBIAN)
+     operator TPoint() const;
+--- WebCore-old/platform/graphics/FloatRect.h	2012-04-09 09:56:46.000000000 +0000
++++ WebCore-new/platform/graphics/FloatRect.h	2012-04-05 09:37:54.000000000 +0000
+@@ -49,6 +49,13 @@
+ class wxRect2DDouble;
+ #endif
+ 
++#if PLATFORM(SYLLABLE)
++namespace os
++{
++class Rect;
++}
++#endif
++
+ namespace WebCore {
+ 
+ class IntRect;
+@@ -126,6 +133,10 @@
+     FloatRect(const QRectF&);
+     operator QRectF() const;
+ #endif
++#if PLATFORM(SYLLABLE)
++    FloatRect(const os::Rect&);
++    operator os::Rect() const;
++#endif
+ #if PLATFORM(SYMBIAN)
+     FloatRect(const TRect&);
+     operator TRect() const;
+--- WebCore-old/platform/graphics/GlyphBuffer.h	2012-04-09 09:56:46.000000000 +0000
++++ WebCore-new/platform/graphics/GlyphBuffer.h	2012-04-05 09:37:55.000000000 +0000
+@@ -56,6 +56,9 @@
+ #elif PLATFORM(QT)
+ typedef unsigned short GlyphBufferGlyph;
+ typedef FloatSize GlyphBufferAdvance;
++#elif PLATFORM(SYLLABLE)
++typedef unsigned short GlyphBufferGlyph;
++typedef FloatSize GlyphBufferAdvance;
+ #endif
+ 
+ class GlyphBuffer {
+@@ -103,7 +106,7 @@
+ 
+     Glyph glyphAt(int index) const
+     {
+-#if PLATFORM(CG) || PLATFORM(QT) || PLATFORM(WX)
++#if PLATFORM(CG) || PLATFORM(QT) || PLATFORM(WX) || PLATFORM(SYLLABLE)
+         return m_glyphs[index];
+ #elif PLATFORM(CAIRO)
+         return m_glyphs[index].index;
+@@ -114,7 +117,7 @@
+     {
+ #if PLATFORM(CG)
+         return m_advances[index].width;
+-#elif PLATFORM(CAIRO) || PLATFORM(QT) || PLATFORM(WX)
++#elif PLATFORM(CAIRO) || PLATFORM(QT) || PLATFORM(WX) || PLATFORM(SYLLABLE)
+         return m_advances[index].width();
+ #endif
+     }
+@@ -142,7 +145,7 @@
+         cairoGlyph.index = glyph;
+         m_glyphs.append(cairoGlyph);
+         m_advances.append(FloatSize(width, 0));
+-#elif PLATFORM(QT) || PLATFORM(WX)
++#elif PLATFORM(QT) || PLATFORM(WX) || PLATFORM(SYLLABLE)
+         m_glyphs.append(glyph);
+         m_advances.append(FloatSize(width, 0));
+ #endif
+--- WebCore-old/platform/graphics/GraphicsContext.cpp	2012-04-09 09:56:46.000000000 +0000
++++ WebCore-new/platform/graphics/GraphicsContext.cpp	2012-04-05 09:37:55.000000000 +0000
+@@ -431,16 +431,17 @@
+ }
+ #endif
+ 
+-#if !PLATFORM(QT) && !PLATFORM(CAIRO)
++#if !PLATFORM(QT) && !PLATFORM(CAIRO) && !PLATFORM(SYLLABLE)
+ void GraphicsContext::setPlatformStrokeStyle(const StrokeStyle&)
+ {
+ }
+ #endif
+ 
+-#if !PLATFORM(QT)
++#if !PLATFORM(QT) && !PLATFORM(SYLLABLE)
+ void GraphicsContext::setPlatformFont(const Font&)
+ {
+ }
+ #endif
+ 
+ }
++
+--- WebCore-old/platform/graphics/GraphicsContext.h	2012-04-09 09:56:44.000000000 +0000
++++ WebCore-new/platform/graphics/GraphicsContext.h	2012-04-05 09:37:55.000000000 +0000
+@@ -41,6 +41,12 @@
+ #elif PLATFORM(QT)
+ class QPainter;
+ typedef QPainter PlatformGraphicsContext;
++#elif PLATFORM(SYLLABLE)
++namespace os
++{
++class View;
++}
++typedef os::View PlatformGraphicsContext;
+ #elif PLATFORM(WX)
+ class wxGCDC;
+ class wxWindowDC;
+@@ -54,6 +60,7 @@
+ #ifdef __APPLE__
+     class wxDC;
+     typedef wxDC PlatformGraphicsContext;
++>>>>>>> .r29940
+ #else
+     typedef wxGCDC PlatformGraphicsContext;
+ #endif
+--- WebCore-old/platform/graphics/ImageSource.h	2012-04-09 09:56:44.000000000 +0000
++++ WebCore-new/platform/graphics/ImageSource.h	2012-04-05 09:37:55.000000000 +0000
+@@ -37,6 +37,11 @@
+ typedef const struct __CFData* CFDataRef;
+ #elif PLATFORM(QT)
+ class QPixmap;
++#elif PLATFORM(SYLLABLE)
++namespace os
++{
++class Bitmap;
++}
+ #elif PLATFORM(CAIRO)
+ struct _cairo_surface;
+ typedef struct _cairo_surface cairo_surface_t;
+@@ -59,6 +64,10 @@
+ class ImageDecoderQt;
+ typedef ImageDecoderQt* NativeImageSourcePtr;
+ typedef QPixmap* NativeImagePtr;
++#elif PLATFORM(SYLLABLE)
++class ImageDecoder;
++typedef ImageDecoder* NativeImageSourcePtr;
++typedef os::Bitmap* NativeImagePtr;
+ #else
+ class ImageDecoder;
+ typedef ImageDecoder* NativeImageSourcePtr;
+--- WebCore-old/platform/graphics/IntPoint.h	2012-04-09 09:56:48.000000000 +0000
++++ WebCore-new/platform/graphics/IntPoint.h	2012-04-05 09:37:55.000000000 +0000
+@@ -48,6 +48,11 @@
+ class QPoint;
+ #elif PLATFORM(GTK)
+ typedef struct _GdkPoint GdkPoint;
++#elif PLATFORM(SYLLABLE)
++namespace os
++{
++class IPoint;
++}
+ #endif
+ #if PLATFORM(SYMBIAN)
+ class TPoint;
+@@ -93,6 +98,9 @@
+ #elif PLATFORM(GTK)
+     IntPoint(const GdkPoint&);
+     operator GdkPoint() const;
++#elif PLATFORM(SYLLABLE)
++    IntPoint(const os::IPoint&);
++    operator os::IPoint() const;
+ #endif
+ #if PLATFORM(SYMBIAN)
+     IntPoint(const TPoint&);
+--- WebCore-old/platform/graphics/IntRect.h	2012-04-09 09:56:48.000000000 +0000
++++ WebCore-new/platform/graphics/IntRect.h	2012-04-05 09:37:56.000000000 +0000
+@@ -47,6 +47,11 @@
+ class QRect;
+ #elif PLATFORM(GTK)
+ typedef struct _GdkRectangle GdkRectangle;
++#elif PLATFORM(SYLLABLE)
++namespace os
++{
++class IRect;
++}
+ #endif
+ #if PLATFORM(SYMBIAN)
+ class TRect;
+@@ -140,6 +145,9 @@
+ #elif PLATFORM(GTK)
+     IntRect(const GdkRectangle&);
+     operator GdkRectangle() const;
++#elif PLATFORM(SYLLABLE)
++    IntRect(const os::IRect&);
++    operator os::IRect() const;
+ #endif
+ #if PLATFORM(SYMBIAN)
+     IntRect(const TRect&);
+--- WebCore-old/platform/graphics/IntSize.h	2012-04-09 09:56:48.000000000 +0000
++++ WebCore-new/platform/graphics/IntSize.h	2012-04-05 09:37:56.000000000 +0000
+@@ -44,6 +44,11 @@
+ typedef struct tagSIZE SIZE;
+ #elif PLATFORM(QT)
+ class QSize;
++#elif PLATFORM(SYLLABLE)
++namespace os
++{
++class IPoint;
++}
+ #endif
+ #if PLATFORM(SYMBIAN)
+ class TSize;
+@@ -100,6 +105,10 @@
+     IntSize(const QSize&);
+     operator QSize() const;
+ #endif
++#if PLATFORM(SYLLABLE)
++    IntSize(const os::IPoint&);
++    operator os::IPoint() const;
++#endif
+ #if PLATFORM(SYMBIAN)
+     IntSize(const TSize&);
+     operator TSize() const;
+--- WebCore-old/platform/graphics/Path.h	2012-04-09 09:56:48.000000000 +0000
++++ WebCore-new/platform/graphics/Path.h	2012-04-05 09:37:56.000000000 +0000
+@@ -40,6 +40,12 @@
+     struct CairoPath;
+ }
+ typedef WebCore::CairoPath PlatformPath;
++#elif PLATFORM(SYLLABLE)
++namespace os
++{
++	class Region;
++}
++typedef os::Region PlatformPath;
+ #else
+ typedef void PlatformPath;
+ #endif
+--- WebCore-old/platform/image-decoders/bmp/BMPImageDecoder.cpp	2012-04-09 09:56:54.000000000 +0000
++++ WebCore-new/platform/image-decoders/bmp/BMPImageDecoder.cpp	2012-04-05 09:38:33.000000000 +0000
+@@ -26,7 +26,7 @@
+ #include "config.h"
+ #include "BMPImageDecoder.h"
+ 
+-#if PLATFORM(CAIRO) || PLATFORM(QT) || PLATFORM(WX)
++#if PLATFORM(CAIRO) || PLATFORM(QT) || PLATFORM(WX) || PLATFORM(SYLLABLE)
+ 
+ namespace WebCore
+ {
+--- WebCore-old/platform/image-decoders/gif/GIFImageDecoder.cpp	2012-04-09 09:56:54.000000000 +0000
++++ WebCore-new/platform/image-decoders/gif/GIFImageDecoder.cpp	2012-04-05 09:38:36.000000000 +0000
+@@ -26,7 +26,7 @@
+ #include "GIFImageDecoder.h"
+ #include "GIFImageReader.h"
+ 
+-#if PLATFORM(CAIRO) || PLATFORM(QT) || PLATFORM(WX)
++#if PLATFORM(CAIRO) || PLATFORM(QT) || PLATFORM(WX) || PLATFORM(SYLLABLE)
+ 
+ namespace WebCore {
+ 
+--- WebCore-old/platform/image-decoders/gif/GIFImageReader.cpp	2012-04-09 09:56:54.000000000 +0000
++++ WebCore-new/platform/image-decoders/gif/GIFImageReader.cpp	2012-04-05 09:38:36.000000000 +0000
+@@ -78,7 +78,7 @@
+ #include <string.h>
+ #include "GIFImageDecoder.h"
+ 
+-#if PLATFORM(CAIRO) || PLATFORM(QT) || PLATFORM(WX)
++#if PLATFORM(CAIRO) || PLATFORM(QT) || PLATFORM(WX) || PLATFORM(SYLLABLE)
+ 
+ using WebCore::GIFImageDecoder;
+ 
+--- WebCore-old/platform/image-decoders/ico/ICOImageDecoder.cpp	2012-04-09 09:56:54.000000000 +0000
++++ WebCore-new/platform/image-decoders/ico/ICOImageDecoder.cpp	2012-04-05 09:38:39.000000000 +0000
+@@ -26,7 +26,7 @@
+ #include "config.h"
+ #include "ICOImageDecoder.h"
+ 
+-#if PLATFORM(CAIRO) || PLATFORM(QT) || PLATFORM(WX)
++#if PLATFORM(CAIRO) || PLATFORM(QT) || PLATFORM(WX) || PLATFORM(SYLLABLE)
+ 
+ namespace WebCore
+ {
+--- WebCore-old/platform/image-decoders/jpeg/JPEGImageDecoder.cpp	2012-04-09 09:56:54.000000000 +0000
++++ WebCore-new/platform/image-decoders/jpeg/JPEGImageDecoder.cpp	2012-04-05 09:38:41.000000000 +0000
+@@ -39,7 +39,7 @@
+ #include "JPEGImageDecoder.h"
+ #include <assert.h>
+ 
+-#if PLATFORM(CAIRO) || PLATFORM(QT) || PLATFORM(WX)
++#if PLATFORM(CAIRO) || PLATFORM(QT) || PLATFORM(WX) || PLATFORM(SYLLABLE)
+ 
+ extern "C" {
+ #include "jpeglib.h"
+--- WebCore-old/platform/image-decoders/png/PNGImageDecoder.cpp	2012-04-09 09:56:54.000000000 +0000
++++ WebCore-new/platform/image-decoders/png/PNGImageDecoder.cpp	2012-04-05 09:38:47.000000000 +0000
+@@ -39,7 +39,7 @@
+ #include "png.h"
+ #include "assert.h"
+ 
+-#if PLATFORM(CAIRO) || PLATFORM(QT) || PLATFORM(WX)
++#if PLATFORM(CAIRO) || PLATFORM(QT) || PLATFORM(WX) || PLATFORM(SYLLABLE)
+ 
+ namespace WebCore {
+ 
+--- WebCore-old/platform/image-decoders/xbm/XBMImageDecoder.cpp	2012-04-09 09:56:54.000000000 +0000
++++ WebCore-new/platform/image-decoders/xbm/XBMImageDecoder.cpp	2012-04-05 09:38:49.000000000 +0000
+@@ -26,7 +26,7 @@
+ #include "config.h"
+ #include "XBMImageDecoder.h"
+  
+-#if PLATFORM(CAIRO) || PLATFORM(QT) || PLATFORM(WX)
++#if PLATFORM(CAIRO) || PLATFORM(QT) || PLATFORM(WX) || PLATFORM(SYLLABLE)
+ 
+ namespace WebCore
+ {
+--- WebCore-old/platform/image-decoders/zlib/adler32.c	2012-04-09 09:56:54.000000000 +0000
++++ WebCore-new/platform/image-decoders/zlib/adler32.c	2012-04-05 09:38:56.000000000 +0000
+@@ -3,7 +3,7 @@
+  * For conditions of distribution and use, see copyright notice in zlib.h
+  */
+ 
+-/* @(#) $Id: adler32.c,v 3.6 2005/08/04 19:14:14 tor%cs.brown.edu Exp $ */
++/* @(#) $Id: adler32.c,v 1.1.1.1 2008/07/21 15:54:32 cvs_user Exp $ */
+ 
+ #define ZLIB_INTERNAL
+ #include "zlib.h"
+--- WebCore-old/platform/image-decoders/zlib/compress.c	2012-04-09 09:56:54.000000000 +0000
++++ WebCore-new/platform/image-decoders/zlib/compress.c	2012-04-05 09:38:56.000000000 +0000
+@@ -3,7 +3,7 @@
+  * For conditions of distribution and use, see copyright notice in zlib.h
+  */
+ 
+-/* @(#) $Id: compress.c,v 3.6 2005/08/04 19:14:14 tor%cs.brown.edu Exp $ */
++/* @(#) $Id: compress.c,v 1.1.1.1 2008/07/21 15:54:32 cvs_user Exp $ */
+ 
+ #define ZLIB_INTERNAL
+ #include "zlib.h"
+--- WebCore-old/platform/image-decoders/zlib/crc32.c	2012-04-09 09:56:54.000000000 +0000
++++ WebCore-new/platform/image-decoders/zlib/crc32.c	2012-04-05 09:38:56.000000000 +0000
+@@ -9,7 +9,7 @@
+  * factor of two increase in speed on a Power PC G4 (PPC7455) using gcc -O3.
+  */
+ 
+-/* @(#) $Id: crc32.c,v 3.6 2005/08/04 19:14:14 tor%cs.brown.edu Exp $ */
++/* @(#) $Id: crc32.c,v 1.1.1.1 2008/07/21 15:54:32 cvs_user Exp $ */
+ 
+ /*
+   Note on the use of DYNAMIC_CRC_TABLE: there is no mutex or semaphore
+--- WebCore-old/platform/image-decoders/zlib/deflate.c	2012-04-09 09:56:54.000000000 +0000
++++ WebCore-new/platform/image-decoders/zlib/deflate.c	2012-04-05 09:38:56.000000000 +0000
+@@ -47,7 +47,7 @@
+  *
+  */
+ 
+-/* @(#) $Id: deflate.c,v 3.6 2005/08/04 19:14:14 tor%cs.brown.edu Exp $ */
++/* @(#) $Id: deflate.c,v 1.1.1.1 2008/07/21 15:54:32 cvs_user Exp $ */
+ 
+ #include "deflate.h"
+ 
+--- WebCore-old/platform/image-decoders/zlib/deflate.h	2012-04-09 09:56:54.000000000 +0000
++++ WebCore-new/platform/image-decoders/zlib/deflate.h	2012-04-05 09:38:57.000000000 +0000
+@@ -8,7 +8,7 @@
+    subject to change. Applications should only use zlib.h.
+  */
+ 
+-/* @(#) $Id: deflate.h,v 3.6 2005/08/04 19:14:14 tor%cs.brown.edu Exp $ */
++/* @(#) $Id: deflate.h,v 1.1.1.1 2008/07/21 15:54:32 cvs_user Exp $ */
+ 
+ #ifndef DEFLATE_H
+ #define DEFLATE_H
+--- WebCore-old/platform/image-decoders/zlib/gzio.c	2012-04-09 09:56:54.000000000 +0000
++++ WebCore-new/platform/image-decoders/zlib/gzio.c	2012-04-05 09:38:57.000000000 +0000
+@@ -5,7 +5,7 @@
+  * Compile this file with -DNO_GZCOMPRESS to avoid the compression code.
+  */
+ 
+-/* @(#) $Id: gzio.c,v 3.7 2005/08/04 19:14:14 tor%cs.brown.edu Exp $ */
++/* @(#) $Id: gzio.c,v 1.1.1.1 2008/07/21 15:54:32 cvs_user Exp $ */
+ 
+ #include <stdio.h>
+ 
+--- WebCore-old/platform/image-decoders/zlib/trees.c	2012-04-09 09:56:54.000000000 +0000
++++ WebCore-new/platform/image-decoders/zlib/trees.c	2012-04-05 09:38:58.000000000 +0000
+@@ -29,7 +29,7 @@
+  *          Addison-Wesley, 1983. ISBN 0-201-06672-6.
+  */
+ 
+-/* @(#) $Id: trees.c,v 3.6 2005/08/04 19:14:14 tor%cs.brown.edu Exp $ */
++/* @(#) $Id: trees.c,v 1.1.1.1 2008/07/21 15:54:33 cvs_user Exp $ */
+ 
+ /* #define GEN_TREES_H */
+ 
+--- WebCore-old/platform/image-decoders/zlib/uncompr.c	2012-04-09 09:56:54.000000000 +0000
++++ WebCore-new/platform/image-decoders/zlib/uncompr.c	2012-04-05 09:38:58.000000000 +0000
+@@ -3,7 +3,7 @@
+  * For conditions of distribution and use, see copyright notice in zlib.h
+  */
+ 
+-/* @(#) $Id: uncompr.c,v 3.6 2005/08/04 19:14:14 tor%cs.brown.edu Exp $ */
++/* @(#) $Id: uncompr.c,v 1.1.1.1 2008/07/21 15:54:33 cvs_user Exp $ */
+ 
+ #define ZLIB_INTERNAL
+ #include "zlib.h"
+--- WebCore-old/platform/image-decoders/zlib/zconf.h	2012-04-09 09:56:54.000000000 +0000
++++ WebCore-new/platform/image-decoders/zlib/zconf.h	2012-04-05 09:38:58.000000000 +0000
+@@ -3,7 +3,7 @@
+  * For conditions of distribution and use, see copyright notice in zlib.h
+  */
+ 
+-/* @(#) $Id: zconf.h,v 3.9 2005/08/04 19:14:14 tor%cs.brown.edu Exp $ */
++/* @(#) $Id: zconf.h,v 1.1.1.1 2008/07/21 15:54:33 cvs_user Exp $ */
+ 
+ #ifndef ZCONF_H
+ #define ZCONF_H
+--- WebCore-old/platform/image-decoders/zlib/zutil.c	2012-04-09 09:56:54.000000000 +0000
++++ WebCore-new/platform/image-decoders/zlib/zutil.c	2012-04-05 09:38:58.000000000 +0000
+@@ -3,7 +3,7 @@
+  * For conditions of distribution and use, see copyright notice in zlib.h
+  */
+ 
+-/* @(#) $Id: zutil.c,v 3.11 2005/08/04 19:14:14 tor%cs.brown.edu Exp $ */
++/* @(#) $Id: zutil.c,v 1.1.1.1 2008/07/21 15:54:33 cvs_user Exp $ */
+ 
+ #include "zutil.h"
+ 
+--- WebCore-old/platform/image-decoders/zlib/zutil.h	2012-04-09 09:56:54.000000000 +0000
++++ WebCore-new/platform/image-decoders/zlib/zutil.h	2012-04-05 09:38:58.000000000 +0000
+@@ -8,7 +8,7 @@
+    subject to change. Applications should only use zlib.h.
+  */
+ 
+-/* @(#) $Id: zutil.h,v 3.10 2005/08/04 19:14:14 tor%cs.brown.edu Exp $ */
++/* @(#) $Id: zutil.h,v 1.1.1.1 2008/07/21 15:54:33 cvs_user Exp $ */
+ 
+ #ifndef ZUTIL_H
+ #define ZUTIL_H
+--- WebCore-old/platform/network/ResourceHandle.h	2012-04-09 09:56:50.000000000 +0000
++++ WebCore-new/platform/network/ResourceHandle.h	2012-04-05 09:39:14.000000000 +0000
+@@ -133,7 +133,7 @@
+     friend LRESULT __stdcall ResourceHandleWndProc(HWND, unsigned message, WPARAM, LPARAM);
+ #endif
+ 
+-#if PLATFORM(GTK) || PLATFORM(QT) || PLATFORM(WX)
++#if PLATFORM(GTK) || PLATFORM(QT) || PLATFORM(WX) || PLATFORM(SYLLABLE)
+     ResourceHandleInternal* getInternal() { return d.get(); }
+ #endif
+ 
+--- WebCore-old/platform/network/ResourceHandleInternal.h	2012-04-09 09:56:50.000000000 +0000
++++ WebCore-new/platform/network/ResourceHandleInternal.h	2012-04-05 09:39:15.000000000 +0000
+@@ -111,6 +111,9 @@
+ #elif USE(CFNETWORK)
+             , m_currentCFChallenge(0)
+ #endif
++#if PLATFORM(SYLLABLE)
++			, m_progressive(false)
++#endif
+         {
+         }
+         
+@@ -174,9 +177,13 @@
+ #if USE(CFNETWORK)
+         CFURLAuthChallengeRef m_currentCFChallenge;
+ #endif
++#if PLATFORM(SYLLABLE)
++        bool m_progressive;
++#endif
+         AuthenticationChallenge m_currentWebChallenge;
+     };
+ 
+ } // namespace WebCore
+ 
+ #endif // ResourceHandleInternal_h
++
+--- WebCore-old/platform/network/curl/ResourceHandleCurl.cpp	2012-04-09 09:56:50.000000000 +0000
++++ WebCore-new/platform/network/curl/ResourceHandleCurl.cpp	2012-04-05 09:39:22.000000000 +0000
+@@ -51,7 +51,8 @@
+ 
+ bool ResourceHandle::start(Frame* frame)
+ {
+-    ASSERT(frame);
++/* XXXKV */
++//    ASSERT(frame);
+     ref();
+     ResourceHandleManager::sharedInstance()->add(this);
+     return true;
+--- WebCore-old/platform/network/curl/ResourceHandleManager.cpp	2012-04-09 09:56:50.000000000 +0000
++++ WebCore-new/platform/network/curl/ResourceHandleManager.cpp	2012-04-05 09:39:22.000000000 +0000
+@@ -42,6 +42,13 @@
+ #include <errno.h>
+ #include <wtf/Vector.h>
+ 
++#if PLATFORM(SYLLABLE)
++#include <util/locker.h>
++#include <util/string.h>
++os::Locker g_cGlobalMutex( "global_mutex" );
++os::String g_zProxyURL;
++#endif
++
+ namespace WebCore {
+ 
+ const int selectTimeoutMS = 5;
+--- WebCore-old/platform/text/PlatformString.h	2012-04-09 09:56:34.000000000 +0000
++++ WebCore-new/platform/text/PlatformString.h	2012-04-05 09:40:00.000000000 +0000
+@@ -39,6 +39,12 @@
+ class wxString;
+ #endif
+ 
++#if PLATFORM(SYLLABLE)
++namespace os
++{
++class String;
++}
++#endif
+ 
+ namespace WebCore {
+ 
+@@ -184,6 +190,11 @@
+     operator wxString() const;
+ #endif
+ 
++#if PLATFORM(SYLLABLE)
++    String(const os::String&);
++    operator os::String() const;
++#endif
++
+ #ifndef NDEBUG
+     Vector<char> ascii() const;
+ #endif

@@ -1,0 +1,11 @@
+--- original/configure	2011-11-21 19:49:30.000000000 +0000
++++ current/configure	2011-12-01 12:01:58.000000000 +0000
+@@ -2558,6 +2558,8 @@
+         ;;
+     none)
+         ;;
++    syllable)
++        ;;
+     *)
+         die "Unknown OS '$target_os'."
+         ;;

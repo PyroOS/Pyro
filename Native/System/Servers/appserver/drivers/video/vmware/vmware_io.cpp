@@ -30,10 +30,10 @@
 #include <stdlib.h>
 #include <stdio.h>
 
-#include <atheos/types.h>
-#include <atheos/pci.h>
-#include <atheos/kernel.h>
-#include <atheos/isa_io.h>
+#include <pyro/types.h>
+#include <pyro/pci.h>
+#include <pyro/kernel.h>
+#include <pyro/isa_io.h>
 
 #include "ChipInfo.h"
 #include "svga_reg.h"

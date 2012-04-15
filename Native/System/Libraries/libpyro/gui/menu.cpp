@@ -27,7 +27,7 @@
 #include <gui/font.h>
 #include <gui/bitmap.h>
 #include <util/message.h>
-#include <atheos/kernel.h>
+#include <pyro/kernel.h>
 #include <typeinfo>
 #include <iostream>
 

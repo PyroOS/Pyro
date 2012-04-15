@@ -1,16 +1,14 @@
 CFLAGS   = -kernel -fno-PIC -c -O3 -Wall
 AFLAGS   = -c
 
-C_INCLUDE_PATH=$(ATHEOS_INCLUDE_PATH)
+C_INCLUDE_PATH=$(PYRO_INCLUDE)
 
 DRIVERNAME := sylvnc_mouse
 
 OBJS := $(DRIVERNAME).o
 
-
 OBJDIR	:= objs
 OBJS	:= $(addprefix $(OBJDIR)/,$(OBJS))
-
 
 #
 #	rules
@@ -28,9 +26,6 @@ $(OBJDIR)/%.o : %.s
 $(OBJDIR)/%.o : %.S
 	$(CC) $(CFLAGS) -x assembler-with-cpp $< -o $@
 
-
-
-
 all :	objs $(OBJDIR)/$(DRIVERNAME)
 
 objs:
@@ -39,12 +34,16 @@ objs:
 $(OBJDIR)/$(DRIVERNAME): $(OBJS) Makefile
 	$(CC) -kernel $(OBJS) -o $(OBJDIR)/$(DRIVERNAME)
 
-install: all
-	cp -f $(OBJDIR)/$(DRIVERNAME) /system/drivers/dev/input/$(DRIVERNAME)
+# ----- ----- ----- ----- ----- ----- ----- ----- ----- -----
 
-dist: all
-	cp -f $(OBJDIR)/$(DRIVERNAME) $(DIST_DIR)/atheos/sys/drivers/dev/$(DRIVERNAME)
+dist: all inst clean
+
+inst:
+	mkdir -p $(PYRO_BINARY_DESTINATION)Native/Extra/System/SylVNC/System/drivers/dev
+	cp -pf $(OBJDIR)/$(DRIVERNAME) $(PYRO_BINARY_DESTINATION)Native/Extra/System/SylVNC/System/drivers/dev/
+	addattrib $(PYRO_BINARY_DESTINATION)Native/Extra/System/SylVNC/System/drivers/dev/$(DRIVERNAME) "CheckSum::MD5" `md5sum $(PYRO_BINARY_DESTINATION)Native/Extra/System/SylVNC/System/drivers/dev/$(DRIVERNAME) | cut -c1-32`
+	sync
 
 clean:
-	-rm -f $(OBJS) $(OBJDIR)/$(DRIVERNAME)
-
+	rm -rf $(OBJDIR)
+	sync

@@ -19,7 +19,7 @@
  */
 
 #include <stdio.h>
-#include <atheos/types.h>
+#include <pyro/types.h>
 
 #include <gui/window.h>
 #include <gui/view.h>

@@ -35,7 +35,7 @@
 #include "cardwo.h"
 #include "audio.h"
 
-#include <atheos/spinlock.h>
+#include <pyro/spinlock.h>
 
 static uint32 samplerate_to_linearpitch(uint32 samplingrate)
 {

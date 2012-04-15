@@ -100,12 +100,12 @@ Desktop::Desktop() : os::Window( os::Rect(), "desktop", MSG_DESKTOP_TITLE, os::W
 				cFileNode.ReadAttr( os::String( "DesktopLink::" ) + g_zLinks[i], ATTR_TYPE_STRING, zBuffer, 0, PATH_MAX );
 				unlink( (cPath + "/" + zBuffer).c_str() );
 			}
-			create_desktop_icon( "/Applications", MSG_DESKTOP_SYMLINKS_APPLICATIONS, "/system/icons/applications.png" );
+			create_desktop_icon( "/boot/Applications", MSG_DESKTOP_SYMLINKS_APPLICATIONS, "/boot/System/icons/applications.png" );
 			create_desktop_icon( "/", MSG_DESKTOP_SYMLINKS_DISKS, "" );
-			create_desktop_icon( "/Applications/Preferences", MSG_DESKTOP_SYMLINKS_PREFERENCES, "/system/icons/settings.png" );
-			create_desktop_icon( "/system/bin/aterm", MSG_DESKTOP_SYMLINKS_TERMINAL, "/system/icons/aterm.png" );
-			create_desktop_icon( pzHome, MSG_DESKTOP_SYMLINKS_HOME, "/system/icons/home.png" );
-			create_desktop_icon( os::String( pzHome ) + "/Trash", MSG_DESKTOP_SYMLINKS_TRASH, "/system/icons/trash.png" );
+			create_desktop_icon( "/boot/Preferences", MSG_DESKTOP_SYMLINKS_PREFERENCES, "/boot/System/icons/settings.png" );
+			create_desktop_icon( "/boot/System/binary/Terminal", MSG_DESKTOP_SYMLINKS_TERMINAL, "/boot/System/icons/aterm.png" );
+			create_desktop_icon( pzHome, MSG_DESKTOP_SYMLINKS_HOME, "/boot/System/icons/home.png" );
+			create_desktop_icon( os::String( pzHome ) + "/Trash", MSG_DESKTOP_SYMLINKS_TRASH, "/boot/System/icons/trash.png" );
 		}
 	} else {
 		os::String cPath = os::String( pzHome ) + os::String( "/Desktop" );
@@ -120,12 +120,12 @@ Desktop::Desktop() : os::Window( os::Rect(), "desktop", MSG_DESKTOP_TITLE, os::W
 			unlink( (cPath + "/" + zBuffer).c_str() );
 		}
 		/* Create default links */
-		create_desktop_icon( "/Applications", MSG_DESKTOP_SYMLINKS_APPLICATIONS, "/system/icons/applications.png" );
+		create_desktop_icon( "/boot/Applications", MSG_DESKTOP_SYMLINKS_APPLICATIONS, "/boot/System/icons/applications.png" );
 		create_desktop_icon( "/", MSG_DESKTOP_SYMLINKS_DISKS, "" );
-		create_desktop_icon( "/Applications/Preferences", MSG_DESKTOP_SYMLINKS_PREFERENCES, "/system/icons/settings.png" );
-		create_desktop_icon( "/system/bin/aterm", MSG_DESKTOP_SYMLINKS_TERMINAL, "/system/icons/aterm.png" );
-		create_desktop_icon( pzHome, MSG_DESKTOP_SYMLINKS_HOME, "/system/icons/home.png" );
-		create_desktop_icon( os::String( pzHome ) + "/Trash", MSG_DESKTOP_SYMLINKS_TRASH, "/system/icons/trash.png" );
+		create_desktop_icon( "/boot/Preferences", MSG_DESKTOP_SYMLINKS_PREFERENCES, "/boot/System/icons/settings.png" );
+		create_desktop_icon( "/boot/System/binary/Terminal", MSG_DESKTOP_SYMLINKS_TERMINAL, "/boot/System/icons/aterm.png" );
+		create_desktop_icon( pzHome, MSG_DESKTOP_SYMLINKS_HOME, "/boot/System/icons/home.png" );
+		create_desktop_icon( os::String( pzHome ) + "/Trash", MSG_DESKTOP_SYMLINKS_TRASH, "/boot/System/icons/trash.png" );
 	}
 	delete( pcSettings );
 
@@ -213,7 +213,7 @@ void Desktop::HandleMessage( os::Message* pcMessage )
 				if( fork() == 0 )
 				{
 					set_thread_priority( -1, 0 );
-					execlp( "/system/bin/FileBrowser", "/system/bin/FileBrowser", zPath.c_str(), NULL );
+					execlp( "/boot/System/binary/FileBrowser", "/boot/System/binary/FileBrowser", zPath.c_str(), NULL );
 				}
 			}
 			break;
@@ -266,7 +266,7 @@ void Desktop::LaunchFiles()
  	if ( fork() == 0 )
     {
 		set_thread_priority( -1, 0 );
-		execlp( "/system/bin/Dock", "/system/bin/Dock", NULL );
+		execlp( "/boot/System/binary/Dock", "/boot/System/binary/Dock", NULL );
 		exit( 1 );
 	}
 	
@@ -347,7 +347,9 @@ void Desktop::LoadBackground()
 		if( m_zBackground == "None" )
 			bNone = true;
 		else {
-			os::Path cPath = os::Path( "/system/resources/wallpapers/" );
+			const char *pzHome = getenv( "HOME" );
+			os::String cWallpaperPath = os::String(pzHome) + os::String("/Pictures/");
+			os::Path cPath = os::Path( cWallpaperPath );
 			cPath.Append( m_zBackground.c_str() );
 			cFile.SetTo( cPath );
 			m_pcBackground = new os::BitmapImage( &cFile );

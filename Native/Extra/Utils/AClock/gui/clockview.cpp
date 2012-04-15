@@ -218,4 +218,3 @@ void ClockView::draw( const Rect& cUpdateRect )
    
     Flush();
 }
-

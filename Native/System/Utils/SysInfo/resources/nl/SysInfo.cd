@@ -19,14 +19,14 @@ MSG_MAINWND_MENU_OPTIONS_SPEED_HIGH			Hoog
 MSG_MAINWND_MENU_OPTIONS_SPEED_PAUSE		Pauzeren
 
 MSG_ABOUTWND_TITLE=900						Over Systeeminformatie versie %s
-MSG_ABOUTWND_TEXT							Systeeminformatie versie %s\nSysteembeheer voor Syllable\n\nAtheMgr copyright John Hall, 2001\n
+MSG_ABOUTWND_TEXT							Systeeminformatie versie %s\nSysteembeheer voor Pyro\n\nAtheMgr copyright John Hall, 2001\n
 MSG_ABOUTWND_OK								OK
 
 MSG_TAB_SYSINFO=1000						Systeeminfo
 MSG_TAB_SYSINFO_VER_NAME					Onderdeel
 MSG_TAB_SYSINFO_VER_VERSION					Versie
 MSG_TAB_SYSINFO_VER_BUILDDATE				Bouwdatum
-MSG_TAB_SYSINFO_VER_SYLLABLE				Syllable
+MSG_TAB_SYSINFO_VER_SYLLABLE				Pyro
 MSG_TAB_SYSINFO_VER_SLBMGR					Systeeminformatie
 MSG_TAB_SYSINFO_CPU_CPU						CPU
 MSG_TAB_SYSINFO_CPU_CORESPEED				Kloksnelheid

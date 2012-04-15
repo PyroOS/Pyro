@@ -125,7 +125,7 @@ void DockMenu::AddEntry( os::RegistrarManager* pcManager, os::String zApplicatio
 			{
 				try
 				{
-					os::String cCategoryIcon = os::String( "/system/icons/Dock/" ) + zCategoryIcon + os::String( ".png" );
+					os::String cCategoryIcon = os::String( "/boot/System/resources/icons/Dock/" ) + zCategoryIcon + os::String( ".png" );
 					os::StreamableIO* pcStream = new os::File( cCategoryIcon );
 					os::BitmapImage* pcImg = new os::BitmapImage();
 					pcImg->Load( pcStream );
@@ -157,11 +157,3 @@ void DockMenu::AddEntry( os::RegistrarManager* pcManager, os::String zApplicatio
 	
 	pcAddMenu->AddItem( new os::MenuItem( zApplicationName, pcMsg, "", pcItemIcon ) );
 }
-
-
-
-
-
-
-
-

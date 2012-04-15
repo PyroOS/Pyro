@@ -3,10 +3,7 @@
 <LinkerFlags>
 <Target>App
 <Category>Other
-<InstallPath>/Applications/App
+<InstallPath>/boot/Applications/App
 <Group>Source
 <FileName>main.cpp
 <FileType>
-<Group>Libraries
-<FileName>stdc++
-<FileType>

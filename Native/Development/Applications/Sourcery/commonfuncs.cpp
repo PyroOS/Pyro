@@ -538,7 +538,7 @@ String GetApplicationPath()
 	char buffer[BUFFER_SIZE];
 	int nFD;
 	
-	if( (nFD = open_image_file( get_image_id() )) < 0 )
+	if( (nFD = open_image_file( IMGFILE_BIN_DIR )) < 0 )
 		return "";
 		
 	if( get_directory_path( nFD,buffer,BUFFER_SIZE ) < 0 )
@@ -546,13 +546,14 @@ String GetApplicationPath()
 	
 	close(nFD);
 	buffer[BUFFER_SIZE-1] = 0; /* ensure null-terminated */
+//	strcpy(buffer,buffer+5);  /* remove /boot */
 	cPath =  String(buffer);
 	
+	if (cPath.find("/boot/syllable",0) == 0)
+		cPath = cPath + 14;
+	else if (cPath.find("/boot",0) == 0)
+		cPath = cPath + 5;
+		
 	return cPath;
 }	
-
-
-
-
-
 

@@ -21,8 +21,8 @@
 #include <posix/errno.h>
 #include <posix/wait.h>
 
-#include <atheos/types.h>
-#include <atheos/sigcontext.h>
+#include <pyro/types.h>
+#include <pyro/sigcontext.h>
 
 #include <macros.h>
 

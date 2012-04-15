@@ -15,8 +15,8 @@
 #ifndef __F_NET_IF_H__
 #define __F_NET_IF_H__
 
-#include <atheos/types.h>		/* for "__kernel_caddr_t" et al	*/
-#include <atheos/socket.h>		/* for "struct sockaddr" et al	*/
+#include <pyro/types.h>		/* for "__kernel_caddr_t" et al	*/
+#include <pyro/socket.h>		/* for "struct sockaddr" et al	*/
 
 #ifdef __KERNEL__
 #include <net/nettypes.h>

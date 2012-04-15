@@ -35,7 +35,7 @@
 #define MAX_KERNEL_ARGS	128
 
 /// Default debug level (KERN_DEBUG, KERN_INFO, KERN_WARNING, KERN_FATAL).
-#define DEBUG_LIMIT	KERN_INFO	///< Debug level (see <atheos/kdebug.h>)
+#define DEBUG_LIMIT	KERN_INFO	///< Debug level (see <pyro/kdebug.h>)
 
 /// Kernel load address is currently @ 1MB  -- will soon be 0xfe800000
 #define KERNEL_LOAD_ADDR 0x100000

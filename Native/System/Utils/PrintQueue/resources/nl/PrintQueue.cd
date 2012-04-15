@@ -41,7 +41,7 @@ MSG_MAINWND_JOBSIZE_MB							%d MB
 MSG_MAINWND_JOBSIZE_GB							%d GB
 
 MSG_ABOUTWND_TITLE=1000							Over Printerwachtrij
-MSG_ABOUTWND_TEXT1								Syllable Printerwachtrijbeheerder
+MSG_ABOUTWND_TEXT1								Pyro Printerwachtrijbeheerder
 MSG_ABOUTWND_TEXT2								Gebruikt CUPS versie %d.%d.%d\n
 MSG_ABOUTWND_CLOSE								_OK
 

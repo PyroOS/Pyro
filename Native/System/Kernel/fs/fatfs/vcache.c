@@ -53,9 +53,9 @@ typedef long long dr9_off_t;
 #define UNLOCK_CACHE_W \
 	release_sem_etc(vol->vcache.vc_sem, READERS, 0)
 
-#include <atheos/kernel.h>
-#include <atheos/filesystem.h>
-#include <atheos/string.h>
+#include <pyro/kernel.h>
+#include <pyro/filesystem.h>
+#include <pyro/string.h>
 
 #include <posix/errno.h>
 

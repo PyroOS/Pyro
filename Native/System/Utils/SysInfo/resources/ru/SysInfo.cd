@@ -19,14 +19,14 @@ MSG_MAINWND_MENU_OPTIONS_SPEED_HIGH			Высокая
 MSG_MAINWND_MENU_OPTIONS_SPEED_PAUSE		Пауза
 
 MSG_ABOUTWND_TITLE=900						О программе Системная Информация вер.%s
-MSG_ABOUTWND_TEXT							Системная Информация вер.%s\n\nСистемная Информация для Syllable\nJohn Hall, 2001\n\nСистемная Информация распространяется на условиях универсальной общественной лицензии GNU (GPL)\n
+MSG_ABOUTWND_TEXT							Системная Информация вер.%s\n\nСистемная Информация для Pyro\nJohn Hall, 2001\n\nСистемная Информация распространяется на условиях универсальной общественной лицензии GNU (GPL)\n
 MSG_ABOUTWND_OK								_ОК
 
 MSG_TAB_SYSINFO=1000						Системная информация
 MSG_TAB_SYSINFO_VER_NAME					Название
 MSG_TAB_SYSINFO_VER_VERSION					Версия
 MSG_TAB_SYSINFO_VER_BUILDDATE				Дата сборки
-MSG_TAB_SYSINFO_VER_SYLLABLE				Syllable
+MSG_TAB_SYSINFO_VER_SYLLABLE				Pyro
 MSG_TAB_SYSINFO_VER_SLBMGR					Системная информация
 MSG_TAB_SYSINFO_CPU_CPU						ЦПУ
 MSG_TAB_SYSINFO_CPU_CORESPEED				Скорость ядра

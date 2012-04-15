@@ -6,8 +6,8 @@
 #ifndef _DOSFS_H_
 #define _DOSFS_H_
 
-#include <atheos/semaphore.h>
-#include <atheos/bcache.h>
+#include <pyro/semaphore.h>
+#include <pyro/bcache.h>
 
 #define new_lock( id, name ) ( (((*(id))=create_semaphore( (name), 1, SEM_RECURSIVE )) < 0) ? -EINVAL : 0 )
 #define free_lock(lock) delete_semaphore( *(lock) )
@@ -151,7 +151,7 @@ typedef struct _nspace
     fs_id	id;				// ID passed in to fs_mount
     int		fd;				// File descriptor
     char	device[256];
-    uint32	flags;			// see <atheos/filesystem.h> for flags
+    uint32	flags;			// see <pyro/filesystem.h> for flags
 	
       // info from bpb
     uint32	bytes_per_sector;

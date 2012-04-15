@@ -22,9 +22,9 @@
 #ifndef _ATI_DRIVER_H_
 #define _ATI_DRIVER_H_
 
-#include <atheos/kernel.h>
-#include <atheos/pci.h>
-#include <atheos/pci_vendors.h>
+#include <pyro/kernel.h>
+#include <pyro/pci.h>
+#include <pyro/pci_vendors.h>
 #include <gui/bitmap.h>
 #include "../../../server/ddriver.h"
 #include "../../../server/sprite.h"

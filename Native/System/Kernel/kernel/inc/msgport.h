@@ -29,7 +29,7 @@ extern "C"
 }				/* Make emacs auto-indent work. */
 #endif
 
-#include <atheos/types.h>
+#include <pyro/types.h>
 #include "typedefs.h"
 
 

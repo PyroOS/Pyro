@@ -8,7 +8,7 @@
 #ifndef __MII_H__
 #define __MII_H__
 
-#include <atheos/types.h>
+#include <pyro/types.h>
 
 /* Generic MII registers. */
 

@@ -20,7 +20,7 @@
 #ifndef	__F_GUI_REGION_H__
 #define	__F_GUI_REGION_H__
 
-#include <atheos/types.h>
+#include <pyro/types.h>
 #include <gui/gfxtypes.h>
 
 #include <gui/rect.h>

@@ -19,6 +19,6 @@ MSG_HELPWND_TEXT								Når du klikker på et tegn,\nbliver det kopieret til ud
 MSG_HELPWND_OK									Ok
 
 MSG_ABOUTWND_TITLE=2000							Om Tegnvælger
-MSG_ABOUTWND_TEXT								CharMap V1.1\nTegnvælger for Syllable.
+MSG_ABOUTWND_TEXT								CharMap V1.1\nTegnvælger for Pyro.
 MSG_ABOUTWND_OK									Ok
 

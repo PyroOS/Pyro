@@ -21,7 +21,7 @@
 #ifndef __F_MGA_REGS_H__
 #define __F_MGA_REGS_H__
 
-#include <atheos/types.h>
+#include <pyro/types.h>
 
 //#define M2_DEVCTRL					0x0004
 #define M2_DWGCTL						0x1c00

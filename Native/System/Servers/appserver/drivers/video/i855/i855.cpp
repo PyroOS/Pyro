@@ -35,13 +35,13 @@ SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 #include <stdlib.h>
 #include <stdio.h>
 
-#include <atheos/types.h>
-#include <atheos/pci.h>
-#include <atheos/kernel.h>
-#include <atheos/isa_io.h>
-#include <atheos/vesa_gfx.h>
-#include <atheos/udelay.h>
-#include <atheos/time.h>
+#include <pyro/types.h>
+#include <pyro/pci.h>
+#include <pyro/kernel.h>
+#include <pyro/isa_io.h>
+#include <pyro/vesa_gfx.h>
+#include <pyro/udelay.h>
+#include <pyro/time.h>
 #include <appserver/pci_graphics.h>
 
 #include "../../../server/bitmap.h"

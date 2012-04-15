@@ -24,14 +24,14 @@
 #include <posix/ioctl.h>
 #include <macros.h>
 
-#include <atheos/string.h>
-#include <atheos/types.h>
-#include <atheos/time.h>
-#include <atheos/filesystem.h>
-#include <atheos/kernel.h>
-#include <atheos/bcache.h>
-#include <atheos/device.h>
-#include <atheos/semaphore.h>
+#include <pyro/string.h>
+#include <pyro/types.h>
+#include <pyro/time.h>
+#include <pyro/filesystem.h>
+#include <pyro/kernel.h>
+#include <pyro/bcache.h>
+#include <pyro/device.h>
+#include <pyro/semaphore.h>
 
 #include "afs.h"
 #include "btree.h"

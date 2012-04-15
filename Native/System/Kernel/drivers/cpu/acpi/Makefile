@@ -1,14 +1,11 @@
 CFLAGS   += -kernel -fno-PIC -c -I../../bus/acpi/include
 AFLAGS   = -c
 
-C_INCLUDE_PATH=$(ATHEOS_INCLUDE_PATH)
+C_INCLUDE_PATH=$(PYRO_INCLUDE)
 
 OBJS := acpi_processor.o acpi_cstate.o acpi_pstate.o
-
-
 OBJDIR	:= objs
 OBJS	:= $(addprefix $(OBJDIR)/,$(OBJS))
-
 
 #
 #	rules
@@ -26,9 +23,6 @@ $(OBJDIR)/%.o : %.s
 $(OBJDIR)/%.o : %.S
 	$(CC) $(CFLAGS) -x assembler-with-cpp $< -o $@
 
-
-
-
 all :	objs $(OBJDIR)/acpi_cpu
 
 objs:
@@ -37,23 +31,16 @@ objs:
 $(OBJDIR)/acpi_cpu: $(OBJS) Makefile
 	$(CC) -kernel $(OBJS) -o $(OBJDIR)/acpi_cpu
 
-install: all
-	cp -f $(OBJDIR)/acpi_cpu $(IMAGE)/system/drivers/dev/
+# ----- ----- ----- ----- ----- ----- ----- ----- ----- -----
 
-dist: install
+dist: all inst clean
+
+inst:
+	mkdir -p $(PYRO_BINARY_DESTINATION)/System/drivers/dev
+	cp -f $(OBJDIR)/acpi_cpu $(PYRO_BINARY_DESTINATION)/System/drivers/dev/
+	addattrib $(PYRO_BINARY_DESTINATION)/System/drivers/dev/acpi_cpu "CheckSum::MD5" `md5sum $(PYRO_BINARY_DESTINATION)/System/drivers/dev/acpi_cpu | cut -c1-32`
+	sync
 
 clean:
-	-rm -f $(OBJS) $(OBJDIR)/acpi_cpu
-
-
-
-
-
-
-
-
-
-
-
-
-
+	rm -rf $(OBJDIR)
+	sync

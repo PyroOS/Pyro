@@ -22,12 +22,12 @@
 #include <stdlib.h>
 #include <stdio.h>
 
-#include <atheos/types.h>
-#include <atheos/isa_io.h>
+#include <pyro/types.h>
+#include <pyro/isa_io.h>
 
-#include <atheos/kernel.h>
-#include <atheos/vesa_gfx.h>
-#include <atheos/areas.h>
+#include <pyro/kernel.h>
+#include <pyro/vesa_gfx.h>
+#include <pyro/areas.h>
 
 #include "../../../server/bitmap.h"
 #include "../../../server/sprite.h"
@@ -2842,4 +2842,3 @@ uint8 SylVNC::TranslateKeyCode( rfbKeySym XKeySym )
     }
     return nDstCode;
 }
-

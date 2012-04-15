@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include <setjmp.h>
 
-#include <atheos/kdebug.h>
+#include <pyro/kdebug.h>
 
 #include <util/circularbuffer.h>
 #include <translation/translator.h>

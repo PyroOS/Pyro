@@ -22,13 +22,13 @@
 #include <posix/errno.h>
 #include <macros.h>
 
-#include <atheos/string.h>
-#include <atheos/types.h>
-#include <atheos/kernel.h>
-#include <atheos/bcache.h>
-#include <atheos/time.h>
-#include <atheos/semaphore.h>
-#include <atheos/areas.h>
+#include <pyro/string.h>
+#include <pyro/types.h>
+#include <pyro/kernel.h>
+#include <pyro/bcache.h>
+#include <pyro/time.h>
+#include <pyro/semaphore.h>
+#include <pyro/areas.h>
 
 #include "afs.h"
 

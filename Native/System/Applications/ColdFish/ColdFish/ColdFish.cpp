@@ -473,7 +473,7 @@ void CFApp::LoadPlugins()
 	os::String zFileName;
 //	os::String zPath;
 //	This is not relocatable, but works from the live CD:
-	os::String zPath = os::String( "/Applications/Media/Plugins" );
+	os::String zPath = os::String( "/Applications/ColdFish/Plugins" );
 
 	os::Directory *pcDirectory = new os::Directory();
 //	if( pcDirectory->SetTo( "^/Plugins" ) != 0 )
@@ -1896,7 +1896,7 @@ CFApplication::CFApplication( const char *pzMimeType, os::String zFileName, bool
 {
 	/* Select string catalogue */
 	try {
-		SetCatalog( "coldfish.catalog" );
+		SetCatalog( "ColdFish.catalog" );
 	} catch( ... ) {
 		if (DEBUG)
 			std::cout << "Failed to load catalog file!" << std::endl;
@@ -1945,4 +1945,3 @@ int main( int argc, char *argv[] )
 	pcApp->Run();
 	return ( 0 );
 }
-
